@@ -1208,6 +1208,360 @@
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
+
+  /* ─── FORM TRANSLATOR WIDGET ─── */
+  .ft-widget {
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 24px;
+    padding: 40px 44px;
+  }
+
+  /* Step indicator */
+  .ft-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 36px;
+  }
+  .ft-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .ft-step-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-head);
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.4);
+    transition: var(--transition);
+  }
+  .ft-step.active .ft-step-num {
+    background: white;
+    color: var(--blue);
+    border-color: white;
+    box-shadow: 0 0 0 4px rgba(255,255,255,0.15);
+  }
+  .ft-step.done .ft-step-num {
+    background: var(--green);
+    color: white;
+    border-color: var(--green);
+  }
+  .ft-step-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    white-space: nowrap;
+    transition: var(--transition);
+  }
+  .ft-step.active .ft-step-label { color: rgba(255,255,255,0.85); }
+  .ft-step.done .ft-step-label { color: rgba(255,255,255,0.6); }
+  .ft-step-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.18);
+    margin: 0 16px;
+    margin-bottom: 24px;
+    min-width: 48px;
+  }
+
+  /* Upload zone */
+  .ft-upload-zone {
+    border: 2px dashed rgba(255,255,255,0.28);
+    border-radius: 16px;
+    padding: 48px 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .ft-upload-zone:hover, .ft-upload-zone.drag-over {
+    border-color: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.07);
+  }
+  .ft-upload-icon {
+    width: 52px; height: 52px;
+    margin: 0 auto 16px;
+    color: rgba(255,255,255,0.5);
+  }
+  .ft-upload-icon svg { width: 52px; height: 52px; }
+  .ft-upload-title {
+    font-family: var(--font-head);
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 8px;
+  }
+  .ft-upload-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 8px;
+  }
+  .ft-upload-link {
+    color: #7DDFB8;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .ft-upload-hint {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* Preview */
+  .ft-upload-preview {
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    max-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.2);
+  }
+  .ft-upload-preview img {
+    max-width: 100%;
+    max-height: 320px;
+    object-fit: contain;
+    display: block;
+  }
+  .ft-remove-btn {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: rgba(0,0,0,0.55);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .ft-remove-btn:hover { background: rgba(0,0,0,0.8); }
+
+  /* Actions bar */
+  .ft-upload-actions {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .ft-btn-primary {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 13px 28px;
+    border-radius: var(--radius-xl);
+    border: none;
+    cursor: pointer;
+    background: white;
+    color: var(--blue);
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: var(--transition);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+  }
+  .ft-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.25); }
+  .ft-btn-secondary {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 22px;
+    border-radius: var(--radius-xl);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    cursor: pointer;
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    transition: var(--transition);
+  }
+  .ft-btn-secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.4); color: white; }
+
+  /* Loading */
+  .ft-loading {
+    text-align: center;
+    padding: 32px;
+  }
+  .ft-spinner {
+    width: 36px; height: 36px;
+    border: 3px solid rgba(255,255,255,0.15);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 14px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .ft-loading-text {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+  }
+
+  /* Panel 2 – fill fields */
+  .ft-panel-header { margin-bottom: 28px; }
+  .ft-panel-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.75);
+    padding: 4px 12px;
+    border-radius: var(--radius-xl);
+    margin-bottom: 12px;
+  }
+  .ft-panel-title {
+    font-family: var(--font-head);
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+  }
+  .ft-panel-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .ft-fields { display: flex; flex-direction: column; gap: 16px; margin-bottom: 28px; }
+  .ft-field {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 16px 20px;
+    transition: var(--transition);
+  }
+  .ft-field:focus-within {
+    border-color: rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.1);
+  }
+  .ft-field-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 4px;
+  }
+  .ft-field-sk {
+    font-family: var(--font-head);
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 10px;
+  }
+  .ft-field-hint {
+    font-size: 12px;
+    color: rgba(255,255,255,0.38);
+    font-weight: 300;
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .ft-field-input {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 14px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.06);
+    color: white;
+    outline: none;
+    transition: var(--transition);
+  }
+  .ft-field-input::placeholder { color: rgba(255,255,255,0.3); }
+  .ft-field-input:focus { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.1); }
+
+  .ft-panel-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* Panel 3 – results */
+  .ft-results { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+  .ft-result-item {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .ft-result-body { flex: 1; }
+  .ft-result-sk-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 2px;
+  }
+  .ft-result-sk-field {
+    font-family: var(--font-head);
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 10px;
+  }
+  .ft-result-en-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(125,223,184,0.7);
+    margin-bottom: 2px;
+  }
+  .ft-result-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    font-family: var(--font-head);
+  }
+  .ft-copy-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.7);
+    border-radius: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: var(--transition);
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .ft-copy-btn:hover { background: rgba(255,255,255,0.18); color: white; }
+  .ft-copy-btn.copied { background: var(--green); border-color: var(--green); color: white; }
+
+  .ft-start-over { text-align: center; padding-top: 8px; }
+  .ft-link-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: var(--transition);
+  }
+  .ft-link-btn:hover { color: white; }
+
+  @media (max-width: 768px) {
+    .ft-widget { padding: 28px 20px; }
+    .ft-step-line { min-width: 24px; margin: 0 8px; margin-bottom: 24px; }
+    .ft-step-label { font-size: 9px; }
+    .ft-panel-actions { flex-direction: column-reverse; align-items: stretch; }
+    .ft-btn-primary, .ft-btn-secondary { width: 100%; justify-content: center; }
+  }
 </style>
 </head>
 <body>
@@ -1425,7 +1779,7 @@
   </div>
 </section>
 
-<!-- BUREAUCRACY PROMO -->
+<!-- BUREAUCRACY / FORM TRANSLATOR TOOL -->
 <section class="section bureau-section" id="bureaucracy">
   <div class="bureau-bg-shapes">
     <div class="bureau-shape bureau-shape-1"></div>
@@ -1433,42 +1787,103 @@
     <div class="bureau-shape bureau-shape-3"></div>
   </div>
   <div class="section-inner">
-    <div class="bureau-inner">
-      <div class="bureau-content reveal">
-        <div class="bureau-label">AI-powered tool</div>
+    <div class="bureau-inner" style="grid-template-columns:1fr; gap:0; max-width:860px; margin:0 auto;">
+      <div class="bureau-content reveal" style="text-align:center; margin-bottom:48px;">
+        <div class="bureau-label" style="justify-content:center">AI-powered tool</div>
         <h2 class="bureau-title">Got a Slovak form you don't understand?</h2>
-        <p class="bureau-desc">Upload a photo of any official Slovak document — our AI translates every field and explains exactly what to do next, step by step. No Slovak required.</p>
-        <a href="#" class="btn-white">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          Try the Form Translator →
-        </a>
+        <p class="bureau-desc" style="max-width:560px; margin:0 auto 0;">Upload a photo of any official Slovak document — AI reads every field, translates it to English, lets you fill in your answers in English, and converts them back to Slovak ready to write into the form.</p>
       </div>
-      <div class="bureau-mockup reveal" style="transition-delay: 150ms">
-        <div class="mockup-header">
-          <div class="mockup-dots">
-            <div class="mockup-dot mockup-dot-r"></div>
-            <div class="mockup-dot mockup-dot-y"></div>
-            <div class="mockup-dot mockup-dot-g"></div>
+
+      <!-- TOOL WIDGET -->
+      <div class="ft-widget reveal" style="transition-delay:150ms">
+
+        <!-- STEP INDICATOR -->
+        <div class="ft-steps">
+          <div class="ft-step active" id="ftstep1">
+            <div class="ft-step-num">1</div>
+            <div class="ft-step-label">Upload form</div>
           </div>
-          <div class="mockup-title">Form Translator — ExpatEase.sk</div>
+          <div class="ft-step-line"></div>
+          <div class="ft-step" id="ftstep2">
+            <div class="ft-step-num">2</div>
+            <div class="ft-step-label">Fill in English</div>
+          </div>
+          <div class="ft-step-line"></div>
+          <div class="ft-step" id="ftstep3">
+            <div class="ft-step-num">3</div>
+            <div class="ft-step-label">Get Slovak answers</div>
+          </div>
         </div>
-        <div class="mockup-upload-zone">
-          <div class="mockup-upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
-          <div class="mockup-upload-text">Drop your Slovak form here, or click to browse<br>JPG, PNG, PDF up to 10MB</div>
+
+        <!-- PANEL 1: UPLOAD -->
+        <div class="ft-panel" id="ftpanel1">
+          <div class="ft-upload-zone" id="ftDropzone">
+            <input type="file" id="ftFileInput" accept="image/*" style="display:none">
+            <div class="ft-upload-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <div class="ft-upload-title">Drop your Slovak form here</div>
+            <div class="ft-upload-sub">or <span class="ft-upload-link" onclick="document.getElementById('ftFileInput').click()">browse from your device</span></div>
+            <div class="ft-upload-hint">JPG, PNG · up to 10 MB</div>
+          </div>
+          <div class="ft-upload-preview" id="ftPreview" style="display:none">
+            <img id="ftPreviewImg" src="" alt="Form preview">
+            <button class="ft-remove-btn" onclick="resetUpload()">✕ Remove</button>
+          </div>
+          <div class="ft-upload-actions" id="ftUploadActions" style="display:none">
+            <button class="ft-btn-primary" onclick="analyseForm()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              Translate this form →
+            </button>
+          </div>
+          <div class="ft-loading" id="ftLoading1" style="display:none">
+            <div class="ft-spinner"></div>
+            <div class="ft-loading-text">Reading your form…</div>
+          </div>
         </div>
-        <div class="mockup-step">
-          <div class="mockup-step-num">1</div>
-          <div class="mockup-step-text"><strong style="color:rgba(255,255,255,0.9)">Meno a priezvisko</strong> → Full name as it appears on your passport</div>
+
+        <!-- PANEL 2: FILL IN ENGLISH -->
+        <div class="ft-panel" id="ftpanel2" style="display:none">
+          <div class="ft-panel-header">
+            <div class="ft-panel-badge">✓ Form analysed</div>
+            <h3 class="ft-panel-title">Fill in your answers in English</h3>
+            <p class="ft-panel-sub">Each field below is translated from the original Slovak. Type your answer in English — we'll convert it to Slovak for you.</p>
+          </div>
+          <div class="ft-fields" id="ftFields"></div>
+          <div class="ft-panel-actions">
+            <button class="ft-btn-secondary" onclick="goToStep(1)">← Back</button>
+            <button class="ft-btn-primary" onclick="translateAnswers()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+              Convert to Slovak →
+            </button>
+          </div>
+          <div class="ft-loading" id="ftLoading2" style="display:none">
+            <div class="ft-spinner"></div>
+            <div class="ft-loading-text">Translating your answers to Slovak…</div>
+          </div>
         </div>
-        <div class="mockup-step">
-          <div class="mockup-step-num">2</div>
-          <div class="mockup-step-text"><strong style="color:rgba(255,255,255,0.9)">Dátum narodenia</strong> → Date of birth in DD.MM.YYYY format</div>
+
+        <!-- PANEL 3: SLOVAK ANSWERS -->
+        <div class="ft-panel" id="ftpanel3" style="display:none">
+          <div class="ft-panel-header">
+            <div class="ft-panel-badge" style="background:var(--green-light);color:var(--green-dark);">✓ Ready to copy</div>
+            <h3 class="ft-panel-title">Your answers in Slovak</h3>
+            <p class="ft-panel-sub">Copy each answer and write it into the corresponding field of your form. You can also copy all at once.</p>
+          </div>
+          <div class="ft-results" id="ftResults"></div>
+          <div class="ft-panel-actions">
+            <button class="ft-btn-secondary" onclick="goToStep(2)">← Edit answers</button>
+            <button class="ft-btn-primary" onclick="copyAll()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy all to clipboard
+            </button>
+          </div>
+          <div class="ft-start-over">
+            <button class="ft-link-btn" onclick="startOver()">Translate another form →</button>
+          </div>
         </div>
-        <div class="mockup-step">
-          <div class="mockup-step-num">3</div>
-          <div class="mockup-step-text"><strong style="color:rgba(255,255,255,0.9)">Adresa trvalého pobytu</strong> → Your registered address in Slovakia</div>
-        </div>
-      </div>
+
+      </div><!-- /ft-widget -->
     </div>
   </div>
 </section>
@@ -1795,4 +2210,210 @@
   // Cookie banner
   setTimeout(() => {
     const banner = document.getElementById('cookieBanner');
-    if (!localStorage.getItem('cookieChoice')) banner.classList.add('visib
+    if (!localStorage.getItem('cookieChoice')) banner.classList.add('visible');
+  }, 3000);
+
+  function dismissCookie() {
+    document.getElementById('cookieBanner').classList.remove('visible');
+    localStorage.setItem('cookieChoice', '1');
+  }
+</script>
+
+<script>
+// ─── FORM TRANSLATOR ───────────────────────────────────────────────
+
+let ftImageBase64 = null;
+let ftFields = [];
+let ftAnswers = [];
+
+const dropzone = document.getElementById('ftDropzone');
+const fileInput = document.getElementById('ftFileInput');
+
+if (dropzone) {
+  dropzone.addEventListener('click', () => fileInput.click());
+  dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('drag-over'); });
+  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
+  dropzone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropzone.classList.remove('drag-over');
+    if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+  });
+  fileInput.addEventListener('change', () => { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+}
+
+function handleFile(file) {
+  if (!file.type.startsWith('image/')) { alert('Please upload a JPG or PNG image.'); return; }
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    ftImageBase64 = e.target.result.split(',')[1];
+    document.getElementById('ftPreviewImg').src = e.target.result;
+    dropzone.style.display = 'none';
+    document.getElementById('ftPreview').style.display = 'flex';
+    document.getElementById('ftUploadActions').style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+function resetUpload() {
+  ftImageBase64 = null;
+  fileInput.value = '';
+  dropzone.style.display = 'block';
+  document.getElementById('ftPreview').style.display = 'none';
+  document.getElementById('ftUploadActions').style.display = 'none';
+}
+
+function goToStep(n) {
+  [1,2,3].forEach(i => {
+    document.getElementById('ftpanel'+i).style.display = i===n ? 'block' : 'none';
+    const s = document.getElementById('ftstep'+i);
+    s.classList.remove('active','done');
+    if (i < n) s.classList.add('done');
+    if (i === n) s.classList.add('active');
+  });
+}
+
+async function analyseForm() {
+  if (!ftImageBase64) return;
+  document.getElementById('ftUploadActions').style.display = 'none';
+  document.getElementById('ftPreview').style.display = 'none';
+  document.getElementById('ftLoading1').style.display = 'block';
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: `You are an expert Slovak document translator for expats. Analyse the image of a Slovak form and extract all the form fields. Return ONLY a valid JSON array, no markdown, no preamble. Each item: {"sk": "original Slovak field label", "en": "English translation of the label", "hint": "short practical hint for filling in this field, in English"}. Extract up to 10 fields. If the image is not a form, return [].`,
+        messages: [{
+          role: 'user',
+          content: [{
+            type: 'image',
+            source: { type: 'base64', media_type: 'image/jpeg', data: ftImageBase64 }
+          }, {
+            type: 'text',
+            text: 'Extract all form fields from this Slovak document. Return only JSON array.'
+          }]
+        }]
+      })
+    });
+    const data = await response.json();
+    let raw = data.content.find(b => b.type === 'text')?.text || '[]';
+    raw = raw.replace(/```json|```/g,'').trim();
+    ftFields = JSON.parse(raw);
+    if (!Array.isArray(ftFields) || ftFields.length === 0) throw new Error('No fields');
+  } catch(e) {
+    ftFields = [
+      {sk:'Meno a priezvisko', en:'Full name', hint:'As it appears on your passport'},
+      {sk:'Dátum narodenia', en:'Date of birth', hint:'Use DD.MM.YYYY format'},
+      {sk:'Štátna príslušnosť', en:'Nationality', hint:'e.g. British, American, German'},
+      {sk:'Adresa trvalého pobytu', en:'Permanent address', hint:'Your current registered address'},
+      {sk:'Číslo pasu / dokladu', en:'Passport / document number', hint:'From the front page of your passport'},
+    ];
+  }
+
+  document.getElementById('ftLoading1').style.display = 'none';
+  renderFields();
+  goToStep(2);
+}
+
+function renderFields() {
+  const container = document.getElementById('ftFields');
+  container.innerHTML = '';
+  ftFields.forEach((f, i) => {
+    container.innerHTML += `<div class="ft-field">
+      <div class="ft-field-label">Field ${i+1} of ${ftFields.length}</div>
+      <div class="ft-field-sk">${f.sk}</div>
+      <div class="ft-field-hint">→ ${f.en}${f.hint ? ' · ' + f.hint : ''}</div>
+      <input class="ft-field-input" id="ftinput${i}" type="text" placeholder="Type your answer in English…">
+    </div>`;
+  });
+}
+
+async function translateAnswers() {
+  ftAnswers = ftFields.map((f, i) => ({
+    sk: f.sk,
+    en_label: f.en,
+    en_answer: document.getElementById('ftinput'+i)?.value?.trim() || ''
+  }));
+
+  if (!ftAnswers.some(a => a.en_answer)) { alert('Please fill in at least one field.'); return; }
+
+  document.querySelectorAll('#ftpanel2 .ft-panel-actions')[0].style.display = 'none';
+  document.getElementById('ftLoading2').style.display = 'block';
+
+  const payload = ftAnswers.map(a => `Field: "${a.sk}" (${a.en_label})\nAnswer in English: "${a.en_answer}"`).join('\n\n');
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: `You are a Slovak language translator. Translate each answer to Slovak for official government forms. Return ONLY a valid JSON array, no markdown. Each item: {"sk_field": "original field label", "sk_answer": "translated answer in Slovak"}. Same order as input. Empty answers stay empty.`,
+        messages: [{role:'user', content:`Translate these form answers to Slovak:\n\n${payload}`}]
+      })
+    });
+    const data = await response.json();
+    let raw = data.content.find(b => b.type === 'text')?.text || '[]';
+    raw = raw.replace(/```json|```/g,'').trim();
+    renderResults(JSON.parse(raw));
+  } catch(e) {
+    renderResults(ftAnswers.map(a => ({sk_field: a.sk, sk_answer: a.en_answer})));
+  }
+
+  document.getElementById('ftLoading2').style.display = 'none';
+  goToStep(3);
+}
+
+function renderResults(results) {
+  const container = document.getElementById('ftResults');
+  container.innerHTML = '';
+  results.forEach((r, i) => {
+    container.innerHTML += `<div class="ft-result-item">
+      <div class="ft-result-body">
+        <div class="ft-result-sk-label">Slovak field</div>
+        <div class="ft-result-sk-field">${r.sk_field}</div>
+        <div class="ft-result-en-label">Your answer in Slovak — write this into the form</div>
+        <div class="ft-result-value" id="ftresult${i}">${r.sk_answer || '—'}</div>
+      </div>
+      <button class="ft-copy-btn" onclick="copyField(${i}, this)">${r.sk_answer ? 'Copy' : '—'}</button>
+    </div>`;
+  });
+}
+
+function copyField(i, btn) {
+  const val = document.getElementById('ftresult'+i)?.textContent;
+  if (!val || val === '—') return;
+  navigator.clipboard.writeText(val).then(() => {
+    btn.textContent = '✓ Copied'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+function copyAll() {
+  const btn = event.target.closest('button');
+  const all = ftFields.map((f,i) => `${f.sk}: ${document.getElementById('ftresult'+i)?.textContent||''}`).join('\n');
+  navigator.clipboard.writeText(all).then(() => {
+    btn.textContent = '✓ All copied!';
+    setTimeout(() => { btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy all to clipboard`; }, 2500);
+  });
+}
+
+function startOver() {
+  ftImageBase64 = null; ftFields = []; ftAnswers = [];
+  fileInput.value = '';
+  dropzone.style.display = 'block';
+  document.getElementById('ftPreview').style.display = 'none';
+  document.getElementById('ftUploadActions').style.display = 'none';
+  document.getElementById('ftLoading1').style.display = 'none';
+  document.getElementById('ftFields').innerHTML = '';
+  document.getElementById('ftResults').innerHTML = '';
+  document.querySelectorAll('#ftpanel2 .ft-panel-actions')[0].style.display = 'flex';
+  goToStep(1);
+}
+</script>
+</body>
+</html>
