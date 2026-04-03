@@ -7,7 +7,7 @@
 <meta name="description" content="Find English-speaking doctors, lawyers, tradespeople and more in Bratislava. Or decode any Slovak form in seconds.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
   :root {
     --blue: #1A4F8A;
@@ -30,7 +30,7 @@
     --shadow-card: 0 2px 16px rgba(26,79,138,0.08);
     --shadow-hover: 0 12px 40px rgba(26,79,138,0.16);
     --shadow-nav: 0 2px 24px rgba(26,79,138,0.10);
-    --font-head: 'Syne', sans-serif;
+    --font-head: 'Urbanist', sans-serif;
     --font-body: 'DM Sans', sans-serif;
     --transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
   }
@@ -399,12 +399,14 @@
     color: rgba(255,255,255,0.75);
   }
   .trust-icon {
-    width: 20px; height: 20px;
-    background: rgba(255,255,255,0.15);
+    width: 22px; height: 22px;
+    background: rgba(255,255,255,0.18);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 10px;
+    flex-shrink: 0;
+    color: white;
   }
+  .trust-icon svg { width: 12px; height: 12px; }
 
   @keyframes fadeUp {
     to { opacity: 1; transform: translateY(0); }
@@ -501,17 +503,19 @@
     letter-spacing: -0.04em;
   }
   .how-icon {
-    width: 52px; height: 52px;
+    width: 56px; height: 56px;
     background: var(--blue-light);
-    border-radius: 14px;
+    border-radius: 16px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 24px;
     margin-bottom: 20px;
     transition: var(--transition);
+    color: var(--blue);
   }
+  .how-icon svg { width: 28px; height: 28px; }
   .how-card:hover .how-icon {
     background: linear-gradient(135deg, var(--blue), var(--green));
     transform: scale(1.1) rotate(-5deg);
+    color: white;
   }
   .how-title {
     font-family: var(--font-head);
@@ -559,12 +563,14 @@
   .cat-card:hover::after { opacity: 1; }
   .cat-card-inner { position: relative; z-index: 1; }
   .cat-icon {
-    font-size: 28px;
-    margin-bottom: 12px;
+    width: 48px; height: 48px;
+    margin-bottom: 14px;
     display: block;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease;
+    color: var(--blue);
   }
-  .cat-card:hover .cat-icon { transform: scale(1.15); }
+  .cat-icon svg { width: 48px; height: 48px; display: block; }
+  .cat-card:hover .cat-icon { transform: scale(1.12); color: var(--green); }
   .cat-name {
     font-family: var(--font-head);
     font-size: 14px;
@@ -705,7 +711,8 @@
     border-color: rgba(255,255,255,0.5);
     background: rgba(255,255,255,0.06);
   }
-  .mockup-upload-icon { font-size: 32px; margin-bottom: 8px; }
+  .mockup-upload-icon { width: 40px; height: 40px; margin: 0 auto 10px; color: rgba(255,255,255,0.5); }
+  .mockup-upload-icon svg { width: 40px; height: 40px; }
   .mockup-upload-text {
     font-size: 13px;
     color: rgba(255,255,255,0.65);
@@ -819,7 +826,8 @@
     color: var(--gray-700);
     font-weight: 400;
   }
-  .listing-meta-icon { font-size: 14px; width: 16px; text-align: center; }
+  .listing-meta-icon { width: 16px; height: 16px; flex-shrink: 0; color: var(--gray-400); }
+  .listing-meta-icon svg { width: 14px; height: 14px; }
   .listing-stars {
     display: flex; align-items: center; gap: 4px;
     margin-bottom: 20px;
@@ -1253,26 +1261,29 @@
 
   <div class="hero-content">
     <div class="hero-eyebrow">
-      <span class="hero-eyebrow-flag">🇸🇰</span>
+      <span class="hero-eyebrow-flag"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:rgba(255,255,255,0.8)"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
       <span class="hero-eyebrow-text">Built for Bratislava's expat community</span>
     </div>
     <h1 class="hero-h1">Life in Slovakia,<br><em>made simple.</em></h1>
     <p class="hero-sub">Find English-speaking doctors, lawyers, tradespeople and more — or decode any Slovak form in seconds.</p>
     <div class="hero-ctas">
       <a href="#categories" class="btn-primary">Find an Expert →</a>
-      <a href="#bureaucracy" class="btn-outline-white">🗂 Translate a Form</a>
+      <a href="#bureaucracy" class="btn-outline-white">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Translate a Form
+      </a>
     </div>
     <div class="hero-trust">
       <div class="trust-item">
-        <div class="trust-icon">✓</div>
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
         500+ verified listings
       </div>
       <div class="trust-item">
-        <div class="trust-icon">🌍</div>
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
         12 expert categories
       </div>
       <div class="trust-item">
-        <div class="trust-icon">⭐</div>
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
         Trusted by 8,000+ expats
       </div>
     </div>
@@ -1289,19 +1300,19 @@
     </div>
     <div class="how-grid">
       <div class="how-card reveal" style="transition-delay: 0ms">
-        <div class="how-icon">🔍</div>
+        <div class="how-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
         <div class="how-number">01</div>
         <div class="how-title">Search & Filter</div>
         <p class="how-desc">Filter by category, district in Bratislava, and language. Every listing is English-friendly.</p>
       </div>
       <div class="how-card reveal" style="transition-delay: 100ms">
-        <div class="how-icon">⭐</div>
+        <div class="how-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
         <div class="how-number">02</div>
         <div class="how-title">Read Real Reviews</div>
         <p class="how-desc">Reviews from real expats in Bratislava. Honest, community-verified experiences you can trust.</p>
       </div>
       <div class="how-card reveal" style="transition-delay: 200ms">
-        <div class="how-icon">📞</div>
+        <div class="how-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
         <div class="how-number">03</div>
         <div class="how-title">Connect Directly</div>
         <p class="how-desc">Call, email or visit — every profile has full contact details so you can reach out with confidence.</p>
@@ -1321,7 +1332,7 @@
     <div class="categories-grid">
       <a href="#" class="cat-card reveal" style="transition-delay: 0ms">
         <div class="cat-card-inner">
-          <span class="cat-icon">🏥</span>
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
           <div class="cat-name">Doctors & Specialists</div>
           <div class="cat-count">48 listings</div>
         </div>
@@ -1329,7 +1340,7 @@
       </a>
       <a href="#" class="cat-card reveal" style="transition-delay: 60ms">
         <div class="cat-card-inner">
-          <span class="cat-icon">⚖️</span>
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
           <div class="cat-name">Lawyers & Legal</div>
           <div class="cat-count">31 listings</div>
         </div>
@@ -1337,7 +1348,7 @@
       </a>
       <a href="#" class="cat-card reveal" style="transition-delay: 120ms">
         <div class="cat-card-inner">
-          <span class="cat-icon">🏦</span>
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
           <div class="cat-name">Banks & Finance</div>
           <div class="cat-count">14 listings</div>
         </div>
@@ -1345,7 +1356,7 @@
       </a>
       <a href="#" class="cat-card reveal" style="transition-delay: 180ms">
         <div class="cat-card-inner">
-          <span class="cat-icon">✂️</span>
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M8.12 8.12L12 12"/><path d="M15.88 8.12L12 12"/><path d="M12 12L6 21"/><path d="M12 12l6 9"/></svg></span>
           <div class="cat-name">Barbers & Hairdressers</div>
           <div class="cat-count">27 listings</div>
         </div>
@@ -1353,7 +1364,7 @@
       </a>
       <a href="#" class="cat-card reveal" style="transition-delay: 240ms">
         <div class="cat-card-inner">
-          <span class="cat-icon">🔌</span>
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
           <div class="cat-name">Electricians</div>
           <div class="cat-count">19 listings</div>
         </div>
@@ -1361,7 +1372,7 @@
       </a>
       <a href="#" class="cat-card reveal" style="transition-delay: 300ms">
         <div class="cat-card-inner">
-          <span class="cat-icon">🔧</span>
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
           <div class="cat-name">Plumbers</div>
           <div class="cat-count">22 listings</div>
         </div>
@@ -1369,7 +1380,7 @@
       </a>
       <a href="#" class="cat-card reveal" style="transition-delay: 360ms">
         <div class="cat-card-inner">
-          <span class="cat-icon">🏗️</span>
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="6" height="4"/><rect x="16" y="3" width="6" height="4"/><rect x="9" y="3" width="6" height="4"/><path d="M2 7v14h20V7"/><path d="M9 21v-8h6v8"/></svg></span>
           <div class="cat-name">Builders & Construction</div>
           <div class="cat-count">16 listings</div>
         </div>
@@ -1377,7 +1388,7 @@
       </a>
       <a href="#" class="cat-card reveal" style="transition-delay: 420ms">
         <div class="cat-card-inner">
-          <span class="cat-icon">💉</span>
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span>
           <div class="cat-name">Tattoo Studios</div>
           <div class="cat-count">11 listings</div>
         </div>
@@ -1385,7 +1396,7 @@
       </a>
       <a href="#" class="cat-card reveal" style="transition-delay: 480ms">
         <div class="cat-card-inner">
-          <span class="cat-icon">🐾</span>
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg></span>
           <div class="cat-name">Vets</div>
           <div class="cat-count">9 listings</div>
         </div>
@@ -1393,7 +1404,7 @@
       </a>
       <a href="#" class="cat-card reveal" style="transition-delay: 540ms">
         <div class="cat-card-inner">
-          <span class="cat-icon">🏠</span>
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
           <div class="cat-name">Real Estate</div>
           <div class="cat-count">34 listings</div>
         </div>
@@ -1401,7 +1412,7 @@
       </a>
       <a href="#" class="cat-card reveal" style="transition-delay: 600ms">
         <div class="cat-card-inner">
-          <span class="cat-icon">💊</span>
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12h6"/><path d="M12 9v6"/></svg></span>
           <div class="cat-name">Pharmacies</div>
           <div class="cat-count">18 listings</div>
         </div>
@@ -1409,7 +1420,7 @@
       </a>
       <a href="#" class="cat-card reveal" style="transition-delay: 660ms">
         <div class="cat-card-inner">
-          <span class="cat-icon">📦</span>
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
           <div class="cat-name">Moving & Relocation</div>
           <div class="cat-count">12 listings</div>
         </div>
@@ -1432,7 +1443,10 @@
         <div class="bureau-label">AI-powered tool</div>
         <h2 class="bureau-title">Got a Slovak form you don't understand?</h2>
         <p class="bureau-desc">Upload a photo of any official Slovak document — our AI translates every field and explains exactly what to do next, step by step. No Slovak required.</p>
-        <a href="#" class="btn-white">🗂 Try the Form Translator →</a>
+        <a href="#" class="btn-white">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Try the Form Translator →
+        </a>
       </div>
       <div class="bureau-mockup reveal" style="transition-delay: 150ms">
         <div class="mockup-header">
@@ -1444,7 +1458,7 @@
           <div class="mockup-title">Form Translator — ExpatEase.sk</div>
         </div>
         <div class="mockup-upload-zone">
-          <div class="mockup-upload-icon">📄</div>
+          <div class="mockup-upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
           <div class="mockup-upload-text">Drop your Slovak form here, or click to browse<br>JPG, PNG, PDF up to 10MB</div>
         </div>
         <div class="mockup-step">
@@ -1492,8 +1506,8 @@
           <span class="listing-reviews">(38 reviews)</span>
         </div>
         <div class="listing-meta">
-          <div class="listing-meta-item"><span class="listing-meta-icon">📍</span> Staré Mesto, Bratislava I</div>
-          <div class="listing-meta-item"><span class="listing-meta-icon">📞</span> +421 912 345 678</div>
+          <div class="listing-meta-item"><span class="listing-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span> Staré Mesto, Bratislava I</div>
+          <div class="listing-meta-item"><span class="listing-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span> +421 912 345 678</div>
         </div>
         <a href="#" class="listing-link">View profile →</a>
       </div>
@@ -1514,8 +1528,8 @@
           <span class="listing-reviews">(61 reviews)</span>
         </div>
         <div class="listing-meta">
-          <div class="listing-meta-item"><span class="listing-meta-icon">📍</span> Ružinov, Bratislava II</div>
-          <div class="listing-meta-item"><span class="listing-meta-icon">🌐</span> thecraftba.sk</div>
+          <div class="listing-meta-item"><span class="listing-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span> Ružinov, Bratislava II</div>
+          <div class="listing-meta-item"><span class="listing-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span> thecraftba.sk</div>
         </div>
         <a href="#" class="listing-link">View profile →</a>
       </div>
@@ -1535,8 +1549,8 @@
           <span class="listing-reviews">(24 reviews)</span>
         </div>
         <div class="listing-meta">
-          <div class="listing-meta-item"><span class="listing-meta-icon">📍</span> Petržalka, Bratislava V</div>
-          <div class="listing-meta-item"><span class="listing-meta-icon">📞</span> +421 903 876 543</div>
+          <div class="listing-meta-item"><span class="listing-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span> Petržalka, Bratislava V</div>
+          <div class="listing-meta-item"><span class="listing-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span> +421 903 876 543</div>
         </div>
         <a href="#" class="listing-link">View profile →</a>
       </div>
@@ -1555,7 +1569,7 @@
     <div class="blog-grid">
       <a href="#" class="blog-card reveal">
         <div class="blog-img">
-          📋
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="rgba(26,79,138,0.35)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
           <div class="blog-img-overlay"></div>
         </div>
         <div class="blog-body">
@@ -1570,7 +1584,9 @@
         </div>
       </a>
       <a href="#" class="blog-card reveal" style="transition-delay: 100ms">
-        <div class="blog-img" style="height: 160px; font-size: 36px">🏥</div>
+        <div class="blog-img" style="height: 160px;">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="rgba(26,79,138,0.35)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
         <div class="blog-body">
           <div class="blog-tag">Healthcare</div>
           <div class="blog-title">Registering for Slovak Health Insurance as a New Expat</div>
@@ -1583,7 +1599,7 @@
         </div>
       </a>
       <div class="newsletter-card reveal" style="transition-delay: 200ms">
-        <div class="nl-title">The weekly expat guide to Slovakia 📬</div>
+        <div class="nl-title">The weekly expat guide to Slovakia</div>
         <div class="nl-sub">Every Friday: new listings, bureaucracy tips, and what's happening in the community.</div>
         <div class="nl-form">
           <input class="nl-input" type="email" placeholder="your@email.com">
@@ -1693,7 +1709,7 @@
           <li><a href="#">Submit a Business</a></li>
           <li><a href="#">About ExpatEase</a></li>
           <li><a href="#">Contact Us</a></li>
-          <li><a href="#">hello@expatease.sk</a></li>
+          <li><a href="#"><span class="__cf_email__" data-cfemail="046c6168686b44617c746570616577612a776f">[email&#160;protected]</span></a></li>
         </ul>
       </div>
     </div>
@@ -1717,7 +1733,7 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Navbar scroll effect
   const nav = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
@@ -1779,13 +1795,4 @@
   // Cookie banner
   setTimeout(() => {
     const banner = document.getElementById('cookieBanner');
-    if (!localStorage.getItem('cookieChoice')) banner.classList.add('visible');
-  }, 2500);
-
-  function dismissCookie() {
-    document.getElementById('cookieBanner').classList.remove('visible');
-    localStorage.setItem('cookieChoice', 'set');
-  }
-</script>
-</body>
-</html>
+    if (!localStorage.getItem('cookieChoice')) banner.classList.add('visib
