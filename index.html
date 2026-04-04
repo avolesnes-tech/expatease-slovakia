@@ -1191,10 +1191,15 @@
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   }
   @media (max-width: 768px) {
-    .nav { padding: 0 24px; }
+    .nav { padding: 0 16px; }
     .nav-links { display: none; }
-    .section { padding: 64px 24px; }
-    .hero-content { padding: 0 24px; padding-top: 72px; }
+    .nav-cta { font-size: 11px; padding: 7px 12px; white-space: nowrap; }
+    .section { padding: 64px 20px; }
+    .hero-content { padding: 0 20px; padding-top: 72px; }
+    .hero-h1 { font-size: 2.6rem; }
+    .hero-sub { font-size: 15px; }
+    .hero-ctas { flex-direction: column; gap: 10px; }
+    .btn-primary, .btn-outline-white { width: 100%; justify-content: center; }
     .how-grid { grid-template-columns: 1fr; }
     .categories-grid { grid-template-columns: repeat(2, 1fr); }
     .listings-grid { grid-template-columns: 1fr; }
@@ -1203,6 +1208,19 @@
     .testimonials-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; gap: 32px; }
     .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    .cookie-banner {
+      flex-direction: column;
+      gap: 16px;
+      padding: 20px;
+      bottom: 16px;
+      left: 16px;
+      transform: translateX(0) translateY(120px);
+      width: calc(100vw - 32px);
+      border-radius: 16px;
+    }
+    .cookie-banner.visible { transform: translateX(0) translateY(0); }
+    .cookie-btns { width: 100%; }
+    .cookie-btn-accept, .cookie-btn-reject { flex: 1; text-align: center; }
   }
 
   @media (prefers-reduced-motion: reduce) {
