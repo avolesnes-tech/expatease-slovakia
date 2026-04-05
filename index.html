@@ -1873,13 +1873,13 @@
 
         <!-- PANEL 1: UPLOAD -->
         <div class="ft-panel" id="ftpanel1">
+          <input type="file" id="ftFileInput" accept="image/*" style="position:fixed;left:-9999px;top:-9999px;opacity:0;width:1px;height:1px">
           <div class="ft-upload-zone" id="ftDropzone">
             <div class="ft-upload-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
             </div>
             <div class="ft-upload-title">Upload your Slovak form</div>
             <button type="button" class="ft-upload-label-btn" onclick="document.getElementById('ftFileInput').click()">📎 Choose a photo</button>
-            <input type="file" id="ftFileInput" accept="image/*" style="position:absolute;left:-9999px;opacity:0;width:1px;height:1px">
             <div class="ft-upload-hint">JPG, PNG · up to 10 MB</div>
           </div>
           <div class="ft-upload-preview" id="ftPreview" style="display:none">
@@ -2296,15 +2296,22 @@ if (dropzone) {
   });
 }
 
-fileInput.addEventListener('change', () => { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+fileInput.addEventListener('change', function() {
+  if (this.files && this.files[0]) handleFile(this.files[0]);
+});
 
 function handleFile(file) {
-  if (!file.type.startsWith('image/')) { alert('Please upload a JPG or PNG image.'); return; }
+  // Some mobile browsers don't set file.type — check extension as fallback
+  const isImage = file.type.startsWith('image/') ||
+    /\.(jpe?g|png|gif|webp|heic|heif)$/i.test(file.name);
+  if (!isImage) { alert('Please upload a JPG or PNG image.'); return; }
+
   const reader = new FileReader();
+  reader.onerror = () => alert('Could not read the file. Please try again.');
   reader.onload = (e) => {
     const originalSrc = e.target.result;
-    // Resize image to max 1200px to avoid timeouts
     const img = new Image();
+    img.onerror = () => alert('Could not load image. Please try a different file.');
     img.onload = () => {
       const canvas = document.createElement('canvas');
       const MAX = 1200;
@@ -2319,7 +2326,7 @@ function handleFile(file) {
       ftImageBase64 = resized.split(',')[1];
       ftImageMimeType = 'image/jpeg';
       document.getElementById('ftPreviewImg').src = originalSrc;
-      dropzone.style.display = 'none';
+      document.getElementById('ftDropzone').style.display = 'none';
       document.getElementById('ftPreview').style.display = 'flex';
       document.getElementById('ftUploadActions').style.display = 'block';
     };
@@ -2331,7 +2338,7 @@ function handleFile(file) {
 function resetUpload() {
   ftImageBase64 = null;
   fileInput.value = '';
-  dropzone.style.display = 'block';
+  document.getElementById('ftDropzone').style.display = 'block';
   document.getElementById('ftPreview').style.display = 'none';
   document.getElementById('ftUploadActions').style.display = 'none';
 }
@@ -2500,7 +2507,7 @@ function copyAll() {
 function startOver() {
   ftImageBase64 = null; ftFields = []; ftAnswers = [];
   fileInput.value = '';
-  dropzone.style.display = 'block';
+  document.getElementById('ftDropzone').style.display = 'block';
   document.getElementById('ftPreview').style.display = 'none';
   document.getElementById('ftUploadActions').style.display = 'none';
   document.getElementById('ftLoading1').style.display = 'none';
