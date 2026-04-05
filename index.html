@@ -1466,7 +1466,26 @@
     line-height: 1.6;
   }
 
-  .ft-fields { display: flex; flex-direction: column; gap: 16px; margin-bottom: 28px; }
+  .ft-fields { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+  .ft-section-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 16px;
+    border-left: 3px solid rgba(255,255,255,0.2);
+    margin: 4px 0;
+  }
+  .ft-section-en {
+    font-family: var(--font-head);
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+  }
+  .ft-section-sk {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    font-style: italic;
+  }
   .ft-field {
     background: rgba(255,255,255,0.07);
     border: 1px solid rgba(255,255,255,0.12);
@@ -2261,6 +2280,7 @@
 
 let ftImageBase64 = null;
 let ftImageMimeType = 'image/jpeg';
+let ftSections = [];
 let ftFields = [];
 let ftAnswers = [];
 
@@ -2376,13 +2396,21 @@ async function analyseForm() {
 function renderFields() {
   const container = document.getElementById('ftFields');
   container.innerHTML = '';
-  ftFields.forEach((f, i) => {
-    container.innerHTML += `<div class="ft-field">
-      <div class="ft-field-label">Field ${i+1} of ${ftFields.length}</div>
-      <div class="ft-field-sk">${f.sk}</div>
-      <div class="ft-field-hint">→ ${f.en}${f.hint ? ' · ' + f.hint : ''}</div>
-      <input class="ft-field-input" id="ftinput${i}" type="text" placeholder="Type your answer in English…">
-    </div>`;
+  let fieldIndex = 0;
+  ftSections.forEach((s) => {
+    if (s.type === 'text') {
+      container.innerHTML += `<div class="ft-section-text">
+        <span class="ft-section-en">${s.en}</span>
+        <span class="ft-section-sk">${s.sk}</span>
+      </div>`;
+    } else {
+      const i = fieldIndex++;
+      container.innerHTML += `<div class="ft-field">
+        <div class="ft-field-sk">${s.sk}</div>
+        <div class="ft-field-hint">→ ${s.en}${s.hint ? ' · ' + s.hint : ''}</div>
+        <input class="ft-field-input" id="ftinput${i}" type="text" placeholder="Type your answer in English…">
+      </div>`;
+    }
   });
 }
 
@@ -2426,16 +2454,26 @@ async function translateAnswers() {
 function renderResults(results) {
   const container = document.getElementById('ftResults');
   container.innerHTML = '';
-  results.forEach((r, i) => {
-    container.innerHTML += `<div class="ft-result-item">
-      <div class="ft-result-body">
-        <div class="ft-result-sk-label">Slovak field</div>
-        <div class="ft-result-sk-field">${r.sk_field}</div>
-        <div class="ft-result-en-label">Your answer in Slovak — write this into the form</div>
-        <div class="ft-result-value" id="ftresult${i}">${r.sk_answer || '—'}</div>
-      </div>
-      <button class="ft-copy-btn" onclick="copyField(${i}, this)">${r.sk_answer ? 'Copy' : '—'}</button>
-    </div>`;
+  let fieldIndex = 0;
+  ftSections.forEach((s) => {
+    if (s.type === 'text') {
+      container.innerHTML += `<div class="ft-section-text">
+        <span class="ft-section-en">${s.en}</span>
+        <span class="ft-section-sk">${s.sk}</span>
+      </div>`;
+    } else {
+      const i = fieldIndex;
+      const r = results[fieldIndex] || {};
+      fieldIndex++;
+      container.innerHTML += `<div class="ft-result-item">
+        <div class="ft-result-body">
+          <div class="ft-result-sk-label">${s.sk}</div>
+          <div class="ft-result-en-label">Write into form:</div>
+          <div class="ft-result-value" id="ftresult${i}">${r.sk_answer || '—'}</div>
+        </div>
+        <button class="ft-copy-btn" onclick="copyField(${i}, this)">${r.sk_answer ? 'Copy' : '—'}</button>
+      </div>`;
+    }
   });
 }
 
