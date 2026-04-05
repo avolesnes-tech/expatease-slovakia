@@ -2256,6 +2256,7 @@
 // ─── FORM TRANSLATOR ───────────────────────────────────────────────
 
 let ftImageBase64 = null;
+let ftImageMimeType = 'image/jpeg';
 let ftFields = [];
 let ftAnswers = [];
 
@@ -2278,11 +2279,28 @@ function handleFile(file) {
   if (!file.type.startsWith('image/')) { alert('Please upload a JPG or PNG image.'); return; }
   const reader = new FileReader();
   reader.onload = (e) => {
-    ftImageBase64 = e.target.result.split(',')[1];
-    document.getElementById('ftPreviewImg').src = e.target.result;
-    dropzone.style.display = 'none';
-    document.getElementById('ftPreview').style.display = 'flex';
-    document.getElementById('ftUploadActions').style.display = 'block';
+    const originalSrc = e.target.result;
+    ftImageMimeType = 'image/jpeg';
+    // Resize image to max 1200px to avoid timeouts
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const MAX = 1200;
+      let w = img.width, h = img.height;
+      if (w > MAX || h > MAX) {
+        if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
+        else { w = Math.round(w * MAX / h); h = MAX; }
+      }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      const resized = canvas.toDataURL('image/jpeg', 0.85);
+      ftImageBase64 = resized.split(',')[1];
+      document.getElementById('ftPreviewImg').src = originalSrc;
+      dropzone.style.display = 'none';
+      document.getElementById('ftPreview').style.display = 'flex';
+      document.getElementById('ftUploadActions').style.display = 'block';
+    };
+    img.src = originalSrc;
   };
   reader.readAsDataURL(file);
 }
@@ -2323,7 +2341,7 @@ async function analyseForm() {
           role: 'user',
           content: [{
             type: 'image',
-            source: { type: 'base64', media_type: 'image/jpeg', data: ftImageBase64 }
+            source: { type: 'base64', media_type: ftImageMimeType || 'image/jpeg', data: ftImageBase64 }
           }, {
             type: 'text',
             text: 'Extract all form fields from this Slovak document. Return only JSON array.'
