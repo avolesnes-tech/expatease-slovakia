@@ -2280,9 +2280,8 @@
 
 let ftImageBase64 = null;
 let ftImageMimeType = 'image/jpeg';
-let ftSections = [];
-let ftFields = [];
-let ftAnswers = [];
+let ftFields = [];   // [{sk, en, hint}]
+let ftAnswers = [];  // [{sk, en_label, en_answer}]
 
 const dropzone = document.getElementById('ftDropzone');
 const fileInput = document.getElementById('ftFileInput');
@@ -2304,7 +2303,6 @@ function handleFile(file) {
   const reader = new FileReader();
   reader.onload = (e) => {
     const originalSrc = e.target.result;
-    ftImageMimeType = 'image/jpeg';
     // Resize image to max 1200px to avoid timeouts
     const img = new Image();
     img.onload = () => {
@@ -2319,6 +2317,7 @@ function handleFile(file) {
       canvas.getContext('2d').drawImage(img, 0, 0, w, h);
       const resized = canvas.toDataURL('image/jpeg', 0.85);
       ftImageBase64 = resized.split(',')[1];
+      ftImageMimeType = 'image/jpeg';
       document.getElementById('ftPreviewImg').src = originalSrc;
       dropzone.style.display = 'none';
       document.getElementById('ftPreview').style.display = 'flex';
@@ -2347,6 +2346,10 @@ function goToStep(n) {
   });
 }
 
+function escHtml(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
 async function analyseForm() {
   if (!ftImageBase64) return;
   document.getElementById('ftUploadActions').style.display = 'none';
@@ -2359,26 +2362,28 @@ async function analyseForm() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: `You are an expert Slovak document translator for expats. Analyse the image of a Slovak form and extract all the form fields. Return ONLY a valid JSON array, no markdown, no preamble. Each item: {"sk": "original Slovak field label", "en": "English translation of the label", "hint": "short practical hint for filling in this field, in English"}. Extract up to 10 fields. If the image is not a form, return [].`,
+        max_tokens: 2000,
+        system: `You are an expert Slovak document translator for expats. Analyse the image of a Slovak form and extract all the fillable form fields (input boxes, blank lines, underscores, fillable areas). Return ONLY a valid JSON array — no markdown fences, no preamble, no trailing text whatsoever. Each element must be an object with exactly three string keys: "sk" (the original Slovak field label as printed on the form), "en" (English translation of that label), "hint" (a short practical tip in English for how to fill it in). Extract every fillable field you can see, up to 15. If the image is not a form or has no fillable fields, return [].`,
         messages: [{
           role: 'user',
           content: [{
             type: 'image',
-            source: { type: 'base64', media_type: ftImageMimeType || 'image/jpeg', data: ftImageBase64 }
+            source: { type: 'base64', media_type: ftImageMimeType, data: ftImageBase64 }
           }, {
             type: 'text',
-            text: 'Extract all form fields from this Slovak document. Return only JSON array.'
+            text: 'Extract all fillable form fields from this Slovak document. Return only a JSON array.'
           }]
         }]
       })
     });
     const data = await response.json();
-    let raw = data.content.find(b => b.type === 'text')?.text || '[]';
-    raw = raw.replace(/```json|```/g,'').trim();
-    ftFields = JSON.parse(raw);
-    if (!Array.isArray(ftFields) || ftFields.length === 0) throw new Error('No fields');
+    let raw = (data.content || []).find(b => b.type === 'text')?.text || '[]';
+    raw = raw.replace(/^```[a-z]*\n?/i, '').replace(/\n?```$/i, '').trim();
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length === 0) throw new Error('No fields');
+    ftFields = parsed;
   } catch(e) {
+    console.warn('analyseForm fallback:', e);
     ftFields = [
       {sk:'Meno a priezvisko', en:'Full name', hint:'As it appears on your passport'},
       {sk:'Dátum narodenia', en:'Date of birth', hint:'Use DD.MM.YYYY format'},
@@ -2396,95 +2401,76 @@ async function analyseForm() {
 function renderFields() {
   const container = document.getElementById('ftFields');
   container.innerHTML = '';
-  let fieldIndex = 0;
-  ftSections.forEach((s) => {
-    if (s.type === 'text') {
-      container.innerHTML += `<div class="ft-section-text">
-        <span class="ft-section-en">${s.en}</span>
-        <span class="ft-section-sk">${s.sk}</span>
-      </div>`;
-    } else {
-      const i = fieldIndex++;
-      container.innerHTML += `<div class="ft-field">
-        <div class="ft-field-sk">${s.sk}</div>
-        <div class="ft-field-hint">→ ${s.en}${s.hint ? ' · ' + s.hint : ''}</div>
-        <input class="ft-field-input" id="ftinput${i}" type="text" placeholder="Type your answer in English…">
-      </div>`;
-    }
+  ftFields.forEach((f, i) => {
+    container.innerHTML += `<div class="ft-field">
+      <div class="ft-field-sk">${escHtml(f.sk)}</div>
+      <div class="ft-field-hint">→ ${escHtml(f.en)}${f.hint ? ' · ' + escHtml(f.hint) : ''}</div>
+      <input class="ft-field-input" id="ftinput${i}" type="text" placeholder="Type your answer in English…" autocomplete="off">
+    </div>`;
   });
 }
 
 async function translateAnswers() {
-  // Re-read from DOM to handle any sync issues
-  const fieldEls = document.querySelectorAll('#ftFields .ft-field');
-  if (fieldEls.length > 0 && (!ftFields || ftFields.length === 0)) {
-    ftFields = Array.from(fieldEls).map((el, i) => {
-      const sk = el.querySelector('.ft-field-sk')?.textContent?.trim() || '';
-      const hint = el.querySelector('.ft-field-hint')?.textContent?.replace('\u2192 ', '').trim() || '';
-      return { sk, en: hint.split(' \u00b7 ')[0] || sk, hint: hint.split(' \u00b7 ')[1] || '' };
-    });
-  }
-
   ftAnswers = ftFields.map((f, i) => ({
     sk: f.sk,
     en_label: f.en,
-    en_answer: document.getElementById('ftinput'+i)?.value?.trim() || ''
+    en_answer: (document.getElementById('ftinput'+i)?.value || '').trim()
   }));
 
-  if (!ftAnswers.some(a => a.en_answer)) { alert('Please fill in at least one field.'); return; }
+  if (!ftAnswers.some(a => a.en_answer)) {
+    alert('Please fill in at least one field before translating.');
+    return;
+  }
 
   const actionsEl = document.querySelector('#ftpanel2 .ft-panel-actions');
   if (actionsEl) actionsEl.style.display = 'none';
   document.getElementById('ftLoading2').style.display = 'block';
 
-  const payload = ftAnswers.map(a => `Field: "${a.sk}" (${a.en_label})\nAnswer in English: "${a.en_answer}"`).join('\n\n');
+  const payload = ftAnswers
+    .map(a => `Field: "${a.sk}" (English: "${a.en_label}")\nAnswer in English: "${a.en_answer}"`)
+    .join('\n\n');
 
+  let results = null;
   try {
     const response = await fetch('/.netlify/functions/anthropic', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: `You are a Slovak language translator. Translate each answer to Slovak for official government forms. Return ONLY a valid JSON array, no markdown. Each item: {"sk_field": "original field label", "sk_answer": "translated answer in Slovak"}. Same order as input. Empty answers stay empty.`,
+        max_tokens: 2000,
+        system: `You are a professional Slovak language translator specialising in official government and administrative forms. Translate the provided English answers into natural, correct Slovak suitable for writing into official forms. Return ONLY a valid JSON array — no markdown, no preamble. Each element: {"sk_field": "<original Slovak field label>", "sk_answer": "<Slovak translation of the answer>"}. Preserve the same order as the input. If an answer is empty, set sk_answer to an empty string.`,
         messages: [{role:'user', content:`Translate these form answers to Slovak:\n\n${payload}`}]
       })
     });
     const data = await response.json();
-    let raw = data.content.find(b => b.type === 'text')?.text || '[]';
-    raw = raw.replace(/```json|```/g,'').trim();
-    renderResults(JSON.parse(raw));
+    let raw = (data.content || []).find(b => b.type === 'text')?.text || '[]';
+    raw = raw.replace(/^```[a-z]*\n?/i, '').replace(/\n?```$/i, '').trim();
+    results = JSON.parse(raw);
+    if (!Array.isArray(results)) throw new Error('Bad response');
   } catch(e) {
-    renderResults(ftAnswers.map(a => ({sk_field: a.sk, sk_answer: a.en_answer})));
+    console.warn('translateAnswers fallback:', e);
+    results = ftAnswers.map(a => ({sk_field: a.sk, sk_answer: a.en_answer}));
   }
 
   document.getElementById('ftLoading2').style.display = 'none';
+  renderResults(results);
   goToStep(3);
 }
 
 function renderResults(results) {
   const container = document.getElementById('ftResults');
   container.innerHTML = '';
-  let fieldIndex = 0;
-  ftSections.forEach((s) => {
-    if (s.type === 'text') {
-      container.innerHTML += `<div class="ft-section-text">
-        <span class="ft-section-en">${s.en}</span>
-        <span class="ft-section-sk">${s.sk}</span>
-      </div>`;
-    } else {
-      const i = fieldIndex;
-      const r = results[fieldIndex] || {};
-      fieldIndex++;
-      container.innerHTML += `<div class="ft-result-item">
-        <div class="ft-result-body">
-          <div class="ft-result-sk-label">${s.sk}</div>
-          <div class="ft-result-en-label">Write into form:</div>
-          <div class="ft-result-value" id="ftresult${i}">${r.sk_answer || '—'}</div>
-        </div>
-        <button class="ft-copy-btn" onclick="copyField(${i}, this)">${r.sk_answer ? 'Copy' : '—'}</button>
-      </div>`;
-    }
+  ftFields.forEach((f, i) => {
+    const r = results[i] || {};
+    const val = r.sk_answer || '';
+    container.innerHTML += `<div class="ft-result-item">
+      <div class="ft-result-body">
+        <div class="ft-result-sk-label">${escHtml(f.sk)}</div>
+        <div class="ft-result-en-label">Write into form:</div>
+        <div class="ft-result-value" id="ftresult${i}">${escHtml(val) || '—'}</div>
+      </div>
+      <button class="ft-copy-btn" onclick="copyField(${i}, this)" ${!val ? 'disabled style="opacity:0.35;cursor:default"' : ''}>${val ? 'Copy' : '—'}</button>
+    </div>`;
   });
 }
 
@@ -2499,10 +2485,15 @@ function copyField(i, btn) {
 
 function copyAll() {
   const btn = event.target.closest('button');
-  const all = ftFields.map((f,i) => `${f.sk}: ${document.getElementById('ftresult'+i)?.textContent||''}`).join('\n');
+  const all = ftFields.map((f,i) => {
+    const val = document.getElementById('ftresult'+i)?.textContent || '';
+    return (val && val !== '—') ? `${f.sk}: ${val}` : null;
+  }).filter(Boolean).join('\n');
+  if (!all) return;
   navigator.clipboard.writeText(all).then(() => {
+    const orig = btn.innerHTML;
     btn.textContent = '✓ All copied!';
-    setTimeout(() => { btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy all to clipboard`; }, 2500);
+    setTimeout(() => { btn.innerHTML = orig; }, 2500);
   });
 }
 
@@ -2515,7 +2506,8 @@ function startOver() {
   document.getElementById('ftLoading1').style.display = 'none';
   document.getElementById('ftFields').innerHTML = '';
   document.getElementById('ftResults').innerHTML = '';
-  document.querySelectorAll('#ftpanel2 .ft-panel-actions')[0].style.display = 'flex';
+  const actionsEl = document.querySelector('#ftpanel2 .ft-panel-actions');
+  if (actionsEl) actionsEl.style.display = 'flex';
   goToStep(1);
 }
 </script>
