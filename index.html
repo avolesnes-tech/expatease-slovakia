@@ -2415,6 +2415,16 @@ function renderFields() {
 }
 
 async function translateAnswers() {
+  // Re-read from DOM to handle any sync issues
+  const fieldEls = document.querySelectorAll('#ftFields .ft-field');
+  if (fieldEls.length > 0 && (!ftFields || ftFields.length === 0)) {
+    ftFields = Array.from(fieldEls).map((el, i) => {
+      const sk = el.querySelector('.ft-field-sk')?.textContent?.trim() || '';
+      const hint = el.querySelector('.ft-field-hint')?.textContent?.replace('\u2192 ', '').trim() || '';
+      return { sk, en: hint.split(' \u00b7 ')[0] || sk, hint: hint.split(' \u00b7 ')[1] || '' };
+    });
+  }
+
   ftAnswers = ftFields.map((f, i) => ({
     sk: f.sk,
     en_label: f.en,
@@ -2423,7 +2433,8 @@ async function translateAnswers() {
 
   if (!ftAnswers.some(a => a.en_answer)) { alert('Please fill in at least one field.'); return; }
 
-  document.querySelectorAll('#ftpanel2 .ft-panel-actions')[0].style.display = 'none';
+  const actionsEl = document.querySelector('#ftpanel2 .ft-panel-actions');
+  if (actionsEl) actionsEl.style.display = 'none';
   document.getElementById('ftLoading2').style.display = 'block';
 
   const payload = ftAnswers.map(a => `Field: "${a.sk}" (${a.en_label})\nAnswer in English: "${a.en_answer}"`).join('\n\n');
