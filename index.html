@@ -2278,7 +2278,20 @@
 <script>
 // ─── FORM TRANSLATOR ───────────────────────────────────────────────
 
-let ftImageBase64 = null;
+// ── Anthropic API (direct) ───────────────────────────────────────────
+const ANTHROPIC_API = 'https://api.anthropic.com/v1/messages';
+
+async function callClaude(body) {
+  const response = await fetch(ANTHROPIC_API, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' }  ,
+    body: JSON.stringify(body)
+  });
+  if (!response.ok) throw new Error('API error ' + response.status);
+  return response.json();
+}
+
+
 let ftImageMimeType = 'image/jpeg';
 let ftFields = [];   // [{sk, en, hint}]
 let ftAnswers = [];  // [{sk, en_label, en_answer}]
@@ -2364,10 +2377,7 @@ async function analyseForm() {
   document.getElementById('ftLoading1').style.display = 'block';
 
   try {
-    const response = await fetch('/.netlify/functions/anthropic', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+    const data = await callClaude({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 2000,
         system: `You are an expert Slovak document translator for expats. Analyse the image of a Slovak form and extract all the fillable form fields (input boxes, blank lines, underscores, fillable areas). Return ONLY a valid JSON array — no markdown fences, no preamble, no trailing text whatsoever. Each element must be an object with exactly three string keys: "sk" (the original Slovak field label as printed on the form), "en" (English translation of that label), "hint" (a short practical tip in English for how to fill it in). Extract every fillable field you can see, up to 15. If the image is not a form or has no fillable fields, return [].`,
@@ -2381,9 +2391,7 @@ async function analyseForm() {
             text: 'Extract all fillable form fields from this Slovak document. Return only a JSON array.'
           }]
         }]
-      })
-    });
-    const data = await response.json();
+      });
     let raw = (data.content || []).find(b => b.type === 'text')?.text || '[]';
     raw = raw.replace(/^```[a-z]*\n?/i, '').replace(/\n?```$/i, '').trim();
     const parsed = JSON.parse(raw);
@@ -2439,17 +2447,12 @@ async function translateAnswers() {
 
   let results = null;
   try {
-    const response = await fetch('/.netlify/functions/anthropic', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+    const data = await callClaude({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 2000,
         system: `You are a professional Slovak language translator specialising in official government and administrative forms. Translate the provided English answers into natural, correct Slovak suitable for writing into official forms. Return ONLY a valid JSON array — no markdown, no preamble. Each element: {"sk_field": "<original Slovak field label>", "sk_answer": "<Slovak translation of the answer>"}. Preserve the same order as the input. If an answer is empty, set sk_answer to an empty string.`,
         messages: [{role:'user', content:`Translate these form answers to Slovak:\n\n${payload}`}]
-      })
-    });
-    const data = await response.json();
+      });
     let raw = (data.content || []).find(b => b.type === 'text')?.text || '[]';
     raw = raw.replace(/^```[a-z]*\n?/i, '').replace(/\n?```$/i, '').trim();
     results = JSON.parse(raw);
