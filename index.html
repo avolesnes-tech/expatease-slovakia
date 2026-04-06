@@ -192,6 +192,7 @@
   .hero-carousel {
     position: absolute; inset: 0;
     z-index: 0;
+    overflow: hidden;
   }
   .hero-slide {
     position: absolute; inset: 0;
@@ -600,6 +601,7 @@
     background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 50%, #1B6B4A 100%);
     position: relative;
     overflow: hidden;
+    transform: translateZ(0);
   }
   .bureau-bg-shapes {
     position: absolute; inset: 0;
@@ -752,6 +754,7 @@
     border-radius: var(--radius-lg);
     padding: 28px;
     border: 1px solid var(--gray-100);
+    border-left: 3px solid var(--green);
     box-shadow: var(--shadow-card);
     transition: var(--transition);
     position: relative;
@@ -1227,6 +1230,66 @@
     .cookie-btn-accept, .cookie-btn-reject { flex: 1; text-align: center; }
   }
 
+  /* ─── SCROLL INDICATOR ─── */
+  .hero-scroll-indicator {
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 6px;
+    opacity: 0; animation: fadeIn 1s ease 1.8s forwards;
+    cursor: pointer; transition: opacity 0.3s;
+    background: none; border: none; padding: 0; outline: none;
+    white-space: nowrap;
+  }
+  .hero-scroll-indicator span {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.5); text-transform: uppercase;
+  }
+  .hero-scroll-chevron {
+    width: 28px; height: 28px;
+    border: 1.5px solid rgba(255,255,255,0.3); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    animation: bounce-down 2s ease-in-out infinite;
+    color: rgba(255,255,255,0.6);
+  }
+  @keyframes bounce-down {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+  }
+
+  /* ─── CATEGORY CARD COLOR CODING ─── */
+  .cat-card:nth-child(4n+1) { border-top: 3px solid var(--blue); }
+  .cat-card:nth-child(4n+2) { border-top: 3px solid var(--green); }
+  .cat-card:nth-child(4n+3) { border-top: 3px solid var(--gold); }
+  .cat-card:nth-child(4n)   { border-top: 3px solid var(--blue-dark); }
+  .cat-card:nth-child(4n+1) .cat-icon { color: var(--blue); }
+  .cat-card:nth-child(4n+2) .cat-icon { color: var(--green); }
+  .cat-card:nth-child(4n+3) .cat-icon { color: #c47e0e; }
+  .cat-card:nth-child(4n)   .cat-icon { color: var(--blue-dark); }
+
+  /* ─── HOW IT WORKS — per-step icon colors ─── */
+  .how-card:nth-child(1) .how-icon { background: rgba(26,79,138,0.10); color: var(--blue); }
+  .how-card:nth-child(2) .how-icon { background: rgba(46,158,107,0.12); color: var(--green-dark); }
+  .how-card:nth-child(3) .how-icon { background: rgba(246,173,85,0.15); color: #b45309; }
+  .how-card:nth-child(1):hover .how-icon { background: var(--blue); }
+  .how-card:nth-child(2):hover .how-icon { background: var(--green); }
+  .how-card:nth-child(3):hover .how-icon { background: #d97706; }
+
+  /* ─── BLOG IMAGE — themed per article ─── */
+  .blog-card:nth-child(1) .blog-img {
+    background: linear-gradient(135deg, #0F3360 0%, #1A4F8A 70%, #2563EB 100%);
+  }
+  .blog-card:nth-child(2) .blog-img {
+    background: linear-gradient(135deg, #1D7A50 0%, #2E9E6B 100%);
+  }
+  .blog-card:nth-child(3) .blog-img {
+    background: linear-gradient(135deg, #4338CA 0%, #7C3AED 100%);
+  }
+  .blog-img svg { opacity: 0.35; }
+  .blog-card:nth-child(1) .blog-img svg,
+  .blog-card:nth-child(2) .blog-img svg,
+  .blog-card:nth-child(3) .blog-img svg { stroke: rgba(255,255,255,0.7); opacity: 1; }
+
+  /* ─── LISTING CARD — left accent ─── */
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
@@ -1611,12 +1674,561 @@
   }
   .ft-link-btn:hover { color: white; }
 
+  .ft-error-msg {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(220, 53, 69, 0.15);
+    border: 1px solid rgba(220, 53, 69, 0.4);
+    color: #ff8a94;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 16px;
+  }
+  .ft-error-msg span { flex: 1; }
+  .ft-retry-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: var(--transition);
+  }
+  .ft-retry-btn:hover { background: rgba(255,255,255,0.2); }
+
+  .ft-upload-error {
+    color: #ff8a94;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 10px;
+  }
+
   @media (max-width: 768px) {
     .ft-widget { padding: 28px 20px; }
     .ft-step-line { min-width: 24px; margin: 0 8px; margin-bottom: 24px; }
     .ft-step-label { font-size: 9px; }
     .ft-panel-actions { flex-direction: column-reverse; align-items: stretch; }
     .ft-btn-primary, .ft-btn-secondary { width: 100%; justify-content: center; }
+  }
+
+  /* ═══════════════════════════════════════════════
+     SUBMIT BUSINESS MODAL
+  ═══════════════════════════════════════════════ */
+
+  /* Overlay */
+  .submit-modal-overlay {
+    position: fixed; inset: 0; z-index: 3000;
+    background: rgba(15,51,96,0.60);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity 0.32s cubic-bezier(0.4,0,0.2,1),
+                visibility 0.32s cubic-bezier(0.4,0,0.2,1);
+  }
+  .submit-modal-overlay.open {
+    opacity: 1; visibility: visible; pointer-events: auto;
+  }
+
+  /* Panel */
+  .submit-modal-panel {
+    background: #fff;
+    border: 1px solid rgba(26,79,138,0.08);
+    border-radius: 20px;
+    box-shadow: 0 24px 80px rgba(26,79,138,0.20), 0 4px 16px rgba(0,0,0,0.06);
+    width: 100%; max-width: 680px;
+    max-height: 90vh;
+    display: flex; flex-direction: column;
+    transform: translateY(32px) scale(0.98);
+    opacity: 0;
+    transition: transform 0.32s cubic-bezier(0.34,1.10,0.64,1),
+                opacity 0.28s cubic-bezier(0.4,0,0.2,1);
+    overflow: hidden;
+  }
+  .submit-modal-overlay.open .submit-modal-panel {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+
+  /* Header */
+  .submit-modal-header {
+    padding: 22px 28px 0;
+    display: flex; align-items: flex-start; justify-content: space-between;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--gray-100);
+    padding-bottom: 18px;
+  }
+
+  /* Step progress */
+  .submit-modal-progress {
+    display: flex; align-items: center; gap: 0; flex: 1;
+  }
+  .sm-step {
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+  }
+  .sm-step-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    border: 2px solid var(--gray-100);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-head); font-size: 13px; font-weight: 700;
+    color: var(--gray-400);
+    transition: var(--transition);
+    background: white;
+  }
+  .sm-step.active .sm-step-num {
+    background: var(--blue); border-color: var(--blue); color: white;
+    box-shadow: 0 0 0 4px rgba(26,79,138,0.12);
+  }
+  .sm-step.done .sm-step-num {
+    background: var(--green); border-color: var(--green); color: white;
+  }
+  .sm-step-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.07em;
+    text-transform: uppercase; color: var(--gray-400); white-space: nowrap;
+    transition: var(--transition);
+  }
+  .sm-step.active .sm-step-label { color: var(--gray-900); }
+  .sm-step.done .sm-step-label { color: var(--green); }
+  .sm-step-line {
+    flex: 1; height: 1px; background: var(--gray-100);
+    margin: 0 10px; margin-bottom: 22px; min-width: 24px;
+  }
+
+  /* Close button */
+  .submit-modal-close {
+    width: 34px; height: 34px; border-radius: 50%; border: none;
+    background: transparent; cursor: pointer; color: var(--gray-400);
+    display: flex; align-items: center; justify-content: center;
+    transition: var(--transition); flex-shrink: 0; margin-left: 12px;
+    margin-top: -2px;
+  }
+  .submit-modal-close:hover { background: var(--gray-50); color: var(--gray-900); }
+  .submit-modal-close svg { display: block; pointer-events: none; }
+
+  /* Scrollable body */
+  .submit-modal-body {
+    padding: 28px; overflow-y: auto; flex: 1;
+    scroll-behavior: smooth;
+  }
+  .submit-modal-body::-webkit-scrollbar { width: 4px; }
+  .submit-modal-body::-webkit-scrollbar-track { background: transparent; }
+  .submit-modal-body::-webkit-scrollbar-thumb { background: var(--gray-100); border-radius: 4px; }
+
+  /* Panel intro */
+  .sm-panel-intro { text-align: center; margin-bottom: 28px; }
+  .sm-panel-title {
+    font-family: var(--font-head); font-size: 22px; font-weight: 800;
+    color: var(--gray-900); letter-spacing: -0.02em; margin-bottom: 6px;
+  }
+  .sm-panel-sub { font-size: 14px; color: var(--gray-400); line-height: 1.5; }
+
+  /* Plan cards grid */
+  .sm-plans-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;
+  }
+
+  /* Plan card */
+  .sm-plan-card {
+    background: white; border-radius: var(--radius-lg);
+    border: 2px solid var(--gray-100); padding: 22px 18px;
+    cursor: pointer; position: relative;
+    transition: var(--transition);
+    display: flex; flex-direction: column; gap: 6px;
+    outline: none;
+  }
+  .sm-plan-card:hover {
+    transform: translateY(-3px); box-shadow: var(--shadow-hover);
+    border-color: rgba(26,79,138,0.25);
+  }
+  .sm-plan-card:focus-visible { box-shadow: 0 0 0 3px rgba(26,79,138,0.25); }
+  .sm-plan-card.selected {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 1px var(--blue), var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+  .sm-plan-featured {
+    border-color: rgba(26,79,138,0.20);
+  }
+  .sm-plan-featured.selected {
+    border-color: var(--blue);
+  }
+
+  /* Plan badge */
+  .sm-plan-badge {
+    position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    color: white; font-size: 10px; font-weight: 700; letter-spacing: 0.07em;
+    text-transform: uppercase; padding: 3px 12px; border-radius: var(--radius-xl);
+    white-space: nowrap; font-family: var(--font-body);
+  }
+
+  .sm-plan-name {
+    font-family: var(--font-head); font-size: 15px; font-weight: 700;
+    color: var(--gray-900); margin-top: 6px;
+  }
+  .sm-plan-price {
+    font-family: var(--font-head); font-size: 26px; font-weight: 800;
+    color: var(--blue); letter-spacing: -0.03em; line-height: 1.1;
+  }
+  .sm-plan-period { font-size: 13px; font-weight: 500; color: var(--gray-400); }
+  .sm-plan-desc { font-size: 12px; color: var(--gray-400); line-height: 1.4; margin-bottom: 4px; }
+
+  /* Plan features */
+  .sm-plan-features { list-style: none; display: flex; flex-direction: column; gap: 5px; margin-top: 8px; }
+  .sm-plan-feature {
+    font-size: 12px; color: var(--gray-700); display: flex; align-items: flex-start; gap: 7px;
+    line-height: 1.4;
+  }
+  .sm-plan-feature::before {
+    content: '✓'; color: var(--green); font-weight: 700; font-size: 11px;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .sm-plan-feature-base::before { content: '→'; color: var(--blue); }
+
+  /* Step 1 footer */
+  .sm-step1-footer { display: flex; flex-direction: column; gap: 10px; }
+
+  /* Continue / Submit buttons */
+  .sm-continue-btn, .sm-submit-btn {
+    width: 100%; padding: 13px 20px;
+    font-family: var(--font-body); font-size: 15px; font-weight: 600;
+    border-radius: var(--radius-xl); border: none; cursor: pointer;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--green) 100%);
+    color: white; letter-spacing: 0.01em;
+    transition: var(--transition);
+    box-shadow: 0 4px 20px rgba(26,79,138,0.28);
+    position: relative; overflow: hidden;
+  }
+  .sm-continue-btn::after, .sm-submit-btn::after {
+    content: '';
+    position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+    transition: left 0.5s ease;
+  }
+  .sm-continue-btn:not(:disabled):hover, .sm-submit-btn:not(:disabled):hover {
+    transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,79,138,0.35);
+  }
+  .sm-continue-btn:not(:disabled):hover::after, .sm-submit-btn:not(:disabled):hover::after {
+    left: 150%;
+  }
+  .sm-continue-btn:disabled {
+    opacity: 0.38; cursor: not-allowed; transform: none; box-shadow: none;
+  }
+
+  /* Form sections */
+  .sm-section-title {
+    font-family: var(--font-head); font-size: 15px; font-weight: 700;
+    color: var(--gray-900); margin-bottom: 18px;
+  }
+  .sm-section-divider {
+    border-top: 1px solid var(--gray-100); padding-top: 22px; margin-top: 8px;
+  }
+
+  /* Field groups */
+  .sm-field-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 16px; }
+
+  /* Labels */
+  .sm-label {
+    font-family: var(--font-body); font-size: 12px; font-weight: 600;
+    color: var(--gray-700); display: flex; align-items: center; justify-content: space-between;
+    letter-spacing: 0.01em;
+  }
+  .sm-required { color: var(--blue); font-size: 10px; font-weight: 600; margin-left: 3px; }
+  .sm-hint-inline { font-size: 11px; color: var(--gray-400); font-weight: 400; }
+
+  /* Inputs */
+  .sm-input {
+    font-family: var(--font-body); font-size: 14px; color: var(--gray-900);
+    padding: 10px 13px; border-radius: var(--radius-md);
+    border: 1.5px solid var(--gray-100); background: white; outline: none;
+    transition: var(--transition); width: 100%; line-height: 1.5;
+  }
+  .sm-input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(26,79,138,0.08);
+  }
+  .sm-input::placeholder { color: var(--gray-400); }
+  .sm-input.sm-input-error { border-color: #e53e3e; box-shadow: 0 0 0 3px rgba(229,62,62,0.10); }
+
+  .sm-select {
+    appearance: none; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238C97A8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 12px center;
+    padding-right: 34px;
+  }
+  .sm-textarea { resize: vertical; min-height: 78px; line-height: 1.6; }
+  .sm-textarea-tall { min-height: 110px; }
+
+  /* Char counter */
+  .sm-char-counter { font-size: 11px; font-weight: 500; color: var(--gray-400); }
+  .sm-char-counter.warning { color: #d97706; }
+
+  /* Error hint under field */
+  .sm-field-error {
+    font-size: 11px; color: #e53e3e; font-weight: 500; margin-top: 2px;
+    display: none;
+  }
+  .sm-field-error.visible { display: block; }
+
+  /* Phone wrapper */
+  .sm-phone-wrapper { display: flex; gap: 8px; }
+  .sm-prefix-select { width: 86px; flex-shrink: 0; }
+  .sm-phone-input { flex: 1; }
+
+  /* Checkbox */
+  .sm-checkbox-group { flex-direction: row; align-items: center; }
+  .sm-checkbox-label {
+    display: flex; align-items: center; gap: 10px;
+    cursor: pointer; font-size: 13px; color: var(--gray-700); line-height: 1.4;
+    user-select: none;
+  }
+  .sm-checkbox { position: absolute; opacity: 0; width: 0; height: 0; }
+  .sm-checkbox-custom {
+    width: 20px; height: 20px; border-radius: 6px; flex-shrink: 0;
+    border: 2px solid var(--gray-100); background: white;
+    transition: var(--transition); position: relative;
+  }
+  .sm-checkbox:checked + .sm-checkbox-custom {
+    background: var(--blue); border-color: var(--blue);
+  }
+  .sm-checkbox:checked + .sm-checkbox-custom::after {
+    content: '';
+    position: absolute; left: 5px; top: 2px;
+    width: 5px; height: 9px;
+    border: 2px solid white; border-top: none; border-left: none;
+    transform: rotate(45deg);
+  }
+
+  /* Upload zones */
+  .sm-upload-zone {
+    border: 2px dashed var(--gray-100); border-radius: var(--radius-md);
+    padding: 28px 20px; text-align: center; cursor: pointer;
+    transition: var(--transition); position: relative;
+  }
+  .sm-upload-zone:hover, .sm-upload-zone.drag-over {
+    border-color: var(--blue); background: var(--blue-light);
+  }
+  .sm-upload-zone-icon { color: var(--gray-400); margin-bottom: 8px; }
+  .sm-upload-zone-title {
+    font-family: var(--font-head); font-size: 14px; font-weight: 600;
+    color: var(--gray-700); margin-bottom: 4px;
+  }
+  .sm-upload-zone-sub { font-size: 12px; color: var(--gray-400); }
+  .sm-upload-zone-link { color: var(--blue); text-decoration: underline; cursor: pointer; }
+
+  /* Logo preview */
+  .sm-logo-preview { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+  .sm-logo-preview img {
+    width: 72px; height: 72px; border-radius: 50%; object-fit: cover;
+    border: 3px solid var(--gray-100);
+  }
+  .sm-preview-remove {
+    font-size: 12px; color: #e53e3e; background: none; border: none;
+    cursor: pointer; font-weight: 600; padding: 4px 8px;
+    border-radius: var(--radius-sm); transition: var(--transition);
+  }
+  .sm-preview-remove:hover { background: #fff5f5; }
+
+  /* Cover preview */
+  .sm-cover-preview img {
+    width: 100%; height: 130px; object-fit: cover;
+    border-radius: var(--radius-md); margin-top: 10px;
+    border: 1px solid var(--gray-100);
+  }
+
+  /* Gallery */
+  .sm-gallery-zone { padding: 20px; }
+  .sm-gallery-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px;
+  }
+  .sm-gallery-thumb {
+    aspect-ratio: 1; border-radius: var(--radius-sm); overflow: hidden;
+    position: relative;
+  }
+  .sm-gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .sm-gallery-remove {
+    position: absolute; top: 4px; right: 4px;
+    background: rgba(0,0,0,0.55); color: white; border: none;
+    border-radius: 50%; width: 20px; height: 20px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 11px; line-height: 1;
+    transition: var(--transition);
+  }
+  .sm-gallery-remove:hover { background: rgba(229,62,62,0.85); }
+
+  /* Repeatable rows */
+  .sm-repeatable-row {
+    background: var(--gray-50); border-radius: var(--radius-md); padding: 14px;
+    display: flex; flex-direction: column; gap: 10px;
+    margin-bottom: 10px; position: relative; border: 1px solid var(--gray-100);
+  }
+  .sm-repeatable-row-inner { display: flex; gap: 8px; flex-wrap: wrap; }
+  .sm-repeatable-row-inner .sm-field-group { flex: 1; min-width: 120px; margin-bottom: 0; }
+  .sm-remove-row-btn {
+    position: absolute; top: 8px; right: 8px;
+    background: none; border: none; color: var(--gray-400);
+    cursor: pointer; font-size: 16px; line-height: 1; padding: 2px 5px;
+    border-radius: var(--radius-sm); transition: var(--transition);
+  }
+  .sm-remove-row-btn:hover { color: #e53e3e; background: #fff5f5; }
+
+  /* Add row button */
+  .sm-add-btn {
+    font-family: var(--font-body); font-size: 13px; font-weight: 600;
+    color: var(--blue); background: var(--blue-light);
+    border: 1px solid rgba(26,79,138,0.12); cursor: pointer;
+    padding: 7px 16px; border-radius: var(--radius-sm);
+    transition: var(--transition); display: inline-flex; align-items: center; gap: 5px;
+  }
+  .sm-add-btn:hover { background: rgba(26,79,138,0.12); }
+  .sm-add-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* Opening hours */
+  .sm-hours-grid { display: flex; flex-direction: column; gap: 6px; }
+  .sm-hours-row {
+    display: grid; grid-template-columns: 90px 52px 1fr 1fr; gap: 8px;
+    align-items: center; padding: 6px 0;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .sm-hours-row:last-child { border-bottom: none; }
+  .sm-hours-day { font-size: 12px; font-weight: 600; color: var(--gray-700); }
+  .sm-hours-toggle-label {
+    display: flex; align-items: center; gap: 6px; cursor: pointer;
+  }
+  .sm-hours-toggle { position: absolute; opacity: 0; width: 0; height: 0; }
+  .sm-hours-pill {
+    width: 36px; height: 20px; background: var(--gray-100); border-radius: 10px;
+    position: relative; transition: var(--transition); flex-shrink: 0;
+  }
+  .sm-hours-pill::after {
+    content: ''; position: absolute; left: 3px; top: 3px;
+    width: 14px; height: 14px; border-radius: 50%; background: white;
+    transition: var(--transition);
+  }
+  .sm-hours-toggle:checked + .sm-hours-pill { background: var(--green); }
+  .sm-hours-toggle:checked + .sm-hours-pill::after { transform: translateX(16px); }
+  .sm-hours-open-label { font-size: 11px; color: var(--gray-400); white-space: nowrap; }
+  .sm-hours-toggle:checked ~ .sm-hours-open-label { color: var(--green); }
+  .sm-hours-time { font-size: 12px; }
+  .sm-hours-time:disabled { opacity: 0.38; background: var(--gray-50); cursor: not-allowed; }
+
+  /* Payment mockup */
+  .sm-payment-section {
+    margin-top: 22px; padding: 18px 20px;
+    border-radius: var(--radius-md); background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+  }
+  .sm-payment-header {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;
+  }
+  .sm-payment-price {
+    font-family: var(--font-head); font-size: 20px; font-weight: 800; color: var(--gray-900);
+  }
+  .sm-payment-stripe {
+    font-size: 11px; font-weight: 700; color: var(--gray-400);
+    letter-spacing: 0.05em; text-transform: uppercase;
+    background: var(--gray-100); padding: 3px 8px; border-radius: 4px;
+  }
+  .sm-payment-note { font-size: 12px; color: var(--gray-400); line-height: 1.5; margin-bottom: 12px; }
+
+  /* Form footer */
+  .sm-form-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 12px; margin-top: 24px; padding-top: 20px;
+    border-top: 1px solid var(--gray-100);
+  }
+  .sm-back-btn {
+    font-family: var(--font-body); font-size: 13px; font-weight: 500;
+    color: var(--gray-400); background: none; border: none;
+    cursor: pointer; transition: var(--transition); padding: 4px 0;
+    flex-shrink: 0;
+  }
+  .sm-back-btn:hover { color: var(--gray-900); }
+  .sm-submit-btn { flex: 1; max-width: 260px; padding: 12px 20px; font-size: 14px; }
+
+  /* Submitting state */
+  .sm-submitting { text-align: center; padding: 28px 20px; }
+  .sm-submitting-spinner {
+    width: 34px; height: 34px; border: 3px solid var(--gray-100);
+    border-top-color: var(--blue); border-radius: 50%;
+    margin: 0 auto 14px; animation: spin 0.8s linear infinite;
+  }
+  .sm-submitting-text { font-size: 14px; color: var(--gray-400); }
+
+  /* Error banner */
+  .sm-error-banner {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(229,62,62,0.06); border: 1px solid rgba(229,62,62,0.25);
+    color: #c53030; border-radius: var(--radius-md); padding: 12px 16px;
+    font-size: 13px; font-weight: 500; margin-top: 16px;
+  }
+
+  /* Success panel */
+  .sm-success-panel { text-align: center; padding: 16px 0 8px; }
+  .sm-success-icon { margin-bottom: 20px; }
+  .sm-checkmark {
+    width: 64px; height: 64px; display: block; margin: 0 auto;
+  }
+  .sm-checkmark-circle {
+    stroke-dasharray: 166; stroke-dashoffset: 166;
+    stroke: var(--green); stroke-width: 2; fill: none;
+    animation: sm-circle-draw 0.6s cubic-bezier(0.65,0,0.45,1) 0.3s forwards;
+  }
+  .sm-checkmark-check {
+    stroke-dasharray: 48; stroke-dashoffset: 48;
+    stroke: var(--green); stroke-width: 3;
+    stroke-linecap: round; stroke-linejoin: round; fill: none;
+    animation: sm-check-draw 0.3s cubic-bezier(0.65,0,0.45,1) 0.95s forwards;
+  }
+  @keyframes sm-circle-draw { to { stroke-dashoffset: 0; } }
+  @keyframes sm-check-draw  { to { stroke-dashoffset: 0; } }
+
+  .sm-success-title {
+    font-family: var(--font-head); font-size: 24px; font-weight: 800;
+    color: var(--gray-900); letter-spacing: -0.02em; margin-bottom: 10px;
+  }
+  .sm-success-sub {
+    font-size: 14px; color: var(--gray-400); line-height: 1.6;
+    max-width: 400px; margin: 0 auto 28px;
+  }
+  .sm-success-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .sm-close-success-btn {
+    font-family: var(--font-body); font-size: 14px; font-weight: 600;
+    color: var(--gray-700); background: white;
+    border: 1.5px solid var(--gray-100); border-radius: var(--radius-xl);
+    padding: 10px 24px; cursor: pointer; transition: var(--transition);
+  }
+  .sm-close-success-btn:hover { border-color: var(--gray-400); color: var(--gray-900); }
+  .sm-another-btn {
+    font-family: var(--font-body); font-size: 14px; font-weight: 600;
+    color: var(--blue); background: var(--blue-light);
+    border: none; border-radius: var(--radius-xl);
+    padding: 10px 24px; cursor: pointer; transition: var(--transition);
+  }
+  .sm-another-btn:hover { background: rgba(26,79,138,0.12); }
+
+  /* Mobile overrides */
+  @media (max-width: 768px) {
+    .submit-modal-overlay { padding: 0; align-items: flex-end; }
+    .submit-modal-panel {
+      max-width: 100%; max-height: 95vh; border-radius: 20px 20px 0 0;
+      transform: translateY(40px) scale(1);
+    }
+    .submit-modal-overlay.open .submit-modal-panel { transform: translateY(0) scale(1); }
+    .sm-plans-grid { grid-template-columns: 1fr; }
+    .sm-gallery-grid { grid-template-columns: repeat(3, 1fr); }
+    .sm-hours-row { grid-template-columns: 76px 48px 1fr 1fr; }
+    .sm-form-footer { flex-direction: column-reverse; }
+    .sm-submit-btn { max-width: 100%; }
+    .sm-back-btn { text-align: center; }
   }
 </style>
 </head>
@@ -1639,9 +2251,9 @@
       <button class="lang-btn active" id="btn-en">EN</button>
       <button class="lang-btn" id="btn-sk">SK</button>
     </div>
-    <a href="#submit" class="nav-cta">
+    <button class="nav-cta" id="openSubmitModalBtn">
       + Submit a Business
-    </a>
+    </button>
   </div>
 </nav>
 
@@ -1681,18 +2293,25 @@
     <div class="hero-trust">
       <div class="trust-item">
         <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-        500+ verified listings
+        <span class="counter" data-target="500" data-suffix="+ verified listings">500+ verified listings</span>
       </div>
       <div class="trust-item">
         <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-        12 expert categories
+        <span class="counter" data-target="12" data-suffix=" expert categories">12 expert categories</span>
       </div>
       <div class="trust-item">
         <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-        Trusted by 8,000+ expats
+        <span class="counter" data-target="8000" data-prefix="Trusted by " data-suffix="+ expats">Trusted by 8,000+ expats</span>
       </div>
     </div>
   </div>
+
+  <button class="hero-scroll-indicator" id="heroScrollBtn" aria-label="Scroll down">
+    <span>Scroll</span>
+    <div class="hero-scroll-chevron">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </button>
 </section>
 
 <!-- HOW IT WORKS -->
@@ -1732,7 +2351,7 @@
     <div class="section-header reveal">
       <div class="section-label">Expert directory</div>
       <h2 class="section-title">Find who you need</h2>
-      <p class="section-sub">Twelve categories of verified English-speaking professionals in Bratislava.</p>
+      <p class="section-sub">Verified English-speaking professionals in Bratislava, across every category you need.</p>
     </div>
     <div class="categories-grid">
       <a href="#" class="cat-card reveal" style="transition-delay: 0ms">
@@ -1761,29 +2380,21 @@
       </a>
       <a href="#" class="cat-card reveal" style="transition-delay: 180ms">
         <div class="cat-card-inner">
-          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M8.12 8.12L12 12"/><path d="M15.88 8.12L12 12"/><path d="M12 12L6 21"/><path d="M12 12l6 9"/></svg></span>
-          <div class="cat-name">Barbers & Hairdressers</div>
-          <div class="cat-count">27 listings</div>
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="6" y1="9" x2="6" y2="15"/><path d="M20 4s-6 3-6 8 6 8 6 8"/></svg></span>
+          <div class="cat-name">Hair & Beauty</div>
+          <div class="cat-count">38 listings</div>
         </div>
         <span class="cat-arrow">→</span>
       </a>
       <a href="#" class="cat-card reveal" style="transition-delay: 240ms">
         <div class="cat-card-inner">
-          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
-          <div class="cat-name">Electricians</div>
-          <div class="cat-count">19 listings</div>
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+          <div class="cat-name">Handymen</div>
+          <div class="cat-count">41 listings</div>
         </div>
         <span class="cat-arrow">→</span>
       </a>
       <a href="#" class="cat-card reveal" style="transition-delay: 300ms">
-        <div class="cat-card-inner">
-          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
-          <div class="cat-name">Plumbers</div>
-          <div class="cat-count">22 listings</div>
-        </div>
-        <span class="cat-arrow">→</span>
-      </a>
-      <a href="#" class="cat-card reveal" style="transition-delay: 360ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="6" height="4"/><rect x="16" y="3" width="6" height="4"/><rect x="9" y="3" width="6" height="4"/><path d="M2 7v14h20V7"/><path d="M9 21v-8h6v8"/></svg></span>
           <div class="cat-name">Builders & Construction</div>
@@ -1791,15 +2402,7 @@
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="#" class="cat-card reveal" style="transition-delay: 420ms">
-        <div class="cat-card-inner">
-          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span>
-          <div class="cat-name">Tattoo Studios</div>
-          <div class="cat-count">11 listings</div>
-        </div>
-        <span class="cat-arrow">→</span>
-      </a>
-      <a href="#" class="cat-card reveal" style="transition-delay: 480ms">
+      <a href="#" class="cat-card reveal" style="transition-delay: 360ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg></span>
           <div class="cat-name">Vets</div>
@@ -1807,7 +2410,7 @@
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="#" class="cat-card reveal" style="transition-delay: 540ms">
+      <a href="#" class="cat-card reveal" style="transition-delay: 420ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
           <div class="cat-name">Real Estate</div>
@@ -1815,19 +2418,35 @@
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="#" class="cat-card reveal" style="transition-delay: 600ms">
+      <a href="#" class="cat-card reveal" style="transition-delay: 480ms">
         <div class="cat-card-inner">
-          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12h6"/><path d="M12 9v6"/></svg></span>
-          <div class="cat-name">Pharmacies</div>
-          <div class="cat-count">18 listings</div>
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+          <div class="cat-name">Schools & Learning</div>
+          <div class="cat-count">23 listings</div>
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="#" class="cat-card reveal" style="transition-delay: 660ms">
+      <a href="#" class="cat-card reveal" style="transition-delay: 540ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
           <div class="cat-name">Moving & Relocation</div>
           <div class="cat-count">12 listings</div>
+        </div>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a href="#" class="cat-card reveal" style="transition-delay: 600ms">
+        <div class="cat-card-inner">
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span>
+          <div class="cat-name">Sports & Leisure</div>
+          <div class="cat-count">17 listings</div>
+        </div>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a href="#bureaucracy" class="cat-card reveal" style="transition-delay: 660ms">
+        <div class="cat-card-inner">
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></span>
+          <div class="cat-name">Bureaucracy</div>
+          <div class="cat-count">Form Translator →</div>
         </div>
         <span class="cat-arrow">→</span>
       </a>
@@ -2139,9 +2758,18 @@
         </div>
         <p class="footer-tagline">Life in Slovakia, made simple. The #1 resource for English-speaking expats in Bratislava.</p>
         <div class="footer-socials">
-          <a href="#" class="footer-social">f</a>
-          <a href="#" class="footer-social">in</a>
-          <a href="#" class="footer-social">ig</a>
+          <a href="#" class="footer-social" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" class="footer-social" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="footer-social" aria-label="X / Twitter">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" class="footer-social" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
         </div>
       </div>
       <div>
@@ -2191,6 +2819,315 @@
 </footer>
 
 <!-- COOKIE BANNER -->
+<!-- ═══════════════════════════════════════════════
+     SUBMIT BUSINESS MODAL
+═══════════════════════════════════════════════ -->
+<div class="submit-modal-overlay" id="submitModalOverlay" role="dialog" aria-modal="true" aria-labelledby="smModalTitle">
+  <div class="submit-modal-panel" id="submitModalPanel">
+
+    <!-- Header -->
+    <div class="submit-modal-header">
+      <div class="submit-modal-progress">
+        <div class="sm-step active" id="smstep1">
+          <div class="sm-step-num">1</div>
+          <div class="sm-step-label">Choose Plan</div>
+        </div>
+        <div class="sm-step-line"></div>
+        <div class="sm-step" id="smstep2">
+          <div class="sm-step-num">2</div>
+          <div class="sm-step-label">Your Details</div>
+        </div>
+        <div class="sm-step-line"></div>
+        <div class="sm-step" id="smstep3">
+          <div class="sm-step-num">3</div>
+          <div class="sm-step-label">Done</div>
+        </div>
+      </div>
+      <button class="submit-modal-close" id="smClose" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <!-- Scrollable body -->
+    <div class="submit-modal-body">
+
+      <!-- ── STEP 1: Plan selection ── -->
+      <div class="sm-panel" id="smpanel1">
+        <div class="sm-panel-intro">
+          <h2 class="sm-panel-title" id="smModalTitle">List your business on ExpatEase</h2>
+          <p class="sm-panel-sub">Choose the plan that fits your business. You can upgrade at any time.</p>
+        </div>
+        <div class="sm-plans-grid">
+
+          <!-- Basic -->
+          <div class="sm-plan-card" id="planBasic" data-plan="basic" role="button" tabindex="0" aria-pressed="false">
+            <div class="sm-plan-name">Basic</div>
+            <div class="sm-plan-price">Free</div>
+            <div class="sm-plan-desc">Get discovered by expats in Bratislava instantly.</div>
+            <ul class="sm-plan-features">
+              <li class="sm-plan-feature">Business name &amp; category</li>
+              <li class="sm-plan-feature">Phone &amp; email</li>
+              <li class="sm-plan-feature">Bratislava address</li>
+              <li class="sm-plan-feature">One-sentence description</li>
+              <li class="sm-plan-feature">Contact person name</li>
+              <li class="sm-plan-feature">English-speaking badge</li>
+            </ul>
+          </div>
+
+          <!-- Premium -->
+          <div class="sm-plan-card sm-plan-featured" id="planPremium" data-plan="premium" role="button" tabindex="0" aria-pressed="false">
+            <div class="sm-plan-badge">Most Popular</div>
+            <div class="sm-plan-name">Premium</div>
+            <div class="sm-plan-price">€9.90<span class="sm-plan-period">/month</span></div>
+            <div class="sm-plan-desc">A full profile — photos, services, team &amp; more.</div>
+            <ul class="sm-plan-features">
+              <li class="sm-plan-feature sm-plan-feature-base">Everything in Basic</li>
+              <li class="sm-plan-feature">Business logo</li>
+              <li class="sm-plan-feature">Cover photo</li>
+              <li class="sm-plan-feature">Full "About" section</li>
+              <li class="sm-plan-feature">Services &amp; products list</li>
+              <li class="sm-plan-feature">Team member profiles</li>
+              <li class="sm-plan-feature">Photo gallery (up to 8)</li>
+              <li class="sm-plan-feature">Website &amp; social links</li>
+              <li class="sm-plan-feature">Opening hours</li>
+            </ul>
+          </div>
+
+        </div>
+        <div class="sm-step1-footer">
+          <button class="sm-continue-btn" id="smContinueBtn" disabled>Continue →</button>
+        </div>
+      </div><!-- /smpanel1 -->
+
+      <!-- ── STEP 2: Form ── -->
+      <div class="sm-panel" id="smpanel2" style="display:none">
+
+        <!-- Basic fields (always shown) -->
+        <div id="smFormBasic">
+          <div class="sm-section-title">Business Information</div>
+
+          <div class="sm-field-group">
+            <label class="sm-label" for="smBizName">Business Name <span class="sm-required">*</span></label>
+            <input class="sm-input" type="text" id="smBizName" placeholder="e.g. The Craft Barbershop" autocomplete="organization">
+            <div class="sm-field-error" id="smBizNameErr">Please enter your business name.</div>
+          </div>
+
+          <div class="sm-field-group">
+            <label class="sm-label" for="smCategory">Category <span class="sm-required">*</span></label>
+            <select class="sm-input sm-select" id="smCategory">
+              <option value="">Select a category…</option>
+              <option>Doctors &amp; Specialists</option>
+              <option>Lawyers &amp; Legal</option>
+              <option>Banks &amp; Finance</option>
+              <option>Barbers &amp; Hairdressers</option>
+              <option>Electricians</option>
+              <option>Plumbers</option>
+              <option>Builders &amp; Construction</option>
+              <option>Tattoo Studios</option>
+              <option>Vets</option>
+              <option>Real Estate</option>
+              <option>Pharmacies</option>
+              <option>Moving &amp; Relocation</option>
+            </select>
+            <div class="sm-field-error" id="smCategoryErr">Please select a category.</div>
+          </div>
+
+          <div class="sm-field-group">
+            <label class="sm-label" for="smContactName">Contact Person Name <span class="sm-required">*</span></label>
+            <input class="sm-input" type="text" id="smContactName" placeholder="Your full name" autocomplete="name">
+            <div class="sm-field-error" id="smContactNameErr">Please enter a contact name.</div>
+          </div>
+
+          <div class="sm-field-group">
+            <label class="sm-label" for="smPhone">Phone Number <span class="sm-required">*</span></label>
+            <div class="sm-phone-wrapper">
+              <select class="sm-input sm-select sm-prefix-select" id="smPhonePrefix">
+                <option value="+421">+421</option>
+                <option value="+44">+44</option>
+                <option value="+49">+49</option>
+                <option value="+33">+33</option>
+                <option value="+1">+1</option>
+              </select>
+              <input class="sm-input sm-phone-input" type="tel" id="smPhone" placeholder="912 345 678">
+            </div>
+            <div class="sm-field-error" id="smPhoneErr">Please enter a phone number.</div>
+          </div>
+
+          <div class="sm-field-group">
+            <label class="sm-label" for="smEmail">Email Address <span class="sm-required">*</span></label>
+            <input class="sm-input" type="email" id="smEmail" placeholder="hello@yourbusiness.sk" autocomplete="email">
+            <div class="sm-field-error" id="smEmailErr">Please enter a valid email address.</div>
+          </div>
+
+          <div class="sm-field-group">
+            <label class="sm-label" for="smAddress">Address in Bratislava <span class="sm-required">*</span></label>
+            <input class="sm-input" type="text" id="smAddress" placeholder="e.g. Obchodná 15, 811 06 Bratislava" autocomplete="street-address">
+            <div class="sm-field-error" id="smAddressErr">Please enter your address.</div>
+          </div>
+
+          <div class="sm-field-group">
+            <label class="sm-label" for="smDescription">
+              One-Sentence Description <span class="sm-required">*</span>
+              <span class="sm-char-counter" id="smDescCounter">0 / 150</span>
+            </label>
+            <textarea class="sm-input sm-textarea" id="smDescription" maxlength="150" placeholder="e.g. English-speaking GP accepting new patients in Staré Mesto."></textarea>
+            <div class="sm-field-error" id="smDescriptionErr">Please write a short description.</div>
+          </div>
+
+          <div class="sm-field-group sm-checkbox-group">
+            <label class="sm-checkbox-label">
+              <input type="checkbox" class="sm-checkbox" id="smEnglish">
+              <span class="sm-checkbox-custom"></span>
+              English-speaking — we'll add the 🇬🇧 badge to your listing
+            </label>
+          </div>
+        </div><!-- /smFormBasic -->
+
+        <!-- Premium-only fields -->
+        <div id="smFormPremium" style="display:none">
+          <div class="sm-section-title sm-section-divider">Premium Details</div>
+
+          <!-- Logo -->
+          <div class="sm-field-group">
+            <label class="sm-label">Business Logo</label>
+            <div class="sm-upload-zone" id="smLogoZone">
+              <input type="file" id="smLogoInput" accept="image/*" style="display:none">
+              <div class="sm-upload-zone-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+              <div class="sm-upload-zone-title">Upload logo</div>
+              <div class="sm-upload-zone-sub">PNG, JPG or WebP — <span class="sm-upload-zone-link" id="smLogoBrowse">browse</span></div>
+            </div>
+            <div class="sm-logo-preview" id="smLogoPreview" style="display:none">
+              <img id="smLogoImg" src="" alt="Logo preview">
+              <button class="sm-preview-remove" id="smLogoRemove">Remove</button>
+            </div>
+          </div>
+
+          <!-- Cover photo -->
+          <div class="sm-field-group">
+            <label class="sm-label">Cover Photo</label>
+            <div class="sm-upload-zone" id="smCoverZone">
+              <input type="file" id="smCoverInput" accept="image/*" style="display:none">
+              <div class="sm-upload-zone-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+              <div class="sm-upload-zone-title">Upload cover photo</div>
+              <div class="sm-upload-zone-sub">Recommended: 1200 × 400 px — <span class="sm-upload-zone-link" id="smCoverBrowse">browse</span></div>
+            </div>
+            <div class="sm-cover-preview" id="smCoverPreview" style="display:none">
+              <img id="smCoverImg" src="" alt="Cover preview">
+              <button class="sm-preview-remove" id="smCoverRemove" style="margin-top:6px">Remove cover</button>
+            </div>
+          </div>
+
+          <!-- About -->
+          <div class="sm-field-group">
+            <label class="sm-label" for="smAbout">
+              About Your Business
+              <span class="sm-char-counter" id="smAboutCounter">0 / 500</span>
+            </label>
+            <textarea class="sm-input sm-textarea sm-textarea-tall" id="smAbout" maxlength="500" placeholder="Tell expats what makes your business special, your experience, and why they should choose you…"></textarea>
+          </div>
+
+          <!-- Services -->
+          <div class="sm-field-group">
+            <label class="sm-label">Services / Products <span class="sm-hint-inline">(up to 6)</span></label>
+            <div id="smServicesList"></div>
+            <button class="sm-add-btn" id="smAddServiceBtn" type="button">+ Add Service</button>
+          </div>
+
+          <!-- Team -->
+          <div class="sm-field-group">
+            <label class="sm-label">Team Members <span class="sm-hint-inline">(up to 5)</span></label>
+            <div id="smTeamList"></div>
+            <button class="sm-add-btn" id="smAddTeamBtn" type="button">+ Add Team Member</button>
+          </div>
+
+          <!-- Gallery -->
+          <div class="sm-field-group">
+            <label class="sm-label">Photo Gallery <span class="sm-hint-inline">(up to 8 photos)</span></label>
+            <div class="sm-upload-zone sm-gallery-zone" id="smGalleryZone">
+              <input type="file" id="smGalleryInput" accept="image/*" multiple style="display:none">
+              <div class="sm-upload-zone-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+              <div class="sm-upload-zone-title">Upload photos</div>
+              <div class="sm-upload-zone-sub"><span class="sm-upload-zone-link" id="smGalleryBrowse">Browse</span> or drag &amp; drop — up to 8 images</div>
+            </div>
+            <div class="sm-gallery-grid" id="smGalleryGrid"></div>
+          </div>
+
+          <!-- Website & social -->
+          <div class="sm-field-group">
+            <label class="sm-label" for="smWebsite">Website URL</label>
+            <input class="sm-input" type="url" id="smWebsite" placeholder="https://yourbusiness.sk">
+            <div class="sm-field-error" id="smWebsiteErr">Please enter a valid URL (starting with https://).</div>
+          </div>
+          <div class="sm-field-group">
+            <label class="sm-label" for="smInstagram">Instagram URL</label>
+            <input class="sm-input" type="url" id="smInstagram" placeholder="https://instagram.com/yourbusiness">
+          </div>
+          <div class="sm-field-group">
+            <label class="sm-label" for="smFacebook">Facebook URL</label>
+            <input class="sm-input" type="url" id="smFacebook" placeholder="https://facebook.com/yourbusiness">
+          </div>
+
+          <!-- Opening hours -->
+          <div class="sm-field-group">
+            <label class="sm-label">Opening Hours</label>
+            <div class="sm-hours-grid" id="smHoursGrid"></div>
+          </div>
+
+          <!-- Payment mockup -->
+          <div class="sm-payment-section">
+            <div class="sm-payment-header">
+              <span class="sm-payment-price">€9.90 / month</span>
+              <span class="sm-payment-stripe">Stripe — coming soon</span>
+            </div>
+            <p class="sm-payment-note">Submit your listing now. We'll reach out to set up billing once your profile is approved — no payment required today.</p>
+            <label class="sm-checkbox-label">
+              <input type="checkbox" class="sm-checkbox" id="smWaitlist">
+              <span class="sm-checkbox-custom"></span>
+              Notify me when Premium billing launches
+            </label>
+          </div>
+        </div><!-- /smFormPremium -->
+
+        <!-- Error banner -->
+        <div class="sm-error-banner" id="smErrorBanner" style="display:none">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span id="smErrorMsg">Something went wrong. Please try again.</span>
+        </div>
+
+        <!-- Submitting spinner -->
+        <div class="sm-submitting" id="smSubmitting" style="display:none">
+          <div class="sm-submitting-spinner"></div>
+          <div class="sm-submitting-text">Submitting your listing…</div>
+        </div>
+
+        <!-- Footer -->
+        <div class="sm-form-footer" id="smFormFooter">
+          <button class="sm-back-btn" id="smBackBtn" type="button">← Back</button>
+          <button class="sm-submit-btn" id="smSubmitBtn" type="button">Submit Listing →</button>
+        </div>
+
+      </div><!-- /smpanel2 -->
+
+      <!-- ── STEP 3: Success ── -->
+      <div class="sm-panel sm-success-panel" id="smpanel3" style="display:none">
+        <div class="sm-success-icon">
+          <svg class="sm-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="sm-checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="sm-checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+          </svg>
+        </div>
+        <h2 class="sm-success-title">You're on the list!</h2>
+        <p class="sm-success-sub" id="smSuccessMsg">Your listing has been submitted for review. We'll be in touch within 2 business days.</p>
+        <div class="sm-success-actions">
+          <button class="sm-close-success-btn" id="smCloseSuccess">Close</button>
+          <button class="sm-another-btn" id="smSubmitAnother">Submit Another →</button>
+        </div>
+      </div><!-- /smpanel3 -->
+
+    </div><!-- /submit-modal-body -->
+  </div><!-- /submit-modal-panel -->
+</div><!-- /submit-modal-overlay -->
+
 <div class="cookie-banner" id="cookieBanner">
   <div class="cookie-text">We use essential cookies to make ExpatEase work. With your consent, we'd also like to use analytics cookies (privacy-first, no PII) to improve the service.</div>
   <div class="cookie-btns">
@@ -2273,25 +3210,67 @@
     document.getElementById('cookieBanner').classList.remove('visible');
     localStorage.setItem('cookieChoice', '1');
   }
+
+  // Scroll indicator
+  const scrollBtn = document.getElementById('heroScrollBtn');
+  if (scrollBtn) {
+    scrollBtn.addEventListener('click', () => {
+      document.querySelector('.how-section')?.scrollIntoView({ behavior: 'smooth' });
+    });
+    window.addEventListener('scroll', () => {
+      scrollBtn.style.opacity = window.scrollY > 80 ? '0' : '';
+      scrollBtn.style.pointerEvents = window.scrollY > 80 ? 'none' : '';
+    }, { passive: true });
+  }
+
+  // Animated counters
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target, 10);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = target > 1000 ? 1800 : target > 100 ? 1400 : 900;
+    const start = performance.now();
+    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+    function tick(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const value = Math.round(easeOut(progress) * target);
+      const formatted = target >= 1000 ? value.toLocaleString() : value;
+      el.textContent = prefix + formatted + (progress < 1 ? '' : (target >= 1000 ? ',' : '') + suffix.replace(',', ''));
+      if (progress < 1) requestAnimationFrame(tick);
+      else el.textContent = prefix + (target >= 1000 ? target.toLocaleString() : target) + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const counterEls = document.querySelectorAll('.counter[data-target]');
+  if (counterEls.length) {
+    const counterObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { animateCounter(e.target); counterObs.unobserve(e.target); }
+      });
+    }, { threshold: 0.5 });
+    counterEls.forEach(el => counterObs.observe(el));
+  }
 </script>
 
 <script>
 // ─── FORM TRANSLATOR ───────────────────────────────────────────────
 
-// ── Anthropic API (direct) ───────────────────────────────────────────
-const ANTHROPIC_API = 'https://api.anthropic.com/v1/messages';
+// ── Proxy (Cloudflare Worker) ─────────────────────────────────────────
+const PROXY_URL = 'https://worker-proud-credit-3c67.expatease.workers.dev';
 
 async function callClaude(body) {
-  const response = await fetch(ANTHROPIC_API, {
+  const response = await fetch(PROXY_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' }  ,
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
   });
   if (!response.ok) throw new Error('API error ' + response.status);
   return response.json();
 }
 
-
+let ftImageBase64 = null;
 let ftImageMimeType = 'image/jpeg';
 let ftFields = [];   // [{sk, en, hint}]
 let ftAnswers = [];  // [{sk, en_label, en_answer}]
@@ -2300,6 +3279,10 @@ const dropzone = document.getElementById('ftDropzone');
 const fileInput = document.getElementById('ftFileInput');
 
 if (dropzone) {
+  dropzone.addEventListener('click', (e) => {
+    if (!e.target.closest('.ft-upload-label-btn')) fileInput.click();
+  });
+  dropzone.style.cursor = 'pointer';
   dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('drag-over'); });
   dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
   dropzone.addEventListener('drop', e => {
@@ -2313,18 +3296,30 @@ fileInput.addEventListener('change', function() {
   if (this.files && this.files[0]) handleFile(this.files[0]);
 });
 
+function showUploadError(msg) {
+  const zone = document.getElementById('ftDropzone');
+  let err = zone.querySelector('.ft-upload-error');
+  if (!err) {
+    err = document.createElement('div');
+    err.className = 'ft-upload-error';
+    zone.appendChild(err);
+  }
+  err.textContent = msg;
+  setTimeout(() => err.remove(), 4000);
+}
+
 function handleFile(file) {
   // Some mobile browsers don't set file.type — check extension as fallback
   const isImage = file.type.startsWith('image/') ||
     /\.(jpe?g|png|gif|webp|heic|heif)$/i.test(file.name);
-  if (!isImage) { alert('Please upload a JPG or PNG image.'); return; }
+  if (!isImage) { showUploadError('Please upload a JPG or PNG image.'); return; }
 
   const reader = new FileReader();
-  reader.onerror = () => alert('Could not read the file. Please try again.');
+  reader.onerror = () => showUploadError('Could not read the file. Please try again.');
   reader.onload = (e) => {
     const originalSrc = e.target.result;
     const img = new Image();
-    img.onerror = () => alert('Could not load image. Please try a different file.');
+    img.onerror = () => showUploadError('Could not load image. Please try a different file.');
     img.onload = () => {
       const canvas = document.createElement('canvas');
       const MAX = 1200;
@@ -2370,8 +3365,24 @@ function escHtml(str) {
   return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+function showFtError(panelId, msg, retryFn) {
+  const panel = document.getElementById(panelId);
+  let err = panel.querySelector('.ft-error-msg');
+  if (!err) {
+    err = document.createElement('div');
+    err.className = 'ft-error-msg';
+    panel.appendChild(err);
+  }
+  err.innerHTML = `<span>${escHtml(msg)}</span>${retryFn ? `<button class="ft-retry-btn" onclick="(${retryFn.toString()})()">Try again</button>` : ''}`;
+}
+
+function clearFtError(panelId) {
+  document.getElementById(panelId)?.querySelector('.ft-error-msg')?.remove();
+}
+
 async function analyseForm() {
   if (!ftImageBase64) return;
+  clearFtError('ftpanel1');
   document.getElementById('ftUploadActions').style.display = 'none';
   document.getElementById('ftPreview').style.display = 'none';
   document.getElementById('ftLoading1').style.display = 'block';
@@ -2395,17 +3406,15 @@ async function analyseForm() {
     let raw = (data.content || []).find(b => b.type === 'text')?.text || '[]';
     raw = raw.replace(/^```[a-z]*\n?/i, '').replace(/\n?```$/i, '').trim();
     const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed) || parsed.length === 0) throw new Error('No fields');
+    if (!Array.isArray(parsed) || parsed.length === 0) throw new Error('No fields found');
     ftFields = parsed;
   } catch(e) {
-    console.warn('analyseForm fallback:', e);
-    ftFields = [
-      {sk:'Meno a priezvisko', en:'Full name', hint:'As it appears on your passport'},
-      {sk:'Dátum narodenia', en:'Date of birth', hint:'Use DD.MM.YYYY format'},
-      {sk:'Štátna príslušnosť', en:'Nationality', hint:'e.g. British, American, German'},
-      {sk:'Adresa trvalého pobytu', en:'Permanent address', hint:'Your current registered address'},
-      {sk:'Číslo pasu / dokladu', en:'Passport / document number', hint:'From the front page of your passport'},
-    ];
+    document.getElementById('ftLoading1').style.display = 'none';
+    document.getElementById('ftPreview').style.display = 'flex';
+    document.getElementById('ftUploadActions').style.display = 'block';
+    showFtError('ftpanel1', 'Could not read the form. Please check your internet connection and try again.', analyseForm);
+    console.error('analyseForm error:', e);
+    return;
   }
 
   document.getElementById('ftLoading1').style.display = 'none';
@@ -2432,8 +3441,9 @@ async function translateAnswers() {
     en_answer: (document.getElementById('ftinput'+i)?.value || '').trim()
   }));
 
+  clearFtError('ftpanel2');
   if (!ftAnswers.some(a => a.en_answer)) {
-    alert('Please fill in at least one field before translating.');
+    showFtError('ftpanel2', 'Please fill in at least one field before translating.');
     return;
   }
 
@@ -2458,8 +3468,11 @@ async function translateAnswers() {
     results = JSON.parse(raw);
     if (!Array.isArray(results)) throw new Error('Bad response');
   } catch(e) {
-    console.warn('translateAnswers fallback:', e);
-    results = ftAnswers.map(a => ({sk_field: a.sk, sk_answer: a.en_answer}));
+    document.getElementById('ftLoading2').style.display = 'none';
+    if (actionsEl) actionsEl.style.display = 'flex';
+    showFtError('ftpanel2', 'Translation failed. Please check your connection and try again.', translateAnswers);
+    console.error('translateAnswers error:', e);
+    return;
   }
 
   document.getElementById('ftLoading2').style.display = 'none';
@@ -2520,6 +3533,574 @@ function startOver() {
   if (actionsEl) actionsEl.style.display = 'flex';
   goToStep(1);
 }
+</script>
+
+<!-- ═══════════════════════════════════════════
+     SUBMIT BUSINESS MODAL — JavaScript
+═══════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── State ── */
+  let smSelectedPlan = null;
+  let smGalleryFiles = [];
+  let smServiceCount = 0;
+  let smTeamCount = 0;
+
+  /* ── DOM refs ── */
+  const overlay   = document.getElementById('submitModalOverlay');
+  const panel     = document.getElementById('submitModalPanel');
+  const closeBtn  = document.getElementById('smClose');
+  const contBtn   = document.getElementById('smContinueBtn');
+  const backBtn   = document.getElementById('smBackBtn');
+  const submitBtn = document.getElementById('smSubmitBtn');
+
+  /* ══════════════════════════════
+     Open / Close
+  ══════════════════════════════ */
+  function openSubmitModal() {
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function closeSubmitModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(smReset, 320);
+  }
+
+  /* ══════════════════════════════
+     Step navigation
+  ══════════════════════════════ */
+  function smGoToStep(n) {
+    [1, 2, 3].forEach(i => {
+      const panel = document.getElementById('smpanel' + i);
+      const step  = document.getElementById('smstep' + i);
+      if (panel) panel.style.display = (i === n) ? 'block' : 'none';
+      if (step) {
+        step.classList.remove('active', 'done');
+        if (i === n) step.classList.add('active');
+        if (i < n)  step.classList.add('done');
+      }
+    });
+    // Scroll modal body to top on step change
+    const body = document.querySelector('.submit-modal-body');
+    if (body) body.scrollTop = 0;
+  }
+
+  /* ══════════════════════════════
+     Plan selection
+  ══════════════════════════════ */
+  function smSelectPlan(plan) {
+    smSelectedPlan = plan;
+    document.querySelectorAll('.sm-plan-card').forEach(card => {
+      const isSelected = card.dataset.plan === plan;
+      card.classList.toggle('selected', isSelected);
+      card.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+    });
+    contBtn.disabled = false;
+  }
+
+  function smContinue() {
+    if (!smSelectedPlan) return;
+    const premiumSection = document.getElementById('smFormPremium');
+    premiumSection.style.display = smSelectedPlan === 'premium' ? 'block' : 'none';
+    smGoToStep(2);
+  }
+
+  /* ══════════════════════════════
+     Character counters
+  ══════════════════════════════ */
+  function smCharCounter(inputId, counterId, max) {
+    const el      = document.getElementById(inputId);
+    const counter = document.getElementById(counterId);
+    if (!el || !counter) return;
+    el.addEventListener('input', () => {
+      const len = el.value.length;
+      counter.textContent = len + ' / ' + max;
+      counter.classList.toggle('warning', len > max * 0.9);
+    });
+  }
+
+  /* ══════════════════════════════
+     Upload zones (logo / cover)
+  ══════════════════════════════ */
+  function smWireSimpleUpload(zoneId, inputId, browseId, onFile) {
+    const zone   = document.getElementById(zoneId);
+    const input  = document.getElementById(inputId);
+    const browse = document.getElementById(browseId);
+    if (!zone || !input) return;
+
+    if (browse) browse.addEventListener('click', e => { e.stopPropagation(); input.click(); });
+    zone.addEventListener('click', () => input.click());
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+    zone.addEventListener('drop', e => {
+      e.preventDefault(); zone.classList.remove('drag-over');
+      const file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith('image/')) onFile(file);
+    });
+    input.addEventListener('change', () => {
+      if (input.files[0]) onFile(input.files[0]);
+    });
+  }
+
+  function smHandleLogoUpload(file) {
+    const zone    = document.getElementById('smLogoZone');
+    const preview = document.getElementById('smLogoPreview');
+    const img     = document.getElementById('smLogoImg');
+    const reader  = new FileReader();
+    reader.onload = e => {
+      img.src = e.target.result;
+      zone.style.display = 'none';
+      preview.style.display = 'flex';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function smHandleCoverUpload(file) {
+    const zone    = document.getElementById('smCoverZone');
+    const preview = document.getElementById('smCoverPreview');
+    const img     = document.getElementById('smCoverImg');
+    const reader  = new FileReader();
+    reader.onload = e => {
+      img.src = e.target.result;
+      zone.style.display = 'none';
+      preview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  /* ══════════════════════════════
+     Gallery upload
+  ══════════════════════════════ */
+  function smWireGallery() {
+    const zone   = document.getElementById('smGalleryZone');
+    const input  = document.getElementById('smGalleryInput');
+    const browse = document.getElementById('smGalleryBrowse');
+    if (!zone || !input) return;
+
+    if (browse) browse.addEventListener('click', e => { e.stopPropagation(); input.click(); });
+    zone.addEventListener('click', () => input.click());
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+    zone.addEventListener('drop', e => {
+      e.preventDefault(); zone.classList.remove('drag-over');
+      smHandleGalleryFiles(Array.from(e.dataTransfer.files));
+    });
+    input.addEventListener('change', () => {
+      smHandleGalleryFiles(Array.from(input.files));
+      input.value = '';
+    });
+  }
+
+  function smHandleGalleryFiles(files) {
+    const remaining = 8 - smGalleryFiles.length;
+    const toAdd = files.filter(f => f.type.startsWith('image/')).slice(0, remaining);
+    toAdd.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        smGalleryFiles.push({ src: e.target.result, name: file.name });
+        smRenderGallery();
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function smRenderGallery() {
+    const grid = document.getElementById('smGalleryGrid');
+    if (!grid) return;
+    grid.innerHTML = smGalleryFiles.map((f, i) => `
+      <div class="sm-gallery-thumb">
+        <img src="${f.src}" alt="${f.name}">
+        <button class="sm-gallery-remove" onclick="smRemoveGallery(${i})" aria-label="Remove photo">×</button>
+      </div>`).join('');
+  }
+
+  window.smRemoveGallery = function(i) {
+    smGalleryFiles.splice(i, 1);
+    smRenderGallery();
+  };
+
+  /* ══════════════════════════════
+     Repeatable rows — Services
+  ══════════════════════════════ */
+  function smAddService() {
+    if (smServiceCount >= 6) return;
+    smServiceCount++;
+    const id = 'smSvc' + smServiceCount;
+    const list = document.getElementById('smServicesList');
+    const row = document.createElement('div');
+    row.className = 'sm-repeatable-row';
+    row.id = id;
+    row.innerHTML = `
+      <button class="sm-remove-row-btn" onclick="smRemoveRow('${id}', 'service')" aria-label="Remove">×</button>
+      <div class="sm-repeatable-row-inner">
+        <div class="sm-field-group"><label class="sm-label">Service name</label><input class="sm-input" type="text" placeholder="e.g. Haircut"></div>
+        <div class="sm-field-group"><label class="sm-label">Price</label><input class="sm-input" type="text" placeholder="e.g. €25"></div>
+        <div class="sm-field-group" style="flex-basis:100%"><label class="sm-label">Short description</label><input class="sm-input" type="text" placeholder="Brief description…"></div>
+      </div>`;
+    list.appendChild(row);
+    const addBtn = document.getElementById('smAddServiceBtn');
+    if (addBtn) addBtn.disabled = smServiceCount >= 6;
+  }
+
+  /* ── Team ── */
+  function smAddTeamMember() {
+    if (smTeamCount >= 5) return;
+    smTeamCount++;
+    const id = 'smTeam' + smTeamCount;
+    const list = document.getElementById('smTeamList');
+    const row = document.createElement('div');
+    row.className = 'sm-repeatable-row';
+    row.id = id;
+    row.innerHTML = `
+      <button class="sm-remove-row-btn" onclick="smRemoveRow('${id}', 'team')" aria-label="Remove">×</button>
+      <div class="sm-repeatable-row-inner">
+        <div class="sm-field-group"><label class="sm-label">Full name</label><input class="sm-input" type="text" placeholder="e.g. Jana Nováková"></div>
+        <div class="sm-field-group"><label class="sm-label">Role / Title</label><input class="sm-input" type="text" placeholder="e.g. Senior Stylist"></div>
+      </div>`;
+    list.appendChild(row);
+    const addBtn = document.getElementById('smAddTeamBtn');
+    if (addBtn) addBtn.disabled = smTeamCount >= 5;
+  }
+
+  window.smRemoveRow = function(id, type) {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+    if (type === 'service') {
+      smServiceCount--;
+      const addBtn = document.getElementById('smAddServiceBtn');
+      if (addBtn) addBtn.disabled = false;
+    } else {
+      smTeamCount--;
+      const addBtn = document.getElementById('smAddTeamBtn');
+      if (addBtn) addBtn.disabled = false;
+    }
+  };
+
+  /* ══════════════════════════════
+     Opening hours
+  ══════════════════════════════ */
+  const SM_DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+
+  function smRenderHours() {
+    const grid = document.getElementById('smHoursGrid');
+    if (!grid) return;
+    grid.innerHTML = SM_DAYS.map((day, i) => {
+      const uid = 'smDay' + i;
+      const defaultOpen = i < 5; // Mon–Fri open by default
+      return `<div class="sm-hours-row">
+        <div class="sm-hours-day">${day.slice(0,3)}</div>
+        <label class="sm-hours-toggle-label">
+          <input type="checkbox" class="sm-hours-toggle" id="${uid}Toggle" onchange="smToggleDay(${i})" ${defaultOpen ? 'checked' : ''}>
+          <span class="sm-hours-pill"></span>
+          <span class="sm-hours-open-label" id="${uid}Label">${defaultOpen ? 'Open' : 'Closed'}</span>
+        </label>
+        <input type="time" class="sm-input sm-hours-time" id="${uid}From" value="09:00" ${!defaultOpen ? 'disabled' : ''}>
+        <input type="time" class="sm-input sm-hours-time" id="${uid}To"   value="18:00" ${!defaultOpen ? 'disabled' : ''}>
+      </div>`;
+    }).join('');
+  }
+
+  window.smToggleDay = function(i) {
+    const uid     = 'smDay' + i;
+    const toggle  = document.getElementById(uid + 'Toggle');
+    const label   = document.getElementById(uid + 'Label');
+    const fromEl  = document.getElementById(uid + 'From');
+    const toEl    = document.getElementById(uid + 'To');
+    const isOpen  = toggle.checked;
+    if (label) label.textContent = isOpen ? 'Open' : 'Closed';
+    if (fromEl) fromEl.disabled = !isOpen;
+    if (toEl)   toEl.disabled   = !isOpen;
+  };
+
+  /* ══════════════════════════════
+     Validation
+  ══════════════════════════════ */
+  function smShowFieldError(inputId, errId, show) {
+    const input = document.getElementById(inputId);
+    const err   = document.getElementById(errId);
+    if (input) input.classList.toggle('sm-input-error', show);
+    if (err)   err.classList.toggle('visible', show);
+  }
+
+  function smValidateForm() {
+    let valid = true;
+    const required = [
+      { id: 'smBizName',     err: 'smBizNameErr',     label: 'name' },
+      { id: 'smCategory',    err: 'smCategoryErr',     label: 'category' },
+      { id: 'smContactName', err: 'smContactNameErr',  label: 'contact' },
+      { id: 'smPhone',       err: 'smPhoneErr',        label: 'phone' },
+      { id: 'smEmail',       err: 'smEmailErr',        label: 'email' },
+      { id: 'smAddress',     err: 'smAddressErr',      label: 'address' },
+      { id: 'smDescription', err: 'smDescriptionErr',  label: 'desc' },
+    ];
+    required.forEach(({ id, err }) => {
+      const el = document.getElementById(id);
+      const empty = !el || !el.value.trim();
+      smShowFieldError(id, err, empty);
+      if (empty) valid = false;
+    });
+    // Email format
+    const emailEl = document.getElementById('smEmail');
+    if (emailEl && emailEl.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
+      smShowFieldError('smEmail', 'smEmailErr', true);
+      valid = false;
+    }
+    // Optional URL fields
+    const urlFields = [
+      { id: 'smWebsite', err: 'smWebsiteErr' },
+    ];
+    if (smSelectedPlan === 'premium') {
+      urlFields.forEach(({ id, err }) => {
+        const el = document.getElementById(id);
+        if (el && el.value.trim() && !/^https?:\/\/.+/.test(el.value.trim())) {
+          smShowFieldError(id, err, true);
+          valid = false;
+        } else {
+          smShowFieldError(id, err, false);
+        }
+      });
+    }
+    // Scroll to first error
+    if (!valid) {
+      const firstErr = document.querySelector('.sm-input-error');
+      if (firstErr) {
+        const body = document.querySelector('.submit-modal-body');
+        const bodyRect = body.getBoundingClientRect();
+        const errRect  = firstErr.getBoundingClientRect();
+        body.scrollBy({ top: errRect.top - bodyRect.top - 80, behavior: 'smooth' });
+      }
+    }
+    return valid;
+  }
+
+  /* ══════════════════════════════
+     Collect form data
+  ══════════════════════════════ */
+  function smCollectFormData() {
+    const prefix = document.getElementById('smPhonePrefix')?.value || '+421';
+    const phone  = document.getElementById('smPhone')?.value.trim() || '';
+
+    const data = {
+      name:            document.getElementById('smBizName')?.value.trim(),
+      category:        document.getElementById('smCategory')?.value,
+      contact_name:    document.getElementById('smContactName')?.value.trim(),
+      phone:           prefix + ' ' + phone,
+      email:           document.getElementById('smEmail')?.value.trim(),
+      address:         document.getElementById('smAddress')?.value.trim(),
+      description:     document.getElementById('smDescription')?.value.trim(),
+      english_speaking: document.getElementById('smEnglish')?.checked || false,
+      plan:            smSelectedPlan,
+    };
+
+    if (smSelectedPlan === 'premium') {
+      data.about   = document.getElementById('smAbout')?.value.trim() || null;
+      data.website = document.getElementById('smWebsite')?.value.trim() || null;
+      data.social_links = {
+        instagram: document.getElementById('smInstagram')?.value.trim() || null,
+        facebook:  document.getElementById('smFacebook')?.value.trim() || null,
+      };
+      // Opening hours
+      const hours = {};
+      SM_DAYS.forEach((day, i) => {
+        const uid    = 'smDay' + i;
+        const toggle = document.getElementById(uid + 'Toggle');
+        const from   = document.getElementById(uid + 'From');
+        const to     = document.getElementById(uid + 'To');
+        hours[day.toLowerCase()] = {
+          open: toggle?.checked || false,
+          from: from?.value || null,
+          to:   to?.value   || null,
+        };
+      });
+      data.opening_hours = hours;
+    }
+
+    return data;
+  }
+
+  /* ══════════════════════════════
+     Submit
+  ══════════════════════════════ */
+  async function smSubmit() {
+    if (!smValidateForm()) return;
+
+    const footer    = document.getElementById('smFormFooter');
+    const errBanner = document.getElementById('smErrorBanner');
+    const spinner   = document.getElementById('smSubmitting');
+
+    errBanner.style.display = 'none';
+    footer.style.display    = 'none';
+    spinner.style.display   = 'block';
+
+    try {
+      const res = await fetch('/submit-business', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(smCollectFormData()),
+      });
+      const json = await res.json();
+      if (res.ok && json.success) {
+        smShowSuccess();
+      } else {
+        throw new Error(json.error || 'Submission failed');
+      }
+    } catch (err) {
+      spinner.style.display = 'none';
+      footer.style.display  = 'flex';
+      document.getElementById('smErrorMsg').textContent =
+        err.message || 'Something went wrong. Please try again.';
+      errBanner.style.display = 'flex';
+    }
+  }
+
+  /* ══════════════════════════════
+     Success
+  ══════════════════════════════ */
+  function smShowSuccess() {
+    const msg = document.getElementById('smSuccessMsg');
+    if (smSelectedPlan === 'premium') {
+      msg.textContent = 'Your Premium listing has been submitted for review. Our team will contact you to add your photos and confirm payment details — usually within 2–3 business days.';
+    } else {
+      msg.textContent = 'Your listing has been submitted for review. We\'ll email you within 2 business days once it\'s live.';
+    }
+    smGoToStep(3);
+  }
+
+  /* ══════════════════════════════
+     Reset
+  ══════════════════════════════ */
+  function smReset() {
+    smSelectedPlan = null;
+    smGalleryFiles = [];
+    smServiceCount = 0;
+    smTeamCount    = 0;
+
+    // Clear plan selection
+    document.querySelectorAll('.sm-plan-card').forEach(c => {
+      c.classList.remove('selected');
+      c.setAttribute('aria-pressed', 'false');
+    });
+    contBtn.disabled = true;
+
+    // Clear inputs
+    ['smBizName','smCategory','smContactName','smPhone','smEmail',
+     'smAddress','smDescription','smAbout','smWebsite','smInstagram','smFacebook']
+      .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+    ['smEnglish','smWaitlist'].forEach(id => {
+      const el = document.getElementById(id); if (el) el.checked = false;
+    });
+
+    // Clear counters
+    const descCounter = document.getElementById('smDescCounter');
+    const aboutCounter = document.getElementById('smAboutCounter');
+    if (descCounter) descCounter.textContent = '0 / 150';
+    if (aboutCounter) aboutCounter.textContent = '0 / 500';
+
+    // Reset premium fields
+    document.getElementById('smServicesList').innerHTML = '';
+    document.getElementById('smTeamList').innerHTML = '';
+    document.getElementById('smGalleryGrid').innerHTML = '';
+
+    // Reset logo/cover
+    const logoZone = document.getElementById('smLogoZone');
+    const logoPrev = document.getElementById('smLogoPreview');
+    if (logoZone) logoZone.style.display = 'block';
+    if (logoPrev) logoPrev.style.display = 'none';
+
+    const coverZone = document.getElementById('smCoverZone');
+    const coverPrev = document.getElementById('smCoverPreview');
+    if (coverZone) coverZone.style.display = 'block';
+    if (coverPrev) coverPrev.style.display = 'none';
+
+    // Clear field errors
+    document.querySelectorAll('.sm-input-error').forEach(el => el.classList.remove('sm-input-error'));
+    document.querySelectorAll('.sm-field-error.visible').forEach(el => el.classList.remove('visible'));
+
+    // Reset error banner & spinner
+    const errBanner = document.getElementById('smErrorBanner');
+    const spinner   = document.getElementById('smSubmitting');
+    const footer    = document.getElementById('smFormFooter');
+    if (errBanner) errBanner.style.display = 'none';
+    if (spinner)   spinner.style.display   = 'none';
+    if (footer)    footer.style.display    = 'flex';
+
+    // Re-init add buttons
+    const svcBtn  = document.getElementById('smAddServiceBtn');
+    const teamBtn = document.getElementById('smAddTeamBtn');
+    if (svcBtn)  svcBtn.disabled  = false;
+    if (teamBtn) teamBtn.disabled = false;
+
+    smGoToStep(1);
+  }
+
+  /* ══════════════════════════════
+     Event wiring
+  ══════════════════════════════ */
+  // Open triggers
+  document.getElementById('openSubmitModalBtn').addEventListener('click', e => {
+    e.preventDefault(); openSubmitModal();
+  });
+
+  // Close
+  closeBtn.addEventListener('click', closeSubmitModal);
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closeSubmitModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeSubmitModal();
+  });
+
+  // Plan cards
+  document.querySelectorAll('.sm-plan-card').forEach(card => {
+    card.addEventListener('click', () => smSelectPlan(card.dataset.plan));
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); smSelectPlan(card.dataset.plan); }
+    });
+  });
+
+  // Navigation
+  contBtn.addEventListener('click',  smContinue);
+  backBtn.addEventListener('click',  () => smGoToStep(1));
+  submitBtn.addEventListener('click', smSubmit);
+
+  // Success actions
+  document.getElementById('smCloseSuccess').addEventListener('click', closeSubmitModal);
+  document.getElementById('smSubmitAnother').addEventListener('click', smReset);
+
+  // Logo / cover remove
+  document.getElementById('smLogoRemove').addEventListener('click', () => {
+    document.getElementById('smLogoZone').style.display = 'block';
+    document.getElementById('smLogoPreview').style.display = 'none';
+    document.getElementById('smLogoInput').value = '';
+  });
+  document.getElementById('smCoverRemove').addEventListener('click', () => {
+    document.getElementById('smCoverZone').style.display = 'block';
+    document.getElementById('smCoverPreview').style.display = 'none';
+    document.getElementById('smCoverInput').value = '';
+  });
+
+  // Add buttons
+  document.getElementById('smAddServiceBtn').addEventListener('click', smAddService);
+  document.getElementById('smAddTeamBtn').addEventListener('click', smAddTeamMember);
+
+  // Char counters
+  smCharCounter('smDescription', 'smDescCounter', 150);
+  smCharCounter('smAbout',       'smAboutCounter', 500);
+
+  // Upload zones
+  smWireSimpleUpload('smLogoZone',  'smLogoInput',  'smLogoBrowse',  smHandleLogoUpload);
+  smWireSimpleUpload('smCoverZone', 'smCoverInput', 'smCoverBrowse', smHandleCoverUpload);
+  smWireGallery();
+
+  // Opening hours
+  smRenderHours();
+
+})();
 </script>
 </body>
 </html>
