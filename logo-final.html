@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ExpatBase — Logo Final</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Urbanist', system-ui, sans-serif; background: #ECEEF2; min-height: 100vh; padding: 60px 40px; }
+
+  h1 { text-align: center; font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #9CA3AF; margin-bottom: 56px; }
+
+  /* ── Layout ── */
+  .section { margin-bottom: 48px; }
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #9CA3AF; margin-bottom: 20px; }
+
+  .row { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+  .row.center { justify-content: center; }
+
+  /* ── Cards ── */
+  .card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 2px 16px rgba(0,0,0,.06);
+  }
+  .card.dark { background: #1A4F8A; }
+  .card.darker { background: #0F2D52; }
+  .card.mid { background: #F8F9FB; }
+
+  /* ── Size labels ── */
+  .size-row { display: flex; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
+  .size-item { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .size-label { font-size: 10px; font-weight: 600; color: #9CA3AF; letter-spacing: .08em; }
+
+  /* ── Divider ── */
+  hr { border: none; border-top: 1px solid #E5E7EB; margin: 48px 0; }
+</style>
+</head>
+<body>
+
+<h1>ExpatBase — Brand Mark · Final</h1>
+
+<!-- ═══════════════════════════════════════════════════
+     SVG DEFINITIONS — reusable across all instances
+═══════════════════════════════════════════════════ -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+
+    <!-- PRIMARY gradient — blue top-left → green bottom-right -->
+    <linearGradient id="ebGrad" x1="0%" y1="0%" x2="90%" y2="110%">
+      <stop offset="0%"   stop-color="#1A4F8A"/>
+      <stop offset="100%" stop-color="#2E9E6B"/>
+    </linearGradient>
+
+    <!-- DARK bg inverse gradient — slightly lighter for contrast -->
+    <linearGradient id="ebGradLight" x1="0%" y1="0%" x2="90%" y2="110%">
+      <stop offset="0%"   stop-color="#2E6FC4"/>
+      <stop offset="100%" stop-color="#35B87C"/>
+    </linearGradient>
+
+    <!-- Inner highlight (radial, gives subtle depth) -->
+    <radialGradient id="ebHighlight" cx="38%" cy="28%" r="62%">
+      <stop offset="0%"   stop-color="white" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Drop shadow filter -->
+    <filter id="ebShadow" x="-25%" y="-10%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#1A4F8A" flood-opacity=".28"/>
+    </filter>
+
+    <!-- Soft glow for dark backgrounds -->
+    <filter id="ebGlow" x="-30%" y="-15%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#2E9E6B" flood-opacity=".5"/>
+    </filter>
+
+    <!-- The PIN SHAPE as a clipPath for reuse -->
+    <!-- ViewBox 0 0 120 140. Circle: cx=60, cy=50, r=44. Point at (60,130) -->
+    <!-- Upper semicircle arc + two smooth bezier curves to tip -->
+    <symbol id="eb-icon" viewBox="0 0 120 140">
+      <!-- Shadow layer -->
+      <path
+        d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
+        fill="url(#ebGrad)"
+        filter="url(#ebShadow)"/>
+      <!-- Highlight layer -->
+      <path
+        d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
+        fill="url(#ebHighlight)"/>
+      <!-- Monogram -->
+      <text
+        x="60" y="55"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        font-family="'Urbanist', 'Segoe UI', system-ui, sans-serif"
+        font-weight="900"
+        font-size="36"
+        fill="white"
+        letter-spacing="-2">EB</text>
+    </symbol>
+
+    <!-- LIGHT version (for dark backgrounds) -->
+    <symbol id="eb-icon-light" viewBox="0 0 120 140">
+      <path
+        d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
+        fill="url(#ebGradLight)"
+        filter="url(#ebGlow)"/>
+      <path
+        d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
+        fill="url(#ebHighlight)"/>
+      <text
+        x="60" y="55"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        font-family="'Urbanist', 'Segoe UI', system-ui, sans-serif"
+        font-weight="900"
+        font-size="36"
+        fill="white"
+        letter-spacing="-2">EB</text>
+    </symbol>
+
+    <!-- MONO version (single color for single-color contexts) -->
+    <symbol id="eb-icon-mono" viewBox="0 0 120 140">
+      <path
+        d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
+        fill="currentColor"/>
+      <text
+        x="60" y="55"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        font-family="'Urbanist', 'Segoe UI', system-ui, sans-serif"
+        font-weight="900"
+        font-size="36"
+        fill="white"
+        letter-spacing="-2">EB</text>
+    </symbol>
+
+  </defs>
+</svg>
+
+
+<!-- ═══════════════════════════════════
+     SECTION 1 — PRIMARY LOCKUP
+═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-label">01 — Primary lockup · Light background</div>
+  <div class="card">
+    <div class="row center" style="gap: 20px; align-items: center;">
+      <!-- Icon -->
+      <svg width="64" height="75" viewBox="0 0 120 140">
+        <use href="#eb-icon"/>
+      </svg>
+      <!-- Wordmark -->
+      <div>
+        <div style="font-family:'Urbanist',sans-serif; font-weight:800; font-size:32px; letter-spacing:-.04em; color:#111827; line-height:1;">
+          Expat<span style="background:linear-gradient(135deg,#1A4F8A,#2E9E6B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Base</span>
+        </div>
+        <div style="font-family:'Urbanist',sans-serif; font-weight:600; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:#9CA3AF; margin-top:3px;">Slovakia</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SECTION 2 — DARK BACKGROUND
+═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-label">02 — Primary lockup · Dark background</div>
+  <div class="card dark">
+    <div class="row center" style="gap: 20px; align-items: center;">
+      <svg width="64" height="75" viewBox="0 0 120 140">
+        <use href="#eb-icon-light"/>
+      </svg>
+      <div>
+        <div style="font-family:'Urbanist',sans-serif; font-weight:800; font-size:32px; letter-spacing:-.04em; color:white; line-height:1;">
+          Expat<span style="color:#35B87C;">Base</span>
+        </div>
+        <div style="font-family:'Urbanist',sans-serif; font-weight:600; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.4); margin-top:3px;">Slovakia</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════
+     SECTION 3 — ICON ONLY · SIZES
+═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-label">03 — Icon mark · All sizes</div>
+  <div class="card">
+    <div class="size-row" style="align-items: flex-end;">
+
+      <div class="size-item">
+        <svg width="120" height="140" viewBox="0 0 120 140"><use href="#eb-icon"/></svg>
+        <div class="size-label">120px</div>
+      </div>
+
+      <div class="size-item">
+        <svg width="80" height="93" viewBox="0 0 120 140"><use href="#eb-icon"/></svg>
+        <div class="size-label">80px</div>
+      </div>
+
+      <div class="size-item">
+        <svg width="56" height="65" viewBox="0 0 120 140"><use href="#eb-icon"/></svg>
+        <div class="size-label">56px</div>
+      </div>
+
+      <div class="size-item">
+        <svg width="40" height="47" viewBox="0 0 120 140"><use href="#eb-icon"/></svg>
+        <div class="size-label">40px</div>
+      </div>
+
+      <div class="size-item">
+        <svg width="28" height="33" viewBox="0 0 120 140"><use href="#eb-icon"/></svg>
+        <div class="size-label">28px</div>
+      </div>
+
+      <div class="size-item">
+        <svg width="20" height="23" viewBox="0 0 120 140"><use href="#eb-icon"/></svg>
+        <div class="size-label">20px</div>
+      </div>
+
+      <div class="size-item">
+        <svg width="16" height="19" viewBox="0 0 120 140"><use href="#eb-icon"/></svg>
+        <div class="size-label">Favicon</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════
+     SECTION 4 — MONO & REVERSED
+═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-label">04 — Colour variants</div>
+  <div class="row" style="gap:16px;">
+
+    <!-- White on dark -->
+    <div class="card darker" style="flex:1; min-width:200px;">
+      <div style="text-align:center; margin-bottom:16px;">
+        <svg width="56" height="65" viewBox="0 0 120 140" style="color:white"><use href="#eb-icon-mono"/></svg>
+      </div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);text-align:center;">White (reversed)</div>
+    </div>
+
+    <!-- Blue mono -->
+    <div class="card mid" style="flex:1; min-width:200px;">
+      <div style="text-align:center; margin-bottom:16px;">
+        <svg width="56" height="65" viewBox="0 0 120 140" style="color:#1A4F8A"><use href="#eb-icon-mono"/></svg>
+      </div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#9CA3AF;text-align:center;">Blue (single colour)</div>
+    </div>
+
+    <!-- Green mono -->
+    <div class="card mid" style="flex:1; min-width:200px;">
+      <div style="text-align:center; margin-bottom:16px;">
+        <svg width="56" height="65" viewBox="0 0 120 140" style="color:#2E9E6B"><use href="#eb-icon-mono"/></svg>
+      </div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#9CA3AF;text-align:center;">Green (single colour)</div>
+    </div>
+
+    <!-- Black mono -->
+    <div class="card mid" style="flex:1; min-width:200px;">
+      <div style="text-align:center; margin-bottom:16px;">
+        <svg width="56" height="65" viewBox="0 0 120 140" style="color:#111827"><use href="#eb-icon-mono"/></svg>
+      </div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#9CA3AF;text-align:center;">Black (print)</div>
+    </div>
+
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════
+     SECTION 5 — NAVBAR SIMULATION
+═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-label">05 — As it looks in the navbar</div>
+  <div class="card" style="padding: 0; overflow:hidden; border-radius:24px;">
+    <!-- Light nav -->
+    <div style="background:white; padding: 16px 32px; display:flex; align-items:center; gap:14px; border-bottom:1px solid #F3F4F6;">
+      <svg width="28" height="33" viewBox="0 0 120 140"><use href="#eb-icon"/></svg>
+      <span style="font-family:'Urbanist',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.03em;color:#111827;">ExpatBase</span>
+      <span style="margin-left:auto;font-family:'Urbanist',sans-serif;font-size:13px;color:#6B7280;display:flex;gap:24px;">
+        <span>Find Experts</span><span>Bureaucracy</span><span>Blog</span>
+      </span>
+    </div>
+    <!-- Dark nav -->
+    <div style="background:#1A4F8A; padding: 16px 32px; display:flex; align-items:center; gap:14px;">
+      <svg width="28" height="33" viewBox="0 0 120 140"><use href="#eb-icon-light"/></svg>
+      <span style="font-family:'Urbanist',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.03em;color:white;">ExpatBase</span>
+      <span style="margin-left:auto;font-family:'Urbanist',sans-serif;font-size:13px;color:rgba(255,255,255,.65);display:flex;gap:24px;">
+        <span>Find Experts</span><span>Bureaucracy</span><span>Blog</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════
+     SECTION 6 — EXPORT INSTRUCTIONS
+═══════════════════════════════════ -->
+<div class="section">
+  <div class="section-label">06 — Ako exportovať do Canvy</div>
+  <div class="card mid">
+    <p style="font-size:14px;color:#374151;line-height:1.8;">
+      <strong>Krok 1:</strong> Pravý klik na logo → Inšpektovať → skopírovať SVG kód z &lt;symbol id="eb-icon"&gt;<br>
+      <strong>Krok 2:</strong> Uložiť ako <code style="background:#F3F4F6;padding:2px 6px;border-radius:4px;font-size:13px;">expatbase-logo.svg</code><br>
+      <strong>Krok 3:</strong> V Canve → Nahrať súbory → nahrať SVG → logo je pripravené na použitie<br>
+      <strong>Krok 4:</strong> Pre PNG export: pravý klik → Uložiť obrázok → PNG
+    </p>
+  </div>
+</div>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ExpatEase Slovakia — Life in Slovakia, made simple.</title>
+<title>ExpatBase Slovakia — Life in Slovakia, made simple.</title>
 <meta name="description" content="Find English-speaking doctors, lawyers, tradespeople and more in Bratislava. Or decode any Slovak form in seconds.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,29 +67,11 @@
     text-decoration: none;
   }
   .nav-logo-mark {
-    width: 36px; height: 36px;
-    background: linear-gradient(135deg, var(--blue), var(--green));
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    color: white;
-    font-family: var(--font-head);
-    font-weight: 800;
-    font-size: 16px;
-    letter-spacing: -0.5px;
     flex-shrink: 0;
-    position: relative;
-    overflow: hidden;
+    display: flex; align-items: center;
+    transition: transform 0.3s ease;
   }
-  .nav-logo-mark::after {
-    content: '';
-    position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%);
-    transform: translateX(-100%);
-    transition: transform 0.6s ease;
-  }
-  .nav-logo:hover .nav-logo-mark::after { transform: translateX(100%); }
+  .nav-logo:hover .nav-logo-mark { transform: scale(1.08); }
   .nav-logo-text {
     font-family: var(--font-head);
     font-weight: 700;
@@ -123,7 +105,7 @@
     background: var(--blue-light);
     color: var(--blue);
   }
-  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .nav-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
   .lang-toggle {
     display: flex;
     background: rgba(255,255,255,0.15);
@@ -152,6 +134,15 @@
   }
   .nav.scrolled .lang-btn { color: var(--gray-400); }
   .nav.scrolled .lang-btn.active { color: var(--blue); }
+  /* Join community button — adapt to scrolled (white bg) state */
+  .nav.scrolled #joinCommunityBtn {
+    border-color: var(--blue);
+    color: var(--blue);
+    background: transparent;
+  }
+  .nav.scrolled #joinCommunityBtn:hover {
+    background: var(--blue-light);
+  }
   .nav-cta {
     font-family: var(--font-body);
     font-size: 13px;
@@ -1064,14 +1055,8 @@
     margin-bottom: 16px;
   }
   .footer-logo-mark {
-    width: 36px; height: 36px;
-    background: linear-gradient(135deg, var(--blue), var(--green));
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-head);
-    font-weight: 800;
-    font-size: 16px;
-    color: white;
+    flex-shrink: 0;
+    display: flex; align-items: center;
   }
   .footer-logo-text {
     font-family: var(--font-head);
@@ -2007,6 +1992,38 @@
     transform: rotate(45deg);
   }
 
+  /* Language pills (Submit form) */
+  .sm-lang-pills {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px;
+  }
+  .sm-lang-pill {
+    font-family: var(--font-body); font-size: 13px; font-weight: 500;
+    padding: 7px 14px; border-radius: var(--radius-xl);
+    border: 1.5px solid var(--gray-100); background: white;
+    color: var(--gray-700); cursor: pointer; transition: var(--transition);
+    display: inline-flex; align-items: center; gap: 5px;
+    white-space: nowrap;
+  }
+  .sm-lang-pill:hover { border-color: var(--blue); color: var(--blue); }
+  .sm-lang-pill.selected {
+    border-color: var(--green); background: var(--green-light);
+    color: var(--green-dark); font-weight: 600;
+  }
+  /* Category-specific check pills (blue accent) */
+  .sm-check-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+  .sm-check-pill {
+    font-size: 13px; font-weight: 500; padding: 7px 14px;
+    border-radius: var(--radius-xl); border: 1.5px solid var(--gray-100);
+    background: white; color: var(--gray-700); cursor: pointer;
+    transition: var(--transition);
+  }
+  .sm-check-pill:hover { border-color: var(--blue); color: var(--blue); }
+  .sm-check-pill.selected {
+    border-color: var(--blue); background: var(--blue-light);
+    color: var(--blue); font-weight: 600;
+  }
+  .sm-cat-block { animation: fadeUp 0.2s ease both; }
+
   /* Upload zones */
   .sm-upload-zone {
     border: 2px dashed var(--gray-100); border-radius: var(--radius-md);
@@ -2234,11 +2251,57 @@
 </head>
 <body>
 
+<!-- SVG LOGO DEFS — reused across navbar and footer -->
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+  <defs>
+    <linearGradient id="ebGrad" x1="0%" y1="0%" x2="90%" y2="110%">
+      <stop offset="0%"   stop-color="#1A4F8A"/>
+      <stop offset="100%" stop-color="#2E9E6B"/>
+    </linearGradient>
+    <linearGradient id="ebGradLight" x1="0%" y1="0%" x2="90%" y2="110%">
+      <stop offset="0%"   stop-color="#2E6FC4"/>
+      <stop offset="100%" stop-color="#35B87C"/>
+    </linearGradient>
+    <radialGradient id="ebHighlight" cx="38%" cy="28%" r="62%">
+      <stop offset="0%"   stop-color="white" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="ebShadow" x="-25%" y="-10%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1A4F8A" flood-opacity=".30"/>
+    </filter>
+    <filter id="ebGlow" x="-30%" y="-15%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#2E9E6B" flood-opacity=".45"/>
+    </filter>
+    <!-- Standard (gradient) pin — used on light backgrounds -->
+    <symbol id="eb-icon" viewBox="0 0 120 140">
+      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
+        fill="url(#ebGrad)" filter="url(#ebShadow)"/>
+      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
+        fill="url(#ebHighlight)"/>
+      <text x="60" y="55" text-anchor="middle" dominant-baseline="middle"
+        font-family="'Urbanist','Segoe UI',system-ui,sans-serif"
+        font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
+    </symbol>
+    <!-- Light (brighter gradient) pin — used on dark/navy backgrounds -->
+    <symbol id="eb-icon-light" viewBox="0 0 120 140">
+      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
+        fill="url(#ebGradLight)" filter="url(#ebGlow)"/>
+      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
+        fill="url(#ebHighlight)"/>
+      <text x="60" y="55" text-anchor="middle" dominant-baseline="middle"
+        font-family="'Urbanist','Segoe UI',system-ui,sans-serif"
+        font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
+    </symbol>
+  </defs>
+</svg>
+
 <!-- NAVBAR -->
 <nav class="nav" id="navbar">
   <a href="#" class="nav-logo">
-    <div class="nav-logo-mark">EE</div>
-    <span class="nav-logo-text">ExpatEase</span>
+    <div class="nav-logo-mark">
+      <svg width="28" height="33" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon"/></svg>
+    </div>
+    <span class="nav-logo-text">ExpatBase</span>
   </a>
   <ul class="nav-links">
     <li><a href="#categories">Find Experts</a></li>
@@ -2253,6 +2316,9 @@
     </div>
     <button class="nav-cta" id="openSubmitModalBtn">
       + Submit a Business
+    </button>
+    <button class="nav-cta" style="background:transparent; border:1px solid rgba(255,255,255,0.4);" id="joinCommunityBtn">
+      Join community
     </button>
   </div>
 </nav>
@@ -2274,7 +2340,6 @@
     <button class="carousel-dot" data-slide="2"></button>
   </div>
 
-  <div class="carousel-label" id="carousel-label">Barbers & Hairdressers</div>
 
   <div class="hero-content">
     <div class="hero-eyebrow">
@@ -2290,28 +2355,7 @@
         Translate a Form
       </a>
     </div>
-    <div class="hero-trust">
-      <div class="trust-item">
-        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <span class="counter" data-target="500" data-suffix="+ verified listings">500+ verified listings</span>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-        <span class="counter" data-target="12" data-suffix=" expert categories">12 expert categories</span>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-        <span class="counter" data-target="8000" data-prefix="Trusted by " data-suffix="+ expats">Trusted by 8,000+ expats</span>
-      </div>
-    </div>
   </div>
-
-  <button class="hero-scroll-indicator" id="heroScrollBtn" aria-label="Scroll down">
-    <span>Scroll</span>
-    <div class="hero-scroll-chevron">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-    </div>
-  </button>
 </section>
 
 <!-- HOW IT WORKS -->
@@ -2319,7 +2363,7 @@
   <div class="section-inner">
     <div class="section-header reveal">
       <div class="section-label">Simple by design</div>
-      <h2 class="section-title">How ExpatEase works</h2>
+      <h2 class="section-title">How ExpatBase works</h2>
       <p class="section-sub">Three steps to finding exactly the help you need, in a language you understand.</p>
     </div>
     <div class="how-grid">
@@ -2354,7 +2398,7 @@
       <p class="section-sub">Verified English-speaking professionals in Bratislava, across every category you need.</p>
     </div>
     <div class="categories-grid">
-      <a href="#" class="cat-card reveal" style="transition-delay: 0ms">
+      <a href="doctors.html" class="cat-card reveal" style="transition-delay: 0ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
           <div class="cat-name">Doctors & Specialists</div>
@@ -2362,7 +2406,7 @@
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="#" class="cat-card reveal" style="transition-delay: 60ms">
+      <a href="lawyers.html" class="cat-card reveal" style="transition-delay: 60ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
           <div class="cat-name">Lawyers & Legal</div>
@@ -2370,7 +2414,7 @@
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="#" class="cat-card reveal" style="transition-delay: 120ms">
+      <a href="banks.html" class="cat-card reveal" style="transition-delay: 120ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
           <div class="cat-name">Banks & Finance</div>
@@ -2378,7 +2422,7 @@
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="#" class="cat-card reveal" style="transition-delay: 180ms">
+      <a href="barbers.html" class="cat-card reveal" style="transition-delay: 180ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="6" y1="9" x2="6" y2="15"/><path d="M20 4s-6 3-6 8 6 8 6 8"/></svg></span>
           <div class="cat-name">Hair & Beauty</div>
@@ -2386,7 +2430,7 @@
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="#" class="cat-card reveal" style="transition-delay: 240ms">
+      <a href="plumbers.html" class="cat-card reveal" style="transition-delay: 240ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
           <div class="cat-name">Handymen</div>
@@ -2394,23 +2438,23 @@
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="#" class="cat-card reveal" style="transition-delay: 300ms">
+      <a href="builders.html" class="cat-card reveal" style="transition-delay: 300ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="6" height="4"/><rect x="16" y="3" width="6" height="4"/><rect x="9" y="3" width="6" height="4"/><path d="M2 7v14h20V7"/><path d="M9 21v-8h6v8"/></svg></span>
           <div class="cat-name">Builders & Construction</div>
-          <div class="cat-count">16 listings</div>
+          <div class="cat-count">23 listings</div>
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="#" class="cat-card reveal" style="transition-delay: 360ms">
+      <a href="vets.html" class="cat-card reveal" style="transition-delay: 360ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg></span>
           <div class="cat-name">Vets</div>
-          <div class="cat-count">9 listings</div>
+          <div class="cat-count">19 listings</div>
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="#" class="cat-card reveal" style="transition-delay: 420ms">
+      <a href="real-estate.html" class="cat-card reveal" style="transition-delay: 420ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
           <div class="cat-name">Real Estate</div>
@@ -2418,27 +2462,27 @@
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="#" class="cat-card reveal" style="transition-delay: 480ms">
+      <a href="schools.html" class="cat-card reveal" style="transition-delay: 480ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
           <div class="cat-name">Schools & Learning</div>
-          <div class="cat-count">23 listings</div>
-        </div>
-        <span class="cat-arrow">→</span>
-      </a>
-      <a href="#" class="cat-card reveal" style="transition-delay: 540ms">
-        <div class="cat-card-inner">
-          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
-          <div class="cat-name">Moving & Relocation</div>
           <div class="cat-count">12 listings</div>
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="#" class="cat-card reveal" style="transition-delay: 600ms">
+      <a href="moving.html" class="cat-card reveal" style="transition-delay: 540ms">
+        <div class="cat-card-inner">
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
+          <div class="cat-name">Moving & Relocation</div>
+          <div class="cat-count">16 listings</div>
+        </div>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a href="sports.html" class="cat-card reveal" style="transition-delay: 600ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span>
           <div class="cat-name">Sports & Leisure</div>
-          <div class="cat-count">17 listings</div>
+          <div class="cat-count">34 listings</div>
         </div>
         <span class="cat-arrow">→</span>
       </a>
@@ -2734,7 +2778,7 @@
         <div class="testimonial-stars">
           <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
         </div>
-        <p class="testimonial-text">I found my electrician through ExpatEase when I had an emergency at home. He spoke perfect English and arrived within two hours. Five stars.</p>
+        <p class="testimonial-text">I found my electrician through ExpatBase when I had an emergency at home. He spoke perfect English and arrived within two hours. Five stars.</p>
         <div class="testimonial-author">
           <div class="testimonial-avatar">AK</div>
           <div>
@@ -2753,8 +2797,10 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-logo">
-          <div class="footer-logo-mark">EE</div>
-          <div class="footer-logo-text">ExpatEase Slovakia</div>
+          <div class="footer-logo-mark">
+            <svg width="32" height="37" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light"/></svg>
+          </div>
+          <div class="footer-logo-text">ExpatBase Slovakia</div>
         </div>
         <p class="footer-tagline">Life in Slovakia, made simple. The #1 resource for English-speaking expats in Bratislava.</p>
         <div class="footer-socials">
@@ -2775,19 +2821,23 @@
       <div>
         <div class="footer-col-title">Find Experts</div>
         <ul class="footer-links">
-          <li><a href="#">Doctors & Specialists</a></li>
-          <li><a href="#">Lawyers & Legal</a></li>
-          <li><a href="#">Banks & Finance</a></li>
-          <li><a href="#">Barbers & Hairdressers</a></li>
-          <li><a href="#">Electricians</a></li>
-          <li><a href="#">Plumbers</a></li>
-          <li><a href="#">All categories →</a></li>
+          <li><a href="doctors.html">Doctors & Specialists</a></li>
+          <li><a href="lawyers.html">Lawyers & Legal</a></li>
+          <li><a href="banks.html">Banks & Finance</a></li>
+          <li><a href="barbers.html">Beauty & Wellness</a></li>
+          <li><a href="plumbers.html">Handymen</a></li>
+          <li><a href="builders.html">Builders &amp; Construction</a></li>
+          <li><a href="vets.html">Vets &amp; Pet Care</a></li>
+          <li><a href="schools.html">Schools &amp; Education</a></li>
+          <li><a href="moving.html">Moving &amp; Relocation</a></li>
+          <li><a href="sports.html">Sports &amp; Fitness</a></li>
+          <li><a href="#categories">All categories →</a></li>
         </ul>
       </div>
       <div>
         <div class="footer-col-title">Bureaucracy</div>
         <ul class="footer-links">
-          <li><a href="#">Form Translator</a></li>
+          <li><a href="#bureaucracy">Form Translator</a></li>
           <li><a href="#">Residence Permit Guide</a></li>
           <li><a href="#">Health Insurance</a></li>
           <li><a href="#">Bank Account Setup</a></li>
@@ -2798,21 +2848,21 @@
       <div>
         <div class="footer-col-title">Resources</div>
         <ul class="footer-links">
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Newsletter</a></li>
-          <li><a href="#">Submit a Business</a></li>
-          <li><a href="#">About ExpatEase</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#blog">Newsletter</a></li>
+          <li><a href="#" onclick="document.getElementById('submitModal')?.classList.add('open');return false;">Submit a Business</a></li>
+          <li><a href="#about">About ExpatBase</a></li>
           <li><a href="#">Contact Us</a></li>
           <li><a href="#"><span class="__cf_email__" data-cfemail="046c6168686b44617c746570616577612a776f">[email&#160;protected]</span></a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 ExpatEase Slovakia. All rights reserved.</div>
+      <div class="footer-copy">© 2026 ExpatBase Slovakia. All rights reserved.</div>
       <div class="footer-legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
-        <a href="#">Cookie Policy</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="cookie-policy.html">Cookie Policy</a>
       </div>
     </div>
   </div>
@@ -2828,18 +2878,13 @@
     <!-- Header -->
     <div class="submit-modal-header">
       <div class="submit-modal-progress">
-        <div class="sm-step active" id="smstep1">
+        <div class="sm-step active" id="smstep2">
           <div class="sm-step-num">1</div>
-          <div class="sm-step-label">Choose Plan</div>
-        </div>
-        <div class="sm-step-line"></div>
-        <div class="sm-step" id="smstep2">
-          <div class="sm-step-num">2</div>
           <div class="sm-step-label">Your Details</div>
         </div>
         <div class="sm-step-line"></div>
         <div class="sm-step" id="smstep3">
-          <div class="sm-step-num">3</div>
+          <div class="sm-step-num">2</div>
           <div class="sm-step-label">Done</div>
         </div>
       </div>
@@ -2851,56 +2896,8 @@
     <!-- Scrollable body -->
     <div class="submit-modal-body">
 
-      <!-- ── STEP 1: Plan selection ── -->
-      <div class="sm-panel" id="smpanel1">
-        <div class="sm-panel-intro">
-          <h2 class="sm-panel-title" id="smModalTitle">List your business on ExpatEase</h2>
-          <p class="sm-panel-sub">Choose the plan that fits your business. You can upgrade at any time.</p>
-        </div>
-        <div class="sm-plans-grid">
-
-          <!-- Basic -->
-          <div class="sm-plan-card" id="planBasic" data-plan="basic" role="button" tabindex="0" aria-pressed="false">
-            <div class="sm-plan-name">Basic</div>
-            <div class="sm-plan-price">Free</div>
-            <div class="sm-plan-desc">Get discovered by expats in Bratislava instantly.</div>
-            <ul class="sm-plan-features">
-              <li class="sm-plan-feature">Business name &amp; category</li>
-              <li class="sm-plan-feature">Phone &amp; email</li>
-              <li class="sm-plan-feature">Bratislava address</li>
-              <li class="sm-plan-feature">One-sentence description</li>
-              <li class="sm-plan-feature">Contact person name</li>
-              <li class="sm-plan-feature">English-speaking badge</li>
-            </ul>
-          </div>
-
-          <!-- Premium -->
-          <div class="sm-plan-card sm-plan-featured" id="planPremium" data-plan="premium" role="button" tabindex="0" aria-pressed="false">
-            <div class="sm-plan-badge">Most Popular</div>
-            <div class="sm-plan-name">Premium</div>
-            <div class="sm-plan-price">€9.90<span class="sm-plan-period">/month</span></div>
-            <div class="sm-plan-desc">A full profile — photos, services, team &amp; more.</div>
-            <ul class="sm-plan-features">
-              <li class="sm-plan-feature sm-plan-feature-base">Everything in Basic</li>
-              <li class="sm-plan-feature">Business logo</li>
-              <li class="sm-plan-feature">Cover photo</li>
-              <li class="sm-plan-feature">Full "About" section</li>
-              <li class="sm-plan-feature">Services &amp; products list</li>
-              <li class="sm-plan-feature">Team member profiles</li>
-              <li class="sm-plan-feature">Photo gallery (up to 8)</li>
-              <li class="sm-plan-feature">Website &amp; social links</li>
-              <li class="sm-plan-feature">Opening hours</li>
-            </ul>
-          </div>
-
-        </div>
-        <div class="sm-step1-footer">
-          <button class="sm-continue-btn" id="smContinueBtn" disabled>Continue →</button>
-        </div>
-      </div><!-- /smpanel1 -->
-
-      <!-- ── STEP 2: Form ── -->
-      <div class="sm-panel" id="smpanel2" style="display:none">
+      <!-- ── STEP 1 (was 2): Form ── -->
+      <div class="sm-panel" id="smpanel2">
 
         <!-- Basic fields (always shown) -->
         <div id="smFormBasic">
@@ -2919,15 +2916,15 @@
               <option>Doctors &amp; Specialists</option>
               <option>Lawyers &amp; Legal</option>
               <option>Banks &amp; Finance</option>
-              <option>Barbers &amp; Hairdressers</option>
-              <option>Electricians</option>
-              <option>Plumbers</option>
+              <option>Beauty &amp; Wellness</option>
+              <option>Handymen</option>
               <option>Builders &amp; Construction</option>
-              <option>Tattoo Studios</option>
-              <option>Vets</option>
               <option>Real Estate</option>
-              <option>Pharmacies</option>
+              <option>Vets &amp; Pet Care</option>
+              <option>Schools &amp; Education</option>
               <option>Moving &amp; Relocation</option>
+              <option>Sports &amp; Fitness</option>
+              <option>Other</option>
             </select>
             <div class="sm-field-error" id="smCategoryErr">Please select a category.</div>
           </div>
@@ -2966,127 +2963,291 @@
           </div>
 
           <div class="sm-field-group">
+            <label class="sm-label" for="smWebsite">Website <span class="sm-hint-inline">optional</span></label>
+            <input class="sm-input" type="url" id="smWebsite" placeholder="e.g. https://yourpractice.sk" autocomplete="url">
+          </div>
+
+          <div class="sm-field-group">
+            <label class="sm-label">Languages spoken <span class="sm-required">*</span></label>
+            <div class="sm-lang-pills" id="smLangPills">
+              <button type="button" class="sm-lang-pill" data-lang="EN">🇬🇧 English</button>
+              <button type="button" class="sm-lang-pill" data-lang="DE">🇩🇪 German</button>
+              <button type="button" class="sm-lang-pill" data-lang="FR">🇫🇷 French</button>
+              <button type="button" class="sm-lang-pill" data-lang="HU">🇭🇺 Hungarian</button>
+              <button type="button" class="sm-lang-pill" data-lang="CZ">🇨🇿 Czech</button>
+              <button type="button" class="sm-lang-pill" data-lang="PL">🇵🇱 Polish</button>
+              <button type="button" class="sm-lang-pill" data-lang="RU">🇷🇺 Russian</button>
+              <button type="button" class="sm-lang-pill" data-lang="ES">🇪🇸 Spanish</button>
+              <button type="button" class="sm-lang-pill" data-lang="IT">🇮🇹 Italian</button>
+              <button type="button" class="sm-lang-pill" data-lang="SK">🇸🇰 Slovak</button>
+            </div>
+            <div class="sm-field-error" id="smLangErr">Please select at least one language.</div>
+          </div>
+
+          <div class="sm-field-group">
             <label class="sm-label" for="smDescription">
-              One-Sentence Description <span class="sm-required">*</span>
+              One-sentence description <span class="sm-required">*</span>
               <span class="sm-char-counter" id="smDescCounter">0 / 150</span>
             </label>
             <textarea class="sm-input sm-textarea" id="smDescription" maxlength="150" placeholder="e.g. English-speaking GP accepting new patients in Staré Mesto."></textarea>
             <div class="sm-field-error" id="smDescriptionErr">Please write a short description.</div>
           </div>
 
-          <div class="sm-field-group sm-checkbox-group">
-            <label class="sm-checkbox-label">
-              <input type="checkbox" class="sm-checkbox" id="smEnglish">
-              <span class="sm-checkbox-custom"></span>
-              English-speaking — we'll add the 🇬🇧 badge to your listing
-            </label>
-          </div>
         </div><!-- /smFormBasic -->
 
-        <!-- Premium-only fields -->
-        <div id="smFormPremium" style="display:none">
-          <div class="sm-section-title sm-section-divider">Premium Details</div>
+        <!-- ── Category-specific details (dynamic, all optional) ── -->
+        <div id="smCategoryDetails" style="display:none">
+          <div style="border-top:1px solid var(--gray-100); margin:4px 0 20px;"></div>
+          <div class="sm-section-title" style="margin-bottom:4px;">
+            More about your services
+            <span class="sm-hint-inline" style="font-weight:400; color:var(--gray-400); font-size:12px; margin-left:6px;">optional — helps clients find you faster</span>
+          </div>
 
-          <!-- Logo -->
-          <div class="sm-field-group">
-            <label class="sm-label">Business Logo</label>
-            <div class="sm-upload-zone" id="smLogoZone">
-              <input type="file" id="smLogoInput" accept="image/*" style="display:none">
-              <div class="sm-upload-zone-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-              <div class="sm-upload-zone-title">Upload logo</div>
-              <div class="sm-upload-zone-sub">PNG, JPG or WebP — <span class="sm-upload-zone-link" id="smLogoBrowse">browse</span></div>
+          <!-- DOCTORS -->
+          <div id="smCat_doctors" class="sm-cat-block" style="display:none">
+            <div class="sm-field-group">
+              <label class="sm-label" for="smSpecialty">Specialty</label>
+              <select class="sm-input sm-select" id="smSpecialty">
+                <option value="">Select specialty…</option>
+                <option>General Practitioner</option>
+                <option>Cardiologist</option>
+                <option>Dermatologist</option>
+                <option>Pediatrician</option>
+                <option>Gynecologist</option>
+                <option>Dentist</option>
+                <option>Psychiatrist</option>
+                <option>Neurologist</option>
+                <option>Orthopedist</option>
+                <option>Ophthalmologist</option>
+                <option>ENT / Ear, Nose & Throat</option>
+                <option>Other</option>
+              </select>
             </div>
-            <div class="sm-logo-preview" id="smLogoPreview" style="display:none">
-              <img id="smLogoImg" src="" alt="Logo preview">
-              <button class="sm-preview-remove" id="smLogoRemove">Remove</button>
+            <div class="sm-field-group">
+              <label class="sm-label">Insurance accepted</label>
+              <div class="sm-check-pills" id="smInsurance">
+                <button type="button" class="sm-check-pill" data-val="VšZP">VšZP</button>
+                <button type="button" class="sm-check-pill" data-val="Dôvera">Dôvera</button>
+                <button type="button" class="sm-check-pill" data-val="Union">Union</button>
+                <button type="button" class="sm-check-pill" data-val="Self-pay">Self-pay only</button>
+              </div>
             </div>
           </div>
 
-          <!-- Cover photo -->
-          <div class="sm-field-group">
-            <label class="sm-label">Cover Photo</label>
-            <div class="sm-upload-zone" id="smCoverZone">
-              <input type="file" id="smCoverInput" accept="image/*" style="display:none">
-              <div class="sm-upload-zone-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-              <div class="sm-upload-zone-title">Upload cover photo</div>
-              <div class="sm-upload-zone-sub">Recommended: 1200 × 400 px — <span class="sm-upload-zone-link" id="smCoverBrowse">browse</span></div>
+          <!-- LAWYERS -->
+          <div id="smCat_lawyers" class="sm-cat-block" style="display:none">
+            <div class="sm-field-group">
+              <label class="sm-label" for="smPracticeArea">Practice Area</label>
+              <select class="sm-input sm-select" id="smPracticeArea">
+                <option value="">Select area…</option>
+                <option>Immigration & Residence Law</option>
+                <option>Employment Law</option>
+                <option>Real Estate & Property Law</option>
+                <option>Corporate & Business Law</option>
+                <option>Family Law</option>
+                <option>Criminal Law</option>
+                <option>Tax Law</option>
+                <option>Intellectual Property</option>
+                <option>Other</option>
+              </select>
             </div>
-            <div class="sm-cover-preview" id="smCoverPreview" style="display:none">
-              <img id="smCoverImg" src="" alt="Cover preview">
-              <button class="sm-preview-remove" id="smCoverRemove" style="margin-top:6px">Remove cover</button>
+          </div>
+
+          <!-- BANKS & FINANCE -->
+          <div id="smCat_banks" class="sm-cat-block" style="display:none">
+            <div class="sm-field-group">
+              <label class="sm-label" for="smServiceTypeBanks">Service Type</label>
+              <select class="sm-input sm-select" id="smServiceTypeBanks">
+                <option value="">Select type…</option>
+                <option>Retail Bank</option>
+                <option>Private / Premium Bank</option>
+                <option>Accountant</option>
+                <option>Tax Advisor</option>
+                <option>Financial Advisor</option>
+                <option>Currency Exchange</option>
+                <option>Payroll Services</option>
+                <option>Other</option>
+              </select>
             </div>
           </div>
 
-          <!-- About -->
-          <div class="sm-field-group">
-            <label class="sm-label" for="smAbout">
-              About Your Business
-              <span class="sm-char-counter" id="smAboutCounter">0 / 500</span>
-            </label>
-            <textarea class="sm-input sm-textarea sm-textarea-tall" id="smAbout" maxlength="500" placeholder="Tell expats what makes your business special, your experience, and why they should choose you…"></textarea>
-          </div>
-
-          <!-- Services -->
-          <div class="sm-field-group">
-            <label class="sm-label">Services / Products <span class="sm-hint-inline">(up to 6)</span></label>
-            <div id="smServicesList"></div>
-            <button class="sm-add-btn" id="smAddServiceBtn" type="button">+ Add Service</button>
-          </div>
-
-          <!-- Team -->
-          <div class="sm-field-group">
-            <label class="sm-label">Team Members <span class="sm-hint-inline">(up to 5)</span></label>
-            <div id="smTeamList"></div>
-            <button class="sm-add-btn" id="smAddTeamBtn" type="button">+ Add Team Member</button>
-          </div>
-
-          <!-- Gallery -->
-          <div class="sm-field-group">
-            <label class="sm-label">Photo Gallery <span class="sm-hint-inline">(up to 8 photos)</span></label>
-            <div class="sm-upload-zone sm-gallery-zone" id="smGalleryZone">
-              <input type="file" id="smGalleryInput" accept="image/*" multiple style="display:none">
-              <div class="sm-upload-zone-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-              <div class="sm-upload-zone-title">Upload photos</div>
-              <div class="sm-upload-zone-sub"><span class="sm-upload-zone-link" id="smGalleryBrowse">Browse</span> or drag &amp; drop — up to 8 images</div>
+          <!-- BEAUTY & WELLNESS -->
+          <div id="smCat_beauty" class="sm-cat-block" style="display:none">
+            <div class="sm-field-group">
+              <label class="sm-label" for="smServiceTypeBeauty">Service Type</label>
+              <select class="sm-input sm-select" id="smServiceTypeBeauty">
+                <option value="">Select type…</option>
+                <option>Barbershop (Men's)</option>
+                <option>Hair Salon (Women's)</option>
+                <option>Unisex Hair Salon</option>
+                <option>Colourist</option>
+                <option>Hair Extensions</option>
+                <option>Blow-dry Bar</option>
+                <option>Nail Studio</option>
+                <option>Tattoo Studio</option>
+                <option>Massage & Wellness</option>
+                <option>Beauty Salon</option>
+                <option>Spa</option>
+                <option>Other</option>
+              </select>
             </div>
-            <div class="sm-gallery-grid" id="smGalleryGrid"></div>
           </div>
 
-          <!-- Website & social -->
-          <div class="sm-field-group">
-            <label class="sm-label" for="smWebsite">Website URL</label>
-            <input class="sm-input" type="url" id="smWebsite" placeholder="https://yourbusiness.sk">
-            <div class="sm-field-error" id="smWebsiteErr">Please enter a valid URL (starting with https://).</div>
-          </div>
-          <div class="sm-field-group">
-            <label class="sm-label" for="smInstagram">Instagram URL</label>
-            <input class="sm-input" type="url" id="smInstagram" placeholder="https://instagram.com/yourbusiness">
-          </div>
-          <div class="sm-field-group">
-            <label class="sm-label" for="smFacebook">Facebook URL</label>
-            <input class="sm-input" type="url" id="smFacebook" placeholder="https://facebook.com/yourbusiness">
-          </div>
-
-          <!-- Opening hours -->
-          <div class="sm-field-group">
-            <label class="sm-label">Opening Hours</label>
-            <div class="sm-hours-grid" id="smHoursGrid"></div>
-          </div>
-
-          <!-- Payment mockup -->
-          <div class="sm-payment-section">
-            <div class="sm-payment-header">
-              <span class="sm-payment-price">€9.90 / month</span>
-              <span class="sm-payment-stripe">Stripe — coming soon</span>
+          <!-- HANDYMEN -->
+          <div id="smCat_handymen" class="sm-cat-block" style="display:none">
+            <div class="sm-field-group">
+              <label class="sm-label">Trade</label>
+              <div class="sm-check-pills" id="smTrade">
+                <button type="button" class="sm-check-pill" data-val="Plumbing">🔧 Plumbing</button>
+                <button type="button" class="sm-check-pill" data-val="Electrical">⚡ Electrical</button>
+                <button type="button" class="sm-check-pill" data-val="HVAC">🌡️ HVAC / Heating</button>
+                <button type="button" class="sm-check-pill" data-val="Locksmith">🔑 Locksmith</button>
+              </div>
             </div>
-            <p class="sm-payment-note">Submit your listing now. We'll reach out to set up billing once your profile is approved — no payment required today.</p>
-            <label class="sm-checkbox-label">
-              <input type="checkbox" class="sm-checkbox" id="smWaitlist">
-              <span class="sm-checkbox-custom"></span>
-              Notify me when Premium billing launches
-            </label>
+            <div class="sm-field-group">
+              <label class="sm-label">Services offered</label>
+              <div class="sm-check-pills" id="smHandyServices">
+                <button type="button" class="sm-check-pill" data-val="Emergency">Emergency call-out</button>
+                <button type="button" class="sm-check-pill" data-val="Installations">Installations</button>
+                <button type="button" class="sm-check-pill" data-val="Repairs">Repairs</button>
+                <button type="button" class="sm-check-pill" data-val="Rewiring">Rewiring</button>
+                <button type="button" class="sm-check-pill" data-val="Boiler">Boiler service</button>
+              </div>
+            </div>
           </div>
-        </div><!-- /smFormPremium -->
+
+          <!-- REAL ESTATE -->
+          <div id="smCat_realestate" class="sm-cat-block" style="display:none">
+            <div class="sm-field-group">
+              <label class="sm-label" for="smServiceTypeRE">Service Type</label>
+              <select class="sm-input sm-select" id="smServiceTypeRE">
+                <option value="">Select type…</option>
+                <option>Rental Agent</option>
+                <option>Sales Agent</option>
+                <option>Property Management</option>
+                <option>Relocation Service</option>
+                <option>Short-term / Furnished Rentals</option>
+                <option>Property Lawyer</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- BUILDERS -->
+          <div id="smCat_builders" class="sm-cat-block" style="display:none">
+            <div class="sm-field-group">
+              <label class="sm-label" for="smServiceTypeBuilders">Service Type</label>
+              <select class="sm-input sm-select" id="smServiceTypeBuilders">
+                <option value="">Select type…</option>
+                <option>General Contractor</option>
+                <option>Renovations</option>
+                <option>Structural & Extensions</option>
+                <option>Interior Design</option>
+                <option>Painting & Plastering</option>
+                <option>Flooring</option>
+                <option>Kitchen & Bathroom</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- VETS -->
+          <div id="smCat_vets" class="sm-cat-block" style="display:none">
+            <div class="sm-field-group">
+              <label class="sm-label">Animal types treated</label>
+              <div class="sm-check-pills" id="smAnimalTypes">
+                <button type="button" class="sm-check-pill" data-val="Dogs">🐶 Dogs</button>
+                <button type="button" class="sm-check-pill" data-val="Cats">🐱 Cats</button>
+                <button type="button" class="sm-check-pill" data-val="Exotic">🦜 Exotic animals</button>
+                <button type="button" class="sm-check-pill" data-val="Birds">🐦 Birds</button>
+                <button type="button" class="sm-check-pill" data-val="Rabbits">🐰 Rabbits & small pets</button>
+              </div>
+            </div>
+            <div class="sm-field-group">
+              <label class="sm-label" for="smVetService">Service</label>
+              <select class="sm-input sm-select" id="smVetService">
+                <option value="">Select service…</option>
+                <option>General Practice</option>
+                <option>Emergency / 24h</option>
+                <option>Surgery</option>
+                <option>Dentistry</option>
+                <option>Dermatology</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- SCHOOLS -->
+          <div id="smCat_schools" class="sm-cat-block" style="display:none">
+            <div class="sm-field-group">
+              <label class="sm-label">School level</label>
+              <div class="sm-check-pills" id="smSchoolLevel">
+                <button type="button" class="sm-check-pill" data-val="Preschool">Preschool (2–5)</button>
+                <button type="button" class="sm-check-pill" data-val="Primary">Primary (6–11)</button>
+                <button type="button" class="sm-check-pill" data-val="Secondary">Secondary (12–18)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- MOVING -->
+          <div id="smCat_moving" class="sm-cat-block" style="display:none">
+            <div class="sm-field-group">
+              <label class="sm-label">Services offered</label>
+              <div class="sm-check-pills" id="smMovingServices">
+                <button type="button" class="sm-check-pill" data-val="International">International moves</button>
+                <button type="button" class="sm-check-pill" data-val="Local">Local moves</button>
+                <button type="button" class="sm-check-pill" data-val="Storage">Storage</button>
+                <button type="button" class="sm-check-pill" data-val="Packing">Packing service</button>
+                <button type="button" class="sm-check-pill" data-val="Assembly">Furniture assembly</button>
+                <button type="button" class="sm-check-pill" data-val="PetTransport">Pet transport</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SPORTS -->
+          <div id="smCat_sports" class="sm-cat-block" style="display:none">
+            <div class="sm-field-group">
+              <label class="sm-label" for="smActivityType">Activity type</label>
+              <select class="sm-input sm-select" id="smActivityType">
+                <option value="">Select activity…</option>
+                <option>Gym & Fitness Centre</option>
+                <option>Swimming</option>
+                <option>Yoga & Pilates</option>
+                <option>Tennis & Racquet Sports</option>
+                <option>Cycling</option>
+                <option>Running Club</option>
+                <option>Team Sports</option>
+                <option>Outdoor & Hiking</option>
+                <option>Personal Training</option>
+                <option>Martial Arts</option>
+                <option>Dance</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- OTHER -->
+          <div id="smCat_other" class="sm-cat-block" style="display:none">
+            <div class="sm-field-group">
+              <label class="sm-label" for="smOtherSpecialization">What do you offer? <span class="sm-hint-inline">describe your specialization</span></label>
+              <input class="sm-input" type="text" id="smOtherSpecialization" placeholder="e.g. Certified yoga instructor, expat tax consultant…">
+            </div>
+          </div>
+
+        </div><!-- /smCategoryDetails -->
+
+        <!-- GDPR consent -->
+        <div class="sm-field-group" style="margin-top:8px;">
+          <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
+            <input type="checkbox" id="smGdprConsent" style="margin-top:3px; flex-shrink:0; width:16px; height:16px; accent-color:var(--green); cursor:pointer;">
+            <span style="font-size:12px; color:var(--gray-400); line-height:1.6; font-weight:300;">
+              I agree to the processing of my personal data (name, email, phone) by ExpatBase Slovakia for the purpose of listing management. Your data will not be shared with third parties. You can request deletion at any time by emailing
+              <a href="mailto:hello@expatbase.sk" style="color:var(--blue);">hello@expatbase.sk</a>.
+              <span style="color:#e53e3e;">*</span>
+            </span>
+          </label>
+          <div class="sm-field-error" id="smGdprErr" style="margin-top:4px;">Please confirm you agree to data processing.</div>
+        </div>
 
         <!-- Error banner -->
         <div class="sm-error-banner" id="smErrorBanner" style="display:none">
@@ -3128,8 +3289,116 @@
   </div><!-- /submit-modal-panel -->
 </div><!-- /submit-modal-overlay -->
 
+<!-- ════════════════════════════════════════
+     JOIN COMMUNITY MODAL
+════════════════════════════════════════ -->
+<div class="submit-modal-overlay" id="joinModalOverlay" role="dialog" aria-modal="true" aria-labelledby="jmModalTitle">
+  <div class="submit-modal-panel" id="joinModalPanel">
+
+    <!-- Header -->
+    <div class="submit-modal-header" style="border-bottom:1px solid var(--gray-50); padding-bottom:16px; margin-bottom:4px;">
+      <div id="jmModalTitle" style="font-size:16px; font-weight:700; color:var(--gray-900); letter-spacing:-0.3px;">Join the ExpatBase Community</div>
+      <button class="submit-modal-close" id="jmClose" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <!-- Scrollable body -->
+    <div class="submit-modal-body">
+
+      <!-- Step 1: Form -->
+      <div class="sm-panel" id="jmpanel1">
+
+        <p style="font-size:13px; color:var(--gray-400); margin-bottom:24px; line-height:1.7;">Get listed in the expat community, receive the weekly Slovakia guide, and connect with verified local professionals.</p>
+
+        <div class="sm-section-title">Your Details</div>
+
+        <!-- Full Name -->
+        <div class="sm-field-group">
+          <label class="sm-label" for="jmName">Full Name <span class="sm-required">*</span></label>
+          <input class="sm-input" type="text" id="jmName" placeholder="e.g. James Miller" autocomplete="name">
+          <div class="sm-field-error" id="jmNameErr">Please enter your name.</div>
+        </div>
+
+        <!-- Email -->
+        <div class="sm-field-group">
+          <label class="sm-label" for="jmEmail">Email Address <span class="sm-required">*</span></label>
+          <input class="sm-input" type="email" id="jmEmail" placeholder="your@email.com" autocomplete="email">
+          <div class="sm-field-error" id="jmEmailErr">Please enter a valid email address.</div>
+        </div>
+
+        <!-- Nationality -->
+        <div class="sm-field-group">
+          <label class="sm-label" for="jmNationality">Nationality <span class="sm-hint-inline">optional</span></label>
+          <input class="sm-input" type="text" id="jmNationality" placeholder="e.g. British, German, American…">
+        </div>
+
+        <!-- What are you looking for -->
+        <div class="sm-field-group">
+          <label class="sm-label">What are you looking for? <span class="sm-hint-inline">optional</span></label>
+          <div class="sm-check-pills" id="jmServicePills">
+            <button type="button" class="sm-check-pill" data-val="Doctors">🏥 Doctors</button>
+            <button type="button" class="sm-check-pill" data-val="Lawyers">⚖️ Lawyers</button>
+            <button type="button" class="sm-check-pill" data-val="Banks">🏦 Banks</button>
+            <button type="button" class="sm-check-pill" data-val="Beauty">💆 Beauty</button>
+            <button type="button" class="sm-check-pill" data-val="Handymen">🔧 Handymen</button>
+            <button type="button" class="sm-check-pill" data-val="Real Estate">🏠 Real Estate</button>
+            <button type="button" class="sm-check-pill" data-val="Schools">🎓 Schools</button>
+            <button type="button" class="sm-check-pill" data-val="Moving">📦 Moving</button>
+            <button type="button" class="sm-check-pill" data-val="Vets">🐾 Vets</button>
+            <button type="button" class="sm-check-pill" data-val="Sports">⚽ Sports</button>
+          </div>
+        </div>
+
+        <!-- GDPR consent -->
+        <div class="sm-field-group" style="margin-top:8px;">
+          <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
+            <input type="checkbox" id="jmGdpr" style="margin-top:3px; flex-shrink:0; width:16px; height:16px; accent-color:var(--green); cursor:pointer;">
+            <span style="font-size:12px; color:var(--gray-400); line-height:1.6; font-weight:300;">
+              I agree to the processing of my personal data for the purpose of community membership and the ExpatBase newsletter, in accordance with the <a href="privacy-policy.html" target="_blank" style="color:var(--blue); text-decoration:underline;">Privacy Policy</a>. I can withdraw my consent at any time by contacting <a href="mailto:hello@expatbase.sk">hello@expatbase.sk</a>. *
+            </span>
+          </label>
+          <div class="sm-field-error" id="jmGdprErr">Please confirm you agree to data processing.</div>
+        </div>
+
+        <!-- Error banner -->
+        <div class="sm-error-banner" id="jmErrorBanner" style="display:none">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span id="jmErrorMsg">Please fix the errors above.</span>
+        </div>
+
+        <!-- Submit button -->
+        <button class="sm-submit-btn" id="jmSubmitBtn" type="button" style="width:100%; max-width:100%; margin-top:20px;">
+          <span id="jmSubmitLabel">Join Community →</span>
+          <span id="jmSpinner" style="display:none; align-items:center; gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 38 38" stroke="white" style="animation:spin 0.8s linear infinite"><g fill="none"><g transform="translate(1 1)" stroke-width="2.5"><circle stroke-opacity=".35" cx="18" cy="18" r="18"/><path d="M36 18c0-9.94-8.06-18-18-18"/></g></g></svg>
+            Joining…
+          </span>
+        </button>
+
+      </div><!-- /jmpanel1 -->
+
+      <!-- Step 2: Success -->
+      <div class="sm-panel sm-success-panel" id="jmpanel2" style="display:none">
+        <div class="sm-success-icon">
+          <svg class="sm-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="sm-checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="sm-checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+          </svg>
+        </div>
+        <h2 class="sm-success-title">Welcome to ExpatBase! 🎉</h2>
+        <p class="sm-success-sub">You're now part of the community. Check your inbox — your welcome email is on the way.</p>
+        <div class="sm-success-actions">
+          <button class="sm-close-success-btn" id="jmCloseSuccess">Done</button>
+        </div>
+      </div><!-- /jmpanel2 -->
+
+    </div><!-- /submit-modal-body -->
+  </div><!-- /joinModalPanel -->
+</div><!-- /joinModalOverlay -->
+
 <div class="cookie-banner" id="cookieBanner">
-  <div class="cookie-text">We use essential cookies to make ExpatEase work. With your consent, we'd also like to use analytics cookies (privacy-first, no PII) to improve the service.</div>
+  <div class="cookie-text">We use essential cookies to make ExpatBase work. With your consent, we'd also like to use analytics cookies (privacy-first, no PII) to improve the service.</div>
   <div class="cookie-btns">
     <button class="cookie-btn-reject" onclick="dismissCookie()">Reject</button>
     <button class="cookie-btn-accept" onclick="dismissCookie()">Accept</button>
@@ -3162,7 +3431,7 @@
   // Carousel
   const slides = document.querySelectorAll('.hero-slide');
   const dots = document.querySelectorAll('.carousel-dot');
-  const labels = ['Barbers & Hairdressers', 'Doctors & Specialists', 'Electricians & Tradespeople'];
+  const labels = ['Beauty & Wellness', 'Doctors & Specialists', 'Electricians & Tradespeople'];
   const labelEl = document.getElementById('carousel-label');
   let current = 0;
   let interval;
@@ -3543,16 +3812,11 @@ function startOver() {
   'use strict';
 
   /* ── State ── */
-  let smSelectedPlan = null;
-  let smGalleryFiles = [];
-  let smServiceCount = 0;
-  let smTeamCount = 0;
+  let smCurrentStep  = 2;
 
   /* ── DOM refs ── */
   const overlay   = document.getElementById('submitModalOverlay');
-  const panel     = document.getElementById('submitModalPanel');
   const closeBtn  = document.getElementById('smClose');
-  const contBtn   = document.getElementById('smContinueBtn');
   const backBtn   = document.getElementById('smBackBtn');
   const submitBtn = document.getElementById('smSubmitBtn');
 
@@ -3560,54 +3824,35 @@ function startOver() {
      Open / Close
   ══════════════════════════════ */
   function openSubmitModal() {
+    smGoToStep(2);
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
-    closeBtn.focus();
+    closeBtn?.focus();
   }
 
   function closeSubmitModal() {
     overlay.classList.remove('open');
     document.body.style.overflow = '';
-    setTimeout(smReset, 320);
+    if (smCurrentStep === 3) setTimeout(smReset, 320);
   }
 
   /* ══════════════════════════════
-     Step navigation
+     Step navigation (2 steps: form → done)
   ══════════════════════════════ */
   function smGoToStep(n) {
-    [1, 2, 3].forEach(i => {
-      const panel = document.getElementById('smpanel' + i);
-      const step  = document.getElementById('smstep' + i);
-      if (panel) panel.style.display = (i === n) ? 'block' : 'none';
+    smCurrentStep = n;
+    [2, 3].forEach(i => {
+      const p    = document.getElementById('smpanel' + i);
+      const step = document.getElementById('smstep' + i);
+      if (p) p.style.display = (i === n) ? 'block' : 'none';
       if (step) {
         step.classList.remove('active', 'done');
         if (i === n) step.classList.add('active');
         if (i < n)  step.classList.add('done');
       }
     });
-    // Scroll modal body to top on step change
     const body = document.querySelector('.submit-modal-body');
     if (body) body.scrollTop = 0;
-  }
-
-  /* ══════════════════════════════
-     Plan selection
-  ══════════════════════════════ */
-  function smSelectPlan(plan) {
-    smSelectedPlan = plan;
-    document.querySelectorAll('.sm-plan-card').forEach(card => {
-      const isSelected = card.dataset.plan === plan;
-      card.classList.toggle('selected', isSelected);
-      card.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
-    });
-    contBtn.disabled = false;
-  }
-
-  function smContinue() {
-    if (!smSelectedPlan) return;
-    const premiumSection = document.getElementById('smFormPremium');
-    premiumSection.style.display = smSelectedPlan === 'premium' ? 'block' : 'none';
-    smGoToStep(2);
   }
 
   /* ══════════════════════════════
@@ -3827,6 +4072,116 @@ function startOver() {
     if (err)   err.classList.toggle('visible', show);
   }
 
+  /* ── Language pills toggle ── */
+  document.querySelectorAll('.sm-lang-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      pill.classList.toggle('selected');
+      // Clear lang error when at least one is selected
+      const anySelected = document.querySelectorAll('.sm-lang-pill.selected').length > 0;
+      document.getElementById('smLangErr')?.classList.toggle('visible', !anySelected);
+    });
+  });
+
+  /* ══════════════════════════════
+     Category-specific fields — show/hide
+  ══════════════════════════════ */
+  const CAT_MAP = {
+    'Doctors & Specialists':  'doctors',
+    'Lawyers & Legal':        'lawyers',
+    'Banks & Finance':        'banks',
+    'Beauty & Wellness':      'beauty',
+    'Handymen':               'handymen',
+    'Real Estate':            'realestate',
+    'Builders & Construction':'builders',
+    'Vets & Pet Care':        'vets',
+    'Schools & Education':    'schools',
+    'Moving & Relocation':    'moving',
+    'Sports & Fitness':       'sports',
+    'Other':                  'other',
+  };
+
+  function smShowCategoryBlock(catValue) {
+    const wrapper = document.getElementById('smCategoryDetails');
+    // Hide all blocks
+    document.querySelectorAll('.sm-cat-block').forEach(el => el.style.display = 'none');
+    const key = CAT_MAP[catValue];
+    if (key) {
+      const block = document.getElementById('smCat_' + key);
+      if (block) {
+        block.style.display = 'block';
+        wrapper.style.display = 'block';
+        return;
+      }
+    }
+    wrapper.style.display = 'none';
+  }
+
+  document.getElementById('smCategory')?.addEventListener('change', function() {
+    smShowCategoryBlock(this.value);
+  });
+
+  // Check-pill toggle (blue, category details)
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('sm-check-pill')) {
+      e.target.classList.toggle('selected');
+    }
+  });
+
+  function smGetCheckPills(containerId) {
+    return [...document.querySelectorAll('#' + containerId + ' .sm-check-pill.selected')]
+      .map(p => p.dataset.val).join(', ');
+  }
+
+  function smGetCategoryExtras() {
+    const cat = document.getElementById('smCategory')?.value;
+    const key = CAT_MAP[cat];
+    if (!key) return {};
+
+    const extras = {};
+    switch (key) {
+      case 'doctors':
+        extras['Specialty'] = document.getElementById('smSpecialty')?.value || '';
+        extras['Insurance Accepted'] = smGetCheckPills('smInsurance');
+        break;
+      case 'lawyers':
+        extras['Specialty'] = document.getElementById('smPracticeArea')?.value || '';
+        break;
+      case 'banks':
+        extras['Specialty'] = document.getElementById('smServiceTypeBanks')?.value || '';
+        break;
+      case 'beauty':
+        extras['Specialty'] = document.getElementById('smServiceTypeBeauty')?.value || '';
+        break;
+      case 'handymen':
+        extras['Specialty'] = smGetCheckPills('smTrade');
+        extras['Additional Details'] = smGetCheckPills('smHandyServices');
+        break;
+      case 'realestate':
+        extras['Specialty'] = document.getElementById('smServiceTypeRE')?.value || '';
+        break;
+      case 'builders':
+        extras['Specialty'] = document.getElementById('smServiceTypeBuilders')?.value || '';
+        break;
+      case 'vets':
+        extras['Additional Details'] = smGetCheckPills('smAnimalTypes');
+        extras['Specialty'] = document.getElementById('smVetService')?.value || '';
+        break;
+      case 'schools':
+        extras['Additional Details'] = smGetCheckPills('smSchoolLevel');
+        break;
+      case 'moving':
+        extras['Additional Details'] = smGetCheckPills('smMovingServices');
+        break;
+      case 'sports':
+        extras['Specialty'] = document.getElementById('smActivityType')?.value || '';
+        break;
+      case 'other':
+        extras['Specialty'] = document.getElementById('smOtherSpecialization')?.value.trim() || '';
+        break;
+    }
+    return extras;
+  }
+
   function smValidateForm() {
     let valid = true;
     const required = [
@@ -3850,29 +4205,42 @@ function startOver() {
       smShowFieldError('smEmail', 'smEmailErr', true);
       valid = false;
     }
-    // Optional URL fields
-    const urlFields = [
-      { id: 'smWebsite', err: 'smWebsiteErr' },
-    ];
-    if (smSelectedPlan === 'premium') {
-      urlFields.forEach(({ id, err }) => {
-        const el = document.getElementById(id);
-        if (el && el.value.trim() && !/^https?:\/\/.+/.test(el.value.trim())) {
-          smShowFieldError(id, err, true);
-          valid = false;
-        } else {
-          smShowFieldError(id, err, false);
-        }
-      });
+    // Languages — at least one required
+    const selectedLangs = document.querySelectorAll('.sm-lang-pill.selected');
+    if (selectedLangs.length === 0) {
+      document.getElementById('smLangErr')?.classList.add('visible');
+      valid = false;
+    } else {
+      document.getElementById('smLangErr')?.classList.remove('visible');
+    }
+    // GDPR consent — required
+    const gdpr = document.getElementById('smGdprConsent');
+    const gdprErr = document.getElementById('smGdprErr');
+    if (!gdpr?.checked) {
+      gdprErr?.classList.add('visible');
+      valid = false;
+    } else {
+      gdprErr?.classList.remove('visible');
+    }
+
+    // Website URL format (optional, both plans)
+    const websiteEl = document.getElementById('smWebsite');
+    if (websiteEl && websiteEl.value.trim() && !/^https?:\/\/.+/.test(websiteEl.value.trim())) {
+      // Auto-prepend https:// if missing
+      if (!/^https?:\/\//.test(websiteEl.value.trim())) {
+        websiteEl.value = 'https://' + websiteEl.value.trim();
+      }
     }
     // Scroll to first error
     if (!valid) {
-      const firstErr = document.querySelector('.sm-input-error');
+      const firstErr = document.querySelector('.sm-input-error, .sm-field-error.visible');
       if (firstErr) {
         const body = document.querySelector('.submit-modal-body');
-        const bodyRect = body.getBoundingClientRect();
-        const errRect  = firstErr.getBoundingClientRect();
-        body.scrollBy({ top: errRect.top - bodyRect.top - 80, behavior: 'smooth' });
+        if (body) {
+          const bodyRect = body.getBoundingClientRect();
+          const errRect  = firstErr.getBoundingClientRect();
+          body.scrollBy({ top: errRect.top - bodyRect.top - 80, behavior: 'smooth' });
+        }
       }
     }
     return valid;
@@ -3885,40 +4253,26 @@ function startOver() {
     const prefix = document.getElementById('smPhonePrefix')?.value || '+421';
     const phone  = document.getElementById('smPhone')?.value.trim() || '';
 
-    const data = {
-      name:            document.getElementById('smBizName')?.value.trim(),
-      category:        document.getElementById('smCategory')?.value,
-      contact_name:    document.getElementById('smContactName')?.value.trim(),
-      phone:           prefix + ' ' + phone,
-      email:           document.getElementById('smEmail')?.value.trim(),
-      address:         document.getElementById('smAddress')?.value.trim(),
-      description:     document.getElementById('smDescription')?.value.trim(),
-      english_speaking: document.getElementById('smEnglish')?.checked || false,
-      plan:            smSelectedPlan,
-    };
+    const selectedLangs = [...document.querySelectorAll('.sm-lang-pill.selected')]
+      .map(p => p.dataset.lang).join(', ');
 
-    if (smSelectedPlan === 'premium') {
-      data.about   = document.getElementById('smAbout')?.value.trim() || null;
-      data.website = document.getElementById('smWebsite')?.value.trim() || null;
-      data.social_links = {
-        instagram: document.getElementById('smInstagram')?.value.trim() || null,
-        facebook:  document.getElementById('smFacebook')?.value.trim() || null,
-      };
-      // Opening hours
-      const hours = {};
-      SM_DAYS.forEach((day, i) => {
-        const uid    = 'smDay' + i;
-        const toggle = document.getElementById(uid + 'Toggle');
-        const from   = document.getElementById(uid + 'From');
-        const to     = document.getElementById(uid + 'To');
-        hours[day.toLowerCase()] = {
-          open: toggle?.checked || false,
-          from: from?.value || null,
-          to:   to?.value   || null,
-        };
-      });
-      data.opening_hours = hours;
-    }
+    const extras = smGetCategoryExtras();
+
+    const data = {
+      name:         document.getElementById('smBizName')?.value.trim(),
+      category:     document.getElementById('smCategory')?.value,
+      contact_name: document.getElementById('smContactName')?.value.trim(),
+      phone:        prefix + ' ' + phone,
+      email:        document.getElementById('smEmail')?.value.trim(),
+      address:      document.getElementById('smAddress')?.value.trim(),
+      website:      document.getElementById('smWebsite')?.value.trim() || null,
+      languages:    selectedLangs,
+      description:  document.getElementById('smDescription')?.value.trim(),
+      specialty:    extras['Specialty'] || '',
+      insurance:    extras['Insurance Accepted'] || '',
+      extra_details:extras['Additional Details'] || '',
+      submitted_at: new Date().toISOString(),
+    };
 
     return data;
   }
@@ -3938,16 +4292,52 @@ function startOver() {
     spinner.style.display   = 'block';
 
     try {
-      const res = await fetch('/submit-business', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(smCollectFormData()),
-      });
+      // ── Airtable REST API ──────────────────────────────────────────────
+      // Replace AIRTABLE_API_KEY and AIRTABLE_BASE_ID once you have them
+      const AIRTABLE_API_KEY  = 'REMOVED_SECRET';
+      const AIRTABLE_BASE_ID  = 'appB4cWwPnCEuHSgI';
+      const AIRTABLE_TABLE    = 'Submissions';
+
+      const formData = smCollectFormData();
+      const res = await fetch(
+        `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE)}`,
+        {
+          method:  'POST',
+          headers: {
+            'Content-Type':  'application/json',
+            'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
+          },
+          body: JSON.stringify({
+            fields: {
+              'Business Name':  formData.name,
+              'Category':       formData.category,
+              'Contact Name':   formData.contact_name,
+              'Phone':          formData.phone,
+              'Email':          formData.email,
+              'Address':        formData.address,
+              'Website':        formData.website || '',
+              'Language':       formData.languages,
+              'Description':    formData.description,
+              'Submitted at':   formData.submitted_at,
+              // Optional category-specific fields — only include if non-empty
+              ...(formData.specialty      ? { 'Specialty':          formData.specialty }      : {}),
+              ...(formData.insurance      ? { 'Insurance Accepted': formData.insurance }      : {}),
+              ...(formData.extra_details  ? { 'Additional Details': formData.extra_details }  : {}),
+            }
+          }),
+        }
+      );
       const json = await res.json();
-      if (res.ok && json.success) {
+      console.log('Airtable status:', res.status, 'response:', JSON.stringify(json, null, 2));
+      if (res.ok && json.id) {
         smShowSuccess();
       } else {
-        throw new Error(json.error || 'Submission failed');
+        const errObj = json.error;
+        const errMsg = typeof errObj === 'string'
+          ? errObj
+          : (errObj?.message || JSON.stringify(errObj) || 'Submission failed');
+        console.error('Airtable full error:', JSON.stringify(json, null, 2));
+        throw new Error(errMsg);
       }
     } catch (err) {
       spinner.style.display = 'none';
@@ -3963,11 +4353,7 @@ function startOver() {
   ══════════════════════════════ */
   function smShowSuccess() {
     const msg = document.getElementById('smSuccessMsg');
-    if (smSelectedPlan === 'premium') {
-      msg.textContent = 'Your Premium listing has been submitted for review. Our team will contact you to add your photos and confirm payment details — usually within 2–3 business days.';
-    } else {
-      msg.textContent = 'Your listing has been submitted for review. We\'ll email you within 2 business days once it\'s live.';
-    }
+    if (msg) msg.textContent = 'Your listing has been submitted for review. We\'ll email you within 2 business days once it\'s live.';
     smGoToStep(3);
   }
 
@@ -3975,31 +4361,30 @@ function startOver() {
      Reset
   ══════════════════════════════ */
   function smReset() {
-    smSelectedPlan = null;
-    smGalleryFiles = [];
-    smServiceCount = 0;
-    smTeamCount    = 0;
-
-    // Clear plan selection
-    document.querySelectorAll('.sm-plan-card').forEach(c => {
-      c.classList.remove('selected');
-      c.setAttribute('aria-pressed', 'false');
-    });
-    contBtn.disabled = true;
-
     // Clear inputs
     ['smBizName','smCategory','smContactName','smPhone','smEmail',
-     'smAddress','smDescription','smAbout','smWebsite','smInstagram','smFacebook']
+     'smAddress','smWebsite','smDescription']
       .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-    ['smEnglish','smWaitlist'].forEach(id => {
-      const el = document.getElementById(id); if (el) el.checked = false;
-    });
 
-    // Clear counters
+    // Reset language pills
+    document.querySelectorAll('.sm-lang-pill').forEach(p => p.classList.remove('selected'));
+    document.getElementById('smLangErr')?.classList.remove('visible');
+
+    // Reset GDPR checkbox
+    const gdprBox = document.getElementById('smGdprConsent');
+    if (gdprBox) gdprBox.checked = false;
+    document.getElementById('smGdprErr')?.classList.remove('visible');
+
+    // Reset category-specific fields
+    document.querySelectorAll('.sm-check-pill').forEach(p => p.classList.remove('selected'));
+    document.querySelectorAll('.sm-cat-block select').forEach(s => s.value = '');
+    document.querySelectorAll('.sm-cat-block input').forEach(i => i.value = '');
+    document.querySelectorAll('.sm-cat-block').forEach(el => el.style.display = 'none');
+    document.getElementById('smCategoryDetails').style.display = 'none';
+
+    // Clear counter
     const descCounter = document.getElementById('smDescCounter');
-    const aboutCounter = document.getElementById('smAboutCounter');
     if (descCounter) descCounter.textContent = '0 / 150';
-    if (aboutCounter) aboutCounter.textContent = '0 / 500';
 
     // Reset premium fields
     document.getElementById('smServicesList').innerHTML = '';
@@ -4048,57 +4433,178 @@ function startOver() {
 
   // Close
   closeBtn.addEventListener('click', closeSubmitModal);
+
+  // Click on overlay background closes modal — e.target check ensures
+  // clicks inside the panel (selects, inputs, buttons) never trigger this
   overlay.addEventListener('click', e => {
     if (e.target === overlay) closeSubmitModal();
   });
+
+  // Escape only closes on step 1 or step 3 — never mid-form (step 2)
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && overlay.classList.contains('open')) closeSubmitModal();
+    if (e.key === 'Escape' && overlay.classList.contains('open') && smCurrentStep !== 2) {
+      closeSubmitModal();
+    }
   });
 
   // Plan cards
   document.querySelectorAll('.sm-plan-card').forEach(card => {
-    card.addEventListener('click', () => smSelectPlan(card.dataset.plan));
-    card.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); smSelectPlan(card.dataset.plan); }
-    });
   });
 
   // Navigation
-  contBtn.addEventListener('click',  smContinue);
-  backBtn.addEventListener('click',  () => smGoToStep(1));
-  submitBtn.addEventListener('click', smSubmit);
+  backBtn?.addEventListener('click', () => smGoToStep(2));
+  submitBtn?.addEventListener('click', smSubmit);
 
   // Success actions
-  document.getElementById('smCloseSuccess').addEventListener('click', closeSubmitModal);
-  document.getElementById('smSubmitAnother').addEventListener('click', smReset);
+  document.getElementById('smCloseSuccess')?.addEventListener('click', closeSubmitModal);
+  document.getElementById('smSubmitAnother')?.addEventListener('click', () => { smReset(); smGoToStep(2); });
 
-  // Logo / cover remove
-  document.getElementById('smLogoRemove').addEventListener('click', () => {
-    document.getElementById('smLogoZone').style.display = 'block';
-    document.getElementById('smLogoPreview').style.display = 'none';
-    document.getElementById('smLogoInput').value = '';
-  });
-  document.getElementById('smCoverRemove').addEventListener('click', () => {
-    document.getElementById('smCoverZone').style.display = 'block';
-    document.getElementById('smCoverPreview').style.display = 'none';
-    document.getElementById('smCoverInput').value = '';
-  });
-
-  // Add buttons
-  document.getElementById('smAddServiceBtn').addEventListener('click', smAddService);
-  document.getElementById('smAddTeamBtn').addEventListener('click', smAddTeamMember);
-
-  // Char counters
+  // Char counter
   smCharCounter('smDescription', 'smDescCounter', 150);
-  smCharCounter('smAbout',       'smAboutCounter', 500);
 
-  // Upload zones
-  smWireSimpleUpload('smLogoZone',  'smLogoInput',  'smLogoBrowse',  smHandleLogoUpload);
-  smWireSimpleUpload('smCoverZone', 'smCoverInput', 'smCoverBrowse', smHandleCoverUpload);
-  smWireGallery();
+})();
+</script>
 
-  // Opening hours
-  smRenderHours();
+<!-- ════════════════════════════════════════
+     JOIN COMMUNITY MODAL — JavaScript
+════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  const AIRTABLE_API_KEY  = 'REMOVED_SECRET';
+  const AIRTABLE_BASE_ID  = 'appB4cWwPnCEuHSgI';
+  const AIRTABLE_TABLE    = 'Members';
+
+  const overlay   = document.getElementById('joinModalOverlay');
+  const closeBtn  = document.getElementById('jmClose');
+  const submitBtn = document.getElementById('jmSubmitBtn');
+
+  /* ── Service pills toggle ── */
+  document.querySelectorAll('#jmServicePills .sm-check-pill').forEach(pill => {
+    pill.addEventListener('click', () => pill.classList.toggle('selected'));
+  });
+
+  /* ── Open / Close ── */
+  function openJoinModal() {
+    document.getElementById('jmpanel1').style.display = 'block';
+    document.getElementById('jmpanel2').style.display = 'none';
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    closeBtn?.focus();
+  }
+
+  function closeJoinModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  /* ── Validation ── */
+  function jmValidate() {
+    let ok = true;
+
+    const name    = document.getElementById('jmName').value.trim();
+    const nameErr = document.getElementById('jmNameErr');
+    if (!name) { nameErr.style.display = 'block'; ok = false; }
+    else nameErr.style.display = 'none';
+
+    const email    = document.getElementById('jmEmail').value.trim();
+    const emailErr = document.getElementById('jmEmailErr');
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      emailErr.style.display = 'block'; ok = false;
+    } else emailErr.style.display = 'none';
+
+    const gdpr    = document.getElementById('jmGdpr').checked;
+    const gdprErr = document.getElementById('jmGdprErr');
+    if (!gdpr) { gdprErr.style.display = 'block'; ok = false; }
+    else gdprErr.style.display = 'none';
+
+    return ok;
+  }
+
+  /* ── Submit ── */
+  async function jmSubmit() {
+    if (!jmValidate()) {
+      document.getElementById('jmErrorBanner').style.display = 'flex';
+      return;
+    }
+    document.getElementById('jmErrorBanner').style.display = 'none';
+
+    // Collect service pills
+    const services = [...document.querySelectorAll('#jmServicePills .sm-check-pill.selected')]
+      .map(p => p.dataset.val).join(', ');
+
+    // Build payload — omit empty optional fields
+    const raw = {
+      'Name':         document.getElementById('jmName').value.trim(),
+      'Email':        document.getElementById('jmEmail').value.trim(),
+      'Nationality':  document.getElementById('jmNationality').value.trim(),
+      'Looking For':  services,
+      'Submitted At': new Date().toISOString(),
+    };
+    const fields = {};
+    Object.entries(raw).forEach(([k, v]) => { if (v) fields[k] = v; });
+
+    // Show spinner
+    document.getElementById('jmSubmitLabel').style.display = 'none';
+    document.getElementById('jmSpinner').style.display     = 'inline-flex';
+    submitBtn.disabled = true;
+
+    try {
+      const res = await fetch(
+        `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE)}`,
+        {
+          method:  'POST',
+          headers: { 'Authorization': `Bearer ${AIRTABLE_API_KEY}`, 'Content-Type': 'application/json' },
+          body:    JSON.stringify({ fields }),
+        }
+      );
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err?.error?.message || `HTTP ${res.status}`);
+      }
+
+      // Show success panel
+      document.getElementById('jmpanel1').style.display = 'none';
+      document.getElementById('jmpanel2').style.display = 'block';
+
+    } catch (err) {
+      console.error('Join error:', err);
+      document.getElementById('jmErrorMsg').textContent = 'Something went wrong — please try again.';
+      document.getElementById('jmErrorBanner').style.display = 'flex';
+    } finally {
+      document.getElementById('jmSubmitLabel').style.display = '';
+      document.getElementById('jmSpinner').style.display     = 'none';
+      submitBtn.disabled = false;
+    }
+  }
+
+  /* ── Event wiring ── */
+  document.getElementById('joinCommunityBtn').addEventListener('click', e => {
+    e.preventDefault();
+    openJoinModal();
+  });
+
+  // Auto-open when arriving via index.html#join (e.g. from subpages)
+  if (window.location.hash === '#join') {
+    history.replaceState(null, '', window.location.pathname);
+    openJoinModal();
+  }
+
+  closeBtn.addEventListener('click', closeJoinModal);
+
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closeJoinModal();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeJoinModal();
+  });
+
+  submitBtn.addEventListener('click', jmSubmit);
+
+  document.getElementById('jmCloseSuccess')?.addEventListener('click', closeJoinModal);
 
 })();
 </script>
