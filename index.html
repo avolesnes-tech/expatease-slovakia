@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231A4F8A'/%3E%3Ctext x='16' y='22' font-family='Arial Black,sans-serif' font-size='16' font-weight='900' fill='white' text-anchor='middle'%3EEB%3C/text%3E%3C/svg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ExpatBase Slovakia — Life in Slovakia, made simple.</title>
 <meta name="description" content="Find English-speaking doctors, lawyers, tradespeople and more in Bratislava — English-speaking professionals for expats.">
@@ -2777,7 +2778,8 @@
         <h2 class="sm-success-title">Welcome to ExpatBase! 🎉</h2>
         <p class="sm-success-sub">You're now part of the community. Check your inbox — your welcome email is on the way.</p>
         <div class="sm-success-actions">
-          <button class="sm-close-success-btn" id="jmCloseSuccess">Done</button>
+          <a href="profile.html" class="sm-close-success-btn" style="text-decoration:none;display:inline-block;">View my profile →</a>
+          <button class="sm-close-success-btn" id="jmCloseSuccess" style="background:transparent;border:1px solid var(--blue);color:var(--blue);margin-top:8px;">Done</button>
         </div>
       </div><!-- /jmpanel2 -->
 
@@ -3647,6 +3649,14 @@
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || `HTTP ${res.status}`);
 
+      // Save to localStorage for profile page
+      localStorage.setItem('ee_member', JSON.stringify({
+        name: fields.name,
+        email: fields.email,
+        nationality: fields.nationality,
+        lookingFor: fields.looking_for,
+        joinedAt: new Date().toISOString()
+      }));
       // Show success panel
       document.getElementById('jmpanel1').style.display = 'none';
       document.getElementById('jmpanel2').style.display = 'block';
@@ -3669,6 +3679,13 @@
   });
 
   // Auto-open when arriving via index.html#join (e.g. from subpages)
+  
+  // Auto-open when arriving via index.html#submit (e.g. from subpages)
+  if (window.location.hash === '#submit') {
+    history.replaceState(null, '', window.location.pathname);
+    setTimeout(() => openSubmitModal(), 100);
+  }
+
   if (window.location.hash === '#join') {
     history.replaceState(null, '', window.location.pathname);
     openJoinModal();

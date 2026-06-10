@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231A4F8A'/%3E%3Ctext x='16' y='22' font-family='Arial Black,sans-serif' font-size='16' font-weight='900' fill='white' text-anchor='middle'%3EEB%3C/text%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile — ExpatEase Slovakia</title>
+<meta name="description" content="Manage your ExpatEase profile, favourites and reviews.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1A4F8A;
+    --blue-dark: #0F3360;
+    --blue-light: #E8F1FB;
+    --green: #2E9E6B;
+    --green-dark: #1D7A50;
+    --green-light: #E6F7EF;
+    --white: #FFFFFF;
+    --gray-50: #F4F6F9;
+    --gray-100: #DDE3EC;
+    --gray-400: #8C97A8;
+    --gray-700: #3D4A5C;
+    --gray-900: #1F2937;
+    --gold: #F6AD55;
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 9999px;
+    --shadow-card: 0 2px 16px rgba(26,79,138,0.08);
+    --shadow-hover: 0 8px 32px rgba(26,79,138,0.14);
+    --font-head: 'Urbanist', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); color: var(--gray-900); background: var(--gray-50); min-height: 100vh; overflow-x: hidden; }
+
+  /* ─── NAV ─── */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--blue); height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 28px; box-shadow: 0 2px 20px rgba(26,79,138,0.18);
+  }
+  .nav-logo {
+    font-family: var(--font-head); font-weight: 800; font-size: 20px;
+    color: white; text-decoration: none; letter-spacing: -0.3px;
+  }
+  .nav-logo span { color: var(--green); }
+  .nav-back {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 13px; color: rgba(255,255,255,0.65); text-decoration: none;
+    transition: var(--transition);
+  }
+  .nav-back:hover { color: white; }
+  .nav-back-arrow { font-size: 16px; }
+
+  /* ─── LAYOUT ─── */
+  .profile-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: calc(100vh - 60px);
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 20px;
+    gap: 22px;
+    align-items: start;
+  }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    background: var(--blue-dark);
+    border-radius: var(--radius-md);
+    padding: 28px 18px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    position: sticky;
+    top: 88px;
+  }
+
+  .avatar-wrap {
+    width: 72px; height: 72px;
+    margin: 0 auto 14px;
+    position: relative;
+    cursor: pointer;
+  }
+  .avatar-circle {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), var(--blue));
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 700; font-size: 24px;
+    font-family: var(--font-head);
+    border: 3px solid rgba(255,255,255,0.15);
+    overflow: hidden;
+    transition: var(--transition);
+  }
+  .avatar-circle img { width: 100%; height: 100%; object-fit: cover; }
+  .avatar-wrap:hover .avatar-circle { border-color: rgba(255,255,255,0.4); }
+  .avatar-edit-btn {
+    position: absolute; bottom: 0; right: 0;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--green); border: 2px solid var(--blue-dark);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: white;
+    cursor: pointer; transition: var(--transition);
+  }
+  .avatar-edit-btn:hover { background: var(--green-dark); }
+  #avatarInput { display: none; }
+
+  .sidebar-name {
+    color: white; font-family: var(--font-head); font-weight: 700;
+    font-size: 16px; text-align: center; margin-bottom: 2px;
+  }
+  .sidebar-email {
+    color: rgba(255,255,255,0.38); font-size: 11px;
+    text-align: center; margin-bottom: 6px;
+  }
+  .member-since {
+    display: flex; align-items: center; justify-content: center;
+    gap: 5px; font-size: 11px; color: rgba(255,255,255,0.45);
+    margin-bottom: 18px;
+  }
+  .member-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+
+  .sidebar-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 8px 0; }
+
+  .nav-item {
+    display: flex; align-items: center; gap: 9px;
+    padding: 9px 11px; border-radius: 8px;
+    color: rgba(255,255,255,0.48); font-size: 13px;
+    cursor: pointer; transition: var(--transition);
+    border: none; background: none; width: 100%;
+    text-align: left; font-family: var(--font-body);
+  }
+  .nav-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.82); }
+  .nav-item.active { background: rgba(255,255,255,0.11); color: white; }
+  .nav-item-icon { font-size: 14px; flex-shrink: 0; opacity: 0.8; }
+  .nav-item-count {
+    margin-left: auto; background: rgba(255,255,255,0.1);
+    border-radius: 10px; padding: 1px 7px; font-size: 11px;
+  }
+  .nav-item.signout { color: rgba(255,255,255,0.28); margin-top: 4px; font-size: 12px; }
+  .nav-item.signout:hover { color: rgba(255,255,255,0.55); background: none; }
+
+  /* ─── BADGES ─── */
+  .badges-area {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .badge {
+    border-radius: 10px; padding: 9px 11px;
+    display: flex; align-items: flex-start; gap: 9px;
+    transition: var(--transition);
+  }
+  .badge.earned {
+    background: rgba(46,158,107,0.16);
+    border: 1px solid rgba(46,158,107,0.32);
+  }
+  .badge.locked {
+    background: rgba(255,255,255,0.04);
+    border: 1px dashed rgba(255,255,255,0.12);
+  }
+  .badge-ico { font-size: 14px; margin-top: 1px; flex-shrink: 0; }
+  .badge-name {
+    font-size: 11px; font-weight: 600; display: block; margin-bottom: 1px;
+  }
+  .badge.earned .badge-name { color: rgba(255,255,255,0.88); }
+  .badge.locked .badge-name { color: rgba(255,255,255,0.3); }
+  .badge-desc { font-size: 10px; line-height: 1.4; }
+  .badge.earned .badge-desc { color: rgba(255,255,255,0.45); }
+  .badge.locked .badge-desc { color: rgba(255,255,255,0.25); }
+
+  /* ─── MAIN CONTENT ─── */
+  .main { min-width: 0; }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .section-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  .section-title {
+    font-family: var(--font-head); font-weight: 700;
+    font-size: 20px; color: var(--blue-dark);
+  }
+  .section-sub {
+    font-size: 13px; color: var(--gray-400);
+    margin-bottom: 20px; line-height: 1.5;
+  }
+
+  .btn-primary {
+    font-family: var(--font-body); font-size: 13px; font-weight: 500;
+    background: var(--blue); color: white; border: none;
+    border-radius: 8px; padding: 7px 14px; cursor: pointer;
+    transition: var(--transition);
+  }
+  .btn-primary:hover { background: var(--blue-dark); }
+
+  .btn-outline {
+    font-family: var(--font-body); font-size: 12px; font-weight: 500;
+    background: transparent; color: var(--blue);
+    border: 1px solid var(--blue); border-radius: 7px;
+    padding: 5px 11px; cursor: pointer; transition: var(--transition);
+  }
+  .btn-outline:hover { background: var(--blue-light); }
+
+  /* ─── CARDS ─── */
+  .card {
+    background: white; border-radius: var(--radius-md);
+    border: 1px solid rgba(26,79,138,0.07);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* ─── OVERVIEW ─── */
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; margin-bottom: 18px; }
+  .info-card { background: white; border-radius: var(--radius-md); padding: 15px 17px; border: 1px solid rgba(26,79,138,0.07); box-shadow: var(--shadow-card); }
+  .info-label { font-size: 10px; color: var(--gray-400); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 4px; }
+  .info-value { font-size: 15px; color: var(--blue-dark); font-weight: 600; }
+
+  .journey-card { background: white; border-radius: var(--radius-md); padding: 17px 19px; border: 1px solid rgba(26,79,138,0.07); box-shadow: var(--shadow-card); margin-bottom: 18px; }
+  .journey-title { font-size: 13px; font-weight: 600; color: var(--blue); margin-bottom: 11px; }
+  .journey-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .journey-tag {
+    background: var(--blue-light); border: 1px solid rgba(26,79,138,0.15);
+    border-radius: var(--radius-xl); padding: 5px 12px;
+    font-size: 12px; color: var(--blue); font-weight: 500;
+  }
+  .journey-edit { font-size: 12px; color: var(--gray-400); cursor: pointer; margin-left: auto; }
+  .journey-edit:hover { color: var(--blue); }
+
+  .qa-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .qa-card {
+    background: white; border-radius: var(--radius-md);
+    padding: 16px 12px; text-align: center;
+    border: 1px solid rgba(26,79,138,0.07); box-shadow: var(--shadow-card);
+    cursor: pointer; transition: var(--transition); text-decoration: none; display: block;
+  }
+  .qa-card:hover { border-color: var(--blue); box-shadow: var(--shadow-hover); transform: translateY(-1px); }
+  .qa-icon { font-size: 20px; margin-bottom: 7px; }
+  .qa-label { font-size: 12px; color: var(--gray-700); font-weight: 500; }
+
+  /* ─── FAVS ─── */
+  .favs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .fav-card {
+    background: white; border-radius: var(--radius-md);
+    padding: 16px; border: 1px solid rgba(26,79,138,0.07);
+    box-shadow: var(--shadow-card); position: relative;
+    transition: var(--transition);
+  }
+  .fav-card:hover { box-shadow: var(--shadow-hover); }
+  .fav-cat { font-size: 10px; color: var(--green); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .fav-name { font-size: 14px; color: var(--blue-dark); font-weight: 600; margin-bottom: 8px; line-height: 1.3; }
+  .fav-rating { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--gray-400); }
+  .fav-stars { color: var(--gold); font-size: 11px; }
+  .fav-remove {
+    position: absolute; top: 11px; right: 11px;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: #fef2f2; border: none; cursor: pointer;
+    font-size: 12px; color: #dc2626;
+    display: flex; align-items: center; justify-content: center;
+    transition: var(--transition); opacity: 0.6;
+  }
+  .fav-card:hover .fav-remove { opacity: 1; }
+  .fav-remove:hover { background: #fee2e2; }
+
+  /* ─── EMPTY STATES ─── */
+  .empty {
+    background: white; border-radius: var(--radius-md);
+    padding: 48px 24px; text-align: center;
+    border: 1px dashed rgba(26,79,138,0.2); box-shadow: var(--shadow-card);
+  }
+  .empty-icon { font-size: 38px; margin-bottom: 12px; opacity: 0.5; }
+  .empty-title {
+    font-family: var(--font-head); font-weight: 700;
+    font-size: 17px; color: var(--blue-dark); margin-bottom: 6px;
+  }
+  .empty-sub { font-size: 13px; color: var(--gray-400); line-height: 1.6; margin-bottom: 18px; max-width: 280px; margin-left: auto; margin-right: auto; }
+
+  /* ─── REVIEWS ─── */
+  .reviews-list { display: flex; flex-direction: column; gap: 12px; }
+  .review-card { background: white; border-radius: var(--radius-md); padding: 17px; border: 1px solid rgba(26,79,138,0.07); box-shadow: var(--shadow-card); }
+  .review-biz { font-weight: 600; color: var(--blue-dark); font-size: 14px; margin-bottom: 5px; }
+  .review-meta { display: flex; align-items: center; gap: 9px; margin-bottom: 9px; }
+  .review-stars { color: var(--gold); font-size: 13px; letter-spacing: 1px; }
+  .review-date { font-size: 11px; color: var(--gray-400); }
+  .review-text { font-size: 13px; color: var(--gray-700); line-height: 1.6; }
+
+  .review-nudge {
+    background: var(--green-light); border: 1px solid rgba(46,158,107,0.2);
+    border-radius: var(--radius-md); padding: 13px 16px;
+    font-size: 12px; color: var(--green-dark); margin-top: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* ─── RECOMMENDED ─── */
+  .rec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .rec-card { background: white; border-radius: var(--radius-md); padding: 16px; border: 1px solid rgba(26,79,138,0.07); box-shadow: var(--shadow-card); }
+  .rec-cat { font-size: 10px; color: var(--green); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .rec-name { font-size: 14px; color: var(--blue-dark); font-weight: 600; margin-bottom: 4px; }
+  .rec-why { font-size: 11px; color: var(--gray-400); margin-bottom: 11px; line-height: 1.4; }
+
+  /* ─── SUGGEST BUSINESS ─── */
+  .suggest-wrap { background: white; border-radius: var(--radius-md); overflow: hidden; border: 1px solid rgba(26,79,138,0.07); box-shadow: var(--shadow-card); }
+  .suggest-header { background: var(--blue-dark); padding: 24px 26px; }
+  .suggest-title { font-family: var(--font-head); font-weight: 700; font-size: 18px; color: white; margin-bottom: 6px; }
+  .suggest-sub { font-size: 13px; color: rgba(255,255,255,0.48); line-height: 1.6; }
+  .suggest-body { padding: 26px; }
+
+  .form-field { margin-bottom: 16px; }
+  .form-label { font-size: 11px; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 6px; }
+  .form-input {
+    width: 100%; border: 1.5px solid var(--gray-100);
+    border-radius: 8px; padding: 10px 13px;
+    font-size: 13px; color: var(--gray-900);
+    font-family: var(--font-body); outline: none;
+    transition: var(--transition);
+  }
+  .form-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,79,138,0.08); }
+  .form-textarea {
+    width: 100%; border: 1.5px solid var(--gray-100);
+    border-radius: 8px; padding: 10px 13px;
+    font-size: 13px; color: var(--gray-900);
+    font-family: var(--font-body); outline: none;
+    resize: vertical; min-height: 90px; max-height: 160px;
+    transition: var(--transition);
+  }
+  .form-textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,79,138,0.08); }
+
+  .email-preview {
+    background: var(--gray-50); border: 1.5px solid var(--gray-100);
+    border-radius: 8px; padding: 14px 16px; margin-bottom: 18px;
+  }
+  .preview-label { font-size: 10px; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .preview-from { font-size: 11px; color: var(--gray-400); margin-bottom: 5px; }
+  .preview-subject { font-size: 13px; font-weight: 600; color: var(--blue-dark); margin-bottom: 9px; }
+  .preview-body { font-size: 12px; color: var(--gray-700); line-height: 1.7; }
+  .preview-body em { color: var(--blue); font-style: normal; font-weight: 500; }
+
+  .btn-send {
+    width: 100%; background: var(--blue); color: white; border: none;
+    border-radius: 8px; padding: 12px; font-size: 14px; font-weight: 600;
+    cursor: pointer; font-family: var(--font-body); transition: var(--transition);
+  }
+  .btn-send:hover { background: var(--blue-dark); }
+  .btn-send:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .send-note { font-size: 11px; color: var(--gray-400); text-align: center; margin-top: 9px; line-height: 1.5; }
+
+  .suggest-success {
+    display: none; text-align: center; padding: 40px 20px;
+  }
+  .suggest-success-ico { font-size: 40px; margin-bottom: 14px; }
+  .suggest-success-title { font-family: var(--font-head); font-weight: 700; font-size: 18px; color: var(--blue-dark); margin-bottom: 6px; }
+  .suggest-success-sub { font-size: 13px; color: var(--gray-400); line-height: 1.6; }
+
+  /* ─── EDIT PROFILE OVERLAY ─── */
+  .edit-overlay {
+    display: none; position: fixed; inset: 0; z-index: 500;
+    background: rgba(15,51,96,0.55); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+  }
+  .edit-overlay.open { display: flex; }
+  .edit-modal {
+    background: white; border-radius: var(--radius-md);
+    width: min(480px, 92vw); max-height: 90vh;
+    overflow-y: auto; box-shadow: 0 24px 64px rgba(26,79,138,0.22);
+  }
+  .edit-header {
+    background: var(--blue-dark); padding: 20px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .edit-header-title { font-family: var(--font-head); font-weight: 700; font-size: 16px; color: white; }
+  .edit-close { background: none; border: none; color: rgba(255,255,255,0.5); font-size: 20px; cursor: pointer; line-height: 1; }
+  .edit-close:hover { color: white; }
+  .edit-body { padding: 24px; }
+  .edit-save {
+    width: 100%; background: var(--blue); color: white; border: none;
+    border-radius: 8px; padding: 11px; font-size: 14px; font-weight: 600;
+    cursor: pointer; font-family: var(--font-body); transition: var(--transition);
+    margin-top: 4px;
+  }
+  .edit-save:hover { background: var(--blue-dark); }
+
+  /* ─── TOAST ─── */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(12px);
+    background: var(--blue-dark); color: white;
+    padding: 11px 20px; border-radius: var(--radius-xl);
+    font-size: 13px; font-weight: 500;
+    opacity: 0; transition: all 0.3s ease;
+    z-index: 999; white-space: nowrap;
+    pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast.green { background: var(--green-dark); }
+
+  /* ─── PHOTO UPLOAD DROP ─── */
+  .photo-drop {
+    border: 2px dashed var(--gray-100); border-radius: 10px;
+    padding: 20px; text-align: center; cursor: pointer;
+    transition: var(--transition); margin-bottom: 16px;
+  }
+  .photo-drop:hover, .photo-drop.drag-over { border-color: var(--blue); background: var(--blue-light); }
+  .photo-drop-text { font-size: 13px; color: var(--gray-400); }
+  .photo-drop-text strong { color: var(--blue); }
+  .photo-preview-wrap { display: none; text-align: center; margin-bottom: 16px; }
+  .photo-preview { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid var(--blue-light); }
+  .photo-remove { display: block; font-size: 12px; color: #dc2626; cursor: pointer; margin-top: 6px; }
+
+  /* ─── SECTION LABEL ─── */
+  .subsection-label {
+    font-family: var(--font-head); font-weight: 700;
+    font-size: 15px; color: var(--blue-dark); margin: 22px 0 12px;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .profile-layout {
+      grid-template-columns: 1fr;
+      padding: 16px;
+      gap: 16px;
+    }
+    .sidebar { position: static; }
+    .sidebar-name, .sidebar-email, .member-since { display: none; }
+    .avatar-wrap { width: 52px; height: 52px; }
+    .avatar-circle { width: 52px; height: 52px; font-size: 18px; }
+    .sidebar { flex-direction: row; flex-wrap: wrap; padding: 14px 12px; gap: 4px; align-items: center; }
+    .avatar-wrap { margin: 0 8px 0 0; }
+    .badges-area { display: none; }
+    .sidebar-divider { display: none; }
+    .nav-item { padding: 7px 9px; font-size: 12px; flex: none; }
+    .nav-item-count { display: none; }
+    .nav-item.signout { margin-top: 0; }
+
+    .info-grid { grid-template-columns: 1fr 1fr; }
+    .favs-grid { grid-template-columns: 1fr; }
+    .rec-grid { grid-template-columns: 1fr; }
+    .qa-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 420px) {
+    .qa-grid { grid-template-columns: 1fr; }
+    .info-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">Expat<span>Ease</span></a>
+  <a href="index.html" class="nav-back">
+    <span class="nav-back-arrow">←</span> Back to directory
+  </a>
+</nav>
+
+<!-- EDIT PROFILE OVERLAY -->
+<div class="edit-overlay" id="editOverlay">
+  <div class="edit-modal">
+    <div class="edit-header">
+      <span class="edit-header-title">Edit profile</span>
+      <button class="edit-close" onclick="closeEdit()">✕</button>
+    </div>
+    <div class="edit-body">
+
+      <!-- Photo upload -->
+      <div class="form-label">Profile photo</div>
+      <div class="photo-preview-wrap" id="photoPreviewWrap">
+        <img id="photoPreviewImg" class="photo-preview" src="" alt="Profile photo">
+        <span class="photo-remove" onclick="removePhoto()">Remove photo</span>
+      </div>
+      <div class="photo-drop" id="photoDrop" onclick="document.getElementById('avatarInput').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+        <div class="photo-drop-text">
+          <strong>Click to upload</strong> or drag & drop<br>
+          <span style="font-size:11px;">JPG, PNG — max 5 MB</span>
+        </div>
+      </div>
+      <input type="file" id="avatarInput" accept="image/jpeg,image/png,image/webp" onchange="handleAvatarSelect(event)">
+
+      <!-- Fields -->
+      <div class="form-field">
+        <label class="form-label" for="editName">Full name</label>
+        <input class="form-input" id="editName" type="text" placeholder="Your full name">
+      </div>
+      <div class="form-field">
+        <label class="form-label" for="editCountry">Country of origin</label>
+        <input class="form-input" id="editCountry" type="text" placeholder="e.g. United Kingdom">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Interests (select all that apply)</label>
+        <div id="interestPicker" style="display:flex;flex-wrap:wrap;gap:7px;margin-top:4px;"></div>
+      </div>
+      <button class="edit-save" onclick="saveProfile()">Save changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- MAIN LAYOUT -->
+<div class="profile-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="avatar-wrap" onclick="openEdit()">
+      <div class="avatar-circle" id="sidebarAvatar">
+        <span id="sidebarInitials">?</span>
+      </div>
+      <div class="avatar-edit-btn">✎</div>
+    </div>
+    <div class="sidebar-name" id="sidebarName">Loading…</div>
+    <div class="sidebar-email" id="sidebarEmail"></div>
+    <div class="member-since" id="memberSince">
+      <span class="member-dot"></span>
+      <span id="memberSinceText">Member</span>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <button class="nav-item active" onclick="showSection('overview', this)">
+      <span class="nav-item-icon">◈</span> Overview
+    </button>
+    <button class="nav-item" onclick="showSection('favs', this)">
+      <span class="nav-item-icon">♥</span> My Favourites
+      <span class="nav-item-count" id="cnt-favs">0</span>
+    </button>
+    <button class="nav-item" onclick="showSection('reviews', this)">
+      <span class="nav-item-icon">★</span> My Reviews
+      <span class="nav-item-count" id="cnt-reviews">0</span>
+    </button>
+    <button class="nav-item" onclick="showSection('recommended', this)">
+      <span class="nav-item-icon">◎</span> For You
+    </button>
+    <button class="nav-item" onclick="showSection('suggest', this)">
+      <span class="nav-item-icon">✉</span> Suggest a Business
+    </button>
+
+    <div class="sidebar-divider"></div>
+
+    <button class="nav-item signout" onclick="doSignOut()">
+      <span class="nav-item-icon">⇤</span> Sign out
+    </button>
+
+    <div class="badges-area" id="badgesArea"></div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- OVERVIEW -->
+    <div class="section active" id="s-overview">
+      <div class="section-head">
+        <h1 class="section-title">Your profile</h1>
+        <button class="btn-primary" onclick="openEdit()">Edit info</button>
+      </div>
+      <div class="section-sub" id="overviewGreeting">Welcome back 👋</div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-label">Full name</div>
+          <div class="info-value" id="ovName">—</div>
+        </div>
+        <div class="info-card">
+          <div class="info-label">From</div>
+          <div class="info-value" id="ovCountry">Not set</div>
+        </div>
+        <div class="info-card">
+          <div class="info-label">Member since</div>
+          <div class="info-value" id="ovMemberSince">—</div>
+        </div>
+        <div class="info-card">
+          <div class="info-label">Saved places</div>
+          <div class="info-value" id="ovFavCount">0 places</div>
+        </div>
+      </div>
+
+      <div class="journey-card" id="journeyCard">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;">
+          <div class="journey-title">🗺 Your interests</div>
+          <span class="journey-edit" onclick="openEdit()">Edit</span>
+        </div>
+        <div class="journey-tags" id="journeyTags">
+          <span style="font-size:13px;color:var(--gray-400);">No interests set — <span style="color:var(--blue);cursor:pointer;" onclick="openEdit()">add some</span></span>
+        </div>
+      </div>
+
+      <div class="subsection-label">Quick actions</div>
+      <div class="qa-grid">
+        <a href="index.html#listings" class="qa-card">
+          <div class="qa-icon">🔍</div>
+          <div class="qa-label">Find something new</div>
+        </a>
+        <a href="index.html#translate" class="qa-card">
+          <div class="qa-icon">📄</div>
+          <div class="qa-label">Translate a form</div>
+        </a>
+        <div class="qa-card" onclick="showSection('suggest', document.querySelector('[onclick*=suggest]'))">
+          <div class="qa-icon">✉</div>
+          <div class="qa-label">Suggest a business</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAVOURITES -->
+    <div class="section" id="s-favs">
+      <div class="section-head">
+        <h1 class="section-title">My Favourites</h1>
+      </div>
+      <div class="section-sub">Places you've saved — click ✕ to remove</div>
+      <div class="favs-grid" id="favsGrid"></div>
+      <div class="empty" id="favsEmpty" style="display:none;">
+        <div class="empty-icon">♡</div>
+        <div class="empty-title">No saved places yet</div>
+        <div class="empty-sub">Tap the heart on any listing to save it here. Your favourites sync across devices.</div>
+        <a href="index.html" class="btn-primary" style="text-decoration:none;display:inline-block;">Browse listings</a>
+      </div>
+    </div>
+
+    <!-- REVIEWS -->
+    <div class="section" id="s-reviews">
+      <div class="section-head">
+        <h1 class="section-title">My Reviews</h1>
+      </div>
+      <div class="section-sub">Your contributions to the community</div>
+      <div class="reviews-list" id="reviewsList"></div>
+      <div class="empty" id="reviewsEmpty" style="display:none;">
+        <div class="empty-icon">✍</div>
+        <div class="empty-title">Share your first experience</div>
+        <div class="empty-sub">Your review helps other expats find the right places. It only takes 2 minutes — and every word makes a difference.</div>
+        <a href="index.html" class="btn-primary" style="text-decoration:none;display:inline-block;">Browse listings to review</a>
+      </div>
+      <div class="review-nudge" id="reviewNudge" style="display:none;"></div>
+    </div>
+
+    <!-- RECOMMENDED -->
+    <div class="section" id="s-recommended">
+      <div class="section-head">
+        <h1 class="section-title">For You</h1>
+      </div>
+      <div class="section-sub">Based on your saved places — you might also like these</div>
+      <div class="rec-grid" id="recGrid"></div>
+      <div class="empty" id="recEmpty" style="display:none;">
+        <div class="empty-icon">◎</div>
+        <div class="empty-title">Save a few places first</div>
+        <div class="empty-sub">Once you save 2+ listings, we'll suggest similar businesses you haven't seen yet.</div>
+        <a href="index.html" class="btn-primary" style="text-decoration:none;display:inline-block;">Browse listings</a>
+      </div>
+    </div>
+
+    <!-- SUGGEST A BUSINESS -->
+    <div class="section" id="s-suggest">
+      <div class="section-head">
+        <h1 class="section-title">Suggest a Business</h1>
+      </div>
+      <div class="section-sub">Know a great English-friendly place? Tell them about ExpatEase.</div>
+
+      <div class="suggest-wrap">
+        <div class="suggest-header">
+          <div class="suggest-title">Know a great place? Tell them about us.</div>
+          <div class="suggest-sub">We'll send a short, friendly email from ExpatEase introducing our directory — no spam, just one message on your behalf.</div>
+        </div>
+        <div class="suggest-body" id="suggestForm">
+          <div class="form-field">
+            <label class="form-label" for="bizName">Business name</label>
+            <input class="form-input" id="bizName" type="text" placeholder="e.g. MedCity Clinic" oninput="updateEmailPreview()">
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="bizEmail">Business email</label>
+            <input class="form-input" id="bizEmail" type="email" placeholder="hello@business.sk">
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="bizNote">Your personal note <span style="font-weight:400;color:var(--gray-400);">(optional)</span></label>
+            <textarea class="form-textarea" id="bizNote" placeholder="e.g. I visited your clinic last month — really appreciated the English-speaking staff." oninput="updateEmailPreview()"></textarea>
+          </div>
+
+          <div class="email-preview">
+            <div class="preview-label">Email preview</div>
+            <div class="preview-from" id="prevFrom">From: ExpatEase &lt;hello@expatease.sk&gt; · To: —</div>
+            <div class="preview-subject">Subject: We'd love to feature you on ExpatEase Slovakia</div>
+            <div class="preview-body" id="prevBody">
+              Hi <em id="prevName">there</em>,<br><br>
+              We run ExpatEase — a directory of English-friendly businesses in Bratislava, trusted by the local expat community. <em id="prevNote"></em>We'd love to list your business so more expats can discover you.<br><br>
+              Getting started is free. Reply to this email or visit <em>expatease.sk</em> to learn more.<br><br>
+              — The ExpatEase team
+            </div>
+          </div>
+
+          <button class="btn-send" id="sendBtn" onclick="submitSuggest()">Send the email</button>
+          <div class="send-note">One email, sent once. We never follow up without their permission.</div>
+        </div>
+
+        <div class="suggest-success" id="suggestSuccess">
+          <div class="suggest-success-ico">✉</div>
+          <div class="suggest-success-title">Email sent!</div>
+          <div class="suggest-success-sub" id="suggestSuccessMsg">We've reached out to the business. If they're interested, we'll be in touch to get them listed.</div>
+          <button class="btn-outline" style="margin-top:16px;" onclick="resetSuggest()">Suggest another</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+
+<script>
+// ─── LOCAL STORAGE AUTH ───
+// No Supabase — user identity comes from localStorage set by the Join modal on index.html
+
+const INTEREST_OPTIONS = [
+  'Healthcare', 'Dentist', 'Legal & admin', 'English-friendly',
+  'Restaurants', 'Barbershop', 'Childcare', 'Fitness', 'Veterinary',
+  'Financial services', 'Translation', 'Shopping'
+];
+
+let currentUser = null;
+let profileData = {}; // extra data stored in localStorage
+let favsData = {};    // { bizId: { name, cat, rating, ratingCount, savedAt } }
+let reviewsData = []; // array of review objects
+let pendingPhotoFile = null;
+
+// ─── INIT ───
+(function () {
+  const member = JSON.parse(localStorage.getItem('ee_member') || 'null');
+  if (!member || !member.email) {
+    // Not registered — redirect to join modal
+    window.location.href = 'index.html#join';
+    return;
+  }
+  // Build a simple currentUser object from localStorage
+  currentUser = {
+    email: member.email,
+    user_metadata: { name: member.name },
+    created_at: member.joinedAt || new Date().toISOString(),
+    id: member.email // use email as unique ID
+  };
+  initProfile();
+})();
+
+function initProfile() {
+  renderSidebarUser();
+  loadProfileData();
+  loadFavourites();
+  loadReviews();
+  renderOverview();
+  renderBadges();
+  renderFavourites();
+  renderReviews();
+  renderRecommended();
+}
+
+// ─── SIDEBAR ───
+function renderSidebarUser() {
+  const meta = currentUser.user_metadata || {};
+  const name = meta.name || currentUser.email?.split('@')[0] || 'You';
+  const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+  const email = currentUser.email || '';
+
+  document.getElementById('sidebarName').textContent = name;
+  document.getElementById('sidebarEmail').textContent = email;
+  document.getElementById('sidebarInitials').textContent = initials;
+  document.getElementById('overviewGreeting').textContent = `Welcome back, ${name.split(' ')[0]} 👋`;
+
+  const created = new Date(currentUser.created_at);
+  const monthYear = created.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+  document.getElementById('memberSinceText').textContent = `Member since ${monthYear}`;
+  document.getElementById('ovMemberSince').textContent = monthYear;
+}
+
+// ─── PROFILE DATA (localStorage) ───
+function loadProfileData() {
+  const member = JSON.parse(localStorage.getItem('ee_member') || '{}');
+  const extra  = JSON.parse(localStorage.getItem('ee_profile') || '{}');
+
+  // Merge member join data + any edits saved later
+  profileData = {
+    country:    extra.country    || member.nationality || '',
+    interests:  extra.interests  || (member.lookingFor ? [member.lookingFor] : []),
+    avatar_url: extra.avatar_url || null,
+  };
+
+  if (profileData.avatar_url) {
+    const circle = document.getElementById('sidebarAvatar');
+    circle.innerHTML = `<img src="${profileData.avatar_url}" alt="Profile photo" style="width:100%;height:100%;object-fit:cover;">`;
+  }
+}
+
+// ─── FAVOURITES (localStorage only) ───
+function loadFavourites() {
+  try { favsData = JSON.parse(localStorage.getItem('ee_favs') || '{}'); }
+  catch { favsData = {}; }
+  updateFavCount();
+}
+
+function updateFavCount() {
+  const count = Object.keys(favsData).length;
+  document.getElementById('cnt-favs').textContent = count;
+  document.getElementById('ovFavCount').textContent = count === 1 ? '1 place' : `${count} places`;
+}
+
+// ─── REVIEWS (localStorage only) ───
+function loadReviews() {
+  try { reviewsData = JSON.parse(localStorage.getItem('ee_reviews') || '[]'); }
+  catch { reviewsData = []; }
+  document.getElementById('cnt-reviews').textContent = reviewsData.length;
+}
+
+// ─── RENDER OVERVIEW ───
+function renderOverview() {
+  const meta = currentUser.user_metadata || {};
+  const name = meta.name || currentUser.email?.split('@')[0] || '—';
+  document.getElementById('ovName').textContent = name;
+
+  const country = profileData.country || '';
+  document.getElementById('ovCountry').textContent = country || 'Not set';
+
+  // Interests / journey tags
+  const interests = profileData.interests || [];
+  const tagsEl = document.getElementById('journeyTags');
+  if (interests.length > 0) {
+    tagsEl.innerHTML = interests.map(i =>
+      `<span class="journey-tag">${i}</span>`
+    ).join('');
+  } else {
+    tagsEl.innerHTML = `<span style="font-size:13px;color:var(--gray-400);">No interests set — <span style="color:var(--blue);cursor:pointer;" onclick="openEdit()">add some</span></span>`;
+  }
+}
+
+// ─── RENDER BADGES ───
+function renderBadges() {
+  const created = new Date(currentUser.created_at);
+  // "Early Member" = registered within the first year of the site (before Jan 2025)
+  const earlyMemberCutoff = new Date('2025-01-01');
+  const isEarly = created < earlyMemberCutoff;
+
+  const rc = reviewsData.length;
+  const isContributor = rc >= 3;
+
+  let html = '';
+
+  if (isEarly) {
+    html += `
+      <div class="badge earned">
+        <div class="badge-ico">🏅</div>
+        <div class="badge-text">
+          <span class="badge-name">Early Member</span>
+          <span class="badge-desc">Joined in ExpatEase's first year</span>
+        </div>
+      </div>`;
+  }
+
+  if (isContributor) {
+    html += `
+      <div class="badge earned">
+        <div class="badge-ico">✍</div>
+        <div class="badge-text">
+          <span class="badge-name">Community Contributor</span>
+          <span class="badge-desc">3+ reviews written — thank you!</span>
+        </div>
+      </div>`;
+  } else if (rc === 0) {
+    html += `
+      <div class="badge locked">
+        <div class="badge-ico">🔒</div>
+        <div class="badge-text">
+          <span class="badge-name">Community Contributor</span>
+          <span class="badge-desc">Write your first review to start</span>
+        </div>
+      </div>`;
+  } else {
+    const need = 3 - rc;
+    html += `
+      <div class="badge locked">
+        <div class="badge-ico">🔒</div>
+        <div class="badge-text">
+          <span class="badge-name">Community Contributor</span>
+          <span class="badge-desc">${need} more review${need > 1 ? 's' : ''} to unlock</span>
+        </div>
+      </div>`;
+  }
+
+  document.getElementById('badgesArea').innerHTML = html;
+}
+
+// ─── RENDER FAVOURITES ───
+function renderFavourites() {
+  const grid = document.getElementById('favsGrid');
+  const empty = document.getElementById('favsEmpty');
+  const entries = Object.entries(favsData);
+
+  if (entries.length === 0) {
+    grid.style.display = 'none';
+    empty.style.display = 'block';
+    return;
+  }
+
+  grid.style.display = 'grid';
+  empty.style.display = 'none';
+
+  grid.innerHTML = entries.map(([id, biz]) => {
+    const stars = biz.rating ? renderStars(biz.rating) : '';
+    const ratingText = biz.rating
+      ? `<span class="fav-stars">${stars}</span> ${biz.rating.toFixed(1)}${biz.ratingCount ? ` · ${biz.ratingCount} reviews` : ''}`
+      : 'No ratings yet';
+    return `
+      <div class="fav-card" data-id="${id}">
+        <button class="fav-remove" onclick="removeFav('${id}')" title="Remove from favourites">✕</button>
+        ${biz.cat ? `<div class="fav-cat">${biz.cat}</div>` : ''}
+        <div class="fav-name">${biz.name || 'Business'}</div>
+        <div class="fav-rating">${ratingText}</div>
+      </div>`;
+  }).join('');
+}
+
+function removeFav(bizId) {
+  delete favsData[bizId];
+  localStorage.setItem('ee_favs', JSON.stringify(favsData));
+  updateFavCount();
+  renderFavourites();
+  renderRecommended();
+  showToast('Removed from favourites');
+}
+
+function renderStars(rating) {
+  const full = Math.round(rating);
+  return '★'.repeat(full) + '☆'.repeat(5 - full);
+}
+
+// ─── RENDER REVIEWS ───
+function renderReviews() {
+  const list = document.getElementById('reviewsList');
+  const empty = document.getElementById('reviewsEmpty');
+  const nudge = document.getElementById('reviewNudge');
+
+  if (reviewsData.length === 0) {
+    list.style.display = 'none';
+    empty.style.display = 'block';
+    nudge.style.display = 'none';
+    return;
+  }
+
+  list.style.display = 'flex';
+  empty.style.display = 'none';
+
+  list.innerHTML = reviewsData.map(rv => {
+    const date = new Date(rv.created_at).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+    const stars = renderStars(rv.rating);
+    return `
+      <div class="review-card">
+        <div class="review-biz">${rv.business_name || 'Business'}</div>
+        <div class="review-meta">
+          <span class="review-stars">${stars}</span>
+          <span class="review-date">${date}</span>
+        </div>
+        <div class="review-text">${rv.review_text}</div>
+      </div>`;
+  }).join('');
+
+  // Contributor nudge
+  const rc = reviewsData.length;
+  if (rc < 3) {
+    const need = 3 - rc;
+    nudge.style.display = 'flex';
+    nudge.innerHTML = `<span>🙌</span> Write ${need} more review${need > 1 ? 's' : ''} to earn the <strong style="margin:0 4px;">Community Contributor</strong> badge!`;
+  } else {
+    nudge.style.display = 'none';
+  }
+
+  renderBadges();
+}
+
+// ─── RENDER RECOMMENDED ───
+function renderRecommended() {
+  const grid = document.getElementById('recGrid');
+  const empty = document.getElementById('recEmpty');
+  const favEntries = Object.entries(favsData);
+
+  if (favEntries.length < 2) {
+    grid.style.display = 'none';
+    empty.style.display = 'block';
+    return;
+  }
+
+  // Simple logic: group saved categories, suggest more in same categories
+  // In real app this would query Supabase for unseen businesses in same categories
+  // For now we show placeholder cards with the correct "because you saved X" logic
+  const categories = {};
+  favEntries.forEach(([id, biz]) => {
+    if (biz.cat) {
+      if (!categories[biz.cat]) categories[biz.cat] = [];
+      categories[biz.cat].push(biz.name);
+    }
+  });
+
+  const recs = [];
+  Object.entries(categories).forEach(([cat, names]) => {
+    recs.push({ cat, reason: `Because you saved ${names[0]}` });
+  });
+
+  if (recs.length === 0) {
+    grid.style.display = 'none';
+    empty.style.display = 'block';
+    return;
+  }
+
+  grid.style.display = 'grid';
+  empty.style.display = 'none';
+
+  // Future: query businesses API for unsaved listings in same categories
+  grid.innerHTML = recs.map(r => `
+    <div class="rec-card">
+      <div class="rec-cat">${r.cat}</div>
+      <div class="rec-name">More ${r.cat} listings</div>
+      <div class="rec-why">${r.reason}</div>
+      <a href="index.html" class="btn-outline" style="text-decoration:none;display:inline-block;">Browse</a>
+    </div>`).join('');
+}
+
+// ─── SECTION NAV ───
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('s-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── EDIT PROFILE ───
+function openEdit() {
+  const meta = currentUser.user_metadata || {};
+  document.getElementById('editName').value = meta.name || '';
+  document.getElementById('editCountry').value = profileData.country || '';
+
+  // Interest picker
+  const interests = profileData.interests || [];
+  const picker = document.getElementById('interestPicker');
+  picker.innerHTML = INTEREST_OPTIONS.map(opt => {
+    const sel = interests.includes(opt);
+    return `<span class="journey-tag" style="cursor:pointer;${sel ? 'background:var(--blue);color:white;border-color:var(--blue);' : ''}" onclick="toggleInterest(this,'${opt}')">${opt}</span>`;
+  }).join('');
+
+  // Photo preview
+  if (profileData.avatar_url) {
+    document.getElementById('photoPreviewImg').src = profileData.avatar_url;
+    document.getElementById('photoPreviewWrap').style.display = 'block';
+    document.getElementById('photoDrop').style.display = 'none';
+  }
+
+  document.getElementById('editOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeEdit() {
+  document.getElementById('editOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  pendingPhotoFile = null;
+}
+
+document.getElementById('editOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeEdit();
+});
+
+function toggleInterest(el, opt) {
+  const active = el.style.background === 'var(--blue)' || el.style.background.includes('#1A4F8A');
+  if (active) {
+    el.style.cssText = 'cursor:pointer;';
+    el.className = 'journey-tag';
+  } else {
+    el.style.cssText = 'cursor:pointer;background:var(--blue);color:white;border-color:var(--blue);';
+    el.className = 'journey-tag';
+  }
+}
+
+function getSelectedInterests() {
+  return Array.from(document.querySelectorAll('#interestPicker .journey-tag'))
+    .filter(el => el.style.background.includes('#1A4F8A') || el.style.background === 'var(--blue)')
+    .map(el => el.textContent);
+}
+
+function saveProfile() {
+  const name = document.getElementById('editName').value.trim();
+  const country = document.getElementById('editCountry').value.trim();
+  const interests = getSelectedInterests();
+
+  // Save photo as base64 in localStorage if pending
+  let avatarUrl = profileData.avatar_url || null;
+  if (pendingPhotoFile) {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      avatarUrl = ev.target.result;
+      _finishSaveProfile(name, country, interests, avatarUrl);
+    };
+    reader.readAsDataURL(pendingPhotoFile);
+    return;
+  }
+  _finishSaveProfile(name, country, interests, avatarUrl);
+}
+
+function _finishSaveProfile(name, country, interests, avatarUrl) {
+  // Update currentUser name
+  if (name) currentUser.user_metadata = { ...currentUser.user_metadata, name };
+
+  // Save to localStorage
+  const member = JSON.parse(localStorage.getItem('ee_member') || '{}');
+  member.name = name || member.name;
+  localStorage.setItem('ee_member', JSON.stringify(member));
+  localStorage.setItem('ee_profile', JSON.stringify({ country, interests, avatar_url: avatarUrl }));
+
+  profileData = { ...profileData, country, interests, avatar_url: avatarUrl };
+
+  // Update sidebar avatar
+  if (avatarUrl) {
+    document.getElementById('sidebarAvatar').innerHTML = `<img src="${avatarUrl}" alt="Profile photo" style="width:100%;height:100%;object-fit:cover;">`;
+  } else if (name) {
+    const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2) || '?';
+    document.getElementById('sidebarAvatar').innerHTML = `<span id="sidebarInitials">${initials}</span>`;
+  }
+
+  renderSidebarUser();
+  renderOverview();
+  closeEdit();
+  showToast('Profile updated!', true);
+}
+
+// ─── PHOTO UPLOAD ───
+function handleAvatarSelect(e) {
+  const file = e.target.files[0];
+  if (file) previewPhoto(file);
+}
+function handleDragOver(e) {
+  e.preventDefault();
+  document.getElementById('photoDrop').classList.add('drag-over');
+}
+function handleDragLeave() {
+  document.getElementById('photoDrop').classList.remove('drag-over');
+}
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('photoDrop').classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) previewPhoto(file);
+}
+function previewPhoto(file) {
+  pendingPhotoFile = file;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    document.getElementById('photoPreviewImg').src = ev.target.result;
+    document.getElementById('photoPreviewWrap').style.display = 'block';
+    document.getElementById('photoDrop').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+function removePhoto() {
+  pendingPhotoFile = null;
+  profileData.avatar_url = null;
+  document.getElementById('photoPreviewWrap').style.display = 'none';
+  document.getElementById('photoDrop').style.display = 'block';
+  document.getElementById('avatarInput').value = '';
+}
+
+// ─── SUGGEST A BUSINESS ───
+function updateEmailPreview() {
+  const name = document.getElementById('bizName').value.trim();
+  const email = document.getElementById('bizEmail').value.trim();
+  const note = document.getElementById('bizNote').value.trim();
+
+  document.getElementById('prevName').textContent = name || 'there';
+  document.getElementById('prevNote').textContent = note ? note + ' ' : '';
+  document.getElementById('prevFrom').innerHTML =
+    `From: ExpatEase &lt;hello@expatease.sk&gt; · To: ${email || '—'}`;
+}
+
+async function submitSuggest() {
+  const bizName = document.getElementById('bizName').value.trim();
+  const bizEmail = document.getElementById('bizEmail').value.trim();
+  const bizNote = document.getElementById('bizNote').value.trim();
+
+  if (!bizName) { showToast('Please enter the business name'); return; }
+  if (!bizEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(bizEmail)) {
+    showToast('Please enter a valid email address'); return;
+  }
+
+  const btn = document.getElementById('sendBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  // Save suggestion to localStorage
+  const suggestions = JSON.parse(localStorage.getItem('ee_suggestions') || '[]');
+  suggestions.push({ business_name: bizName, business_email: bizEmail, personal_note: bizNote, created_at: new Date().toISOString() });
+  localStorage.setItem('ee_suggestions', JSON.stringify(suggestions));
+
+  btn.disabled = false;
+  btn.textContent = 'Send the email';
+
+  // Show success
+  document.getElementById('suggestForm').style.display = 'none';
+  document.getElementById('suggestSuccess').style.display = 'block';
+  document.getElementById('suggestSuccessMsg').textContent =
+    `We've noted ${bizName}. If they're a good fit, we'll reach out to get them listed.`;
+}
+
+function resetSuggest() {
+  document.getElementById('bizName').value = '';
+  document.getElementById('bizEmail').value = '';
+  document.getElementById('bizNote').value = '';
+  document.getElementById('suggestForm').style.display = 'block';
+  document.getElementById('suggestSuccess').style.display = 'none';
+  updateEmailPreview();
+}
+
+// ─── SIGN OUT ───
+function doSignOut() {
+  localStorage.removeItem('ee_member');
+  localStorage.removeItem('ee_profile');
+  window.location.href = 'index.html';
+}
+
+// ─── TOAST ───
+function showToast(msg, green = false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast' + (green ? ' green' : '');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>
