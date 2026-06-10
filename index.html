@@ -3400,52 +3400,34 @@
     spinner.style.display   = 'block';
 
     try {
-      // ── Airtable REST API ──────────────────────────────────────────────
-      // Replace AIRTABLE_API_KEY and AIRTABLE_BASE_ID once you have them
-      const AIRTABLE_API_KEY  = 'AIRTABLE_TOKEN_PLACEHOLDER';
-      const AIRTABLE_BASE_ID  = 'appB4cWwPnCEuHSgI';
-      const AIRTABLE_TABLE    = 'Submissions';
-
+      // ── Server-side proxy (Cloudflare Pages Function) ─────────────────
       const formData = smCollectFormData();
-      const res = await fetch(
-        `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE)}`,
-        {
-          method:  'POST',
-          headers: {
-            'Content-Type':  'application/json',
-            'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
-          },
-          body: JSON.stringify({
-            fields: {
-              'Business Name':  formData.name,
-              'Category':       formData.category,
-              'Contact Name':   formData.contact_name,
-              'Phone':          formData.phone,
-              'Email':          formData.email,
-              'Address':        formData.address,
-              'Website':        formData.website || '',
-              'Language':       formData.languages,
-              'Description':    formData.description,
-              'Submitted at':   formData.submitted_at,
-              // Optional category-specific fields — only include if non-empty
-              ...(formData.specialty      ? { 'Specialty':          formData.specialty }      : {}),
-              ...(formData.insurance      ? { 'Insurance Accepted': formData.insurance }      : {}),
-              ...(formData.extra_details  ? { 'Additional Details': formData.extra_details }  : {}),
-            }
-          }),
-        }
-      );
+      const payload = {
+        'Business Name':  formData.name,
+        'Category':       formData.category,
+        'Contact Name':   formData.contact_name,
+        'Phone':          formData.phone,
+        'Email':          formData.email,
+        'Address':        formData.address,
+        'Website':        formData.website || '',
+        'Language':       formData.languages,
+        'Description':    formData.description,
+        'Submitted at':   formData.submitted_at,
+        ...(formData.specialty      ? { 'Specialty':          formData.specialty }      : {}),
+        ...(formData.insurance      ? { 'Insurance Accepted': formData.insurance }      : {}),
+        ...(formData.extra_details  ? { 'Additional Details': formData.extra_details }  : {}),
+      };
+      const res = await fetch('/functions/airtable-submit?table=Submissions', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload),
+      });
       const json = await res.json();
       console.log('Airtable status:', res.status, 'response:', JSON.stringify(json, null, 2));
-      if (res.ok && json.id) {
+      if (res.ok && json.success) {
         smShowSuccess();
       } else {
-        const errObj = json.error;
-        const errMsg = typeof errObj === 'string'
-          ? errObj
-          : (errObj?.message || JSON.stringify(errObj) || 'Submission failed');
-        console.error('Airtable full error:', JSON.stringify(json, null, 2));
-        throw new Error(errMsg);
+        throw new Error(json.error || 'Submission failed. Please try again.');
       }
     } catch (err) {
       spinner.style.display = 'none';
@@ -3580,10 +3562,6 @@
 (function () {
   'use strict';
 
-  const AIRTABLE_API_KEY  = 'AIRTABLE_TOKEN_PLACEHOLDER';
-  const AIRTABLE_BASE_ID  = 'appB4cWwPnCEuHSgI';
-  const AIRTABLE_TABLE    = 'Members';
-
   const overlay   = document.getElementById('joinModalOverlay');
   const closeBtn  = document.getElementById('jmClose');
   const submitBtn = document.getElementById('jmSubmitBtn');
@@ -3660,19 +3638,14 @@
     submitBtn.disabled = true;
 
     try {
-      const res = await fetch(
-        `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE)}`,
-        {
-          method:  'POST',
-          headers: { 'Authorization': `Bearer ${AIRTABLE_API_KEY}`, 'Content-Type': 'application/json' },
-          body:    JSON.stringify({ fields }),
-        }
-      );
+      const res = await fetch('/functions/airtable-submit?table=Members', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(fields),
+      });
 
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err?.error?.message || `HTTP ${res.status}`);
-      }
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || `HTTP ${res.status}`);
 
       // Show success panel
       document.getElementById('jmpanel1').style.display = 'none';
