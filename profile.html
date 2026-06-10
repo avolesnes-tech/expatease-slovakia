@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231A4F8A'/%3E%3Ctext x='16' y='22' font-family='Arial Black,sans-serif' font-size='16' font-weight='900' fill='white' text-anchor='middle'%3EEB%3C/text%3E%3C/svg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Profile — ExpatEase Slovakia</title>
 <meta name="description" content="Manage your ExpatEase profile, favourites and reviews.">
@@ -710,9 +709,13 @@
 </div>
 
 
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// ─── LOCAL STORAGE AUTH ───
-// No Supabase — user identity comes from localStorage set by the Join modal on index.html
+// ─── CONFIG ───
+const SUPABASE_URL = 'https://etxqrlrqbjcbjmitnspv.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_i38f7jyt2HYOjUTNuOsklg_aMofdDvE';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const INTEREST_OPTIONS = [
   'Healthcare', 'Dentist', 'Legal & admin', 'English-friendly',
@@ -721,34 +724,34 @@ const INTEREST_OPTIONS = [
 ];
 
 let currentUser = null;
-let profileData = {}; // extra data stored in localStorage
+let profileData = {}; // extra data from profiles table
 let favsData = {};    // { bizId: { name, cat, rating, ratingCount, savedAt } }
 let reviewsData = []; // array of review objects
 let pendingPhotoFile = null;
 
 // ─── INIT ───
-(function () {
-  const member = JSON.parse(localStorage.getItem('ee_member') || 'null');
-  if (!member || !member.email) {
-    // Not registered — redirect to join modal
-    window.location.href = 'index.html#join';
+(async () => {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) {
+    // Not logged in — redirect home
+    window.location.href = 'index.html';
     return;
   }
-  // Build a simple currentUser object from localStorage
-  currentUser = {
-    email: member.email,
-    user_metadata: { name: member.name },
-    created_at: member.joinedAt || new Date().toISOString(),
-    id: member.email // use email as unique ID
-  };
-  initProfile();
+  currentUser = session.user;
+  await initProfile();
 })();
 
-function initProfile() {
+sb.auth.onAuthStateChange((_event, session) => {
+  if (!session) window.location.href = 'index.html';
+});
+
+async function initProfile() {
   renderSidebarUser();
-  loadProfileData();
-  loadFavourites();
-  loadReviews();
+  await Promise.all([
+    loadProfileData(),
+    loadFavourites(),
+    loadReviews(),
+  ]);
   renderOverview();
   renderBadges();
   renderFavourites();
@@ -774,28 +777,54 @@ function renderSidebarUser() {
   document.getElementById('ovMemberSince').textContent = monthYear;
 }
 
-// ─── PROFILE DATA (localStorage) ───
-function loadProfileData() {
-  const member = JSON.parse(localStorage.getItem('ee_member') || '{}');
-  const extra  = JSON.parse(localStorage.getItem('ee_profile') || '{}');
+// ─── PROFILE DATA (extra table) ───
+async function loadProfileData() {
+  const { data } = await sb.from('profiles')
+    .select('country, interests, avatar_url')
+    .eq('id', currentUser.id)
+    .maybeSingle();
 
-  // Merge member join data + any edits saved later
-  profileData = {
-    country:    extra.country    || member.nationality || '',
-    interests:  extra.interests  || (member.lookingFor ? [member.lookingFor] : []),
-    avatar_url: extra.avatar_url || null,
-  };
+  profileData = data || {};
 
+  // Show avatar if exists
   if (profileData.avatar_url) {
+    const img = document.createElement('img');
+    img.src = profileData.avatar_url;
+    img.alt = 'Profile photo';
     const circle = document.getElementById('sidebarAvatar');
-    circle.innerHTML = `<img src="${profileData.avatar_url}" alt="Profile photo" style="width:100%;height:100%;object-fit:cover;">`;
+    circle.innerHTML = '';
+    circle.appendChild(img);
   }
 }
 
-// ─── FAVOURITES (localStorage only) ───
-function loadFavourites() {
-  try { favsData = JSON.parse(localStorage.getItem('ee_favs') || '{}'); }
-  catch { favsData = {}; }
+// ─── FAVOURITES ───
+async function loadFavourites() {
+  // Start with localStorage
+  try {
+    const local = JSON.parse(localStorage.getItem('ee_favs') || '{}');
+    favsData = local;
+  } catch { favsData = {}; }
+
+  // Merge with Supabase (source of truth)
+  const { data } = await sb.from('favourites')
+    .select('business_id, business_name, business_category, rating, rating_count, saved_at')
+    .eq('user_id', currentUser.id)
+    .order('saved_at', { ascending: false });
+
+  if (data && data.length > 0) {
+    favsData = {};
+    data.forEach(row => {
+      favsData[row.business_id] = {
+        name: row.business_name,
+        cat: row.business_category || '',
+        rating: row.rating || null,
+        ratingCount: row.rating_count || null,
+        savedAt: row.saved_at
+      };
+    });
+    // Sync back to localStorage
+    localStorage.setItem('ee_favs', JSON.stringify(favsData));
+  }
   updateFavCount();
 }
 
@@ -805,10 +834,14 @@ function updateFavCount() {
   document.getElementById('ovFavCount').textContent = count === 1 ? '1 place' : `${count} places`;
 }
 
-// ─── REVIEWS (localStorage only) ───
-function loadReviews() {
-  try { reviewsData = JSON.parse(localStorage.getItem('ee_reviews') || '[]'); }
-  catch { reviewsData = []; }
+// ─── REVIEWS ───
+async function loadReviews() {
+  const { data } = await sb.from('reviews')
+    .select('id, business_id, business_name, rating, review_text, created_at')
+    .eq('user_id', currentUser.id)
+    .order('created_at', { ascending: false });
+
+  reviewsData = data || [];
   document.getElementById('cnt-reviews').textContent = reviewsData.length;
 }
 
@@ -919,9 +952,12 @@ function renderFavourites() {
   }).join('');
 }
 
-function removeFav(bizId) {
+async function removeFav(bizId) {
   delete favsData[bizId];
   localStorage.setItem('ee_favs', JSON.stringify(favsData));
+  await sb.from('favourites').delete()
+    .eq('user_id', currentUser.id)
+    .eq('business_id', bizId);
   updateFavCount();
   renderFavourites();
   renderRecommended();
@@ -1013,7 +1049,7 @@ function renderRecommended() {
   grid.style.display = 'grid';
   empty.style.display = 'none';
 
-  // Future: query businesses API for unsaved listings in same categories
+  // Real implementation: query sb.from('businesses').select().eq('category', cat).not('id', 'in', savedIds).limit(1)
   grid.innerHTML = recs.map(r => `
     <div class="rec-card">
       <div class="rec-cat">${r.cat}</div>
@@ -1084,41 +1120,47 @@ function getSelectedInterests() {
     .map(el => el.textContent);
 }
 
-function saveProfile() {
+async function saveProfile() {
   const name = document.getElementById('editName').value.trim();
   const country = document.getElementById('editCountry').value.trim();
   const interests = getSelectedInterests();
 
-  // Save photo as base64 in localStorage if pending
+  // Upload photo if pending
   let avatarUrl = profileData.avatar_url || null;
   if (pendingPhotoFile) {
-    const reader = new FileReader();
-    reader.onload = ev => {
-      avatarUrl = ev.target.result;
-      _finishSaveProfile(name, country, interests, avatarUrl);
-    };
-    reader.readAsDataURL(pendingPhotoFile);
-    return;
+    const ext = pendingPhotoFile.name.split('.').pop();
+    const path = `avatars/${currentUser.id}.${ext}`;
+    const { error: upErr } = await sb.storage
+      .from('avatars')
+      .upload(path, pendingPhotoFile, { upsert: true, contentType: pendingPhotoFile.type });
+    if (!upErr) {
+      const { data: urlData } = sb.storage.from('avatars').getPublicUrl(path);
+      avatarUrl = urlData.publicUrl;
+    }
   }
-  _finishSaveProfile(name, country, interests, avatarUrl);
-}
 
-function _finishSaveProfile(name, country, interests, avatarUrl) {
-  // Update currentUser name
-  if (name) currentUser.user_metadata = { ...currentUser.user_metadata, name };
+  // Update auth metadata
+  if (name) {
+    await sb.auth.updateUser({ data: { name } });
+    currentUser.user_metadata = { ...currentUser.user_metadata, name };
+  }
 
-  // Save to localStorage
-  const member = JSON.parse(localStorage.getItem('ee_member') || '{}');
-  member.name = name || member.name;
-  localStorage.setItem('ee_member', JSON.stringify(member));
-  localStorage.setItem('ee_profile', JSON.stringify({ country, interests, avatar_url: avatarUrl }));
+  // Upsert profiles table
+  await sb.from('profiles').upsert({
+    id: currentUser.id,
+    country,
+    interests,
+    avatar_url: avatarUrl,
+    updated_at: new Date().toISOString()
+  });
 
   profileData = { ...profileData, country, interests, avatar_url: avatarUrl };
 
   // Update sidebar avatar
   if (avatarUrl) {
-    document.getElementById('sidebarAvatar').innerHTML = `<img src="${avatarUrl}" alt="Profile photo" style="width:100%;height:100%;object-fit:cover;">`;
-  } else if (name) {
+    const circle = document.getElementById('sidebarAvatar');
+    circle.innerHTML = `<img src="${avatarUrl}" alt="Profile photo" style="width:100%;height:100%;object-fit:cover;">`;
+  } else {
     const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2) || '?';
     document.getElementById('sidebarAvatar').innerHTML = `<span id="sidebarInitials">${initials}</span>`;
   }
@@ -1191,19 +1233,28 @@ async function submitSuggest() {
   btn.disabled = true;
   btn.textContent = 'Sending…';
 
-  // Save suggestion to localStorage
-  const suggestions = JSON.parse(localStorage.getItem('ee_suggestions') || '[]');
-  suggestions.push({ business_name: bizName, business_email: bizEmail, personal_note: bizNote, created_at: new Date().toISOString() });
-  localStorage.setItem('ee_suggestions', JSON.stringify(suggestions));
+  // Save suggestion to Supabase (for your records + triggering edge function)
+  const { error } = await sb.from('business_suggestions').insert({
+    suggested_by: currentUser.id,
+    business_name: bizName,
+    business_email: bizEmail,
+    personal_note: bizNote || null,
+    created_at: new Date().toISOString()
+  });
 
   btn.disabled = false;
   btn.textContent = 'Send the email';
+
+  if (error) {
+    showToast('Something went wrong. Please try again.');
+    return;
+  }
 
   // Show success
   document.getElementById('suggestForm').style.display = 'none';
   document.getElementById('suggestSuccess').style.display = 'block';
   document.getElementById('suggestSuccessMsg').textContent =
-    `We've noted ${bizName}. If they're a good fit, we'll reach out to get them listed.`;
+    `We've reached out to ${bizName}. If they're interested, we'll be in touch to get them listed.`;
 }
 
 function resetSuggest() {
@@ -1216,9 +1267,8 @@ function resetSuggest() {
 }
 
 // ─── SIGN OUT ───
-function doSignOut() {
-  localStorage.removeItem('ee_member');
-  localStorage.removeItem('ee_profile');
+async function doSignOut() {
+  await sb.auth.signOut();
   window.location.href = 'index.html';
 }
 

@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231A4F8A'/%3E%3Ctext x='16' y='22' font-family='Arial Black,sans-serif' font-size='16' font-weight='900' fill='white' text-anchor='middle'%3EEB%3C/text%3E%3C/svg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ExpatBase Slovakia — Life in Slovakia, made simple.</title>
-<meta name="description" content="Find English-speaking doctors, lawyers, tradespeople and more in Bratislava — English-speaking professionals for expats.">
+<title>ExpatEase Slovakia — Life in Slovakia, made simple.</title>
+<meta name="description" content="Find English-speaking doctors, lawyers, tradespeople and more in Bratislava. Or decode any Slovak form in seconds.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
@@ -68,11 +67,29 @@
     text-decoration: none;
   }
   .nav-logo-mark {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: -0.5px;
     flex-shrink: 0;
-    display: flex; align-items: center;
-    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
   }
-  .nav-logo:hover .nav-logo-mark { transform: scale(1.08); }
+  .nav-logo-mark::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  .nav-logo:hover .nav-logo-mark::after { transform: translateX(100%); }
   .nav-logo-text {
     font-family: var(--font-head);
     font-weight: 700;
@@ -106,7 +123,7 @@
     background: var(--blue-light);
     color: var(--blue);
   }
-  .nav-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
   .lang-toggle {
     display: flex;
     background: rgba(255,255,255,0.15);
@@ -135,15 +152,6 @@
   }
   .nav.scrolled .lang-btn { color: var(--gray-400); }
   .nav.scrolled .lang-btn.active { color: var(--blue); }
-  /* Join community button — adapt to scrolled (white bg) state */
-  .nav.scrolled #joinCommunityBtn {
-    border-color: var(--blue);
-    color: var(--blue);
-    background: transparent;
-  }
-  .nav.scrolled #joinCommunityBtn:hover {
-    background: var(--blue-light);
-  }
   .nav-cta {
     font-family: var(--font-body);
     font-size: 13px;
@@ -171,6 +179,28 @@
   }
   .nav-cta:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(46,158,107,0.35); }
   .nav-cta:hover::after { left: 150%; }
+  /* Join button — ghost/outline variant, adapts on scroll */
+  #joinCommunityBtn {
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    color: white;
+  }
+  #joinCommunityBtn:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.8);
+    box-shadow: none;
+    transform: translateY(-1px);
+  }
+  .nav.scrolled #joinCommunityBtn {
+    background: transparent;
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+  .nav.scrolled #joinCommunityBtn:hover {
+    background: var(--blue-light);
+    box-shadow: none;
+    transform: translateY(-1px);
+  }
 
   /* ─── HERO ─── */
   .hero {
@@ -199,9 +229,9 @@
     opacity: 1;
     transform: scale(1);
   }
-  .hero-slide-1 { background-image: url('barber.webp'); }
-  .hero-slide-2 { background-image: url('doctor.webp'); }
-  .hero-slide-3 { background-image: url('plumber.webp'); }
+  .hero-slide-1 { background-image: url('barber.png'); }
+  .hero-slide-2 { background-image: url('doctor.png'); }
+  .hero-slide-3 { background-image: url('plumber.png'); }
 
   /* Ken Burns effect on active */
   .hero-slide.active { animation: kenburns 8s ease-out forwards; }
@@ -702,6 +732,279 @@
   }
   .listing-link:hover { gap: 10px; color: var(--green); }
 
+  /* ─── LISTING ACTIONS (fav + review) ─── */
+  .listing-actions {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 16px; padding-top: 16px;
+    border-top: 1px solid var(--gray-100);
+  }
+  .btn-fav {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 500;
+    padding: 7px 14px; border-radius: var(--radius-xl);
+    border: 1px solid var(--gray-100); background: white;
+    color: var(--gray-400); cursor: pointer; transition: var(--transition);
+  }
+  .btn-fav:hover { border-color: #fca5a5; color: #ef4444; background: #fff5f5; }
+  .btn-fav.saved { border-color: #fca5a5; color: #ef4444; background: #fff5f5; }
+  .btn-review {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 500;
+    padding: 7px 14px; border-radius: var(--radius-xl);
+    border: 1px solid var(--gray-100); background: white;
+    color: var(--gray-400); cursor: pointer; transition: var(--transition);
+  }
+  .btn-review:hover { border-color: var(--gold); color: #b45309; background: #fffbf0; }
+
+  /* ─── AUTH MODAL ─── */
+  @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap');
+
+  .auth-overlay {
+    display: none; position: fixed; inset: 0; z-index: 2000;
+    background: rgba(15,18,22,0.72); backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    align-items: center; justify-content: center; padding: 20px;
+  }
+  .auth-overlay.open { display: flex; }
+
+  /* Split modal shell */
+  .auth-modal {
+    background: white; border-radius: 20px; overflow: hidden;
+    width: 100%; max-width: 760px; position: relative;
+    display: grid; grid-template-columns: 1fr 1fr;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.22);
+    animation: modalIn 0.25s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.96) translateY(8px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* ── Ľavá strana ── */
+  .auth-left {
+    background: var(--blue-dark); padding: 40px 36px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    position: relative; overflow: hidden;
+  }
+  .auth-left::before {
+    content: ''; position: absolute; top: -60px; right: -60px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(46,158,107,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .auth-left::after {
+    content: ''; position: absolute; bottom: -40px; left: -40px;
+    width: 160px; height: 160px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,79,138,0.3) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .auth-logo { display: flex; align-items: center; gap: 10px; }
+  .auth-logo-mark {
+    width: 34px; height: 34px; border-radius: 8px; background: linear-gradient(135deg, var(--blue), var(--green));
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-family: 'DM Sans', var(--font-head), sans-serif;
+    font-weight: 500; font-size: 13px; letter-spacing: -0.5px; flex-shrink: 0;
+  }
+  .auth-logo-text {
+    font-family: 'DM Sans', var(--font-head), sans-serif;
+    font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.6);
+  }
+  .auth-left-body { margin: 32px 0 28px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .auth-tagline {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 28px; line-height: 1.18; color: #fff; margin: 0 0 20px; font-weight: 400;
+  }
+  .auth-tagline em { font-style: italic; color: var(--green); opacity: 0.9; }
+  .auth-benefits { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .auth-benefit { display: flex; align-items: flex-start; gap: 10px; }
+  .auth-benefit-dot {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: rgba(46,158,107,0.18); border: 1px solid rgba(46,158,107,0.38);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+  }
+  .auth-benefit span {
+    font-family: 'DM Sans', var(--font-body), sans-serif;
+    font-size: 13px; color: rgba(255,255,255,0.72); line-height: 1.45; font-weight: 300;
+  }
+  .auth-social-proof {
+    display: flex; align-items: center; gap: 10px;
+    padding-top: 24px; border-top: 0.5px solid rgba(255,255,255,0.1);
+  }
+  .auth-avatars { display: flex; }
+  .auth-avatar {
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 1.5px solid var(--blue-dark);
+    font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500; color: #fff;
+    display: flex; align-items: center; justify-content: center; margin-left: -7px;
+  }
+  .auth-avatar:first-child { margin-left: 0; }
+  .auth-proof-text { font-family: 'DM Sans', sans-serif; font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.3; }
+  .auth-proof-text strong { color: rgba(255,255,255,0.75); font-weight: 500; display: block; font-size: 13px; }
+
+  /* ── Pravá strana ── */
+  .auth-right {
+    padding: 36px 36px 32px; display: flex; flex-direction: column;
+    position: relative; background: #ffffff;
+  }
+  .auth-close {
+    position: absolute; top: 16px; right: 16px;
+    background: #f5f5f4; border: 0.5px solid #e0dfd9; border-radius: 50%;
+    width: 30px; height: 30px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: #888; transition: background 0.12s; line-height: 1;
+  }
+  .auth-close:hover { background: #eeede8; }
+  .auth-right-head { margin-bottom: 22px; }
+  .auth-title {
+    font-family: 'DM Sans', var(--font-head), sans-serif;
+    font-size: 18px; font-weight: 500; color: #1a1a18; margin-bottom: 4px; letter-spacing: -0.01em;
+  }
+  .auth-sub {
+    font-family: 'DM Sans', var(--font-body), sans-serif;
+    font-size: 13px; color: #888; margin: 0; font-weight: 300;
+  }
+  .oauth-btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%; padding: 11px 16px; border-radius: 10px;
+    border: 0.5px solid #d0cfc8; background: #fff;
+    font-family: 'DM Sans', var(--font-body), sans-serif; font-size: 13.5px; font-weight: 400;
+    color: #1a1a18; cursor: pointer; transition: background 0.12s, border-color 0.12s; margin-bottom: 10px;
+  }
+  .oauth-btn:last-of-type { margin-bottom: 0; }
+  .oauth-btn:hover { background: #f5f5f4; border-color: #b0afa9; }
+  .auth-divider { display: flex; align-items: center; gap: 12px; margin: 16px 0; }
+  .auth-divider-line { flex: 1; height: 0.5px; background: #e0dfd9; }
+  .auth-divider-text {
+    font-family: 'DM Sans', sans-serif; font-size: 11.5px; color: #aaa;
+    letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap;
+  }
+  .auth-field { margin-bottom: 10px; }
+  .auth-field label {
+    display: block; font-family: 'DM Sans', sans-serif;
+    font-size: 11.5px; font-weight: 500; color: #888;
+    letter-spacing: 0.03em; text-transform: uppercase; margin-bottom: 5px;
+  }
+  .auth-field input {
+    width: 100%; padding: 9px 12px; box-sizing: border-box;
+    border: 0.5px solid #d0cfc8; border-radius: 9px;
+    font-family: 'DM Sans', var(--font-body), sans-serif; font-size: 13.5px; color: #1a1a18;
+    background: #f9f8f6; outline: none; transition: border-color 0.12s, background 0.12s, box-shadow 0.12s;
+    font-weight: 300;
+  }
+  .auth-field input:focus { border-color: var(--blue); background: #fff; box-shadow: 0 0 0 3px rgba(26,79,138,0.12); }
+  .auth-field input.error { border-color: #ef4444; }
+  .auth-error-msg { font-size: 11px; color: #ef4444; margin-top: 4px; display: none; }
+  .auth-pw-wrap { position: relative; }
+  .auth-pw-toggle {
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer;
+    font-size: 12px; color: #aaa; font-family: 'DM Sans', var(--font-body), sans-serif;
+  }
+  .auth-newsletter {
+    display: flex; align-items: flex-start; gap: 9px;
+    padding: 10px 12px; border-radius: 9px;
+    background: #f9f8f6; border: 0.5px solid #e0dfd9; margin: 8px 0 14px; cursor: pointer;
+  }
+  .auth-newsletter input[type=checkbox] { margin-top: 2px; accent-color: var(--green); flex-shrink: 0; }
+  .auth-newsletter label {
+    font-family: 'DM Sans', sans-serif; font-size: 12px;
+    color: #666; line-height: 1.4; font-weight: 300; cursor: pointer;
+  }
+  .auth-newsletter label strong { color: #1a1a18; font-weight: 500; }
+  .auth-submit {
+    width: 100%; padding: 11px; background: var(--blue); color: white;
+    border: none; border-radius: 10px;
+    font-family: 'DM Sans', var(--font-body), sans-serif; font-size: 14px; font-weight: 500;
+    cursor: pointer; transition: background 0.15s, transform 0.1s; margin-bottom: 4px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .auth-submit:hover { background: var(--green); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(46,158,107,0.3); }
+  .auth-submit:active { transform: translateY(0); }
+  .auth-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .auth-terms {
+    font-family: 'DM Sans', sans-serif; font-size: 11.5px; color: #aaa;
+    text-align: center; margin-top: 10px; line-height: 1.5; font-weight: 300;
+  }
+  .auth-terms a { color: #888; text-decoration: underline; text-underline-offset: 2px; }
+  .auth-terms a:hover { color: var(--blue); }
+  .auth-switch {
+    text-align: center; font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px; color: #888; margin-top: 10px; font-weight: 300;
+  }
+  .auth-switch a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; font-weight: 500; cursor: pointer; }
+  .auth-forgot { text-align: right; margin: -4px 0 10px; }
+  .auth-forgot a { font-size: 12px; color: var(--blue); text-decoration: none; }
+
+  /* Login view — bez ľavého panela, full width */
+  #authViewLogin .auth-right { padding: 36px 36px 32px; }
+
+  .auth-toast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--gray-900); color: white;
+    padding: 12px 20px; border-radius: var(--radius-xl);
+    font-size: 14px; font-weight: 500;
+    z-index: 9999; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1); white-space: nowrap;
+  }
+  .auth-toast.show { transform: translateX(-50%) translateY(0); }
+  .auth-toast.green { background: var(--green); }
+
+  /* Responzívnosť */
+  @media (max-width: 620px) {
+    .auth-modal { grid-template-columns: 1fr; border-radius: 16px; max-height: 95dvh; overflow-y: auto; }
+    .auth-left { padding: 28px 24px; }
+    .auth-tagline { font-size: 22px; }
+    .auth-right { padding: 28px 24px 24px; }
+  }
+  .auth-user-btn {
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--font-body); font-size: 13px; font-weight: 500;
+    padding: 7px 14px; border-radius: var(--radius-xl);
+    border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.12);
+    color: white; cursor: pointer; transition: var(--transition);
+  }
+  .auth-user-btn:hover { background: rgba(255,255,255,0.22); }
+  .nav.scrolled .auth-user-btn { border-color: var(--gray-100); background: var(--gray-50); color: var(--gray-900); }
+  .auth-avatar {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 11px; font-weight: 700; flex-shrink: 0;
+  }
+
+  /* ─── REVIEW MODAL ─── */
+  .review-overlay {
+    display: none; position: fixed; inset: 0; z-index: 2100;
+    background: rgba(15,51,96,0.55); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center; padding: 20px;
+  }
+  .review-overlay.open { display: flex; }
+  .review-modal {
+    background: white; border-radius: var(--radius-lg);
+    padding: 32px; width: 100%; max-width: 440px;
+    position: relative; animation: modalIn 0.25s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .review-title { font-family: var(--font-head); font-size: 20px; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
+  .review-biz-name { font-size: 14px; color: var(--gray-400); margin-bottom: 20px; }
+  .star-picker { display: flex; gap: 6px; margin-bottom: 16px; }
+  .star-pick { font-size: 28px; cursor: pointer; color: var(--gray-100); transition: transform 0.1s, color 0.1s; }
+  .star-pick.active { color: var(--gold); }
+  .star-pick:hover { transform: scale(1.2); }
+  .review-textarea {
+    width: 100%; padding: 12px;
+    border: 1px solid var(--gray-100); border-radius: var(--radius-sm);
+    font-family: var(--font-body); font-size: 14px; color: var(--gray-900);
+    resize: vertical; min-height: 100px; outline: none; transition: var(--transition);
+  }
+  .review-textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,79,138,0.1); }
+  .review-char { font-size: 11px; color: var(--gray-400); text-align: right; margin-top: 4px; margin-bottom: 16px; }
+  .review-submit {
+    width: 100%; padding: 12px; background: var(--blue); color: white; border: none;
+    border-radius: var(--radius-md); font-family: var(--font-body); font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: var(--transition);
+  }
+  .review-submit:hover { background: var(--blue-dark); }
+  .review-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
   /* ─── BLOG SECTION ─── */
   .blog-section { background: var(--gray-50); }
   .blog-grid {
@@ -910,8 +1213,14 @@
     margin-bottom: 16px;
   }
   .footer-logo-mark {
-    flex-shrink: 0;
-    display: flex; align-items: center;
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 16px;
+    color: white;
   }
   .footer-logo-text {
     font-family: var(--font-head);
@@ -1036,6 +1345,16 @@
     .categories-grid { grid-template-columns: repeat(3, 1fr); }
     .blog-grid { grid-template-columns: 1fr 1fr; }
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .nav { padding: 0 24px; }
+    .nav-links { gap: 2px; }
+    .nav-links a { font-size: 13px; padding: 7px 10px; }
+    .nav-cta { font-size: 12px; padding: 8px 14px; }
+    .nav-right { gap: 8px; }
+  }
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .nav { padding: 0 20px; }
+    .nav-logo-text { font-size: 16px; }
   }
   @media (max-width: 768px) {
     .nav { padding: 0 16px; }
@@ -1050,7 +1369,8 @@
     .how-grid { grid-template-columns: 1fr; }
     .categories-grid { grid-template-columns: repeat(2, 1fr); }
     .listings-grid { grid-template-columns: 1fr; }
-.blog-grid { grid-template-columns: 1fr; }
+
+    .blog-grid { grid-template-columns: 1fr; }
     .testimonials-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; gap: 32px; }
     .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
@@ -1423,38 +1743,6 @@
     transform: rotate(45deg);
   }
 
-  /* Language pills (Submit form) */
-  .sm-lang-pills {
-    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px;
-  }
-  .sm-lang-pill {
-    font-family: var(--font-body); font-size: 13px; font-weight: 500;
-    padding: 7px 14px; border-radius: var(--radius-xl);
-    border: 1.5px solid var(--gray-100); background: white;
-    color: var(--gray-700); cursor: pointer; transition: var(--transition);
-    display: inline-flex; align-items: center; gap: 5px;
-    white-space: nowrap;
-  }
-  .sm-lang-pill:hover { border-color: var(--blue); color: var(--blue); }
-  .sm-lang-pill.selected {
-    border-color: var(--green); background: var(--green-light);
-    color: var(--green-dark); font-weight: 600;
-  }
-  /* Category-specific check pills (blue accent) */
-  .sm-check-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
-  .sm-check-pill {
-    font-size: 13px; font-weight: 500; padding: 7px 14px;
-    border-radius: var(--radius-xl); border: 1.5px solid var(--gray-100);
-    background: white; color: var(--gray-700); cursor: pointer;
-    transition: var(--transition);
-  }
-  .sm-check-pill:hover { border-color: var(--blue); color: var(--blue); }
-  .sm-check-pill.selected {
-    border-color: var(--blue); background: var(--blue-light);
-    color: var(--blue); font-weight: 600;
-  }
-  .sm-cat-block { animation: fadeUp 0.2s ease both; }
-
   /* Upload zones */
   .sm-upload-zone {
     border: 2px dashed var(--gray-100); border-radius: var(--radius-md);
@@ -1678,162 +1966,19 @@
     .sm-submit-btn { max-width: 100%; }
     .sm-back-btn { text-align: center; }
   }
-
-  /* ─── MOBILE NAV TOGGLE ─── */
-  .nav-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    width: 38px;
-    height: 38px;
-    background: rgba(255,255,255,0.15);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    padding: 9px 8px;
-    transition: background 0.25s;
-    flex-shrink: 0;
-    margin-left: auto;
-  }
-  .nav-toggle span {
-    display: block;
-    width: 100%;
-    height: 2px;
-    background: white;
-    border-radius: 2px;
-    transition: transform 0.28s ease, opacity 0.2s ease;
-    transform-origin: center;
-  }
-  .nav.scrolled .nav-toggle { background: var(--blue-light); }
-  .nav.scrolled .nav-toggle span { background: var(--blue); }
-  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-  /* ─── MOBILE MENU DRAWER ─── */
-  .mobile-menu {
-    display: none;
-    position: fixed;
-    top: 64px;
-    left: 0; right: 0;
-    background: white;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.14);
-    padding: 8px 20px 28px;
-    z-index: 98;
-    opacity: 0;
-    transform: translateY(-6px);
-    pointer-events: none;
-    transition: opacity 0.22s ease, transform 0.22s ease;
-  }
-  .mobile-menu.open {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: all;
-  }
-  .mobile-menu-links {
-    list-style: none;
-    margin: 0 0 16px;
-    padding: 0;
-  }
-  .mobile-menu-links li a {
-    display: block;
-    padding: 14px 4px;
-    font-family: var(--font-body);
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--gray-700);
-    text-decoration: none;
-    border-bottom: 1px solid var(--gray-50);
-    transition: color 0.2s;
-  }
-  .mobile-menu-links li:last-child a { border-bottom: none; }
-  .mobile-menu-links li a:hover { color: var(--blue); }
-  .mobile-menu-ctas {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-top: 8px;
-  }
-  .mobile-menu-ctas .nav-cta {
-    width: 100%;
-    text-align: center;
-    font-size: 14px;
-    padding: 13px 20px;
-    border-radius: var(--radius-xl);
-  }
-  .mobile-menu-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 97;
-    background: transparent;
-  }
-  .mobile-menu-overlay.open { display: block; }
-
-  @media (max-width: 768px) {
-    .nav-toggle { display: flex; }
-    .nav-right   { display: none; }
-    .mobile-menu { display: block; }
-  }
 </style>
 </head>
 <body>
 
-<!-- SVG LOGO DEFS — reused across navbar and footer -->
-<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
-  <defs>
-    <linearGradient id="ebGrad" x1="0%" y1="0%" x2="90%" y2="110%">
-      <stop offset="0%"   stop-color="#1A4F8A"/>
-      <stop offset="100%" stop-color="#2E9E6B"/>
-    </linearGradient>
-    <linearGradient id="ebGradLight" x1="0%" y1="0%" x2="90%" y2="110%">
-      <stop offset="0%"   stop-color="#2E6FC4"/>
-      <stop offset="100%" stop-color="#35B87C"/>
-    </linearGradient>
-    <radialGradient id="ebHighlight" cx="38%" cy="28%" r="62%">
-      <stop offset="0%"   stop-color="white" stop-opacity=".22"/>
-      <stop offset="100%" stop-color="white" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="ebShadow" x="-25%" y="-10%" width="150%" height="160%">
-      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1A4F8A" flood-opacity=".30"/>
-    </filter>
-    <filter id="ebGlow" x="-30%" y="-15%" width="160%" height="170%">
-      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#2E9E6B" flood-opacity=".45"/>
-    </filter>
-    <!-- Standard (gradient) pin — used on light backgrounds -->
-    <symbol id="eb-icon" viewBox="0 0 120 140">
-      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
-        fill="url(#ebGrad)" filter="url(#ebShadow)"/>
-      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
-        fill="url(#ebHighlight)"/>
-      <text x="60" y="55" text-anchor="middle" dominant-baseline="middle"
-        font-family="'Urbanist','Segoe UI',system-ui,sans-serif"
-        font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
-    </symbol>
-    <!-- Light (brighter gradient) pin — used on dark/navy backgrounds -->
-    <symbol id="eb-icon-light" viewBox="0 0 120 140">
-      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
-        fill="url(#ebGradLight)" filter="url(#ebGlow)"/>
-      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
-        fill="url(#ebHighlight)"/>
-      <text x="60" y="55" text-anchor="middle" dominant-baseline="middle"
-        font-family="'Urbanist','Segoe UI',system-ui,sans-serif"
-        font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
-    </symbol>
-  </defs>
-</svg>
-
 <!-- NAVBAR -->
 <nav class="nav" id="navbar">
   <a href="#" class="nav-logo">
-    <div class="nav-logo-mark">
-      <svg width="28" height="33" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon"/></svg>
-    </div>
-    <span class="nav-logo-text">ExpatBase</span>
+    <div class="nav-logo-mark">EE</div>
+    <span class="nav-logo-text">ExpatEase</span>
   </a>
   <ul class="nav-links">
     <li><a href="#categories">Find Experts</a></li>
+
     <li><a href="#blog">Blog</a></li>
     <li><a href="#about">About</a></li>
   </ul>
@@ -1845,31 +1990,13 @@
     <button class="nav-cta" id="openSubmitModalBtn">
       + Submit a Business
     </button>
-    <button class="nav-cta" style="background:transparent; border:1px solid rgba(255,255,255,0.4);" id="joinCommunityBtn">
-      Join community
-    </button>
+    <div id="authNavArea">
+      <button class="nav-cta" id="joinCommunityBtn" style="background: transparent; border: 1px solid rgba(255,255,255,0.4); margin-left: 4px;">
+        Join the community
+      </button>
+    </div>
   </div>
-  <!-- Hamburger (mobile only) -->
-  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
 </nav>
-
-<!-- Mobile menu drawer -->
-<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-<div class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
-  <ul class="mobile-menu-links">
-    <li><a href="#categories">Find Experts</a></li>
-    <li><a href="#blog">Blog</a></li>
-    <li><a href="#about">About</a></li>
-  </ul>
-  <div class="mobile-menu-ctas">
-    <button class="nav-cta" id="mobileSubmitBtn">+ Submit a Business</button>
-    <button class="nav-cta" id="mobileJoinBtn" style="background:transparent; border:1.5px solid var(--blue); color:var(--blue);">Join community</button>
-  </div>
-</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -1888,6 +2015,7 @@
     <button class="carousel-dot" data-slide="2"></button>
   </div>
 
+  <div class="carousel-label" id="carousel-label">Barbers & Hairdressers</div>
 
   <div class="hero-content">
     <div class="hero-eyebrow">
@@ -1895,11 +2023,36 @@
       <span class="hero-eyebrow-text">Built for Bratislava's expat community</span>
     </div>
     <h1 class="hero-h1">Life in Slovakia,<br><em>made simple.</em></h1>
-    <p class="hero-sub">Find English-speaking doctors, lawyers, tradespeople and more — all speak English, all based in Bratislava.</p>
+    <p class="hero-sub">Find English-speaking doctors, lawyers, tradespeople and more in Bratislava.</p>
     <div class="hero-ctas">
       <a href="#categories" class="btn-primary">Find an Expert →</a>
+      <a href="#" class="btn-outline-white" onclick="openAuth('register'); return false;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Join the community
+      </a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <span class="counter" data-target="500" data-suffix="+ verified listings">500+ verified listings</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <span class="counter" data-target="12" data-suffix=" expert categories">12 expert categories</span>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <span class="counter" data-target="8000" data-prefix="Trusted by " data-suffix="+ expats">Trusted by 8,000+ expats</span>
+      </div>
     </div>
   </div>
+
+  <button class="hero-scroll-indicator" id="heroScrollBtn" aria-label="Scroll down">
+    <span>Scroll</span>
+    <div class="hero-scroll-chevron">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </button>
 </section>
 
 <!-- HOW IT WORKS -->
@@ -1907,7 +2060,7 @@
   <div class="section-inner">
     <div class="section-header reveal">
       <div class="section-label">Simple by design</div>
-      <h2 class="section-title">How ExpatBase works</h2>
+      <h2 class="section-title">How ExpatEase works</h2>
       <p class="section-sub">Three steps to finding exactly the help you need, in a language you understand.</p>
     </div>
     <div class="how-grid">
@@ -1921,7 +2074,7 @@
         <div class="how-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
         <div class="how-number">02</div>
         <div class="how-title">Read Real Reviews</div>
-        <p class="how-desc">Profiles reviewed by our team. Contact details, languages spoken, and service area — all in one place.</p>
+        <p class="how-desc">Reviews from real expats in Bratislava. Honest, community-verified experiences you can trust.</p>
       </div>
       <div class="how-card reveal" style="transition-delay: 200ms">
         <div class="how-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
@@ -1939,7 +2092,7 @@
     <div class="section-header reveal">
       <div class="section-label">Expert directory</div>
       <h2 class="section-title">Find who you need</h2>
-      <p class="section-sub">English-speaking professionals in Bratislava, across every category you need.</p>
+      <p class="section-sub">Verified English-speaking professionals in Bratislava, across every category you need.</p>
     </div>
     <div class="categories-grid">
       <a href="doctors.html" class="cat-card reveal" style="transition-delay: 0ms">
@@ -1950,7 +2103,7 @@
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="lawyers.html" class="cat-card reveal" style="transition-delay: 60ms">
+      <a href="#" class="cat-card reveal" style="transition-delay: 60ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
           <div class="cat-name">Lawyers & Legal</div>
@@ -1958,7 +2111,7 @@
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="banks.html" class="cat-card reveal" style="transition-delay: 120ms">
+      <a href="#" class="cat-card reveal" style="transition-delay: 120ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
           <div class="cat-name">Banks & Finance</div>
@@ -1966,7 +2119,7 @@
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="barbers.html" class="cat-card reveal" style="transition-delay: 180ms">
+      <a href="#" class="cat-card reveal" style="transition-delay: 180ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="6" y1="9" x2="6" y2="15"/><path d="M20 4s-6 3-6 8 6 8 6 8"/></svg></span>
           <div class="cat-name">Hair & Beauty</div>
@@ -1974,7 +2127,7 @@
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="plumbers.html" class="cat-card reveal" style="transition-delay: 240ms">
+      <a href="#" class="cat-card reveal" style="transition-delay: 240ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
           <div class="cat-name">Handymen</div>
@@ -1982,23 +2135,23 @@
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="builders.html" class="cat-card reveal" style="transition-delay: 300ms">
+      <a href="#" class="cat-card reveal" style="transition-delay: 300ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="6" height="4"/><rect x="16" y="3" width="6" height="4"/><rect x="9" y="3" width="6" height="4"/><path d="M2 7v14h20V7"/><path d="M9 21v-8h6v8"/></svg></span>
           <div class="cat-name">Builders & Construction</div>
-          <div class="cat-count">23 listings</div>
+          <div class="cat-count">16 listings</div>
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="vets.html" class="cat-card reveal" style="transition-delay: 360ms">
+      <a href="#" class="cat-card reveal" style="transition-delay: 360ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"/></svg></span>
           <div class="cat-name">Vets</div>
-          <div class="cat-count">19 listings</div>
+          <div class="cat-count">9 listings</div>
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="real-estate.html" class="cat-card reveal" style="transition-delay: 420ms">
+      <a href="#" class="cat-card reveal" style="transition-delay: 420ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
           <div class="cat-name">Real Estate</div>
@@ -2006,27 +2159,27 @@
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="schools.html" class="cat-card reveal" style="transition-delay: 480ms">
+      <a href="#" class="cat-card reveal" style="transition-delay: 480ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
           <div class="cat-name">Schools & Learning</div>
+          <div class="cat-count">23 listings</div>
+        </div>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a href="#" class="cat-card reveal" style="transition-delay: 540ms">
+        <div class="cat-card-inner">
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
+          <div class="cat-name">Moving & Relocation</div>
           <div class="cat-count">12 listings</div>
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="moving.html" class="cat-card reveal" style="transition-delay: 540ms">
-        <div class="cat-card-inner">
-          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>
-          <div class="cat-name">Moving & Relocation</div>
-          <div class="cat-count">16 listings</div>
-        </div>
-        <span class="cat-arrow">→</span>
-      </a>
-      <a href="sports.html" class="cat-card reveal" style="transition-delay: 600ms">
+      <a href="#" class="cat-card reveal" style="transition-delay: 600ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span>
           <div class="cat-name">Sports & Leisure</div>
-          <div class="cat-count">34 listings</div>
+          <div class="cat-count">17 listings</div>
         </div>
         <span class="cat-arrow">→</span>
       </a>
@@ -2034,14 +2187,15 @@
   </div>
 </section>
 
+
 <!-- FEATURED LISTINGS -->
 <section class="section" id="listings">
   <div class="section-inner">
     <div class="section-header reveal" style="display:flex; align-items:flex-end; justify-content:space-between">
       <div>
-        <div class="section-label">Our community</div>
+        <div class="section-label">Verified by our team</div>
         <h2 class="section-title">Recently added experts</h2>
-        <p class="section-sub">English-speaking professionals in Bratislava. New listings added regularly.</p>
+        <p class="section-sub">Reviewed by the expat community. Freshly verified.</p>
       </div>
       <a href="#" style="font-size:14px; font-weight:600; color:var(--blue); text-decoration:none; white-space:nowrap; padding-bottom:8px; flex-shrink:0">View all listings →</a>
     </div>
@@ -2065,7 +2219,15 @@
           <div class="listing-meta-item"><span class="listing-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span> Staré Mesto, Bratislava I</div>
           <div class="listing-meta-item"><span class="listing-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span> +421 912 345 678</div>
         </div>
-        <a href="#" class="listing-link">View profile →</a>
+        <div class="listing-actions">
+          <button class="btn-fav" data-id="listing-1" onclick="toggleFav(this, 'listing-1', 'Dr. Martina Kováčová')">
+            <span>♡</span> Save
+          </button>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <a href="#" class="listing-link">View profile →</a>
+            <button class="btn-review" onclick="openReview('listing-1', 'Dr. Martina Kováčová')">★ Review</button>
+          </div>
+        </div>
       </div>
       <div class="listing-card reveal" style="transition-delay: 100ms">
         <div class="listing-top">
@@ -2087,7 +2249,15 @@
           <div class="listing-meta-item"><span class="listing-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span> Ružinov, Bratislava II</div>
           <div class="listing-meta-item"><span class="listing-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span> thecraftba.sk</div>
         </div>
-        <a href="#" class="listing-link">View profile →</a>
+        <div class="listing-actions">
+          <button class="btn-fav" data-id="listing-2" onclick="toggleFav(this, 'listing-2', 'The Craft Barbershop')">
+            <span>♡</span> Save
+          </button>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <a href="#" class="listing-link">View profile →</a>
+            <button class="btn-review" onclick="openReview('listing-2', 'The Craft Barbershop')">★ Review</button>
+          </div>
+        </div>
       </div>
       <div class="listing-card reveal" style="transition-delay: 200ms">
         <div class="listing-top">
@@ -2108,7 +2278,15 @@
           <div class="listing-meta-item"><span class="listing-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span> Petržalka, Bratislava V</div>
           <div class="listing-meta-item"><span class="listing-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span> +421 903 876 543</div>
         </div>
-        <a href="#" class="listing-link">View profile →</a>
+        <div class="listing-actions">
+          <button class="btn-fav" data-id="listing-3" onclick="toggleFav(this, 'listing-3', 'ElektroPro Bratislava')">
+            <span>♡</span> Save
+          </button>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <a href="#" class="listing-link">View profile →</a>
+            <button class="btn-review" onclick="openReview('listing-3', 'ElektroPro Bratislava')">★ Review</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -2161,7 +2339,7 @@
           <input class="nl-input" type="email" placeholder="your@email.com">
           <button class="nl-btn">Subscribe for free</button>
         </div>
-        <div class="nl-privacy">No spam. Unsubscribe anytime. By subscribing you agree to our <a href="privacy-policy.html" style="color:rgba(255,255,255,0.7); text-decoration:underline;">Privacy Policy</a>.</div>
+        <div class="nl-privacy">No spam. Unsubscribe anytime.</div>
       </div>
     </div>
   </div>
@@ -2175,15 +2353,42 @@
       <h2 class="section-title">Expats who found their people</h2>
     </div>
     <div class="testimonials-grid">
-      <div class="testimonial-card reveal" style="max-width:480px; margin:0 auto; text-align:center;">
+      <div class="testimonial-card reveal">
         <div class="testimonial-stars">
           <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
         </div>
-        <p class="testimonial-text">We're just getting started — be one of the first to share your ExpatBase experience.</p>
-        <div class="testimonial-author" style="justify-content:center;">
+        <p class="testimonial-text">Finally found a GP who speaks English fluently. The review system really helps — I knew exactly what to expect before my first appointment.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JM</div>
           <div>
-            <div class="testimonial-name" style="font-size:14px; color:var(--gray-400);">Your review could be here</div>
-            <div class="testimonial-meta">Join the community →</div>
+            <div class="testimonial-name">James Miller 🇬🇧</div>
+            <div class="testimonial-meta">In Bratislava since 2023</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal" style="transition-delay: 100ms">
+        <div class="testimonial-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testimonial-text">The form translator saved me hours of confusion at the Foreign Police office. Uploaded my document and understood it in seconds. Brilliant tool.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SP</div>
+          <div>
+            <div class="testimonial-name">Sofia Petrova 🇺🇦</div>
+            <div class="testimonial-meta">In Bratislava since 2022</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal" style="transition-delay: 200ms">
+        <div class="testimonial-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="testimonial-text">I found my electrician through ExpatEase when I had an emergency at home. He spoke perfect English and arrived within two hours. Five stars.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AK</div>
+          <div>
+            <div class="testimonial-name">Amir Khalil 🇩🇪</div>
+            <div class="testimonial-meta">In Bratislava since 2024</div>
           </div>
         </div>
       </div>
@@ -2197,10 +2402,8 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-logo">
-          <div class="footer-logo-mark">
-            <svg width="32" height="37" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light"/></svg>
-          </div>
-          <div class="footer-logo-text">ExpatBase Slovakia</div>
+          <div class="footer-logo-mark">EE</div>
+          <div class="footer-logo-text">ExpatEase Slovakia</div>
         </div>
         <p class="footer-tagline">Life in Slovakia, made simple. The #1 resource for English-speaking expats in Bratislava.</p>
         <div class="footer-socials">
@@ -2222,36 +2425,43 @@
         <div class="footer-col-title">Find Experts</div>
         <ul class="footer-links">
           <li><a href="doctors.html">Doctors & Specialists</a></li>
-          <li><a href="lawyers.html">Lawyers & Legal</a></li>
-          <li><a href="banks.html">Banks & Finance</a></li>
-          <li><a href="barbers.html">Beauty & Wellness</a></li>
-          <li><a href="plumbers.html">Handymen</a></li>
-          <li><a href="builders.html">Builders &amp; Construction</a></li>
-          <li><a href="vets.html">Vets &amp; Pet Care</a></li>
-          <li><a href="schools.html">Schools &amp; Education</a></li>
-          <li><a href="moving.html">Moving &amp; Relocation</a></li>
-          <li><a href="sports.html">Sports &amp; Fitness</a></li>
-          <li><a href="#categories">All categories →</a></li>
+          <li><a href="#">Lawyers & Legal</a></li>
+          <li><a href="#">Banks & Finance</a></li>
+          <li><a href="#">Barbers & Hairdressers</a></li>
+          <li><a href="#">Electricians</a></li>
+          <li><a href="#">Plumbers</a></li>
+          <li><a href="#">All categories →</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Bureaucracy</div>
+        <ul class="footer-links">
+
+          <li><a href="#">Residence Permit Guide</a></li>
+          <li><a href="#">Health Insurance</a></li>
+          <li><a href="#">Bank Account Setup</a></li>
+          <li><a href="#">Trade License (Živnosť)</a></li>
+          <li><a href="#">All guides →</a></li>
         </ul>
       </div>
       <div>
         <div class="footer-col-title">Resources</div>
         <ul class="footer-links">
-          <li><a href="#blog">Blog</a></li>
-          <li><a href="#blog">Newsletter</a></li>
-          <li><a href="#" onclick="document.getElementById('submitModal')?.classList.add('open');return false;">Submit a Business</a></li>
-          <li><a href="#about">About ExpatBase</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Newsletter</a></li>
+          <li><a href="#">Submit a Business</a></li>
+          <li><a href="#">About ExpatEase</a></li>
           <li><a href="#">Contact Us</a></li>
           <li><a href="#"><span class="__cf_email__" data-cfemail="046c6168686b44617c746570616577612a776f">[email&#160;protected]</span></a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 ExpatBase Slovakia. All rights reserved.</div>
+      <div class="footer-copy">© 2026 ExpatEase Slovakia. All rights reserved.</div>
       <div class="footer-legal">
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Use</a>
-        <a href="cookie-policy.html">Cookie Policy</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Policy</a>
       </div>
     </div>
   </div>
@@ -2267,13 +2477,18 @@
     <!-- Header -->
     <div class="submit-modal-header">
       <div class="submit-modal-progress">
-        <div class="sm-step active" id="smstep2">
+        <div class="sm-step active" id="smstep1">
           <div class="sm-step-num">1</div>
+          <div class="sm-step-label">Choose Plan</div>
+        </div>
+        <div class="sm-step-line"></div>
+        <div class="sm-step" id="smstep2">
+          <div class="sm-step-num">2</div>
           <div class="sm-step-label">Your Details</div>
         </div>
         <div class="sm-step-line"></div>
         <div class="sm-step" id="smstep3">
-          <div class="sm-step-num">2</div>
+          <div class="sm-step-num">3</div>
           <div class="sm-step-label">Done</div>
         </div>
       </div>
@@ -2285,8 +2500,56 @@
     <!-- Scrollable body -->
     <div class="submit-modal-body">
 
-      <!-- ── STEP 1 (was 2): Form ── -->
-      <div class="sm-panel" id="smpanel2">
+      <!-- ── STEP 1: Plan selection ── -->
+      <div class="sm-panel" id="smpanel1">
+        <div class="sm-panel-intro">
+          <h2 class="sm-panel-title" id="smModalTitle">List your business on ExpatEase</h2>
+          <p class="sm-panel-sub">Choose the plan that fits your business. You can upgrade at any time.</p>
+        </div>
+        <div class="sm-plans-grid">
+
+          <!-- Basic -->
+          <div class="sm-plan-card" id="planBasic" data-plan="basic" role="button" tabindex="0" aria-pressed="false">
+            <div class="sm-plan-name">Basic</div>
+            <div class="sm-plan-price">Free</div>
+            <div class="sm-plan-desc">Get discovered by expats in Bratislava instantly.</div>
+            <ul class="sm-plan-features">
+              <li class="sm-plan-feature">Business name &amp; category</li>
+              <li class="sm-plan-feature">Phone &amp; email</li>
+              <li class="sm-plan-feature">Bratislava address</li>
+              <li class="sm-plan-feature">One-sentence description</li>
+              <li class="sm-plan-feature">Contact person name</li>
+              <li class="sm-plan-feature">English-speaking badge</li>
+            </ul>
+          </div>
+
+          <!-- Premium -->
+          <div class="sm-plan-card sm-plan-featured" id="planPremium" data-plan="premium" role="button" tabindex="0" aria-pressed="false">
+            <div class="sm-plan-badge">Most Popular</div>
+            <div class="sm-plan-name">Premium</div>
+            <div class="sm-plan-price">€9.90<span class="sm-plan-period">/month</span></div>
+            <div class="sm-plan-desc">A full profile — photos, services, team &amp; more.</div>
+            <ul class="sm-plan-features">
+              <li class="sm-plan-feature sm-plan-feature-base">Everything in Basic</li>
+              <li class="sm-plan-feature">Business logo</li>
+              <li class="sm-plan-feature">Cover photo</li>
+              <li class="sm-plan-feature">Full "About" section</li>
+              <li class="sm-plan-feature">Services &amp; products list</li>
+              <li class="sm-plan-feature">Team member profiles</li>
+              <li class="sm-plan-feature">Photo gallery (up to 8)</li>
+              <li class="sm-plan-feature">Website &amp; social links</li>
+              <li class="sm-plan-feature">Opening hours</li>
+            </ul>
+          </div>
+
+        </div>
+        <div class="sm-step1-footer">
+          <button class="sm-continue-btn" id="smContinueBtn" disabled>Continue →</button>
+        </div>
+      </div><!-- /smpanel1 -->
+
+      <!-- ── STEP 2: Form ── -->
+      <div class="sm-panel" id="smpanel2" style="display:none">
 
         <!-- Basic fields (always shown) -->
         <div id="smFormBasic">
@@ -2305,15 +2568,15 @@
               <option>Doctors &amp; Specialists</option>
               <option>Lawyers &amp; Legal</option>
               <option>Banks &amp; Finance</option>
-              <option>Beauty &amp; Wellness</option>
-              <option>Handymen</option>
+              <option>Barbers &amp; Hairdressers</option>
+              <option>Electricians</option>
+              <option>Plumbers</option>
               <option>Builders &amp; Construction</option>
+              <option>Tattoo Studios</option>
+              <option>Vets</option>
               <option>Real Estate</option>
-              <option>Vets &amp; Pet Care</option>
-              <option>Schools &amp; Education</option>
+              <option>Pharmacies</option>
               <option>Moving &amp; Relocation</option>
-              <option>Sports &amp; Fitness</option>
-              <option>Other</option>
             </select>
             <div class="sm-field-error" id="smCategoryErr">Please select a category.</div>
           </div>
@@ -2352,291 +2615,127 @@
           </div>
 
           <div class="sm-field-group">
-            <label class="sm-label" for="smWebsite">Website <span class="sm-hint-inline">optional</span></label>
-            <input class="sm-input" type="url" id="smWebsite" placeholder="e.g. https://yourpractice.sk" autocomplete="url">
-          </div>
-
-          <div class="sm-field-group">
-            <label class="sm-label">Languages spoken <span class="sm-required">*</span></label>
-            <div class="sm-lang-pills" id="smLangPills">
-              <button type="button" class="sm-lang-pill" data-lang="EN">🇬🇧 English</button>
-              <button type="button" class="sm-lang-pill" data-lang="DE">🇩🇪 German</button>
-              <button type="button" class="sm-lang-pill" data-lang="FR">🇫🇷 French</button>
-              <button type="button" class="sm-lang-pill" data-lang="HU">🇭🇺 Hungarian</button>
-              <button type="button" class="sm-lang-pill" data-lang="CZ">🇨🇿 Czech</button>
-              <button type="button" class="sm-lang-pill" data-lang="PL">🇵🇱 Polish</button>
-              <button type="button" class="sm-lang-pill" data-lang="RU">🇷🇺 Russian</button>
-              <button type="button" class="sm-lang-pill" data-lang="ES">🇪🇸 Spanish</button>
-              <button type="button" class="sm-lang-pill" data-lang="IT">🇮🇹 Italian</button>
-              <button type="button" class="sm-lang-pill" data-lang="SK">🇸🇰 Slovak</button>
-            </div>
-            <div class="sm-field-error" id="smLangErr">Please select at least one language.</div>
-          </div>
-
-          <div class="sm-field-group">
             <label class="sm-label" for="smDescription">
-              One-sentence description <span class="sm-required">*</span>
+              One-Sentence Description <span class="sm-required">*</span>
               <span class="sm-char-counter" id="smDescCounter">0 / 150</span>
             </label>
             <textarea class="sm-input sm-textarea" id="smDescription" maxlength="150" placeholder="e.g. English-speaking GP accepting new patients in Staré Mesto."></textarea>
             <div class="sm-field-error" id="smDescriptionErr">Please write a short description.</div>
           </div>
 
+          <div class="sm-field-group sm-checkbox-group">
+            <label class="sm-checkbox-label">
+              <input type="checkbox" class="sm-checkbox" id="smEnglish">
+              <span class="sm-checkbox-custom"></span>
+              English-speaking — we'll add the 🇬🇧 badge to your listing
+            </label>
+          </div>
         </div><!-- /smFormBasic -->
 
-        <!-- ── Category-specific details (dynamic, all optional) ── -->
-        <div id="smCategoryDetails" style="display:none">
-          <div style="border-top:1px solid var(--gray-100); margin:4px 0 20px;"></div>
-          <div class="sm-section-title" style="margin-bottom:4px;">
-            More about your services
-            <span class="sm-hint-inline" style="font-weight:400; color:var(--gray-400); font-size:12px; margin-left:6px;">optional — helps clients find you faster</span>
-          </div>
+        <!-- Premium-only fields -->
+        <div id="smFormPremium" style="display:none">
+          <div class="sm-section-title sm-section-divider">Premium Details</div>
 
-          <!-- DOCTORS -->
-          <div id="smCat_doctors" class="sm-cat-block" style="display:none">
-            <div class="sm-field-group">
-              <label class="sm-label" for="smSpecialty">Specialty</label>
-              <select class="sm-input sm-select" id="smSpecialty">
-                <option value="">Select specialty…</option>
-                <option>General Practitioner</option>
-                <option>Cardiologist</option>
-                <option>Dermatologist</option>
-                <option>Pediatrician</option>
-                <option>Gynecologist</option>
-                <option>Dentist</option>
-                <option>Psychiatrist</option>
-                <option>Neurologist</option>
-                <option>Orthopedist</option>
-                <option>Ophthalmologist</option>
-                <option>ENT / Ear, Nose & Throat</option>
-                <option>Other</option>
-              </select>
+          <!-- Logo -->
+          <div class="sm-field-group">
+            <label class="sm-label">Business Logo</label>
+            <div class="sm-upload-zone" id="smLogoZone">
+              <input type="file" id="smLogoInput" accept="image/*" style="display:none">
+              <div class="sm-upload-zone-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+              <div class="sm-upload-zone-title">Upload logo</div>
+              <div class="sm-upload-zone-sub">PNG, JPG or WebP — <span class="sm-upload-zone-link" id="smLogoBrowse">browse</span></div>
             </div>
-            <div class="sm-field-group">
-              <label class="sm-label">Insurance accepted</label>
-              <div class="sm-check-pills" id="smInsurance">
-                <button type="button" class="sm-check-pill" data-val="VšZP">VšZP</button>
-                <button type="button" class="sm-check-pill" data-val="Dôvera">Dôvera</button>
-                <button type="button" class="sm-check-pill" data-val="Union">Union</button>
-                <button type="button" class="sm-check-pill" data-val="Self-pay">Self-pay only</button>
-              </div>
+            <div class="sm-logo-preview" id="smLogoPreview" style="display:none">
+              <img id="smLogoImg" src="" alt="Logo preview">
+              <button class="sm-preview-remove" id="smLogoRemove">Remove</button>
             </div>
           </div>
 
-          <!-- LAWYERS -->
-          <div id="smCat_lawyers" class="sm-cat-block" style="display:none">
-            <div class="sm-field-group">
-              <label class="sm-label" for="smPracticeArea">Practice Area</label>
-              <select class="sm-input sm-select" id="smPracticeArea">
-                <option value="">Select area…</option>
-                <option>Immigration & Residence Law</option>
-                <option>Employment Law</option>
-                <option>Real Estate & Property Law</option>
-                <option>Corporate & Business Law</option>
-                <option>Family Law</option>
-                <option>Criminal Law</option>
-                <option>Tax Law</option>
-                <option>Intellectual Property</option>
-                <option>Other</option>
-              </select>
+          <!-- Cover photo -->
+          <div class="sm-field-group">
+            <label class="sm-label">Cover Photo</label>
+            <div class="sm-upload-zone" id="smCoverZone">
+              <input type="file" id="smCoverInput" accept="image/*" style="display:none">
+              <div class="sm-upload-zone-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+              <div class="sm-upload-zone-title">Upload cover photo</div>
+              <div class="sm-upload-zone-sub">Recommended: 1200 × 400 px — <span class="sm-upload-zone-link" id="smCoverBrowse">browse</span></div>
+            </div>
+            <div class="sm-cover-preview" id="smCoverPreview" style="display:none">
+              <img id="smCoverImg" src="" alt="Cover preview">
+              <button class="sm-preview-remove" id="smCoverRemove" style="margin-top:6px">Remove cover</button>
             </div>
           </div>
 
-          <!-- BANKS & FINANCE -->
-          <div id="smCat_banks" class="sm-cat-block" style="display:none">
-            <div class="sm-field-group">
-              <label class="sm-label" for="smServiceTypeBanks">Service Type</label>
-              <select class="sm-input sm-select" id="smServiceTypeBanks">
-                <option value="">Select type…</option>
-                <option>Retail Bank</option>
-                <option>Private / Premium Bank</option>
-                <option>Accountant</option>
-                <option>Tax Advisor</option>
-                <option>Financial Advisor</option>
-                <option>Currency Exchange</option>
-                <option>Payroll Services</option>
-                <option>Other</option>
-              </select>
-            </div>
+          <!-- About -->
+          <div class="sm-field-group">
+            <label class="sm-label" for="smAbout">
+              About Your Business
+              <span class="sm-char-counter" id="smAboutCounter">0 / 500</span>
+            </label>
+            <textarea class="sm-input sm-textarea sm-textarea-tall" id="smAbout" maxlength="500" placeholder="Tell expats what makes your business special, your experience, and why they should choose you…"></textarea>
           </div>
 
-          <!-- BEAUTY & WELLNESS -->
-          <div id="smCat_beauty" class="sm-cat-block" style="display:none">
-            <div class="sm-field-group">
-              <label class="sm-label" for="smServiceTypeBeauty">Service Type</label>
-              <select class="sm-input sm-select" id="smServiceTypeBeauty">
-                <option value="">Select type…</option>
-                <option>Barbershop (Men's)</option>
-                <option>Hair Salon (Women's)</option>
-                <option>Unisex Hair Salon</option>
-                <option>Colourist</option>
-                <option>Hair Extensions</option>
-                <option>Blow-dry Bar</option>
-                <option>Nail Studio</option>
-                <option>Tattoo Studio</option>
-                <option>Massage & Wellness</option>
-                <option>Beauty Salon</option>
-                <option>Spa</option>
-                <option>Other</option>
-              </select>
-            </div>
+          <!-- Services -->
+          <div class="sm-field-group">
+            <label class="sm-label">Services / Products <span class="sm-hint-inline">(up to 6)</span></label>
+            <div id="smServicesList"></div>
+            <button class="sm-add-btn" id="smAddServiceBtn" type="button">+ Add Service</button>
           </div>
 
-          <!-- HANDYMEN -->
-          <div id="smCat_handymen" class="sm-cat-block" style="display:none">
-            <div class="sm-field-group">
-              <label class="sm-label">Trade</label>
-              <div class="sm-check-pills" id="smTrade">
-                <button type="button" class="sm-check-pill" data-val="Plumbing">🔧 Plumbing</button>
-                <button type="button" class="sm-check-pill" data-val="Electrical">⚡ Electrical</button>
-                <button type="button" class="sm-check-pill" data-val="HVAC">🌡️ HVAC / Heating</button>
-                <button type="button" class="sm-check-pill" data-val="Locksmith">🔑 Locksmith</button>
-              </div>
-            </div>
-            <div class="sm-field-group">
-              <label class="sm-label">Services offered</label>
-              <div class="sm-check-pills" id="smHandyServices">
-                <button type="button" class="sm-check-pill" data-val="Emergency">Emergency call-out</button>
-                <button type="button" class="sm-check-pill" data-val="Installations">Installations</button>
-                <button type="button" class="sm-check-pill" data-val="Repairs">Repairs</button>
-                <button type="button" class="sm-check-pill" data-val="Rewiring">Rewiring</button>
-                <button type="button" class="sm-check-pill" data-val="Boiler">Boiler service</button>
-              </div>
-            </div>
+          <!-- Team -->
+          <div class="sm-field-group">
+            <label class="sm-label">Team Members <span class="sm-hint-inline">(up to 5)</span></label>
+            <div id="smTeamList"></div>
+            <button class="sm-add-btn" id="smAddTeamBtn" type="button">+ Add Team Member</button>
           </div>
 
-          <!-- REAL ESTATE -->
-          <div id="smCat_realestate" class="sm-cat-block" style="display:none">
-            <div class="sm-field-group">
-              <label class="sm-label" for="smServiceTypeRE">Service Type</label>
-              <select class="sm-input sm-select" id="smServiceTypeRE">
-                <option value="">Select type…</option>
-                <option>Rental Agent</option>
-                <option>Sales Agent</option>
-                <option>Property Management</option>
-                <option>Relocation Service</option>
-                <option>Short-term / Furnished Rentals</option>
-                <option>Property Lawyer</option>
-                <option>Other</option>
-              </select>
+          <!-- Gallery -->
+          <div class="sm-field-group">
+            <label class="sm-label">Photo Gallery <span class="sm-hint-inline">(up to 8 photos)</span></label>
+            <div class="sm-upload-zone sm-gallery-zone" id="smGalleryZone">
+              <input type="file" id="smGalleryInput" accept="image/*" multiple style="display:none">
+              <div class="sm-upload-zone-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+              <div class="sm-upload-zone-title">Upload photos</div>
+              <div class="sm-upload-zone-sub"><span class="sm-upload-zone-link" id="smGalleryBrowse">Browse</span> or drag &amp; drop — up to 8 images</div>
             </div>
+            <div class="sm-gallery-grid" id="smGalleryGrid"></div>
           </div>
 
-          <!-- BUILDERS -->
-          <div id="smCat_builders" class="sm-cat-block" style="display:none">
-            <div class="sm-field-group">
-              <label class="sm-label" for="smServiceTypeBuilders">Service Type</label>
-              <select class="sm-input sm-select" id="smServiceTypeBuilders">
-                <option value="">Select type…</option>
-                <option>General Contractor</option>
-                <option>Renovations</option>
-                <option>Structural & Extensions</option>
-                <option>Interior Design</option>
-                <option>Painting & Plastering</option>
-                <option>Flooring</option>
-                <option>Kitchen & Bathroom</option>
-                <option>Other</option>
-              </select>
-            </div>
+          <!-- Website & social -->
+          <div class="sm-field-group">
+            <label class="sm-label" for="smWebsite">Website URL</label>
+            <input class="sm-input" type="url" id="smWebsite" placeholder="https://yourbusiness.sk">
+            <div class="sm-field-error" id="smWebsiteErr">Please enter a valid URL (starting with https://).</div>
+          </div>
+          <div class="sm-field-group">
+            <label class="sm-label" for="smInstagram">Instagram URL</label>
+            <input class="sm-input" type="url" id="smInstagram" placeholder="https://instagram.com/yourbusiness">
+          </div>
+          <div class="sm-field-group">
+            <label class="sm-label" for="smFacebook">Facebook URL</label>
+            <input class="sm-input" type="url" id="smFacebook" placeholder="https://facebook.com/yourbusiness">
           </div>
 
-          <!-- VETS -->
-          <div id="smCat_vets" class="sm-cat-block" style="display:none">
-            <div class="sm-field-group">
-              <label class="sm-label">Animal types treated</label>
-              <div class="sm-check-pills" id="smAnimalTypes">
-                <button type="button" class="sm-check-pill" data-val="Dogs">🐶 Dogs</button>
-                <button type="button" class="sm-check-pill" data-val="Cats">🐱 Cats</button>
-                <button type="button" class="sm-check-pill" data-val="Exotic">🦜 Exotic animals</button>
-                <button type="button" class="sm-check-pill" data-val="Birds">🐦 Birds</button>
-                <button type="button" class="sm-check-pill" data-val="Rabbits">🐰 Rabbits & small pets</button>
-              </div>
-            </div>
-            <div class="sm-field-group">
-              <label class="sm-label" for="smVetService">Service</label>
-              <select class="sm-input sm-select" id="smVetService">
-                <option value="">Select service…</option>
-                <option>General Practice</option>
-                <option>Emergency / 24h</option>
-                <option>Surgery</option>
-                <option>Dentistry</option>
-                <option>Dermatology</option>
-                <option>Other</option>
-              </select>
-            </div>
+          <!-- Opening hours -->
+          <div class="sm-field-group">
+            <label class="sm-label">Opening Hours</label>
+            <div class="sm-hours-grid" id="smHoursGrid"></div>
           </div>
 
-          <!-- SCHOOLS -->
-          <div id="smCat_schools" class="sm-cat-block" style="display:none">
-            <div class="sm-field-group">
-              <label class="sm-label">School level</label>
-              <div class="sm-check-pills" id="smSchoolLevel">
-                <button type="button" class="sm-check-pill" data-val="Preschool">Preschool (2–5)</button>
-                <button type="button" class="sm-check-pill" data-val="Primary">Primary (6–11)</button>
-                <button type="button" class="sm-check-pill" data-val="Secondary">Secondary (12–18)</button>
-              </div>
+          <!-- Payment mockup -->
+          <div class="sm-payment-section">
+            <div class="sm-payment-header">
+              <span class="sm-payment-price">€9.90 / month</span>
+              <span class="sm-payment-stripe">Stripe — coming soon</span>
             </div>
+            <p class="sm-payment-note">Submit your listing now. We'll reach out to set up billing once your profile is approved — no payment required today.</p>
+            <label class="sm-checkbox-label">
+              <input type="checkbox" class="sm-checkbox" id="smWaitlist">
+              <span class="sm-checkbox-custom"></span>
+              Notify me when Premium billing launches
+            </label>
           </div>
-
-          <!-- MOVING -->
-          <div id="smCat_moving" class="sm-cat-block" style="display:none">
-            <div class="sm-field-group">
-              <label class="sm-label">Services offered</label>
-              <div class="sm-check-pills" id="smMovingServices">
-                <button type="button" class="sm-check-pill" data-val="International">International moves</button>
-                <button type="button" class="sm-check-pill" data-val="Local">Local moves</button>
-                <button type="button" class="sm-check-pill" data-val="Storage">Storage</button>
-                <button type="button" class="sm-check-pill" data-val="Packing">Packing service</button>
-                <button type="button" class="sm-check-pill" data-val="Assembly">Furniture assembly</button>
-                <button type="button" class="sm-check-pill" data-val="PetTransport">Pet transport</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- SPORTS -->
-          <div id="smCat_sports" class="sm-cat-block" style="display:none">
-            <div class="sm-field-group">
-              <label class="sm-label" for="smActivityType">Activity type</label>
-              <select class="sm-input sm-select" id="smActivityType">
-                <option value="">Select activity…</option>
-                <option>Gym & Fitness Centre</option>
-                <option>Swimming</option>
-                <option>Yoga & Pilates</option>
-                <option>Tennis & Racquet Sports</option>
-                <option>Cycling</option>
-                <option>Running Club</option>
-                <option>Team Sports</option>
-                <option>Outdoor & Hiking</option>
-                <option>Personal Training</option>
-                <option>Martial Arts</option>
-                <option>Dance</option>
-                <option>Other</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- OTHER -->
-          <div id="smCat_other" class="sm-cat-block" style="display:none">
-            <div class="sm-field-group">
-              <label class="sm-label" for="smOtherSpecialization">What do you offer? <span class="sm-hint-inline">describe your specialization</span></label>
-              <input class="sm-input" type="text" id="smOtherSpecialization" placeholder="e.g. Certified yoga instructor, expat tax consultant…">
-            </div>
-          </div>
-
-        </div><!-- /smCategoryDetails -->
-
-        <!-- GDPR consent -->
-        <div class="sm-field-group" style="margin-top:8px;">
-          <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
-            <input type="checkbox" id="smGdprConsent" style="margin-top:3px; flex-shrink:0; width:16px; height:16px; accent-color:var(--green); cursor:pointer;">
-            <span style="font-size:12px; color:var(--gray-400); line-height:1.6; font-weight:300;">
-              I agree to the processing of my personal data (name, email, phone) by ExpatBase Slovakia for the purpose of listing management. Your data will not be shared with third parties. You can request deletion at any time by emailing
-              <a href="mailto:hello@expatbase.sk" style="color:var(--blue);">hello@expatbase.sk</a>.
-              <span style="color:#e53e3e;">*</span>
-            </span>
-          </label>
-          <div class="sm-field-error" id="smGdprErr" style="margin-top:4px;">Please confirm you agree to data processing.</div>
-        </div>
+        </div><!-- /smFormPremium -->
 
         <!-- Error banner -->
         <div class="sm-error-banner" id="smErrorBanner" style="display:none">
@@ -2678,117 +2777,8 @@
   </div><!-- /submit-modal-panel -->
 </div><!-- /submit-modal-overlay -->
 
-<!-- ════════════════════════════════════════
-     JOIN COMMUNITY MODAL
-════════════════════════════════════════ -->
-<div class="submit-modal-overlay" id="joinModalOverlay" role="dialog" aria-modal="true" aria-labelledby="jmModalTitle">
-  <div class="submit-modal-panel" id="joinModalPanel">
-
-    <!-- Header -->
-    <div class="submit-modal-header" style="border-bottom:1px solid var(--gray-50); padding-bottom:16px; margin-bottom:4px;">
-      <div id="jmModalTitle" style="font-size:16px; font-weight:700; color:var(--gray-900); letter-spacing:-0.3px;">Join the ExpatBase Community</div>
-      <button class="submit-modal-close" id="jmClose" aria-label="Close">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
-    </div>
-
-    <!-- Scrollable body -->
-    <div class="submit-modal-body">
-
-      <!-- Step 1: Form -->
-      <div class="sm-panel" id="jmpanel1">
-
-        <p style="font-size:13px; color:var(--gray-400); margin-bottom:24px; line-height:1.7;">Get listed in the expat community, receive the weekly Slovakia guide, and connect with verified local professionals.</p>
-
-        <div class="sm-section-title">Your Details</div>
-
-        <!-- Full Name -->
-        <div class="sm-field-group">
-          <label class="sm-label" for="jmName">Full Name <span class="sm-required">*</span></label>
-          <input class="sm-input" type="text" id="jmName" placeholder="e.g. James Miller" autocomplete="name">
-          <div class="sm-field-error" id="jmNameErr">Please enter your name.</div>
-        </div>
-
-        <!-- Email -->
-        <div class="sm-field-group">
-          <label class="sm-label" for="jmEmail">Email Address <span class="sm-required">*</span></label>
-          <input class="sm-input" type="email" id="jmEmail" placeholder="your@email.com" autocomplete="email">
-          <div class="sm-field-error" id="jmEmailErr">Please enter a valid email address.</div>
-        </div>
-
-        <!-- Nationality -->
-        <div class="sm-field-group">
-          <label class="sm-label" for="jmNationality">Nationality <span class="sm-hint-inline">optional</span></label>
-          <input class="sm-input" type="text" id="jmNationality" placeholder="e.g. British, German, American…">
-        </div>
-
-        <!-- What are you looking for -->
-        <div class="sm-field-group">
-          <label class="sm-label">What are you looking for? <span class="sm-hint-inline">optional</span></label>
-          <div class="sm-check-pills" id="jmServicePills">
-            <button type="button" class="sm-check-pill" data-val="Doctors">🏥 Doctors</button>
-            <button type="button" class="sm-check-pill" data-val="Lawyers">⚖️ Lawyers</button>
-            <button type="button" class="sm-check-pill" data-val="Banks">🏦 Banks</button>
-            <button type="button" class="sm-check-pill" data-val="Beauty">💆 Beauty</button>
-            <button type="button" class="sm-check-pill" data-val="Handymen">🔧 Handymen</button>
-            <button type="button" class="sm-check-pill" data-val="Real Estate">🏠 Real Estate</button>
-            <button type="button" class="sm-check-pill" data-val="Schools">🎓 Schools</button>
-            <button type="button" class="sm-check-pill" data-val="Moving">📦 Moving</button>
-            <button type="button" class="sm-check-pill" data-val="Vets">🐾 Vets</button>
-            <button type="button" class="sm-check-pill" data-val="Sports">⚽ Sports</button>
-          </div>
-        </div>
-
-        <!-- GDPR consent -->
-        <div class="sm-field-group" style="margin-top:8px;">
-          <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
-            <input type="checkbox" id="jmGdpr" style="margin-top:3px; flex-shrink:0; width:16px; height:16px; accent-color:var(--green); cursor:pointer;">
-            <span style="font-size:12px; color:var(--gray-400); line-height:1.6; font-weight:300;">
-              I agree to the processing of my personal data for the purpose of community membership and the ExpatBase newsletter, in accordance with the <a href="privacy-policy.html" target="_blank" style="color:var(--blue); text-decoration:underline;">Privacy Policy</a>. I can withdraw my consent at any time by contacting <a href="mailto:hello@expatbase.sk">hello@expatbase.sk</a>. *
-            </span>
-          </label>
-          <div class="sm-field-error" id="jmGdprErr">Please confirm you agree to data processing.</div>
-        </div>
-
-        <!-- Error banner -->
-        <div class="sm-error-banner" id="jmErrorBanner" style="display:none">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <span id="jmErrorMsg">Please fix the errors above.</span>
-        </div>
-
-        <!-- Submit button -->
-        <button class="sm-submit-btn" id="jmSubmitBtn" type="button" style="width:100%; max-width:100%; margin-top:20px;">
-          <span id="jmSubmitLabel">Join Community →</span>
-          <span id="jmSpinner" style="display:none; align-items:center; gap:8px;">
-            <svg width="16" height="16" viewBox="0 0 38 38" stroke="white" style="animation:spin 0.8s linear infinite"><g fill="none"><g transform="translate(1 1)" stroke-width="2.5"><circle stroke-opacity=".35" cx="18" cy="18" r="18"/><path d="M36 18c0-9.94-8.06-18-18-18"/></g></g></svg>
-            Joining…
-          </span>
-        </button>
-
-      </div><!-- /jmpanel1 -->
-
-      <!-- Step 2: Success -->
-      <div class="sm-panel sm-success-panel" id="jmpanel2" style="display:none">
-        <div class="sm-success-icon">
-          <svg class="sm-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-            <circle class="sm-checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
-            <path class="sm-checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-          </svg>
-        </div>
-        <h2 class="sm-success-title">Welcome to ExpatBase! 🎉</h2>
-        <p class="sm-success-sub">You're now part of the community. Check your inbox — your welcome email is on the way.</p>
-        <div class="sm-success-actions">
-          <a href="profile.html" class="sm-close-success-btn" style="text-decoration:none;display:inline-block;">View my profile →</a>
-          <button class="sm-close-success-btn" id="jmCloseSuccess" style="background:transparent;border:1px solid var(--blue);color:var(--blue);margin-top:8px;">Done</button>
-        </div>
-      </div><!-- /jmpanel2 -->
-
-    </div><!-- /submit-modal-body -->
-  </div><!-- /joinModalPanel -->
-</div><!-- /joinModalOverlay -->
-
 <div class="cookie-banner" id="cookieBanner">
-  <div class="cookie-text">We use essential cookies to make ExpatBase work. No tracking, no third-party cookies.</div>
+  <div class="cookie-text">We use essential cookies to make ExpatEase work. With your consent, we'd also like to use analytics cookies (privacy-first, no PII) to improve the service.</div>
   <div class="cookie-btns">
     <button class="cookie-btn-reject" onclick="dismissCookie()">Reject</button>
     <button class="cookie-btn-accept" onclick="dismissCookie()">Accept</button>
@@ -2821,7 +2811,7 @@
   // Carousel
   const slides = document.querySelectorAll('.hero-slide');
   const dots = document.querySelectorAll('.carousel-dot');
-  const labels = ['Beauty & Wellness', 'Doctors & Specialists', 'Electricians & Tradespeople'];
+  const labels = ['Barbers & Hairdressers', 'Doctors & Specialists', 'Electricians & Tradespeople'];
   const labelEl = document.getElementById('carousel-label');
   let current = 0;
   let interval;
@@ -2913,6 +2903,7 @@
   }
 </script>
 
+
 <!-- ═══════════════════════════════════════════
      SUBMIT BUSINESS MODAL — JavaScript
 ═══════════════════════════════════════════ -->
@@ -2921,11 +2912,16 @@
   'use strict';
 
   /* ── State ── */
-  let smCurrentStep  = 2;
+  let smSelectedPlan = null;
+  let smGalleryFiles = [];
+  let smServiceCount = 0;
+  let smTeamCount = 0;
 
   /* ── DOM refs ── */
   const overlay   = document.getElementById('submitModalOverlay');
+  const panel     = document.getElementById('submitModalPanel');
   const closeBtn  = document.getElementById('smClose');
+  const contBtn   = document.getElementById('smContinueBtn');
   const backBtn   = document.getElementById('smBackBtn');
   const submitBtn = document.getElementById('smSubmitBtn');
 
@@ -2933,28 +2929,29 @@
      Open / Close
   ══════════════════════════════ */
   function openSubmitModal() {
-    smGoToStep(2);
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
-    closeBtn?.focus();
+    closeBtn.focus();
   }
-  window._openSubmitModal = openSubmitModal;
 
   function closeSubmitModal() {
     overlay.classList.remove('open');
     document.body.style.overflow = '';
-    if (smCurrentStep === 3) setTimeout(smReset, 320);
+    // Only reset if submission was completed (step 3), not mid-fill
+    if (smCurrentStep === 3) {
+      setTimeout(smReset, 320);
+    }
   }
 
   /* ══════════════════════════════
-     Step navigation (2 steps: form → done)
+     Step navigation
   ══════════════════════════════ */
   function smGoToStep(n) {
     smCurrentStep = n;
-    [2, 3].forEach(i => {
-      const p    = document.getElementById('smpanel' + i);
-      const step = document.getElementById('smstep' + i);
-      if (p) p.style.display = (i === n) ? 'block' : 'none';
+    [1, 2, 3].forEach(i => {
+      const panel = document.getElementById('smpanel' + i);
+      const step  = document.getElementById('smstep' + i);
+      if (panel) panel.style.display = (i === n) ? 'block' : 'none';
       if (step) {
         step.classList.remove('active', 'done');
         if (i === n) step.classList.add('active');
@@ -2963,6 +2960,26 @@
     });
     const body = document.querySelector('.submit-modal-body');
     if (body) body.scrollTop = 0;
+  }
+
+  /* ══════════════════════════════
+     Plan selection
+  ══════════════════════════════ */
+  function smSelectPlan(plan) {
+    smSelectedPlan = plan;
+    document.querySelectorAll('.sm-plan-card').forEach(card => {
+      const isSelected = card.dataset.plan === plan;
+      card.classList.toggle('selected', isSelected);
+      card.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+    });
+    contBtn.disabled = false;
+  }
+
+  function smContinue() {
+    if (!smSelectedPlan) return;
+    const premiumSection = document.getElementById('smFormPremium');
+    premiumSection.style.display = smSelectedPlan === 'premium' ? 'block' : 'none';
+    smGoToStep(2);
   }
 
   /* ══════════════════════════════
@@ -3129,7 +3146,7 @@
       smServiceCount--;
       const addBtn = document.getElementById('smAddServiceBtn');
       if (addBtn) addBtn.disabled = false;
-    } else {
+    } else if (event !== 'INITIAL_SESSION') {
       smTeamCount--;
       const addBtn = document.getElementById('smAddTeamBtn');
       if (addBtn) addBtn.disabled = false;
@@ -3182,116 +3199,6 @@
     if (err)   err.classList.toggle('visible', show);
   }
 
-  /* ── Language pills toggle ── */
-  document.querySelectorAll('.sm-lang-pill').forEach(pill => {
-    pill.addEventListener('click', () => {
-      pill.classList.toggle('selected');
-      // Clear lang error when at least one is selected
-      const anySelected = document.querySelectorAll('.sm-lang-pill.selected').length > 0;
-      document.getElementById('smLangErr')?.classList.toggle('visible', !anySelected);
-    });
-  });
-
-  /* ══════════════════════════════
-     Category-specific fields — show/hide
-  ══════════════════════════════ */
-  const CAT_MAP = {
-    'Doctors & Specialists':  'doctors',
-    'Lawyers & Legal':        'lawyers',
-    'Banks & Finance':        'banks',
-    'Beauty & Wellness':      'beauty',
-    'Handymen':               'handymen',
-    'Real Estate':            'realestate',
-    'Builders & Construction':'builders',
-    'Vets & Pet Care':        'vets',
-    'Schools & Education':    'schools',
-    'Moving & Relocation':    'moving',
-    'Sports & Fitness':       'sports',
-    'Other':                  'other',
-  };
-
-  function smShowCategoryBlock(catValue) {
-    const wrapper = document.getElementById('smCategoryDetails');
-    // Hide all blocks
-    document.querySelectorAll('.sm-cat-block').forEach(el => el.style.display = 'none');
-    const key = CAT_MAP[catValue];
-    if (key) {
-      const block = document.getElementById('smCat_' + key);
-      if (block) {
-        block.style.display = 'block';
-        wrapper.style.display = 'block';
-        return;
-      }
-    }
-    wrapper.style.display = 'none';
-  }
-
-  document.getElementById('smCategory')?.addEventListener('change', function() {
-    smShowCategoryBlock(this.value);
-  });
-
-  // Check-pill toggle (blue, category details)
-  document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('sm-check-pill')) {
-      e.target.classList.toggle('selected');
-    }
-  });
-
-  function smGetCheckPills(containerId) {
-    return [...document.querySelectorAll('#' + containerId + ' .sm-check-pill.selected')]
-      .map(p => p.dataset.val).join(', ');
-  }
-
-  function smGetCategoryExtras() {
-    const cat = document.getElementById('smCategory')?.value;
-    const key = CAT_MAP[cat];
-    if (!key) return {};
-
-    const extras = {};
-    switch (key) {
-      case 'doctors':
-        extras['Specialty'] = document.getElementById('smSpecialty')?.value || '';
-        extras['Insurance Accepted'] = smGetCheckPills('smInsurance');
-        break;
-      case 'lawyers':
-        extras['Specialty'] = document.getElementById('smPracticeArea')?.value || '';
-        break;
-      case 'banks':
-        extras['Specialty'] = document.getElementById('smServiceTypeBanks')?.value || '';
-        break;
-      case 'beauty':
-        extras['Specialty'] = document.getElementById('smServiceTypeBeauty')?.value || '';
-        break;
-      case 'handymen':
-        extras['Specialty'] = smGetCheckPills('smTrade');
-        extras['Additional Details'] = smGetCheckPills('smHandyServices');
-        break;
-      case 'realestate':
-        extras['Specialty'] = document.getElementById('smServiceTypeRE')?.value || '';
-        break;
-      case 'builders':
-        extras['Specialty'] = document.getElementById('smServiceTypeBuilders')?.value || '';
-        break;
-      case 'vets':
-        extras['Additional Details'] = smGetCheckPills('smAnimalTypes');
-        extras['Specialty'] = document.getElementById('smVetService')?.value || '';
-        break;
-      case 'schools':
-        extras['Additional Details'] = smGetCheckPills('smSchoolLevel');
-        break;
-      case 'moving':
-        extras['Additional Details'] = smGetCheckPills('smMovingServices');
-        break;
-      case 'sports':
-        extras['Specialty'] = document.getElementById('smActivityType')?.value || '';
-        break;
-      case 'other':
-        extras['Specialty'] = document.getElementById('smOtherSpecialization')?.value.trim() || '';
-        break;
-    }
-    return extras;
-  }
-
   function smValidateForm() {
     let valid = true;
     const required = [
@@ -3315,42 +3222,29 @@
       smShowFieldError('smEmail', 'smEmailErr', true);
       valid = false;
     }
-    // Languages — at least one required
-    const selectedLangs = document.querySelectorAll('.sm-lang-pill.selected');
-    if (selectedLangs.length === 0) {
-      document.getElementById('smLangErr')?.classList.add('visible');
-      valid = false;
-    } else {
-      document.getElementById('smLangErr')?.classList.remove('visible');
-    }
-    // GDPR consent — required
-    const gdpr = document.getElementById('smGdprConsent');
-    const gdprErr = document.getElementById('smGdprErr');
-    if (!gdpr?.checked) {
-      gdprErr?.classList.add('visible');
-      valid = false;
-    } else {
-      gdprErr?.classList.remove('visible');
-    }
-
-    // Website URL format (optional, both plans)
-    const websiteEl = document.getElementById('smWebsite');
-    if (websiteEl && websiteEl.value.trim() && !/^https?:\/\/.+/.test(websiteEl.value.trim())) {
-      // Auto-prepend https:// if missing
-      if (!/^https?:\/\//.test(websiteEl.value.trim())) {
-        websiteEl.value = 'https://' + websiteEl.value.trim();
-      }
+    // Optional URL fields
+    const urlFields = [
+      { id: 'smWebsite', err: 'smWebsiteErr' },
+    ];
+    if (smSelectedPlan === 'premium') {
+      urlFields.forEach(({ id, err }) => {
+        const el = document.getElementById(id);
+        if (el && el.value.trim() && !/^https?:\/\/.+/.test(el.value.trim())) {
+          smShowFieldError(id, err, true);
+          valid = false;
+        } else if (event !== 'INITIAL_SESSION') {
+          smShowFieldError(id, err, false);
+        }
+      });
     }
     // Scroll to first error
     if (!valid) {
-      const firstErr = document.querySelector('.sm-input-error, .sm-field-error.visible');
+      const firstErr = document.querySelector('.sm-input-error');
       if (firstErr) {
         const body = document.querySelector('.submit-modal-body');
-        if (body) {
-          const bodyRect = body.getBoundingClientRect();
-          const errRect  = firstErr.getBoundingClientRect();
-          body.scrollBy({ top: errRect.top - bodyRect.top - 80, behavior: 'smooth' });
-        }
+        const bodyRect = body.getBoundingClientRect();
+        const errRect  = firstErr.getBoundingClientRect();
+        body.scrollBy({ top: errRect.top - bodyRect.top - 80, behavior: 'smooth' });
       }
     }
     return valid;
@@ -3363,26 +3257,40 @@
     const prefix = document.getElementById('smPhonePrefix')?.value || '+421';
     const phone  = document.getElementById('smPhone')?.value.trim() || '';
 
-    const selectedLangs = [...document.querySelectorAll('.sm-lang-pill.selected')]
-      .map(p => p.dataset.lang).join(', ');
-
-    const extras = smGetCategoryExtras();
-
     const data = {
-      name:         document.getElementById('smBizName')?.value.trim(),
-      category:     document.getElementById('smCategory')?.value,
-      contact_name: document.getElementById('smContactName')?.value.trim(),
-      phone:        prefix + ' ' + phone,
-      email:        document.getElementById('smEmail')?.value.trim(),
-      address:      document.getElementById('smAddress')?.value.trim(),
-      website:      document.getElementById('smWebsite')?.value.trim() || null,
-      languages:    selectedLangs,
-      description:  document.getElementById('smDescription')?.value.trim(),
-      specialty:    extras['Specialty'] || '',
-      insurance:    extras['Insurance Accepted'] || '',
-      extra_details:extras['Additional Details'] || '',
-      submitted_at: new Date().toISOString(),
+      name:            document.getElementById('smBizName')?.value.trim(),
+      category:        document.getElementById('smCategory')?.value,
+      contact_name:    document.getElementById('smContactName')?.value.trim(),
+      phone:           prefix + ' ' + phone,
+      email:           document.getElementById('smEmail')?.value.trim(),
+      address:         document.getElementById('smAddress')?.value.trim(),
+      description:     document.getElementById('smDescription')?.value.trim(),
+      english_speaking: document.getElementById('smEnglish')?.checked || false,
+      plan:            smSelectedPlan,
     };
+
+    if (smSelectedPlan === 'premium') {
+      data.about   = document.getElementById('smAbout')?.value.trim() || null;
+      data.website = document.getElementById('smWebsite')?.value.trim() || null;
+      data.social_links = {
+        instagram: document.getElementById('smInstagram')?.value.trim() || null,
+        facebook:  document.getElementById('smFacebook')?.value.trim() || null,
+      };
+      // Opening hours
+      const hours = {};
+      SM_DAYS.forEach((day, i) => {
+        const uid    = 'smDay' + i;
+        const toggle = document.getElementById(uid + 'Toggle');
+        const from   = document.getElementById(uid + 'From');
+        const to     = document.getElementById(uid + 'To');
+        hours[day.toLowerCase()] = {
+          open: toggle?.checked || false,
+          from: from?.value || null,
+          to:   to?.value   || null,
+        };
+      });
+      data.opening_hours = hours;
+    }
 
     return data;
   }
@@ -3402,34 +3310,16 @@
     spinner.style.display   = 'block';
 
     try {
-      // ── Server-side proxy (Cloudflare Pages Function) ─────────────────
-      const formData = smCollectFormData();
-      const payload = {
-        'Business Name':  formData.name,
-        'Category':       formData.category,
-        'Contact Name':   formData.contact_name,
-        'Phone':          formData.phone,
-        'Email':          formData.email,
-        'Address':        formData.address,
-        'Website':        formData.website || '',
-        'Language':       formData.languages,
-        'Description':    formData.description,
-        'Submitted at':   formData.submitted_at,
-        ...(formData.specialty      ? { 'Specialty':          formData.specialty }      : {}),
-        ...(formData.insurance      ? { 'Insurance Accepted': formData.insurance }      : {}),
-        ...(formData.extra_details  ? { 'Additional Details': formData.extra_details }  : {}),
-      };
-      const res = await fetch('/functions/airtable-submit?table=Submissions', {
+      const res = await fetch('/submit-business', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(payload),
+        body:    JSON.stringify(smCollectFormData()),
       });
       const json = await res.json();
-      console.log('Airtable status:', res.status, 'response:', JSON.stringify(json, null, 2));
       if (res.ok && json.success) {
         smShowSuccess();
-      } else {
-        throw new Error(json.error || 'Submission failed. Please try again.');
+      } else if (event !== 'INITIAL_SESSION') {
+        throw new Error(json.error || 'Submission failed');
       }
     } catch (err) {
       spinner.style.display = 'none';
@@ -3445,7 +3335,11 @@
   ══════════════════════════════ */
   function smShowSuccess() {
     const msg = document.getElementById('smSuccessMsg');
-    if (msg) msg.textContent = 'Your listing has been submitted for review. We\'ll email you within 2 business days once it\'s live.';
+    if (smSelectedPlan === 'premium') {
+      msg.textContent = 'Your Premium listing has been submitted for review. Our team will contact you to add your photos and confirm payment details — usually within 2–3 business days.';
+    } else if (event !== 'INITIAL_SESSION') {
+      msg.textContent = 'Your listing has been submitted for review. We\'ll email you within 2 business days once it\'s live.';
+    }
     smGoToStep(3);
   }
 
@@ -3453,30 +3347,31 @@
      Reset
   ══════════════════════════════ */
   function smReset() {
+    smSelectedPlan = null;
+    smGalleryFiles = [];
+    smServiceCount = 0;
+    smTeamCount    = 0;
+
+    // Clear plan selection
+    document.querySelectorAll('.sm-plan-card').forEach(c => {
+      c.classList.remove('selected');
+      c.setAttribute('aria-pressed', 'false');
+    });
+    contBtn.disabled = true;
+
     // Clear inputs
     ['smBizName','smCategory','smContactName','smPhone','smEmail',
-     'smAddress','smWebsite','smDescription']
+     'smAddress','smDescription','smAbout','smWebsite','smInstagram','smFacebook']
       .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+    ['smEnglish','smWaitlist'].forEach(id => {
+      const el = document.getElementById(id); if (el) el.checked = false;
+    });
 
-    // Reset language pills
-    document.querySelectorAll('.sm-lang-pill').forEach(p => p.classList.remove('selected'));
-    document.getElementById('smLangErr')?.classList.remove('visible');
-
-    // Reset GDPR checkbox
-    const gdprBox = document.getElementById('smGdprConsent');
-    if (gdprBox) gdprBox.checked = false;
-    document.getElementById('smGdprErr')?.classList.remove('visible');
-
-    // Reset category-specific fields
-    document.querySelectorAll('.sm-check-pill').forEach(p => p.classList.remove('selected'));
-    document.querySelectorAll('.sm-cat-block select').forEach(s => s.value = '');
-    document.querySelectorAll('.sm-cat-block input').forEach(i => i.value = '');
-    document.querySelectorAll('.sm-cat-block').forEach(el => el.style.display = 'none');
-    document.getElementById('smCategoryDetails').style.display = 'none';
-
-    // Clear counter
+    // Clear counters
     const descCounter = document.getElementById('smDescCounter');
+    const aboutCounter = document.getElementById('smAboutCounter');
     if (descCounter) descCounter.textContent = '0 / 150';
+    if (aboutCounter) aboutCounter.textContent = '0 / 500';
 
     // Reset premium fields
     document.getElementById('smServicesList').innerHTML = '';
@@ -3541,223 +3436,504 @@
 
   // Plan cards
   document.querySelectorAll('.sm-plan-card').forEach(card => {
+    card.addEventListener('click', () => smSelectPlan(card.dataset.plan));
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); smSelectPlan(card.dataset.plan); }
+    });
   });
 
   // Navigation
-  backBtn?.addEventListener('click', () => smGoToStep(2));
-  submitBtn?.addEventListener('click', smSubmit);
+  contBtn.addEventListener('click',  smContinue);
+  backBtn.addEventListener('click',  () => smGoToStep(1));
+  submitBtn.addEventListener('click', smSubmit);
 
   // Success actions
-  document.getElementById('smCloseSuccess')?.addEventListener('click', closeSubmitModal);
-  document.getElementById('smSubmitAnother')?.addEventListener('click', () => { smReset(); smGoToStep(2); });
+  document.getElementById('smCloseSuccess').addEventListener('click', closeSubmitModal);
+  document.getElementById('smSubmitAnother').addEventListener('click', smReset);
 
-  // Char counter
+  // Logo / cover remove
+  document.getElementById('smLogoRemove').addEventListener('click', () => {
+    document.getElementById('smLogoZone').style.display = 'block';
+    document.getElementById('smLogoPreview').style.display = 'none';
+    document.getElementById('smLogoInput').value = '';
+  });
+  document.getElementById('smCoverRemove').addEventListener('click', () => {
+    document.getElementById('smCoverZone').style.display = 'block';
+    document.getElementById('smCoverPreview').style.display = 'none';
+    document.getElementById('smCoverInput').value = '';
+  });
+
+  // Add buttons
+  document.getElementById('smAddServiceBtn').addEventListener('click', smAddService);
+  document.getElementById('smAddTeamBtn').addEventListener('click', smAddTeamMember);
+
+  // Char counters
   smCharCounter('smDescription', 'smDescCounter', 150);
+  smCharCounter('smAbout',       'smAboutCounter', 500);
+
+  // Upload zones
+  smWireSimpleUpload('smLogoZone',  'smLogoInput',  'smLogoBrowse',  smHandleLogoUpload);
+  smWireSimpleUpload('smCoverZone', 'smCoverInput', 'smCoverBrowse', smHandleCoverUpload);
+  smWireGallery();
+
+  // Opening hours
+  smRenderHours();
 
 })();
 </script>
 
-<!-- ════════════════════════════════════════
-     JOIN COMMUNITY MODAL — JavaScript
-════════════════════════════════════════ -->
+<!-- AUTH MODAL -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-modal" id="authModal">
+
+    <!-- REGISTER VIEW — split layout -->
+    <div id="authViewRegister" style="display:contents;">
+
+      <!-- Ľavá strana -->
+      <div class="auth-left" id="authLeftPanel">
+        <div class="auth-logo">
+          <div class="auth-logo-mark">EE</div>
+          <span class="auth-logo-text">ExpatEase Slovakia</span>
+        </div>
+        <div class="auth-left-body">
+          <h2 class="auth-tagline">Your life in Bratislava,<br><em>made easier</em> together.</h2>
+          <ul class="auth-benefits">
+            <li class="auth-benefit">
+              <div class="auth-benefit-dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5.5 4,8 8.5,2" stroke="#6DC99A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <span>Save your favourite doctors, lawyers &amp; tradespeople in one place</span>
+            </li>
+            <li class="auth-benefit">
+              <div class="auth-benefit-dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5.5 4,8 8.5,2" stroke="#6DC99A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <span>Write reviews and help fellow expats make better decisions</span>
+            </li>
+            <li class="auth-benefit">
+              <div class="auth-benefit-dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5.5 4,8 8.5,2" stroke="#6DC99A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <span>Weekly newsletter: new experts, bureaucracy tips &amp; community news</span>
+            </li>
+            <li class="auth-benefit">
+              <div class="auth-benefit-dot"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5.5 4,8 8.5,2" stroke="#6DC99A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <span>Free forever — no hidden fees, no catch</span>
+            </li>
+          </ul>
+        </div>
+        <div class="auth-social-proof">
+          <div class="auth-avatars">
+            <div class="auth-avatar" style="background:#1A4F8A;">JM</div>
+            <div class="auth-avatar" style="background:#1D5FA0;">SP</div>
+            <div class="auth-avatar" style="background:#2E9E6B;">AK</div>
+          </div>
+          <div class="auth-proof-text">
+            <strong>Growing expat community</strong>
+            in Bratislava
+          </div>
+        </div>
+      </div>
+
+      <!-- Pravá strana — formulár -->
+      <div class="auth-right" id="authRightRegister">
+        <button class="auth-close" onclick="closeAuth()">&#x2715;</button>
+        <div class="auth-right-head">
+          <div class="auth-title">Create your free account</div>
+          <div class="auth-sub">Takes 30 seconds. No credit card needed.</div>
+        </div>
+        <button class="oauth-btn" onclick="oauthLogin('google')">
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Continue with Google
+        </button>
+        <div class="auth-divider">
+          <div class="auth-divider-line"></div>
+          <div class="auth-divider-text">or register with email</div>
+          <div class="auth-divider-line"></div>
+        </div>
+        <div class="auth-field">
+          <label for="regName">Full name</label>
+          <input type="text" id="regName" placeholder="Anna Kovac" autocomplete="name" />
+          <div class="auth-error-msg" id="regNameErr">Please enter your name.</div>
+        </div>
+        <div class="auth-field">
+          <label for="regEmail">Email address</label>
+          <input type="email" id="regEmail" placeholder="anna@example.com" autocomplete="email" />
+          <div class="auth-error-msg" id="regEmailErr">Please enter a valid email.</div>
+        </div>
+        <div class="auth-field">
+          <label for="regPass">Password</label>
+          <div class="auth-pw-wrap">
+            <input type="password" id="regPass" placeholder="Min. 8 characters" autocomplete="new-password" style="padding-right:52px;" />
+            <button class="auth-pw-toggle" type="button" onclick="togglePw('regPass', this)">show</button>
+          </div>
+          <div class="auth-error-msg" id="regPassErr">Password must be at least 8 characters.</div>
+        </div>
+        <div class="auth-newsletter">
+          <input type="checkbox" id="regNewsletter" checked />
+          <label for="regNewsletter">Subscribe to the <strong>ExpatEase newsletter</strong> — tips, new experts &amp; expat news. Unsubscribe anytime.</label>
+        </div>
+        <button class="auth-submit" id="regSubmitBtn" onclick="doRegister()">Join the community →</button>
+        <div class="auth-error-msg" id="regGeneralErr" style="display:none; text-align:center; margin-top:8px;"></div>
+        <p class="auth-terms">By registering you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a> (GDPR compliant).</p>
+        <div class="auth-switch">Already have an account? <a onclick="switchAuthView('login')">Sign in</a></div>
+      </div>
+    </div>
+
+    <!-- LOGIN VIEW — single column, centred -->
+    <div id="authViewLogin" style="display:none; grid-column: 1 / -1;">
+      <div class="auth-right" style="max-width:420px; margin:0 auto; padding:40px 36px 32px;">
+        <button class="auth-close" onclick="closeAuth()" style="position:absolute; top:16px; right:16px;">&#x2715;</button>
+        <div class="auth-logo" style="margin-bottom:6px;">
+          <div class="auth-logo-mark">EE</div>
+          <span class="auth-logo-text" style="color:#1a1a18; font-size:16px; font-weight:500;">ExpatEase</span>
+        </div>
+        <div class="auth-right-head">
+          <div class="auth-title">Welcome back</div>
+          <div class="auth-sub">Sign in to your ExpatEase account</div>
+        </div>
+        <button class="oauth-btn" onclick="oauthLogin('google')">
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Continue with Google
+        </button>
+        <div class="auth-divider">
+          <div class="auth-divider-line"></div>
+          <div class="auth-divider-text">or sign in with email</div>
+          <div class="auth-divider-line"></div>
+        </div>
+        <div class="auth-field">
+          <label for="loginEmail">Email address</label>
+          <input type="email" id="loginEmail" placeholder="anna@example.com" autocomplete="email" />
+        </div>
+        <div class="auth-field">
+          <label for="loginPass">Password</label>
+          <div class="auth-pw-wrap">
+            <input type="password" id="loginPass" placeholder="Your password" autocomplete="current-password" style="padding-right:52px;" />
+            <button class="auth-pw-toggle" type="button" onclick="togglePw('loginPass', this)">show</button>
+          </div>
+        </div>
+        <div class="auth-forgot"><a href="#">Forgot password?</a></div>
+        <button class="auth-submit" id="loginSubmitBtn" onclick="doLogin()">Sign in</button>
+        <div class="auth-error-msg" id="loginGeneralErr" style="display:none; text-align:center; margin-top:8px;"></div>
+        <div class="auth-switch">New to ExpatEase? <a onclick="switchAuthView('register')">Join the community</a></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- REVIEW MODAL -->
+<div class="review-overlay" id="reviewOverlay">
+  <div class="review-modal">
+    <button class="auth-close" onclick="closeReview()">×</button>
+    <div class="review-title">Leave a review</div>
+    <div class="review-biz-name" id="reviewBizName">Business name</div>
+    <div class="star-picker" id="starPicker">
+      <span class="star-pick" data-val="1" onclick="pickStar(1)">★</span>
+      <span class="star-pick" data-val="2" onclick="pickStar(2)">★</span>
+      <span class="star-pick" data-val="3" onclick="pickStar(3)">★</span>
+      <span class="star-pick" data-val="4" onclick="pickStar(4)">★</span>
+      <span class="star-pick" data-val="5" onclick="pickStar(5)">★</span>
+    </div>
+    <textarea class="review-textarea" id="reviewText" placeholder="Share your experience — what made it great or what could be better? Your review helps other expats." maxlength="500" oninput="updateCharCount()"></textarea>
+    <div class="review-char"><span id="reviewCharCount">0</span>/500</div>
+    <button class="review-submit" id="reviewSubmitBtn" onclick="submitReview()">Submit review</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="auth-toast" id="authToast"></div>
+
+<!-- SUPABASE + AUTH LOGIC -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-(function () {
-  'use strict';
+  // ─── SUPABASE CONFIG ───
+  // Replace these with your actual Supabase project values
+  const SUPABASE_URL = 'https://etxqrlrqbjcbjmitnspv.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_i38f7jyt2HYOjUTNuOsklg_aMofdDvE';
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  const overlay   = document.getElementById('joinModalOverlay');
-  const closeBtn  = document.getElementById('jmClose');
-  const submitBtn = document.getElementById('jmSubmitBtn');
+  // ─── STATE ───
+  let currentUser = null;
+  let pendingAction = null; // { type: 'fav'|'review', id, name, btn }
+  let currentReviewBizId = null;
+  let currentReviewBizName = null;
+  let selectedStars = 0;
 
-  /* ── Service pills toggle ── */
-  document.querySelectorAll('#jmServicePills .sm-check-pill').forEach(pill => {
-    pill.addEventListener('click', () => pill.classList.toggle('selected'));
+  // ─── INIT: check session on load ───
+  (async () => {
+    console.log('[EE] Checking session...');
+    const { data: { session }, error } = await sb.auth.getSession();
+    console.log('[EE] Session result:', session ? 'FOUND user: ' + session.user.email : 'NO SESSION', error || '');
+    if (session) {
+      currentUser = session.user;
+      onUserLoggedIn(currentUser);
+    } else {
+      console.log('[EE] No session — showing Join button');
+    }
+    // Load saved favs from localStorage (optimistic UI before DB check)
+    updateFavButtons();
+  })();
+
+  // Auth state listener
+  sb.auth.onAuthStateChange((event, session) => {
+    currentUser = session ? session.user : null;
+    if (currentUser) {
+      onUserLoggedIn(currentUser);
+      if (pendingAction) executePendingAction();
+    } else if (event !== 'INITIAL_SESSION') {
+      onUserLoggedOut();
+    }
   });
 
-  /* ── Open / Close ── */
-  function openJoinModal() {
-    document.getElementById('jmpanel1').style.display = 'block';
-    document.getElementById('jmpanel2').style.display = 'none';
-    overlay.classList.add('open');
+  // ─── UI HELPERS ───
+  function openAuth(view = 'register') {
+    document.getElementById('authOverlay').classList.add('open');
+    switchAuthView(view);
     document.body.style.overflow = 'hidden';
-    closeBtn?.focus();
   }
-  window._openJoinModal = openJoinModal;
-
-  function closeJoinModal() {
-    overlay.classList.remove('open');
+  function closeAuth() {
+    document.getElementById('authOverlay').classList.remove('open');
     document.body.style.overflow = '';
   }
+  function switchAuthView(view) {
+    document.getElementById('authViewRegister').style.display = view === 'register' ? 'contents' : 'none';
+    document.getElementById('authViewLogin').style.display = view === 'login' ? 'block' : 'none';
+  }
+  document.getElementById('authOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeAuth();
+  });
 
-  /* ── Validation ── */
-  function jmValidate() {
-    let ok = true;
-
-    const name    = document.getElementById('jmName').value.trim();
-    const nameErr = document.getElementById('jmNameErr');
-    if (!name) { nameErr.style.display = 'block'; ok = false; }
-    else nameErr.style.display = 'none';
-
-    const email    = document.getElementById('jmEmail').value.trim();
-    const emailErr = document.getElementById('jmEmailErr');
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      emailErr.style.display = 'block'; ok = false;
-    } else emailErr.style.display = 'none';
-
-    const gdpr    = document.getElementById('jmGdpr').checked;
-    const gdprErr = document.getElementById('jmGdprErr');
-    if (!gdpr) { gdprErr.style.display = 'block'; ok = false; }
-    else gdprErr.style.display = 'none';
-
-    return ok;
+  function showToast(msg, green = false) {
+    const t = document.getElementById('authToast');
+    t.textContent = msg;
+    t.className = 'auth-toast' + (green ? ' green' : '');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3200);
   }
 
-  /* ── Submit ── */
-  async function jmSubmit() {
-    if (!jmValidate()) {
-      document.getElementById('jmErrorBanner').style.display = 'flex';
+  function togglePw(inputId, btn) {
+    const inp = document.getElementById(inputId);
+    if (inp.type === 'password') { inp.type = 'text'; btn.textContent = 'hide'; }
+    else { inp.type = 'password'; btn.textContent = 'show'; }
+  }
+
+  function onUserLoggedIn(user) {
+    const area = document.getElementById('authNavArea');
+    const initials = (user.user_metadata?.name || user.email || 'U')
+      .split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+    area.innerHTML = `
+      <button class="auth-user-btn" onclick="handleUserMenu()">
+        <div class="auth-avatar">${initials}</div>
+        <span>${user.user_metadata?.name?.split(' ')[0] || 'Account'}</span>
+      </button>`;
+    closeAuth();
+    updateFavButtons();
+  }
+
+  function onUserLoggedOut() {
+    document.getElementById('authNavArea').innerHTML = `
+      <button class="nav-cta" id="joinCommunityBtn" style="background:transparent;border:1px solid rgba(255,255,255,0.4);margin-left:4px;" onclick="openAuth('register')">
+        Join the community
+      </button>`;
+    updateFavButtons();
+  }
+
+  function handleUserMenu() {
+    if (currentUser) {
+      window.location.href = 'profile.html';
+    }
+  }
+
+  // ─── REGISTER ───
+  async function doRegister() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const pass = document.getElementById('regPass').value;
+    const newsletter = document.getElementById('regNewsletter').checked;
+    let valid = true;
+
+    document.getElementById('regNameErr').style.display = name ? 'none' : 'block';
+    if (!name) valid = false;
+
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    document.getElementById('regEmailErr').style.display = emailOk ? 'none' : 'block';
+    if (!emailOk) valid = false;
+
+    document.getElementById('regPassErr').style.display = pass.length >= 8 ? 'none' : 'block';
+    if (pass.length < 8) valid = false;
+
+    if (!valid) return;
+
+    const btn = document.getElementById('regSubmitBtn');
+    btn.disabled = true; btn.textContent = 'Creating account...';
+
+    const { error } = await sb.auth.signUp({
+      email, password: pass,
+      options: { data: { name, newsletter } }
+    });
+
+    btn.disabled = false; btn.textContent = 'Create free account';
+
+    if (error) {
+      const err = document.getElementById('regGeneralErr');
+      err.textContent = error.message; err.style.display = 'block';
+    } else if (event !== 'INITIAL_SESSION') {
+      showToast('Check your email to confirm your account!', true);
+      closeAuth();
+    }
+  }
+
+  // ─── LOGIN ───
+  async function doLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const pass = document.getElementById('loginPass').value;
+    const btn = document.getElementById('loginSubmitBtn');
+    btn.disabled = true; btn.textContent = 'Signing in...';
+
+    const { error } = await sb.auth.signInWithPassword({ email, password: pass });
+
+    btn.disabled = false; btn.textContent = 'Sign in';
+
+    if (error) {
+      const err = document.getElementById('loginGeneralErr');
+      err.textContent = 'Incorrect email or password.'; err.style.display = 'block';
+    } else if (event !== 'INITIAL_SESSION') {
+      showToast('Welcome back!', true);
+    }
+  }
+
+  // ─── OAUTH ───
+  async function oauthLogin(provider) {
+    await sb.auth.signInWithOAuth({
+      provider,
+      options: { redirectTo: window.location.href }
+    });
+  }
+
+  // ─── NAV BUTTON WIRE-UP ───
+  document.getElementById('joinCommunityBtn')?.addEventListener('click', () => openAuth('register'));
+
+  // ─── FAVOURITES ───
+  function getFavs() {
+    try { return JSON.parse(localStorage.getItem('ee_favs') || '{}'); } catch { return {}; }
+  }
+  function saveFavs(favs) {
+    localStorage.setItem('ee_favs', JSON.stringify(favs));
+  }
+
+  function updateFavButtons() {
+    const favs = getFavs();
+    document.querySelectorAll('.btn-fav').forEach(btn => {
+      const id = btn.dataset.id;
+      const saved = !!favs[id];
+      btn.classList.toggle('saved', saved);
+      btn.innerHTML = saved ? '<span>♥</span> Saved' : '<span>♡</span> Save';
+    });
+  }
+
+  async function toggleFav(btn, bizId, bizName) {
+    if (!currentUser) {
+      pendingAction = { type: 'fav', id: bizId, name: bizName, btn };
+      openAuth('register');
       return;
     }
-    document.getElementById('jmErrorBanner').style.display = 'none';
-
-    // Collect service pills
-    const services = [...document.querySelectorAll('#jmServicePills .sm-check-pill.selected')]
-      .map(p => p.dataset.val).join(', ');
-
-    // Build payload — omit empty optional fields
-    const raw = {
-      'Name':         document.getElementById('jmName').value.trim(),
-      'Email':        document.getElementById('jmEmail').value.trim(),
-      'Nationality':  document.getElementById('jmNationality').value.trim(),
-      'Looking For':  services,
-      'Submitted At': new Date().toISOString(),
-    };
-    const fields = {};
-    Object.entries(raw).forEach(([k, v]) => { if (v) fields[k] = v; });
-
-    // Show spinner
-    document.getElementById('jmSubmitLabel').style.display = 'none';
-    document.getElementById('jmSpinner').style.display     = 'inline-flex';
-    submitBtn.disabled = true;
-
-    try {
-      const res = await fetch('/functions/airtable-submit?table=Members', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(fields),
+    const favs = getFavs();
+    if (favs[bizId]) {
+      // Remove
+      delete favs[bizId];
+      saveFavs(favs);
+      btn.classList.remove('saved');
+      btn.innerHTML = '<span>♡</span> Save';
+      // Remove from Supabase
+      await sb.from('favourites').delete()
+        .eq('user_id', currentUser.id).eq('business_id', bizId);
+    } else if (event !== 'INITIAL_SESSION') {
+      // Add
+      favs[bizId] = { name: bizName, savedAt: Date.now() };
+      saveFavs(favs);
+      btn.classList.add('saved');
+      btn.innerHTML = '<span>♥</span> Saved';
+      showToast('Saved to your favourites!', true);
+      // Save to Supabase
+      await sb.from('favourites').upsert({
+        user_id: currentUser.id,
+        business_id: bizId,
+        business_name: bizName,
+        saved_at: new Date().toISOString()
       });
-
-      const json = await res.json();
-      if (!res.ok) throw new Error(json.error || `HTTP ${res.status}`);
-
-      // Save to localStorage for profile page
-      localStorage.setItem('ee_member', JSON.stringify({
-        name: fields.name,
-        email: fields.email,
-        nationality: fields.nationality,
-        lookingFor: fields.looking_for,
-        joinedAt: new Date().toISOString()
-      }));
-      // Show success panel
-      document.getElementById('jmpanel1').style.display = 'none';
-      document.getElementById('jmpanel2').style.display = 'block';
-
-    } catch (err) {
-      console.error('Join error:', err);
-      document.getElementById('jmErrorMsg').textContent = 'Something went wrong — please try again.';
-      document.getElementById('jmErrorBanner').style.display = 'flex';
-    } finally {
-      document.getElementById('jmSubmitLabel').style.display = '';
-      document.getElementById('jmSpinner').style.display     = 'none';
-      submitBtn.disabled = false;
     }
   }
 
-  /* ── Event wiring ── */
-  document.getElementById('joinCommunityBtn').addEventListener('click', e => {
-    e.preventDefault();
-    openJoinModal();
-  });
-
-  // Auto-open when arriving via index.html#join (e.g. from subpages)
-  
-  // Auto-open when arriving via index.html#submit (e.g. from subpages)
-  if (window.location.hash === '#submit') {
-    history.replaceState(null, '', window.location.pathname);
-    setTimeout(() => openSubmitModal(), 100);
-  }
-
-  if (window.location.hash === '#join') {
-    history.replaceState(null, '', window.location.pathname);
-    openJoinModal();
-  }
-
-  closeBtn.addEventListener('click', closeJoinModal);
-
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay) closeJoinModal();
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && overlay.classList.contains('open')) closeJoinModal();
-  });
-
-  submitBtn.addEventListener('click', jmSubmit);
-
-  document.getElementById('jmCloseSuccess')?.addEventListener('click', closeJoinModal);
-
-})();
-</script>
-
-<!-- ════════════════════════════════════════
-     MOBILE MENU — JavaScript
-════════════════════════════════════════ -->
-<script>
-(function () {
-  const toggle  = document.getElementById('navToggle');
-  const menu    = document.getElementById('mobileMenu');
-  const overlay = document.getElementById('mobileMenuOverlay');
-
-  function openMenu() {
-    menu.classList.add('open');
-    overlay.classList.add('open');
-    toggle.classList.add('open');
-    toggle.setAttribute('aria-expanded', 'true');
+  // ─── REVIEWS ───
+  function openReview(bizId, bizName) {
+    if (!currentUser) {
+      pendingAction = { type: 'review', id: bizId, name: bizName };
+      openAuth('register');
+      return;
+    }
+    currentReviewBizId = bizId;
+    currentReviewBizName = bizName;
+    selectedStars = 0;
+    document.getElementById('reviewBizName').textContent = bizName;
+    document.getElementById('reviewText').value = '';
+    document.getElementById('reviewCharCount').textContent = '0';
+    document.querySelectorAll('.star-pick').forEach(s => s.classList.remove('active'));
+    document.getElementById('reviewOverlay').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
-
-  function closeMenu() {
-    menu.classList.remove('open');
-    overlay.classList.remove('open');
-    toggle.classList.remove('open');
-    toggle.setAttribute('aria-expanded', 'false');
+  function closeReview() {
+    document.getElementById('reviewOverlay').classList.remove('open');
     document.body.style.overflow = '';
   }
-
-  toggle.addEventListener('click', () => {
-    menu.classList.contains('open') ? closeMenu() : openMenu();
+  document.getElementById('reviewOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeReview();
   });
 
-  // Close on overlay tap
-  overlay.addEventListener('click', closeMenu);
+  function pickStar(val) {
+    selectedStars = val;
+    document.querySelectorAll('.star-pick').forEach(s => {
+      s.classList.toggle('active', parseInt(s.dataset.val) <= val);
+    });
+  }
+  function updateCharCount() {
+    document.getElementById('reviewCharCount').textContent =
+      document.getElementById('reviewText').value.length;
+  }
 
-  // Close on any nav link click
-  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  async function submitReview() {
+    if (!selectedStars) { showToast('Please select a star rating.'); return; }
+    const text = document.getElementById('reviewText').value.trim();
+    if (!text) { showToast('Please write a short review.'); return; }
 
-  // Mobile CTA buttons
-  document.getElementById('mobileSubmitBtn').addEventListener('click', () => {
-    closeMenu();
-    window._openSubmitModal && window._openSubmitModal();
-  });
-  document.getElementById('mobileJoinBtn').addEventListener('click', () => {
-    closeMenu();
-    window._openJoinModal && window._openJoinModal();
-  });
+    const btn = document.getElementById('reviewSubmitBtn');
+    btn.disabled = true; btn.textContent = 'Submitting...';
 
-  // Close on Escape
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeMenu();
-  });
-})();
+    const { error } = await sb.from('reviews').insert({
+      user_id: currentUser.id,
+      business_id: currentReviewBizId,
+      business_name: currentReviewBizName,
+      rating: selectedStars,
+      review_text: text,
+      created_at: new Date().toISOString()
+    });
+
+    btn.disabled = false; btn.textContent = 'Submit review';
+
+    if (error) {
+      showToast('Something went wrong. Please try again.');
+    } else if (event !== 'INITIAL_SESSION') {
+      closeReview();
+      showToast('Thank you for your review!', true);
+    }
+  }
+
+  // ─── PENDING ACTION (after login/register) ───
+  async function executePendingAction() {
+    if (!pendingAction) return;
+    const a = pendingAction;
+    pendingAction = null;
+    if (a.type === 'fav' && a.btn) {
+      await toggleFav(a.btn, a.id, a.name);
+    } else if (a.type === 'review') {
+      openReview(a.id, a.name);
+    }
+  }
 </script>
+
 </body>
 </html>

@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231A4F8A'/%3E%3Ctext x='16' y='22' font-family='Arial Black,sans-serif' font-size='16' font-weight='900' fill='white' text-anchor='middle'%3EEB%3C/text%3E%3C/svg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Doctors & Specialists in Bratislava — ExpatBase Slovakia</title>
-<meta name="description" content="Find English-speaking doctors and specialists in Bratislava. GPs, dermatologists, dentists and more.">
+<title>Doctors & Specialists in Bratislava — ExpatEase Slovakia</title>
+<meta name="description" content="Find English-speaking doctors and specialists in Bratislava. 48 verified listings, updated weekly. GPs, dermatologists, dentists and more.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
@@ -67,11 +66,29 @@
     text-decoration: none;
   }
   .nav-logo-mark {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: -0.5px;
     flex-shrink: 0;
-    display: flex; align-items: center;
-    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
   }
-  .nav-logo:hover .nav-logo-mark { transform: scale(1.08); }
+  .nav-logo-mark::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  .nav-logo:hover .nav-logo-mark::after { transform: translateX(100%); }
   .nav-logo-text {
     font-family: var(--font-head);
     font-weight: 700;
@@ -147,14 +164,6 @@
     overflow: hidden;
     display: inline-flex; align-items: center; gap: 6px;
   }
-  .nav.scrolled #joinCommunityBtn {
-    border-color: var(--blue);
-    color: var(--blue);
-    background: transparent;
-  }
-  .nav.scrolled #joinCommunityBtn:hover {
-    background: var(--blue-light);
-  }
   .nav-cta::after {
     content: '';
     position: absolute;
@@ -178,15 +187,8 @@
   }
   .hero-dept-bg {
     position: absolute; inset: 0;
-    background-image: url('doctor.webp');
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(135deg, var(--blue-dark) 0%, #0a2240 100%);
     z-index: 0;
-  }
-  .hero-dept-bg::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(15,51,96,0.78) 0%, rgba(10,34,64,0.72) 100%);
   }
   /* SVG noise texture overlay */
   .hero-dept-noise {
@@ -1014,8 +1016,14 @@
     margin-bottom: 16px;
   }
   .footer-logo-mark {
-    flex-shrink: 0;
-    display: flex; align-items: center;
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 16px;
+    color: white;
   }
   .footer-logo-text {
     font-family: var(--font-head);
@@ -1194,64 +1202,22 @@
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
-
-  /* ── Mobile hamburger ── */
-  .nav-toggle { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
-  .nav-toggle span { display:block; width:24px; height:2px; background:#fff; border-radius:2px; transition:0.3s; }
-  @media(max-width:768px){
-    .nav-links,.nav-right,.lang-toggle{ display:none!important; }
-    .nav-toggle{ display:flex; }
-  }
-  .mobile-drawer { position:fixed; inset:0; background:rgba(15,51,96,0.97); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px; transform:translateX(100%); transition:transform 0.3s ease; }
-  .mobile-drawer.open{ transform:translateX(0); }
-  .mobile-drawer a,.mobile-drawer button{ color:#fff; text-decoration:none; font-size:1.2rem; font-weight:600; background:none; border:none; cursor:pointer; }
-  .mobile-drawer .close-btn{ position:absolute; top:20px; right:24px; font-size:2rem; background:none; border:none; color:#fff; cursor:pointer; }
-
 </style>
 </head>
 <body>
-<!-- SVG LOGO DEFS — reused across navbar and footer -->
-<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
-  <defs>
-    <linearGradient id="ebGrad" x1="0%" y1="0%" x2="90%" y2="110%">
-      <stop offset="0%"   stop-color="#1A4F8A"/>
-      <stop offset="100%" stop-color="#2E9E6B"/>
-    </linearGradient>
-    <linearGradient id="ebGradLight" x1="0%" y1="0%" x2="90%" y2="110%">
-      <stop offset="0%"   stop-color="#2E6FC4"/>
-      <stop offset="100%" stop-color="#35B87C"/>
-    </linearGradient>
-    <radialGradient id="ebHighlight" cx="38%" cy="28%" r="62%">
-      <stop offset="0%"   stop-color="white" stop-opacity=".22"/>
-      <stop offset="100%" stop-color="white" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="ebShadow" x="-25%" y="-10%" width="150%" height="160%">
-      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1A4F8A" flood-opacity=".30"/>
-    </filter>
-    <filter id="ebGlow" x="-30%" y="-15%" width="160%" height="170%">
-      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#2E9E6B" flood-opacity=".45"/>
-    </filter>
-    <symbol id="eb-icon" viewBox="0 0 120 140">
-      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
-        fill="url(#ebGrad)" filter="url(#ebShadow)"/>
-      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
-        fill="url(#ebHighlight)"/>
-      <text x="60" y="55" text-anchor="middle" dominant-baseline="middle"
-        font-family="'Urbanist','Segoe UI',system-ui,sans-serif"
-        font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
-    </symbol>
-  </defs>
-</svg>
 
+<!-- ═══════════════════════════════════════
+     NAVBAR — identical to index.html
+═══════════════════════════════════════ -->
 <nav class="nav" id="navbar">
   <a href="index.html" class="nav-logo">
-    <div class="nav-logo-mark">
-      <svg width="28" height="33" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon"/></svg>
-    </div>
-    <span class="nav-logo-text">ExpatBase</span>
+    <div class="nav-logo-mark">EE</div>
+    <span class="nav-logo-text">ExpatEase</span>
   </a>
   <ul class="nav-links">
+    <!-- Active: Find Experts -->
     <li><a href="index.html#categories" class="active">Find Experts</a></li>
+    <li><a href="index.html#bureaucracy">Bureaucracy</a></li>
     <li><a href="index.html#blog">Blog</a></li>
     <li><a href="index.html#about">About</a></li>
   </ul>
@@ -1260,64 +1226,457 @@
       <button class="lang-btn active" id="btn-en">EN</button>
       <button class="lang-btn" id="btn-sk">SK</button>
     </div>
-    <button class="nav-cta" onclick="window.location='index.html#submit'">
+    <a href="index.html" class="nav-cta">
       + Submit a Business
-    </button>
-    <a href="index.html#join" class="nav-cta" style="background:transparent; border:1px solid rgba(255,255,255,0.4); margin-left:4px;" id="joinCommunityBtn">
+    </a>
+    <a href="index.html" class="nav-cta" style="background: transparent; border: 1px solid rgba(255,255,255,0.4); margin-left: 4px;" id="joinCommunityBtn">
       Join the community
     </a>
   </div>
-  <button class="nav-toggle" id="navToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="mobile-drawer" id="mobileDrawer">
-  <button class="close-btn" id="mobileClose" aria-label="Close menu">&times;</button>
-  <a href="index.html#categories">Find Experts</a>
-  <a href="index.html#blog">Blog</a>
-  <a href="index.html#about">About</a>
-  <button onclick="window.location='index.html#submit'">+ Submit a Business</button>
-  <a href="index.html#join">Join the Community</a>
-</div>
-
-
 <!-- ═══════════════════════════════════════
-     HERO SECTION
+     HERO — department variant, min 560px
+     No real photo — gradient placeholder
+     (Client will add real photo via Cloudflare dashboard later)
 ═══════════════════════════════════════ -->
-<div class="hero-dept">
+<section class="hero-dept" id="hero">
   <div class="hero-dept-bg"></div>
   <div class="hero-dept-noise"></div>
   <div class="hero-dept-glow"></div>
   <div class="hero-dept-bottom"></div>
+
   <div class="hero-dept-content">
+    <!-- EYEBROW -->
     <div class="hero-eyebrow">
-      <span class="hero-eyebrow-text">Healthcare in Bratislava</span>
+      <span style="font-size:16px;">🇸🇰</span>
+      <span class="hero-eyebrow-text">Bratislava · Doctors &amp; Specialists</span>
     </div>
-    <h1 class="hero-h1">Find an English-speaking doctor in Slovakia</h1>
-    <p class="hero-sub">GPs, specialists, dentists and therapists — all vetted, all fluent.</p>
+
+    <!-- H1 -->
+    <h1 class="hero-h1">Find a doctor who actually speaks your language.</h1>
+
+    <!-- SUBLINE -->
+    <p class="hero-sub">Slovakia has excellent healthcare — but navigating it without Slovak is a different story. We've done the finding so you don't have to.</p>
+
+    <!-- TRUST BAR -->
     <div class="hero-trust-bar">
-      <div class="hero-trust-item">
-        <span class="hero-trust-icon">🩺</span>
-        <span class="hero-trust-value">40+</span>
-        <span class="hero-trust-label">Listed doctors</span>
+      <div class="trust-stat">
+        <div>
+          <strong>48</strong>
+          verified doctors
+        </div>
       </div>
-      <div class="hero-trust-item">
-        <span class="hero-trust-icon">🌍</span>
-        <span class="hero-trust-value">12+</span>
-        <span class="hero-trust-label">Specialties</span>
+      <div class="trust-stat">
+        <div>
+          <strong>EN · DE</strong>
+          &amp; more languages
+        </div>
       </div>
-      <div class="hero-trust-item">
-        <span class="hero-trust-icon">🗣️</span>
-        <span class="hero-trust-value">100%</span>
-        <span class="hero-trust-label">English-speaking</span>
+      <div class="trust-stat">
+        <div>
+          <strong>Updated</strong>
+          weekly
+        </div>
       </div>
     </div>
+
+    <!-- CTAs -->
     <div class="hero-ctas">
-      <a href="index.html#categories" class="hero-cta-primary">Find a Doctor</a>
-      <a href="index.html#join" class="hero-cta-secondary">Join the community</a>
+      <a href="#doctors-grid" class="btn-primary-green">
+        Browse all doctors
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="#how-healthcare" class="btn-ghost-white">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="12" r="1" fill="currentColor"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        How Slovak healthcare works
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     BREADCRUMB
+═══════════════════════════════════════ -->
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="index.html">ExpatEase</a>
+    <span class="breadcrumb-sep">›</span>
+    <a href="index.html#categories">Find Experts</a>
+    <span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">Doctors &amp; Specialists</span>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     FILTER BAR — sticky below nav
+     Mobile: collapses into drawer
+═══════════════════════════════════════ -->
+<div class="filter-bar" id="filterBar">
+  <div class="filter-bar-inner">
+    <!-- Desktop filters -->
+    <div class="filter-desktop">
+      <!-- Specialty -->
+      <div class="filter-group">
+        <span class="filter-label">Specialty</span>
+        <select class="filter-select" id="filterSpecialty" aria-label="Filter by specialty">
+          <option value="">All specialties</option>
+          <option>General Practitioner</option>
+          <option>Cardiologist</option>
+          <option>Dermatologist</option>
+          <option>Pediatrician</option>
+          <option>Gynecologist</option>
+          <option>Dentist</option>
+          <option>Psychiatrist</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <!-- Language pills -->
+      <div class="filter-group">
+        <span class="filter-label">Language</span>
+        <div class="lang-pills" role="group" aria-label="Filter by language">
+          <button class="lang-pill active" data-lang="en">🇬🇧 EN</button>
+          <button class="lang-pill" data-lang="de">🇩🇪 DE</button>
+          <button class="lang-pill" data-lang="fr">🇫🇷 FR</button>
+          <button class="lang-pill" data-lang="ru">🇷🇺 RU</button>
+          <button class="lang-pill" data-lang="ua">🇺🇦 UA</button>
+          <button class="lang-pill" data-lang="hu">🇭🇺 HU</button>
+        </div>
+      </div>
+
+      <!-- District -->
+      <div class="filter-group">
+        <span class="filter-label">District</span>
+        <select class="filter-select" id="filterDistrict" aria-label="Filter by district">
+          <option value="">All districts</option>
+          <option>Staré Mesto</option>
+          <option>Ružinov</option>
+          <option>Petržalka</option>
+          <option>Karlova Ves</option>
+          <option>Online</option>
+        </select>
+      </div>
+
+      <!-- Insurance -->
+      <div class="filter-group">
+        <span class="filter-label">Insurance</span>
+        <div class="ins-pills" role="group" aria-label="Filter by insurance">
+          <button class="ins-pill" data-ins="vszp">VšZP</button>
+          <button class="ins-pill" data-ins="dovera">Dôvera</button>
+          <button class="ins-pill" data-ins="union">Union</button>
+          <button class="ins-pill" data-ins="selfpay">Self-pay</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile toggle button -->
+    <button class="filter-mobile-btn" id="filterMobileBtn" aria-expanded="false" aria-controls="filterDrawer">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="12" y1="18" x2="20" y2="18"/></svg>
+      Filters
+    </button>
+
+    <!-- Reset -->
+    <button class="filter-reset" id="filterReset" aria-label="Reset all filters">Reset filters</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     RESULTS BAR
+═══════════════════════════════════════ -->
+<div class="results-bar">
+  <div class="results-bar-inner">
+    <p class="results-count">Showing <strong>48 doctors</strong></p>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <label for="sortSelect" style="font-size:13px; color:var(--gray-400); font-weight:500; white-space:nowrap;">Sort by:</label>
+      <select class="sort-select" id="sortSelect" aria-label="Sort results">
+        <option>Relevance</option>
+        <option>Rating (highest first)</option>
+        <option>Reviews (most first)</option>
+        <option>Newly added</option>
+      </select>
     </div>
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════
+     DOCTOR CARDS GRID
+     6 mock cards — template for real data
+═══════════════════════════════════════ -->
+<div class="cards-section" id="doctors-grid">
+  <div class="doctor-grid">
+
+    <!-- CARD 1: GP -->
+    <article class="doctor-card">
+      <div class="card-header">
+        <!-- Avatar: initials as placeholder for real photo -->
+        <div class="doctor-avatar" aria-label="MUDr. Jana Kovářová">JK</div>
+        <div class="card-header-info">
+          <div class="doctor-name">MUDr. Jana Kovářová</div>
+          <div class="doctor-specialty">General Practitioner</div>
+        </div>
+      </div>
+      <!-- Language badges — most prominent for expats -->
+      <div class="lang-badges">
+        <span class="lang-badge">🇬🇧 English</span>
+        <span class="lang-badge">🇩🇪 Deutsch</span>
+      </div>
+      <span class="avail-badge avail-open">Accepting new patients</span>
+      <div class="card-meta" style="margin-top:12px;">
+        <div class="card-meta-item">
+          <span class="card-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          Staré Mesto · Špitálska 12, BA I
+        </div>
+        <div class="card-meta-item">
+          <span class="card-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          +421 2 5441 2233
+        </div>
+      </div>
+      <div class="card-insurance">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span class="ins-tag">VšZP</span>
+        <span class="ins-tag">Dôvera</span>
+        <span class="ins-tag">Union</span>
+      </div>
+      <div class="card-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        <span class="rating-num">4.9</span>
+        <span class="rating-count">(42 reviews)</span>
+      </div>
+      <div class="card-footer">
+        <a href="profile.html" class="btn-view-profile">
+          View Profile
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- CARD 2: Cardiologist -->
+    <article class="doctor-card">
+      <div class="card-header">
+        <div class="doctor-avatar" aria-label="MUDr. Tomáš Novák">TN</div>
+        <div class="card-header-info">
+          <div class="doctor-name">MUDr. Tomáš Novák, PhD.</div>
+          <div class="doctor-specialty">Cardiologist</div>
+        </div>
+      </div>
+      <div class="lang-badges">
+        <span class="lang-badge">🇬🇧 English</span>
+        <span class="lang-badge">🇫🇷 Français</span>
+      </div>
+      <span class="avail-badge avail-waitlist">Waitlist only</span>
+      <div class="card-meta" style="margin-top:12px;">
+        <div class="card-meta-item">
+          <span class="card-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          Ružinov · Ružinovská 6, BA II
+        </div>
+        <div class="card-meta-item">
+          <span class="card-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+          cardio-ba.sk
+        </div>
+      </div>
+      <div class="card-insurance">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span class="ins-tag">Self-pay</span>
+        <span class="ins-tag">VšZP</span>
+      </div>
+      <div class="card-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        <span class="rating-num">4.8</span>
+        <span class="rating-count">(29 reviews)</span>
+      </div>
+      <div class="card-footer">
+        <a href="profile.html" class="btn-view-profile">
+          View Profile
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- CARD 3: Dermatologist -->
+    <article class="doctor-card">
+      <div class="card-header">
+        <div class="doctor-avatar" aria-label="MUDr. Elena Horáková">EH</div>
+        <div class="card-header-info">
+          <div class="doctor-name">MUDr. Elena Horáková</div>
+          <div class="doctor-specialty">Dermatologist</div>
+        </div>
+      </div>
+      <div class="lang-badges">
+        <span class="lang-badge">🇬🇧 English</span>
+        <span class="lang-badge">🇩🇪 Deutsch</span>
+        <span class="lang-badge">🇷🇺 Русский</span>
+      </div>
+      <span class="avail-badge avail-open">Accepting new patients</span>
+      <div class="card-meta" style="margin-top:12px;">
+        <div class="card-meta-item">
+          <span class="card-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          Karlova Ves · Molecova 2, BA IV
+        </div>
+        <div class="card-meta-item">
+          <span class="card-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          +421 911 234 567
+        </div>
+      </div>
+      <div class="card-insurance">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span class="ins-tag">Dôvera</span>
+        <span class="ins-tag">Union</span>
+        <span class="ins-tag">Self-pay</span>
+      </div>
+      <div class="card-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star" style="color:var(--gray-100)">★</span>
+        <span class="rating-num">4.6</span>
+        <span class="rating-count">(18 reviews)</span>
+      </div>
+      <div class="card-footer">
+        <a href="profile.html" class="btn-view-profile">
+          View Profile
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- CARD 4: Pediatrician -->
+    <article class="doctor-card">
+      <div class="card-header">
+        <div class="doctor-avatar" aria-label="MUDr. Martin Blaho">MB</div>
+        <div class="card-header-info">
+          <div class="doctor-name">MUDr. Martin Blaho</div>
+          <div class="doctor-specialty">Pediatrician</div>
+        </div>
+      </div>
+      <div class="lang-badges">
+        <span class="lang-badge">🇬🇧 English</span>
+        <span class="lang-badge">🇭🇺 Magyar</span>
+      </div>
+      <span class="avail-badge avail-open">Accepting new patients</span>
+      <div class="card-meta" style="margin-top:12px;">
+        <div class="card-meta-item">
+          <span class="card-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          Petržalka · Černyševského 18, BA V
+        </div>
+        <div class="card-meta-item">
+          <span class="card-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          +421 2 6353 1100
+        </div>
+      </div>
+      <div class="card-insurance">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span class="ins-tag">VšZP</span>
+        <span class="ins-tag">Dôvera</span>
+        <span class="ins-tag">Union</span>
+      </div>
+      <div class="card-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        <span class="rating-num">4.9</span>
+        <span class="rating-count">(55 reviews)</span>
+      </div>
+      <div class="card-footer">
+        <a href="profile.html" class="btn-view-profile">
+          View Profile
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- CARD 5: Dentist -->
+    <article class="doctor-card">
+      <div class="card-header">
+        <div class="doctor-avatar" aria-label="MDDr. Katarína Szabó">KS</div>
+        <div class="card-header-info">
+          <div class="doctor-name">MDDr. Katarína Szabó</div>
+          <div class="doctor-specialty">Dentist &amp; Oral Surgeon</div>
+        </div>
+      </div>
+      <div class="lang-badges">
+        <span class="lang-badge">🇬🇧 English</span>
+        <span class="lang-badge">🇩🇪 Deutsch</span>
+        <span class="lang-badge">🇺🇦 Українська</span>
+      </div>
+      <span class="avail-badge avail-waitlist">Waitlist only</span>
+      <div class="card-meta" style="margin-top:12px;">
+        <div class="card-meta-item">
+          <span class="card-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          Staré Mesto · Obchodná 34, BA I
+        </div>
+        <div class="card-meta-item">
+          <span class="card-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+          szabo-dental.sk
+        </div>
+      </div>
+      <div class="card-insurance">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span class="ins-tag">Self-pay</span>
+      </div>
+      <div class="card-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        <span class="rating-num">5.0</span>
+        <span class="rating-count">(37 reviews)</span>
+      </div>
+      <div class="card-footer">
+        <a href="profile.html" class="btn-view-profile">
+          View Profile
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- CARD 6: Psychiatrist / Online -->
+    <article class="doctor-card">
+      <div class="card-header">
+        <div class="doctor-avatar" aria-label="PhDr. Andrei Voicu">AV</div>
+        <div class="card-header-info">
+          <div class="doctor-name">PhDr. Andrei Voicu</div>
+          <div class="doctor-specialty">Psychiatrist &amp; Psychotherapist</div>
+        </div>
+      </div>
+      <div class="lang-badges">
+        <span class="lang-badge">🇬🇧 English</span>
+        <span class="lang-badge">🇫🇷 Français</span>
+        <span class="lang-badge">🇷🇺 Русский</span>
+      </div>
+      <span class="avail-badge avail-open">Accepting new patients</span>
+      <div class="card-meta" style="margin-top:12px;">
+        <div class="card-meta-item">
+          <span class="card-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
+          Online consultations available
+        </div>
+        <div class="card-meta-item">
+          <span class="card-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          Ružinov · also online (EU clients)
+        </div>
+      </div>
+      <div class="card-insurance">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span class="ins-tag">Self-pay</span>
+        <span class="ins-tag">Union</span>
+      </div>
+      <div class="card-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star" style="color:var(--gray-100)">★</span>
+        <span class="rating-num">4.7</span>
+        <span class="rating-count">(22 reviews)</span>
+      </div>
+      <div class="card-footer">
+        <a href="profile.html" class="btn-view-profile">
+          View Profile
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </article>
+
+  </div><!-- /doctor-grid -->
+</div><!-- /cards-section -->
+
+<!-- ═══════════════════════════════════════
+     LOAD MORE
+═══════════════════════════════════════ -->
+<div class="load-more-wrap">
+  <button class="btn-load-more" aria-label="Load 12 more doctors">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    Load 12 more doctors
+  </button>
+</div>
 
 <!-- ═══════════════════════════════════════
      EDUCATIONAL SECTION — How Slovak Healthcare Works
@@ -1379,7 +1738,7 @@
             </div>
           </div>
           <div class="faq-answer">
-            Not necessarily — but it helps. All doctors listed here speak at least English. That said, administrative staff at clinics and hospitals may only speak Slovak. When booking an appointment, specify that you need an English-speaking doctor. Our listings clearly show which languages each doctor speaks.
+            Not necessarily — but it helps. All 48 doctors listed here speak at least English. That said, administrative staff at clinics and hospitals may only speak Slovak. When booking an appointment, specify that you need an English-speaking doctor. Our listings clearly show which languages each doctor speaks.
           </div>
         </div>
 
@@ -1451,7 +1810,7 @@
 
     <div class="related-grid">
       <!-- Lawyers -->
-      <a href="lawyers.html" class="related-card">
+      <a href="#" class="related-card">
         <div class="related-card-inner">
           <div class="related-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -1459,14 +1818,14 @@
           <div class="related-name">Lawyers &amp; Legal</div>
           <p class="related-desc">Residence permits, employment contracts, property law — all explained in English.</p>
           <span class="related-link">
-            Explore listings
+            Browse 31 lawyers
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </span>
         </div>
       </a>
 
       <!-- Banks -->
-      <a href="banks.html" class="related-card">
+      <a href="#" class="related-card">
         <div class="related-card-inner">
           <div class="related-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
@@ -1474,14 +1833,14 @@
           <div class="related-name">Banks &amp; Finance</div>
           <p class="related-desc">Open a Slovak bank account, understand your tax obligations, find an accountant.</p>
           <span class="related-link">
-            Explore listings
+            Browse 14 listings
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </span>
         </div>
       </a>
 
       <!-- Real Estate -->
-      <a href="real-estate.html" class="related-card">
+      <a href="#" class="related-card">
         <div class="related-card-inner">
           <div class="related-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -1489,7 +1848,7 @@
           <div class="related-name">Real Estate</div>
           <p class="related-desc">Find English-speaking agents and landlords who understand expat needs and contracts.</p>
           <span class="related-link">
-            Explore listings
+            Browse 34 listings
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </span>
         </div>
@@ -1501,22 +1860,13 @@
 <!-- ═══════════════════════════════════════
      FOOTER — identical to index.html
 ═══════════════════════════════════════ -->
-
-<div style="max-width:1200px; margin:0 auto 0; padding:0 48px 40px;">
-  <p style="font-size:12px; color:var(--gray-400); line-height:1.7; font-weight:300;">
-    <strong style="color:var(--gray-700);">ℹ️ For information only.</strong>
-    The content on this page is provided as general guidance for expats and does not constitute professional medical, legal, or financial advice. Always consult a qualified professional before making decisions.
-  </p>
-</div>
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-logo">
-          <div class="footer-logo-mark">
-            <svg width="32" height="37" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light"/></svg>
-          </div>
-          <div class="footer-logo-text">ExpatBase Slovakia</div>
+          <div class="footer-logo-mark">EE</div>
+          <div class="footer-logo-text">ExpatEase Slovakia</div>
         </div>
         <p class="footer-tagline">Life in Slovakia, made simple. The #1 resource for English-speaking expats in Bratislava.</p>
         <div class="footer-socials">
@@ -1537,25 +1887,43 @@
       <div>
         <div class="footer-col-title">Find Experts</div>
         <ul class="footer-links">
-          <li><a href="doctors.html">Doctors &amp; Specialists</a></li>
-          <li><a href="lawyers.html">Lawyers &amp; Legal</a></li>
-          <li><a href="banks.html">Banks &amp; Finance</a></li>
-          <li><a href="barbers.html">Beauty &amp; Wellness</a></li>
-          <li><a href="plumbers.html">Handymen</a></li>
-          <li><a href="builders.html">Builders &amp; Construction</a></li>
-          <li><a href="vets.html">Vets &amp; Pet Care</a></li>
-          <li><a href="schools.html">Schools &amp; Education</a></li>
-          <li><a href="moving.html">Moving &amp; Relocation</a></li>
-          <li><a href="sports.html">Sports &amp; Fitness</a></li>
-          <li><a href="index.html#categories">All categories →</a></li>
+          <li><a href="#">Doctors &amp; Specialists</a></li>
+          <li><a href="#">Lawyers &amp; Legal</a></li>
+          <li><a href="#">Banks &amp; Finance</a></li>
+          <li><a href="#">Barbers &amp; Hairdressers</a></li>
+          <li><a href="#">Electricians</a></li>
+          <li><a href="#">Plumbers</a></li>
+          <li><a href="#">All categories →</a></li>
         </ul>
       </div>
+      <div>
+        <div class="footer-col-title">Bureaucracy</div>
+        <ul class="footer-links">
+          <li><a href="#">Form Translator</a></li>
+          <li><a href="#">Residence Permit Guide</a></li>
+          <li><a href="#">Health Insurance</a></li>
+          <li><a href="#">Bank Account Setup</a></li>
+          <li><a href="#">Trade License (Živnosť)</a></li>
+          <li><a href="#">All guides →</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <ul class="footer-links">
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Newsletter</a></li>
+          <li><a href="#">Submit a Business</a></li>
+          <li><a href="#">About ExpatEase</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 ExpatBase Slovakia. All rights reserved.</div>
+      <div class="footer-copy">© 2026 ExpatEase Slovakia. All rights reserved.</div>
       <div class="footer-legal">
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Use</a>
-        <a href="cookie-policy.html">Cookie Policy</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Policy</a>
       </div>
     </div>
   </div>
