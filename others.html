@@ -1343,6 +1343,41 @@
   .mob-btn-ghost { background: transparent; color: rgba(255,255,255,0.8); border: 1.5px solid rgba(255,255,255,0.25) !important; }
   .mob-btn-ghost:hover { background: rgba(255,255,255,0.08); color: white; }
 
+
+  /* ─── EMPTY STATE ─── */
+  .empty-state {
+    padding: 72px 24px 80px;
+    text-align: center;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+  .empty-state-icon {
+    width: 68px; height: 68px;
+    border-radius: 50%;
+    background: var(--gray-50);
+    border: 2px solid var(--gray-100);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 22px;
+    color: var(--gray-400);
+  }
+  .empty-state-title {
+    font-family: var(--font-head);
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 10px;
+  }
+  .empty-state-desc {
+    font-size: 14.5px;
+    color: var(--gray-400);
+    line-height: 1.65;
+    margin-bottom: 26px;
+  }
+  .empty-state .btn-primary-green {
+    display: inline-flex; align-items: center; gap: 8px;
+    text-decoration: none;
+  }
+
 </style>
 
 </head>
@@ -1465,25 +1500,42 @@
   <div class="filter-bar-inner">
     <div class="filter-desktop">
       
-    <div class="filter-group">
-      <label class="filter-label" for="filterAnimal">Animal</label>
-      <select class="filter-select" id="filterAnimal"><option value="">All animals</option><option>Dogs</option><option>Cats</option><option>Small animals</option><option>Exotic animals</option><option>Birds</option></select>
-    </div>
-    <div class="filter-group">
-      <label class="filter-label" for="filterService">Service</label>
-      <select class="filter-select" id="filterService"><option value="">All services</option><option>General practice</option><option>Emergency / 24h</option><option>Surgery &amp; orthopedics</option><option>Dental</option><option>Dermatology</option><option>Exotic specialist</option></select>
-    </div>
-    <div class="filter-group">
-      <label class="filter-label" for="filterDistrict">District</label>
-      <select class="filter-select" id="filterDistrict"><option value="">All districts</option><option>Staré Mesto</option><option>Ružinov</option><option>Petržalka</option><option>Nové Mesto</option><option>Karlova Ves</option></select>
-    </div><div class="filter-group">
-      <label class="filter-label">Language</label>
-      <div class="lang-pills">
-        <button class="lang-pill" type="button">EN</button>
-        <button class="lang-pill" type="button">DE</button>
-        <button class="lang-pill" type="button">HU</button>
+      <div class="filter-group">
+        <span class="filter-label">Service</span>
+        <select class="filter-select" id="filterService" aria-label="Filter by service">
+          <option value="">All services</option>
+          <option>Cleaning</option>
+          <option>Gardening</option>
+          <option>IT Support</option>
+          <option>Photography &amp; Video</option>
+          <option>Childcare &amp; Au pair</option>
+          <option>Translation</option>
+          <option>Personal Trainer</option>
+          <option>Events &amp; Entertainment</option>
+          <option>Other</option>
+        </select>
       </div>
-    </div>
+      <div class="filter-group">
+        <span class="filter-label">Language</span>
+        <div class="lang-pills" role="group" aria-label="Filter by language">
+          <button class="lang-pill active" data-lang="en">🇬🇧 EN</button>
+          <button class="lang-pill" data-lang="de">🇩🇪 DE</button>
+          <button class="lang-pill" data-lang="fr">🇫🇷 FR</button>
+          <button class="lang-pill" data-lang="ru">🇷🇺 RU</button>
+          <button class="lang-pill" data-lang="ua">🇺🇦 UA</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">District</span>
+        <select class="filter-select" id="filterDistrict" aria-label="Filter by district">
+          <option value="">All districts</option>
+          <option>Staré Mesto</option>
+          <option>Ružinov</option>
+          <option>Petržalka</option>
+          <option>Nové Mesto</option>
+          <option>Karlova Ves</option>
+        </select>
+      </div>
       <button class="filter-reset" id="filterReset">Reset filters</button>
     </div>
     <button class="filter-mobile-btn" id="filterMobileBtn" aria-expanded="false" aria-controls="filterDrawerOverlay">
@@ -1865,17 +1917,18 @@
     <div class="drawer-title">Filter results</div>
     
 <div class="drawer-section">
-  <div class="drawer-section-title">Animal type</div>
-  <select class="filter-select" style="width:100%">
-    <option>All animals</option><option>Dogs</option><option>Cats</option>
-    <option>Small animals</option><option>Exotic animals</option>
-  </select>
-</div>
-<div class="drawer-section">
   <div class="drawer-section-title">Service</div>
   <select class="filter-select" style="width:100%">
-    <option>All services</option><option>General practice</option><option>Emergency / 24h</option>
-    <option>Surgery</option><option>Dental</option><option>Dermatology</option>
+    <option value="">All services</option>
+    <option>Cleaning</option>
+    <option>Gardening</option>
+    <option>IT Support</option>
+    <option>Photography &amp; Video</option>
+    <option>Childcare &amp; Au pair</option>
+    <option>Translation</option>
+    <option>Personal Trainer</option>
+    <option>Events &amp; Entertainment</option>
+    <option>Other</option>
   </select>
 </div>
 <div class="drawer-section">
