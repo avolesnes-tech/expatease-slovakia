@@ -194,11 +194,15 @@
     opacity: 0.045;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   }
-  /* Subtle radial glow */
+  /* Blue overlay — matches homepage readability */
   .hero-dept-glow {
-    position: absolute; inset: 0; z-index: 1;
-    background: radial-gradient(ellipse at 70% 40%, rgba(46,158,107,0.18) 0%, transparent 65%),
-                radial-gradient(ellipse at 20% 80%, rgba(26,79,138,0.25) 0%, transparent 60%);
+    position: absolute; inset: 0; z-index: 2;
+    background: linear-gradient(
+      105deg,
+      rgba(15,51,96,0.80) 0%,
+      rgba(26,79,138,0.62) 45%,
+      rgba(46,158,107,0.28) 100%
+    );
   }
   /* Bottom fade into white for smooth transition */
   .hero-dept-bottom {
