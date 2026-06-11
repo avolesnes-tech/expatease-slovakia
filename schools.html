@@ -1195,18 +1195,6 @@
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
 
-  /* ── Mobile hamburger ── */
-  .nav-toggle { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
-  .nav-toggle span { display:block; width:24px; height:2px; background:#fff; border-radius:2px; transition:0.3s; }
-  @media(max-width:768px){
-    .nav-links,.nav-right,.lang-toggle{ display:none!important; }
-    .nav-toggle{ display:flex; }
-  }
-  .mobile-drawer { position:fixed; inset:0; background:rgba(15,51,96,0.97); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px; transform:translateX(100%); transition:transform 0.3s ease; }
-  .mobile-drawer.open{ transform:translateX(0); }
-  .mobile-drawer a,.mobile-drawer button{ color:#fff; text-decoration:none; font-size:1.2rem; font-weight:600; background:none; border:none; cursor:pointer; }
-  .mobile-drawer .close-btn{ position:absolute; top:20px; right:24px; font-size:2rem; background:none; border:none; color:#fff; cursor:pointer; }
-
 
   /* ── ExpatBase logo SVG nav behaviour ── */
   .nav-logo-svg { flex-shrink: 0; transition: opacity 0.28s ease; }
@@ -1216,6 +1204,145 @@
   .nav:not(.scrolled) .logo-use-dark  { display: none !important; }
   .footer-logo-mark { background: none !important; border-radius: 0 !important; width: auto !important; height: auto !important; }
   .auth-logo-mark { background: none !important; border-radius: 0 !important; width: auto !important; height: auto !important; color: inherit; }
+
+
+  /* ─── HAMBURGER & MOBILE DRAWER ─── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.2s;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+  .hamburger:hover { background: rgba(255,255,255,0.1); }
+  .nav.scrolled .hamburger:hover { background: var(--gray-50); }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    transform-origin: center;
+  }
+  .nav.scrolled .hamburger span { background: var(--gray-900); }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  @media (max-width: 860px) {
+    .hamburger { display: flex; }
+    .nav-right .lang-toggle { display: none; }
+    .nav-right #openSubmitModalBtn { display: none; }
+    .nav-right #joinCommunityBtn { display: none; }
+    .nav-right a.nav-cta { display: none; }
+  }
+  .mobile-overlay {
+    position: fixed; inset: 0;
+    background: rgba(10,18,35,0.65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.32s ease;
+  }
+  .mobile-overlay.open { opacity: 1; pointer-events: all; }
+  .mobile-drawer {
+    position: fixed;
+    top: 0; right: 0;
+    width: min(300px, 84vw);
+    height: 100dvh;
+    background: linear-gradient(160deg, #0d1829 0%, #0f1f14 100%);
+    z-index: 999;
+    transform: translateX(100%);
+    transition: transform 0.36s cubic-bezier(0.4,0,0.2,1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: -8px 0 40px rgba(0,0,0,0.4);
+  }
+  .mobile-drawer.open { transform: translateX(0); }
+  .mobile-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    flex-shrink: 0;
+  }
+  .mobile-close {
+    background: rgba(255,255,255,0.08);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: rgba(255,255,255,0.75);
+    font-size: 20px;
+    line-height: 1;
+    transition: background 0.2s, color 0.2s;
+    flex-shrink: 0;
+  }
+  .mobile-close:hover { background: rgba(255,255,255,0.15); color: white; }
+  .mobile-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 12px;
+    gap: 2px;
+    overflow-y: auto;
+  }
+  .mobile-nav a {
+    text-decoration: none;
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 19px;
+    color: rgba(255,255,255,0.82);
+    padding: 14px 16px;
+    border-radius: 12px;
+    transition: all 0.2s;
+    letter-spacing: -0.02em;
+    display: block;
+  }
+  .mobile-nav a:hover, .mobile-nav a.active {
+    background: rgba(255,255,255,0.07);
+    color: white;
+  }
+  .mobile-drawer-footer {
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .mobile-drawer-footer .mob-btn {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 13px 20px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .mob-btn-primary { background: var(--green); color: white; }
+  .mob-btn-primary:hover { background: var(--green-dark); }
+  .mob-btn-ghost { background: transparent; color: rgba(255,255,255,0.8); border: 1.5px solid rgba(255,255,255,0.25) !important; }
+  .mob-btn-ghost:hover { background: rgba(255,255,255,0.08); color: white; }
 
 </style>
 
@@ -1286,17 +1413,11 @@
       Join the community
     </a>
   </div>
-  <button class="nav-toggle" id="navToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<div class="mobile-drawer" id="mobileDrawer">
-  <button class="close-btn" id="mobileClose" aria-label="Close menu">&times;</button>
-  <a href="index.html#categories">Find Experts</a>
-  <a href="index.html#blog">Blog</a>
-  <a href="index.html#about">About</a>
-  <button onclick="window.location='index.html#submit'">+ Submit a Business</button>
-  <a href="index.html#join">Join the Community</a>
-</div>
 
 
 <!-- HERO -->
@@ -1861,6 +1982,29 @@
       this.style.cursor = 'default';
     }, 1000);
   });
+
+  // ── Mobile menu ──
+  (function() {
+    var hamburger = document.getElementById('hamburger');
+    var overlay   = document.getElementById('mobileOverlay');
+    var drawer    = document.getElementById('mobileDrawer');
+    var closeBtn  = document.getElementById('mobileClose');
+    if (!hamburger) return;
+    window.openMobileMenu = function() {
+      hamburger.classList.add('open'); overlay.classList.add('open'); drawer.classList.add('open');
+      document.body.style.overflow = 'hidden'; hamburger.setAttribute('aria-expanded','true');
+    };
+    window.closeMobileMenu = function() {
+      hamburger.classList.remove('open'); overlay.classList.remove('open'); drawer.classList.remove('open');
+      document.body.style.overflow = ''; hamburger.setAttribute('aria-expanded','false');
+    };
+    hamburger.addEventListener('click', function() { hamburger.classList.contains('open') ? closeMobileMenu() : openMobileMenu(); });
+    overlay.addEventListener('click', closeMobileMenu);
+    closeBtn.addEventListener('click', closeMobileMenu);
+    drawer.querySelectorAll('.mobile-nav a').forEach(function(a){ a.addEventListener('click', closeMobileMenu); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMobileMenu(); });
+  })();
+
 </script>
 </body>
 </html>
