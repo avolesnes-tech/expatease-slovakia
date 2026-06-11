@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Profile — ExpatEase Slovakia</title>
-<meta name="description" content="Manage your ExpatEase profile, favourites and reviews.">
+<title>My Profile — ExpatBase Slovakia</title>
+<meta name="description" content="Manage your ExpatBase profile, favourites and reviews.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
@@ -448,13 +448,61 @@
     .qa-grid { grid-template-columns: 1fr; }
     .info-grid { grid-template-columns: 1fr; }
   }
+
+  /* ── ExpatBase logo SVG nav behaviour ── */
+  .nav-logo-svg { flex-shrink: 0; transition: opacity 0.28s ease; }
+  .nav.scrolled .logo-use-light { display: none !important; }
+  .nav.scrolled .logo-use-dark  { display: inline !important; }
+  .nav:not(.scrolled) .logo-use-light { display: inline !important; }
+  .nav:not(.scrolled) .logo-use-dark  { display: none !important; }
+  .footer-logo-mark { background: none !important; border-radius: 0 !important; width: auto !important; height: auto !important; }
+  .auth-logo-mark { background: none !important; border-radius: 0 !important; width: auto !important; height: auto !important; color: inherit; }
+
 </style>
 </head>
 <body>
+<!-- ExpatBase logo symbols -->
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+  <defs>
+    <linearGradient id="ebGrad" x1="0%" y1="0%" x2="90%" y2="110%">
+      <stop offset="0%" stop-color="#1A4F8A"/><stop offset="100%" stop-color="#2E9E6B"/>
+    </linearGradient>
+    <linearGradient id="ebGradLight" x1="0%" y1="0%" x2="90%" y2="110%">
+      <stop offset="0%" stop-color="#2E6FC4"/><stop offset="100%" stop-color="#35B87C"/>
+    </linearGradient>
+    <radialGradient id="ebHighlight" cx="38%" cy="28%" r="62%">
+      <stop offset="0%" stop-color="white" stop-opacity=".22"/><stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="ebShadow" x="-25%" y="-10%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1A4F8A" flood-opacity=".28"/>
+    </filter>
+    <filter id="ebGlow" x="-30%" y="-15%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#2E9E6B" flood-opacity=".45"/>
+    </filter>
+    <symbol id="eb-icon" viewBox="0 0 120 140">
+      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebGrad)" filter="url(#ebShadow)"/>
+      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebHighlight)"/>
+      <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
+    </symbol>
+    <symbol id="eb-icon-light" viewBox="0 0 120 140">
+      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebGradLight)" filter="url(#ebGlow)"/>
+      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebHighlight)"/>
+      <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
+    </symbol>
+    <symbol id="eb-icon-mono" viewBox="0 0 120 140">
+      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="currentColor"/>
+      <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
+    </symbol>
+  </defs>
+</svg>
+
 
 <!-- NAV -->
 <nav class="nav">
-  <a href="index.html" class="nav-logo">Expat<span>Ease</span></a>
+  <a href="index.html" class="nav-logo">
+    <svg class="nav-logo-svg" width="27" height="32" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light" class="logo-use-light"/><use href="#eb-icon" class="logo-use-dark" style="display:none"/></svg>
+    <span class="nav-logo-text">ExpatBase</span>
+  </a>
   <a href="index.html" class="nav-back">
     <span class="nav-back-arrow">←</span> Back to directory
   </a>
@@ -659,12 +707,12 @@
       <div class="section-head">
         <h1 class="section-title">Suggest a Business</h1>
       </div>
-      <div class="section-sub">Know a great English-friendly place? Tell them about ExpatEase.</div>
+      <div class="section-sub">Know a great English-friendly place? Tell them about ExpatBase.</div>
 
       <div class="suggest-wrap">
         <div class="suggest-header">
           <div class="suggest-title">Know a great place? Tell them about us.</div>
-          <div class="suggest-sub">We'll send a short, friendly email from ExpatEase introducing our directory — no spam, just one message on your behalf.</div>
+          <div class="suggest-sub">We'll send a short, friendly email from ExpatBase introducing our directory — no spam, just one message on your behalf.</div>
         </div>
         <div class="suggest-body" id="suggestForm">
           <div class="form-field">
@@ -682,13 +730,13 @@
 
           <div class="email-preview">
             <div class="preview-label">Email preview</div>
-            <div class="preview-from" id="prevFrom">From: ExpatEase &lt;hello@expatease.sk&gt; · To: —</div>
-            <div class="preview-subject">Subject: We'd love to feature you on ExpatEase Slovakia</div>
+            <div class="preview-from" id="prevFrom">From: ExpatBase &lt;hello@expatease.sk&gt; · To: —</div>
+            <div class="preview-subject">Subject: We'd love to feature you on ExpatBase Slovakia</div>
             <div class="preview-body" id="prevBody">
               Hi <em id="prevName">there</em>,<br><br>
-              We run ExpatEase — a directory of English-friendly businesses in Bratislava, trusted by the local expat community. <em id="prevNote"></em>We'd love to list your business so more expats can discover you.<br><br>
+              We run ExpatBase — a directory of English-friendly businesses in Bratislava, trusted by the local expat community. <em id="prevNote"></em>We'd love to list your business so more expats can discover you.<br><br>
               Getting started is free. Reply to this email or visit <em>expatease.sk</em> to learn more.<br><br>
-              — The ExpatEase team
+              — The ExpatBase team
             </div>
           </div>
 
@@ -884,7 +932,7 @@ function renderBadges() {
         <div class="badge-ico">🏅</div>
         <div class="badge-text">
           <span class="badge-name">Early Member</span>
-          <span class="badge-desc">Joined in ExpatEase's first year</span>
+          <span class="badge-desc">Joined in ExpatBase's first year</span>
         </div>
       </div>`;
   }
@@ -1216,7 +1264,7 @@ function updateEmailPreview() {
   document.getElementById('prevName').textContent = name || 'there';
   document.getElementById('prevNote').textContent = note ? note + ' ' : '';
   document.getElementById('prevFrom').innerHTML =
-    `From: ExpatEase &lt;hello@expatease.sk&gt; · To: ${email || '—'}`;
+    `From: ExpatBase &lt;hello@expatease.sk&gt; · To: ${email || '—'}`;
 }
 
 async function submitSuggest() {

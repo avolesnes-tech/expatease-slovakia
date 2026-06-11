@@ -1207,6 +1207,16 @@
   .mobile-drawer a,.mobile-drawer button{ color:#fff; text-decoration:none; font-size:1.2rem; font-weight:600; background:none; border:none; cursor:pointer; }
   .mobile-drawer .close-btn{ position:absolute; top:20px; right:24px; font-size:2rem; background:none; border:none; color:#fff; cursor:pointer; }
 
+
+  /* ── ExpatBase logo SVG nav behaviour ── */
+  .nav-logo-svg { flex-shrink: 0; transition: opacity 0.28s ease; }
+  .nav.scrolled .logo-use-light { display: none !important; }
+  .nav.scrolled .logo-use-dark  { display: inline !important; }
+  .nav:not(.scrolled) .logo-use-light { display: inline !important; }
+  .nav:not(.scrolled) .logo-use-dark  { display: none !important; }
+  .footer-logo-mark { background: none !important; border-radius: 0 !important; width: auto !important; height: auto !important; }
+  .auth-logo-mark { background: none !important; border-radius: 0 !important; width: auto !important; height: auto !important; color: inherit; }
+
 </style>
 
 </head>
@@ -1255,9 +1265,7 @@
 
 <nav class="nav" id="navbar">
   <a href="index.html" class="nav-logo">
-    <div class="nav-logo-mark">
-      <svg width="28" height="33" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon"/></svg>
-    </div>
+    <svg class="nav-logo-svg" width="27" height="32" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light" class="logo-use-light"/><use href="#eb-icon" class="logo-use-dark" style="display:none"/></svg>
     <span class="nav-logo-text">ExpatBase</span>
   </a>
   <ul class="nav-links">

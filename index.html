@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ExpatEase Slovakia — Life in Slovakia, made simple.</title>
+<title>ExpatBase Slovakia — Life in Slovakia, made simple.</title>
 <meta name="description" content="Find English-speaking doctors, lawyers, tradespeople and more in Bratislava. Or decode any Slovak form in seconds.">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1967,15 +1967,60 @@
     .sm-submit-btn { max-width: 100%; }
     .sm-back-btn { text-align: center; }
   }
+
+  /* ── ExpatBase logo SVG nav behaviour ── */
+  .nav-logo-svg { flex-shrink: 0; transition: opacity 0.28s ease; }
+  .nav.scrolled .logo-use-light { display: none !important; }
+  .nav.scrolled .logo-use-dark  { display: inline !important; }
+  .nav:not(.scrolled) .logo-use-light { display: inline !important; }
+  .nav:not(.scrolled) .logo-use-dark  { display: none !important; }
+  .footer-logo-mark { background: none !important; border-radius: 0 !important; width: auto !important; height: auto !important; }
+  .auth-logo-mark { background: none !important; border-radius: 0 !important; width: auto !important; height: auto !important; color: inherit; }
+
 </style>
 </head>
 <body>
+<!-- ExpatBase logo symbols -->
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+  <defs>
+    <linearGradient id="ebGrad" x1="0%" y1="0%" x2="90%" y2="110%">
+      <stop offset="0%" stop-color="#1A4F8A"/><stop offset="100%" stop-color="#2E9E6B"/>
+    </linearGradient>
+    <linearGradient id="ebGradLight" x1="0%" y1="0%" x2="90%" y2="110%">
+      <stop offset="0%" stop-color="#2E6FC4"/><stop offset="100%" stop-color="#35B87C"/>
+    </linearGradient>
+    <radialGradient id="ebHighlight" cx="38%" cy="28%" r="62%">
+      <stop offset="0%" stop-color="white" stop-opacity=".22"/><stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="ebShadow" x="-25%" y="-10%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1A4F8A" flood-opacity=".28"/>
+    </filter>
+    <filter id="ebGlow" x="-30%" y="-15%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#2E9E6B" flood-opacity=".45"/>
+    </filter>
+    <symbol id="eb-icon" viewBox="0 0 120 140">
+      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebGrad)" filter="url(#ebShadow)"/>
+      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebHighlight)"/>
+      <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
+    </symbol>
+    <symbol id="eb-icon-light" viewBox="0 0 120 140">
+      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebGradLight)" filter="url(#ebGlow)"/>
+      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebHighlight)"/>
+      <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
+    </symbol>
+    <symbol id="eb-icon-mono" viewBox="0 0 120 140">
+      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="currentColor"/>
+      <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
+    </symbol>
+  </defs>
+</svg>
+
 
 <!-- NAVBAR -->
 <nav class="nav" id="navbar">
   <a href="#" class="nav-logo">
-    <div class="nav-logo-mark">EE</div>
-    <span class="nav-logo-text">ExpatEase</span>
+    <svg class="nav-logo-svg" width="27" height="32" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light" class="logo-use-light"/><use href="#eb-icon" class="logo-use-dark" style="display:none"/></svg>
+    <span class="nav-logo-text">ExpatBase</span>
   </a>
   <ul class="nav-links">
     <li><a href="#categories">Find Experts</a></li>
@@ -2061,7 +2106,7 @@
   <div class="section-inner">
     <div class="section-header reveal">
       <div class="section-label">Simple by design</div>
-      <h2 class="section-title">How ExpatEase works</h2>
+      <h2 class="section-title">How ExpatBase works</h2>
       <p class="section-sub">Three steps to finding exactly the help you need, in a language you understand.</p>
     </div>
     <div class="how-grid">
@@ -2176,11 +2221,19 @@
         </div>
         <span class="cat-arrow">→</span>
       </a>
-      <a href="#" class="cat-card reveal" style="transition-delay: 600ms">
+      <a href="sports.html" class="cat-card reveal" style="transition-delay: 600ms">
         <div class="cat-card-inner">
           <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span>
           <div class="cat-name">Sports & Leisure</div>
           <div class="cat-count">17 listings</div>
+        </div>
+        <span class="cat-arrow">→</span>
+      </a>
+      <a href="others.html" class="cat-card reveal" style="transition-delay: 660ms">
+        <div class="cat-card-inner">
+          <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+          <div class="cat-name">Others</div>
+          <div class="cat-count">Everything else →</div>
         </div>
         <span class="cat-arrow">→</span>
       </a>
@@ -2384,7 +2437,7 @@
         <div class="testimonial-stars">
           <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
         </div>
-        <p class="testimonial-text">I found my electrician through ExpatEase when I had an emergency at home. He spoke perfect English and arrived within two hours. Five stars.</p>
+        <p class="testimonial-text">I found my electrician through ExpatBase when I had an emergency at home. He spoke perfect English and arrived within two hours. Five stars.</p>
         <div class="testimonial-author">
           <div class="testimonial-avatar">AK</div>
           <div>
@@ -2403,8 +2456,10 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-logo">
-          <div class="footer-logo-mark">EE</div>
-          <div class="footer-logo-text">ExpatEase Slovakia</div>
+          <div class="footer-logo-mark">
+            <svg width="32" height="37" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light"/></svg>
+          </div>
+          <div class="footer-logo-text">ExpatBase Slovakia</div>
         </div>
         <p class="footer-tagline">Life in Slovakia, made simple. The #1 resource for English-speaking expats in Bratislava.</p>
         <div class="footer-socials">
@@ -2435,8 +2490,9 @@
         </ul>
       </div>
       <div>
-        <div class="footer-col-title">Bureaucracy</div>
+        <div class="footer-col-title">Others</div>
         <ul class="footer-links">
+          <li><a href="others.html">All other services</a></li>
 
           <li><a href="#">Residence Permit Guide</a></li>
           <li><a href="#">Health Insurance</a></li>
@@ -2451,14 +2507,14 @@
           <li><a href="#">Blog</a></li>
           <li><a href="#">Newsletter</a></li>
           <li><a href="#">Submit a Business</a></li>
-          <li><a href="#">About ExpatEase</a></li>
+          <li><a href="#">About ExpatBase</a></li>
           <li><a href="#">Contact Us</a></li>
           <li><a href="#"><span class="__cf_email__" data-cfemail="046c6168686b44617c746570616577612a776f">[email&#160;protected]</span></a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 ExpatEase Slovakia. All rights reserved.</div>
+      <div class="footer-copy">© 2026 ExpatBase Slovakia. All rights reserved.</div>
       <div class="footer-legal">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Use</a>
@@ -2504,7 +2560,7 @@
       <!-- ── STEP 1: Plan selection ── -->
       <div class="sm-panel" id="smpanel1">
         <div class="sm-panel-intro">
-          <h2 class="sm-panel-title" id="smModalTitle">List your business on ExpatEase</h2>
+          <h2 class="sm-panel-title" id="smModalTitle">List your business on ExpatBase</h2>
           <p class="sm-panel-sub">Choose the plan that fits your business. You can upgrade at any time.</p>
         </div>
         <div class="sm-plans-grid">
@@ -2779,7 +2835,7 @@
 </div><!-- /submit-modal-overlay -->
 
 <div class="cookie-banner" id="cookieBanner">
-  <div class="cookie-text">We use essential cookies to make ExpatEase work. With your consent, we'd also like to use analytics cookies (privacy-first, no PII) to improve the service.</div>
+  <div class="cookie-text">We use essential cookies to make ExpatBase work. With your consent, we'd also like to use analytics cookies (privacy-first, no PII) to improve the service.</div>
   <div class="cookie-btns">
     <button class="cookie-btn-reject" onclick="dismissCookie()">Reject</button>
     <button class="cookie-btn-accept" onclick="dismissCookie()">Accept</button>
@@ -3493,8 +3549,10 @@
       <!-- Ľavá strana -->
       <div class="auth-left" id="authLeftPanel">
         <div class="auth-logo">
-          <div class="auth-logo-mark">EE</div>
-          <span class="auth-logo-text">ExpatEase Slovakia</span>
+          <div class="auth-logo-mark">
+              <svg width="28" height="33" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon"/></svg>
+            </div>
+            <span class="auth-logo-text">ExpatBase Slovakia</span>
         </div>
         <div class="auth-left-body">
           <h2 class="auth-tagline">Your life in Bratislava,<br><em>made easier</em> together.</h2>
@@ -3560,7 +3618,7 @@
           </div>
           <div class="auth-newsletter">
             <input type="checkbox" id="regNewsletter" checked />
-            <label for="regNewsletter">Subscribe to the <strong>ExpatEase newsletter</strong> — tips, new experts &amp; expat news. Unsubscribe anytime.</label>
+            <label for="regNewsletter">Subscribe to the <strong>ExpatBase newsletter</strong> — tips, new experts &amp; expat news. Unsubscribe anytime.</label>
           </div>
           <button class="auth-submit" id="regSubmitBtn" onclick="doRegister()">Join the community →</button>
           <div class="auth-error-msg" id="regGeneralErr" style="display:none; text-align:center; margin-top:8px;"></div>
@@ -3571,7 +3629,7 @@
         <div id="regSuccessPanel" style="display:none; text-align:center; padding: 20px 0;">
           <div style="font-size:48px; margin-bottom:16px;">🎉</div>
           <div style="font-family:var(--font-head); font-size:22px; font-weight:800; color:var(--gray-900); margin-bottom:10px;">You're in!</div>
-          <div style="font-size:15px; color:var(--gray-400); margin-bottom:24px;">Welcome to the ExpatEase community. We'll be in touch.</div>
+          <div style="font-size:15px; color:var(--gray-400); margin-bottom:24px;">Welcome to the ExpatBase community. We'll be in touch.</div>
           <button class="auth-submit" onclick="closeAuth()">Go explore →</button>
         </div>
       </div>
@@ -3582,8 +3640,10 @@
       <div class="auth-right" style="max-width:420px; margin:0 auto; padding:40px 36px 32px;">
         <button class="auth-close" onclick="closeAuth()" style="position:absolute; top:16px; right:16px;">&#x2715;</button>
         <div class="auth-logo" style="margin-bottom:6px;">
-          <div class="auth-logo-mark">EE</div>
-          <span class="auth-logo-text" style="color:#1a1a18; font-size:16px; font-weight:500;">ExpatEase</span>
+          <div class="auth-logo-mark" style="background:none;width:auto;height:auto;border-radius:0;">
+              <svg width="24" height="28" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon"/></svg>
+            </div>
+            <span class="auth-logo-text" style="color:#1a1a18; font-size:16px; font-weight:500;">ExpatBase</span>
         </div>
         <div class="auth-right-head">
           <div class="auth-title">Welcome back</div>
@@ -3604,7 +3664,7 @@
         </div>
         <button class="auth-submit" id="loginSubmitBtn" onclick="doLogin()">Continue →</button>
         <div class="auth-error-msg" id="loginGeneralErr" style="display:none; text-align:center; margin-top:8px;"></div>
-        <div class="auth-switch">New to ExpatEase? <a onclick="switchAuthView('register')" style="cursor:pointer;">Join the community</a></div>
+        <div class="auth-switch">New to ExpatBase? <a onclick="switchAuthView('register')" style="cursor:pointer;">Join the community</a></div>
       </div>
     </div>
 
