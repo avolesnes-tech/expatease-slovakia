@@ -3536,41 +3536,34 @@
           <div class="auth-title">Create your free account</div>
           <div class="auth-sub">Takes 30 seconds. No credit card needed.</div>
         </div>
-        <button class="oauth-btn" onclick="oauthLogin('google')">
-          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-          Continue with Google
-        </button>
-        <div class="auth-divider">
-          <div class="auth-divider-line"></div>
-          <div class="auth-divider-text">or register with email</div>
-          <div class="auth-divider-line"></div>
-        </div>
-        <div class="auth-field">
-          <label for="regName">Full name</label>
-          <input type="text" id="regName" placeholder="Anna Kovac" autocomplete="name" />
-          <div class="auth-error-msg" id="regNameErr">Please enter your name.</div>
-        </div>
-        <div class="auth-field">
-          <label for="regEmail">Email address</label>
-          <input type="email" id="regEmail" placeholder="anna@example.com" autocomplete="email" />
-          <div class="auth-error-msg" id="regEmailErr">Please enter a valid email.</div>
-        </div>
-        <div class="auth-field">
-          <label for="regPass">Password</label>
-          <div class="auth-pw-wrap">
-            <input type="password" id="regPass" placeholder="Min. 8 characters" autocomplete="new-password" style="padding-right:52px;" />
-            <button class="auth-pw-toggle" type="button" onclick="togglePw('regPass', this)">show</button>
+        <!-- Registration form panel -->
+        <div id="regFormPanel">
+          <div class="auth-field">
+            <label for="regName">Full name</label>
+            <input type="text" id="regName" placeholder="Anna Kovac" autocomplete="name" />
+            <div class="auth-error-msg" id="regNameErr">Please enter your name.</div>
           </div>
-          <div class="auth-error-msg" id="regPassErr">Password must be at least 8 characters.</div>
+          <div class="auth-field">
+            <label for="regEmail">Email address</label>
+            <input type="email" id="regEmail" placeholder="anna@example.com" autocomplete="email" />
+            <div class="auth-error-msg" id="regEmailErr">Please enter a valid email.</div>
+          </div>
+          <div class="auth-newsletter">
+            <input type="checkbox" id="regNewsletter" checked />
+            <label for="regNewsletter">Subscribe to the <strong>ExpatEase newsletter</strong> — tips, new experts &amp; expat news. Unsubscribe anytime.</label>
+          </div>
+          <button class="auth-submit" id="regSubmitBtn" onclick="doRegister()">Join the community →</button>
+          <div class="auth-error-msg" id="regGeneralErr" style="display:none; text-align:center; margin-top:8px;"></div>
+          <p class="auth-terms">By registering you agree to our <a href="privacy-policy.html">Terms of Service</a> and <a href="privacy-policy.html">Privacy Policy</a> (GDPR compliant).</p>
+          <div class="auth-switch">Already a member? <a onclick="switchAuthView('login')" style="cursor:pointer;">Sign in</a></div>
         </div>
-        <div class="auth-newsletter">
-          <input type="checkbox" id="regNewsletter" checked />
-          <label for="regNewsletter">Subscribe to the <strong>ExpatEase newsletter</strong> — tips, new experts &amp; expat news. Unsubscribe anytime.</label>
+        <!-- Success panel (hidden initially) -->
+        <div id="regSuccessPanel" style="display:none; text-align:center; padding: 20px 0;">
+          <div style="font-size:48px; margin-bottom:16px;">🎉</div>
+          <div style="font-family:var(--font-head); font-size:22px; font-weight:800; color:var(--gray-900); margin-bottom:10px;">You're in!</div>
+          <div style="font-size:15px; color:var(--gray-400); margin-bottom:24px;">Welcome to the ExpatEase community. We'll be in touch.</div>
+          <button class="auth-submit" onclick="closeAuth()">Go explore →</button>
         </div>
-        <button class="auth-submit" id="regSubmitBtn" onclick="doRegister()">Join the community →</button>
-        <div class="auth-error-msg" id="regGeneralErr" style="display:none; text-align:center; margin-top:8px;"></div>
-        <p class="auth-terms">By registering you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a> (GDPR compliant).</p>
-        <div class="auth-switch">Already have an account? <a onclick="switchAuthView('login')">Sign in</a></div>
       </div>
     </div>
 
@@ -3584,32 +3577,15 @@
         </div>
         <div class="auth-right-head">
           <div class="auth-title">Welcome back</div>
-          <div class="auth-sub">Sign in to your ExpatEase account</div>
-        </div>
-        <button class="oauth-btn" onclick="oauthLogin('google')">
-          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-          Continue with Google
-        </button>
-        <div class="auth-divider">
-          <div class="auth-divider-line"></div>
-          <div class="auth-divider-text">or sign in with email</div>
-          <div class="auth-divider-line"></div>
+          <div class="auth-sub">Enter your email to continue</div>
         </div>
         <div class="auth-field">
           <label for="loginEmail">Email address</label>
           <input type="email" id="loginEmail" placeholder="anna@example.com" autocomplete="email" />
         </div>
-        <div class="auth-field">
-          <label for="loginPass">Password</label>
-          <div class="auth-pw-wrap">
-            <input type="password" id="loginPass" placeholder="Your password" autocomplete="current-password" style="padding-right:52px;" />
-            <button class="auth-pw-toggle" type="button" onclick="togglePw('loginPass', this)">show</button>
-          </div>
-        </div>
-        <div class="auth-forgot"><a href="#">Forgot password?</a></div>
-        <button class="auth-submit" id="loginSubmitBtn" onclick="doLogin()">Sign in</button>
+        <button class="auth-submit" id="loginSubmitBtn" onclick="doLogin()">Continue →</button>
         <div class="auth-error-msg" id="loginGeneralErr" style="display:none; text-align:center; margin-top:8px;"></div>
-        <div class="auth-switch">New to ExpatEase? <a onclick="switchAuthView('register')">Join the community</a></div>
+        <div class="auth-switch">New to ExpatEase? <a onclick="switchAuthView('register')" style="cursor:pointer;">Join the community</a></div>
       </div>
     </div>
 
@@ -3638,47 +3614,39 @@
 <!-- TOAST -->
 <div class="auth-toast" id="authToast"></div>
 
-<!-- SUPABASE + AUTH LOGIC -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- AUTH + COMMUNITY LOGIC (localStorage + Airtable) -->
 <script>
-  // ─── SUPABASE CONFIG ───
-  // Replace these with your actual Supabase project values
-  const SUPABASE_URL = 'https://etxqrlrqbjcbjmitnspv.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_i38f7jyt2HYOjUTNuOsklg_aMofdDvE';
-  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   // ─── STATE ───
-  let currentUser = null;
-  let pendingAction = null; // { type: 'fav'|'review', id, name, btn }
+  let currentMember = null;
+  let pendingAction = null;
   let currentReviewBizId = null;
   let currentReviewBizName = null;
   let selectedStars = 0;
 
-  // ─── INIT: check session on load ───
-  (async () => {
-    console.log('[EE] Checking session...');
-    const { data: { session }, error } = await sb.auth.getSession();
-    console.log('[EE] Session result:', session ? 'FOUND user: ' + session.user.email : 'NO SESSION', error || '');
-    if (session) {
-      currentUser = session.user;
-      onUserLoggedIn(currentUser);
-    } else {
-      console.log('[EE] No session — showing Join button');
+  // ─── LOCALSTORAGE HELPERS ───
+  function getMember() {
+    try { return JSON.parse(localStorage.getItem('ee_member') || 'null'); } catch { return null; }
+  }
+  function saveMember(m) {
+    localStorage.setItem('ee_member', JSON.stringify(m));
+  }
+  function getFavs() {
+    try { return JSON.parse(localStorage.getItem('ee_favs') || '{}'); } catch { return {}; }
+  }
+  function saveFavs(favs) {
+    localStorage.setItem('ee_favs', JSON.stringify(favs));
+  }
+
+  // ─── INIT: restore session from localStorage ───
+  (function () {
+    const member = getMember();
+    if (member) {
+      currentMember = member;
+      onUserLoggedIn(member);
     }
-    // Load saved favs from localStorage (optimistic UI before DB check)
     updateFavButtons();
   })();
-
-  // Auth state listener
-  sb.auth.onAuthStateChange((event, session) => {
-    currentUser = session ? session.user : null;
-    if (currentUser) {
-      onUserLoggedIn(currentUser);
-      if (pendingAction) executePendingAction();
-    } else if (event !== 'INITIAL_SESSION') {
-      onUserLoggedOut();
-    }
-  });
 
   // ─── UI HELPERS ───
   function openAuth(view = 'register') {
@@ -3689,6 +3657,11 @@
   function closeAuth() {
     document.getElementById('authOverlay').classList.remove('open');
     document.body.style.overflow = '';
+    // Reset register form panels
+    const form = document.getElementById('regFormPanel');
+    const success = document.getElementById('regSuccessPanel');
+    if (form) form.style.display = '';
+    if (success) success.style.display = 'none';
   }
   function switchAuthView(view) {
     document.getElementById('authViewRegister').style.display = view === 'register' ? 'contents' : 'none';
@@ -3696,6 +3669,9 @@
   }
   document.getElementById('authOverlay').addEventListener('click', function(e) {
     if (e.target === this) closeAuth();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeAuth();
   });
 
   function showToast(msg, green = false) {
@@ -3706,44 +3682,33 @@
     setTimeout(() => t.classList.remove('show'), 3200);
   }
 
-  function togglePw(inputId, btn) {
-    const inp = document.getElementById(inputId);
-    if (inp.type === 'password') { inp.type = 'text'; btn.textContent = 'hide'; }
-    else { inp.type = 'password'; btn.textContent = 'show'; }
-  }
-
-  function onUserLoggedIn(user) {
+  function onUserLoggedIn(member) {
     const area = document.getElementById('authNavArea');
-    const initials = (user.user_metadata?.name || user.email || 'U')
+    const initials = (member.name || member.email || 'U')
       .split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+    const firstName = (member.name || 'Account').split(' ')[0];
     area.innerHTML = `
-      <button class="auth-user-btn" onclick="handleUserMenu()">
-        <div class="auth-avatar">${initials}</div>
-        <span>${user.user_metadata?.name?.split(' ')[0] || 'Account'}</span>
+      <button class="auth-user-btn" onclick="window.location.href='profile.html'" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:9999px;padding:6px 14px 6px 6px;cursor:pointer;transition:all 0.28s ease;">
+        <div class="auth-avatar" style="width:28px;height:28px;border-radius:50%;background:var(--green);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;">${initials}</div>
+        <span style="font-size:13px;font-weight:600;color:white;">${firstName}</span>
       </button>`;
-    closeAuth();
     updateFavButtons();
   }
 
   function onUserLoggedOut() {
+    currentMember = null;
+    localStorage.removeItem('ee_member');
     document.getElementById('authNavArea').innerHTML = `
-      <button class="nav-cta" id="joinCommunityBtn" style="background:transparent;border:1px solid rgba(255,255,255,0.4);margin-left:4px;" onclick="openAuth('register')">
+      <button class="nav-cta" id="joinCommunityBtn" onclick="openAuth('register')">
         Join the community
       </button>`;
     updateFavButtons();
-  }
-
-  function handleUserMenu() {
-    if (currentUser) {
-      window.location.href = 'profile.html';
-    }
   }
 
   // ─── REGISTER ───
   async function doRegister() {
     const name = document.getElementById('regName').value.trim();
     const email = document.getElementById('regEmail').value.trim();
-    const pass = document.getElementById('regPass').value;
     const newsletter = document.getElementById('regNewsletter').checked;
     let valid = true;
 
@@ -3754,68 +3719,54 @@
     document.getElementById('regEmailErr').style.display = emailOk ? 'none' : 'block';
     if (!emailOk) valid = false;
 
-    document.getElementById('regPassErr').style.display = pass.length >= 8 ? 'none' : 'block';
-    if (pass.length < 8) valid = false;
-
     if (!valid) return;
 
     const btn = document.getElementById('regSubmitBtn');
-    btn.disabled = true; btn.textContent = 'Creating account...';
+    btn.disabled = true;
+    btn.textContent = 'Joining...';
 
-    const { error } = await sb.auth.signUp({
-      email, password: pass,
-      options: { data: { name, newsletter } }
-    });
+    try {
+      await fetch('/functions/airtable-submit?table=Members', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ Name: name, Email: email, Newsletter: newsletter, 'Submitted At': new Date().toISOString() })
+      });
+    } catch (e) { /* non-blocking — save locally regardless */ }
 
-    btn.disabled = false; btn.textContent = 'Create free account';
+    const member = { name, email, newsletter, joinedAt: new Date().toISOString() };
+    saveMember(member);
+    currentMember = member;
 
-    if (error) {
-      const err = document.getElementById('regGeneralErr');
-      err.textContent = error.message; err.style.display = 'block';
-    } else if (event !== 'INITIAL_SESSION') {
-      showToast('Check your email to confirm your account!', true);
-      closeAuth();
-    }
+    // Show success panel
+    document.getElementById('regFormPanel').style.display = 'none';
+    document.getElementById('regSuccessPanel').style.display = 'block';
+    onUserLoggedIn(member);
   }
 
-  // ─── LOGIN ───
-  async function doLogin() {
+  // ─── LOGIN (email lookup in localStorage) ───
+  function doLogin() {
     const email = document.getElementById('loginEmail').value.trim();
-    const pass = document.getElementById('loginPass').value;
-    const btn = document.getElementById('loginSubmitBtn');
-    btn.disabled = true; btn.textContent = 'Signing in...';
+    const errEl = document.getElementById('loginGeneralErr');
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!emailOk) { errEl.textContent = 'Please enter a valid email.'; errEl.style.display = 'block'; return; }
+    errEl.style.display = 'none';
 
-    const { error } = await sb.auth.signInWithPassword({ email, password: pass });
-
-    btn.disabled = false; btn.textContent = 'Sign in';
-
-    if (error) {
-      const err = document.getElementById('loginGeneralErr');
-      err.textContent = 'Incorrect email or password.'; err.style.display = 'block';
-    } else if (event !== 'INITIAL_SESSION') {
-      showToast('Welcome back!', true);
+    const member = getMember();
+    if (member && member.email === email) {
+      currentMember = member;
+      onUserLoggedIn(member);
+      closeAuth();
+      showToast('Welcome back, ' + (member.name || 'friend') + '!', true);
+    } else {
+      errEl.textContent = 'No account found. Please join the community first.';
+      errEl.style.display = 'block';
     }
-  }
-
-  // ─── OAUTH ───
-  async function oauthLogin(provider) {
-    await sb.auth.signInWithOAuth({
-      provider,
-      options: { redirectTo: window.location.href }
-    });
   }
 
   // ─── NAV BUTTON WIRE-UP ───
   document.getElementById('joinCommunityBtn')?.addEventListener('click', () => openAuth('register'));
 
   // ─── FAVOURITES ───
-  function getFavs() {
-    try { return JSON.parse(localStorage.getItem('ee_favs') || '{}'); } catch { return {}; }
-  }
-  function saveFavs(favs) {
-    localStorage.setItem('ee_favs', JSON.stringify(favs));
-  }
-
   function updateFavButtons() {
     const favs = getFavs();
     document.querySelectorAll('.btn-fav').forEach(btn => {
@@ -3826,42 +3777,30 @@
     });
   }
 
-  async function toggleFav(btn, bizId, bizName) {
-    if (!currentUser) {
+  function toggleFav(btn, bizId, bizName) {
+    if (!currentMember) {
       pendingAction = { type: 'fav', id: bizId, name: bizName, btn };
       openAuth('register');
       return;
     }
     const favs = getFavs();
     if (favs[bizId]) {
-      // Remove
       delete favs[bizId];
       saveFavs(favs);
       btn.classList.remove('saved');
       btn.innerHTML = '<span>♡</span> Save';
-      // Remove from Supabase
-      await sb.from('favourites').delete()
-        .eq('user_id', currentUser.id).eq('business_id', bizId);
-    } else if (event !== 'INITIAL_SESSION') {
-      // Add
+    } else {
       favs[bizId] = { name: bizName, savedAt: Date.now() };
       saveFavs(favs);
       btn.classList.add('saved');
       btn.innerHTML = '<span>♥</span> Saved';
       showToast('Saved to your favourites!', true);
-      // Save to Supabase
-      await sb.from('favourites').upsert({
-        user_id: currentUser.id,
-        business_id: bizId,
-        business_name: bizName,
-        saved_at: new Date().toISOString()
-      });
     }
   }
 
   // ─── REVIEWS ───
   function openReview(bizId, bizName) {
-    if (!currentUser) {
+    if (!currentMember) {
       pendingAction = { type: 'review', id: bizId, name: bizName };
       openAuth('register');
       return;
@@ -3903,35 +3842,25 @@
     const btn = document.getElementById('reviewSubmitBtn');
     btn.disabled = true; btn.textContent = 'Submitting...';
 
-    const { error } = await sb.from('reviews').insert({
-      user_id: currentUser.id,
-      business_id: currentReviewBizId,
-      business_name: currentReviewBizName,
-      rating: selectedStars,
-      review_text: text,
-      created_at: new Date().toISOString()
-    });
+    // Save locally
+    try {
+      const reviews = JSON.parse(localStorage.getItem('ee_reviews') || '[]');
+      reviews.unshift({ bizId: currentReviewBizId, bizName: currentReviewBizName, rating: selectedStars, text, date: new Date().toISOString() });
+      localStorage.setItem('ee_reviews', JSON.stringify(reviews));
+    } catch(e) {}
 
     btn.disabled = false; btn.textContent = 'Submit review';
-
-    if (error) {
-      showToast('Something went wrong. Please try again.');
-    } else if (event !== 'INITIAL_SESSION') {
-      closeReview();
-      showToast('Thank you for your review!', true);
-    }
+    closeReview();
+    showToast('Thank you for your review!', true);
   }
 
-  // ─── PENDING ACTION (after login/register) ───
-  async function executePendingAction() {
+  // ─── PENDING ACTION (after join) ───
+  function executePendingAction() {
     if (!pendingAction) return;
     const a = pendingAction;
     pendingAction = null;
-    if (a.type === 'fav' && a.btn) {
-      await toggleFav(a.btn, a.id, a.name);
-    } else if (a.type === 'review') {
-      openReview(a.id, a.name);
-    }
+    if (a.type === 'fav' && a.btn) toggleFav(a.btn, a.id, a.name);
+    else if (a.type === 'review') openReview(a.id, a.name);
   }
 </script>
 
