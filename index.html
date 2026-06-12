@@ -6,6 +6,7 @@
 <title>ExpatBase Slovakia — Life in Slovakia, made simple.</title>
 <meta name="description" content="Find English-speaking doctors, lawyers, tradespeople and more in Bratislava. Or decode any Slovak form in seconds.">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
@@ -3887,6 +3888,23 @@
 
 <!-- AUTH + COMMUNITY LOGIC (localStorage + Airtable) -->
 <script>
+  // ─── SUPABASE (for profile sessions) ───
+  const _sb = supabase.createClient(
+    'https://etxqrlrqbjcbjmitnspv.supabase.co',
+    'sb_publishable_i38f7jyt2HYOjUTNuOsklg_aMofdDvE'
+  );
+  let _sbSessionReady = false;
+
+  async function goToProfile() {
+    if (_sbSessionReady) { window.location.href = 'profile.html'; return; }
+    // Wait up to 3s for Supabase session after Google sign-in
+    for (let i = 0; i < 15; i++) {
+      const { data } = await _sb.auth.getSession();
+      if (data.session) { window.location.href = 'profile.html'; return; }
+      await new Promise(r => setTimeout(r, 200));
+    }
+    window.location.href = 'profile.html'; // navigate anyway
+  }
 
   // ─── STATE ───
   let currentMember = null;
@@ -3959,7 +3977,7 @@
       .split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
     const firstName = (member.name || 'Account').split(' ')[0];
     area.innerHTML = `
-      <button class="auth-user-btn" onclick="window.location.href='profile.html'" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:9999px;padding:6px 14px 6px 6px;cursor:pointer;transition:all 0.28s ease;">
+      <button class="auth-user-btn" onclick="goToProfile()" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:9999px;padding:6px 14px 6px 6px;cursor:pointer;transition:all 0.28s ease;">
         <div class="auth-avatar" style="width:28px;height:28px;border-radius:50%;background:var(--green);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;">${initials}</div>
         <span style="font-size:13px;font-weight:600;color:white;">${firstName}</span>
       </button>`;
@@ -4172,7 +4190,7 @@
     });
   }
 
-  function handleGoogleCredential(response) {
+  async function handleGoogleCredential(response) {
     // Decode JWT — no signature verification needed client-side
     const payload = JSON.parse(atob(response.credential.split('.')[1]));
     const member = {
@@ -4185,6 +4203,11 @@
     };
     saveMember(member);
     currentMember = member;
+
+    // Create Supabase session so profile.html works
+    _sb.auth.signInWithIdToken({ provider: 'google', token: response.credential })
+      .then(() => { _sbSessionReady = true; })
+      .catch(() => {});
 
     // Send to Airtable (non-blocking)
     fetch('/functions/airtable-submit?table=Members', {
