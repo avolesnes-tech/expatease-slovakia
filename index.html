@@ -2668,18 +2668,23 @@
       <div>
         <div class="footer-col-title">Find Experts</div>
         <ul class="footer-links">
-          <li><a href="doctors.html">Doctors & Specialists</a></li>
-          <li><a href="lawyers.html">Lawyers & Legal</a></li>
-          <li><a href="banks.html">Banks & Finance</a></li>
-          <li><a href="barbers.html">Barbers & Hairdressers</a></li>
-          <li><a href="plumbers.html">Plumbers</a></li>
-          <li><a href="#categories">All categories →</a></li>
+          <li><a href="doctors.html">Doctors &amp; Specialists</a></li>
+          <li><a href="lawyers.html">Lawyers &amp; Legal</a></li>
+          <li><a href="banks.html">Banks &amp; Finance</a></li>
+          <li><a href="barbers.html">Hair, Beauty &amp; Tattoo</a></li>
+          <li><a href="plumbers.html">Handymen</a></li>
+          <li><a href="builders.html">Builders &amp; Construction</a></li>
+          <li><a href="vets.html">Vets &amp; Pet Care</a></li>
+          <li><a href="real-estate.html">Real Estate</a></li>
+          <li><a href="schools.html">Schools &amp; Learning</a></li>
+          <li><a href="moving.html">Moving &amp; Relocation</a></li>
+          <li><a href="sports.html">Sports &amp; Leisure</a></li>
+          <li><a href="others.html">Other Services</a></li>
         </ul>
       </div>
       <div>
         <div class="footer-col-title">Guides</div>
         <ul class="footer-links">
-          <li><a href="others.html">All other services</a></li>
 
           <li><a href="residence-permit-guide.html">Residence Permit Guide</a></li>
           <li><a href="#">Health Insurance</a></li>
@@ -2703,9 +2708,9 @@
     <div class="footer-bottom">
       <div class="footer-copy">© 2026 ExpatBase Slovakia. All rights reserved.</div>
       <div class="footer-legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
-        <a href="#">Cookie Policy</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="cookie-policy.html">Cookie Policy</a>
       </div>
     </div>
   </div>
@@ -4142,7 +4147,15 @@
     });
   }
 
-  function triggerGoogleLogin() {
+  async function triggerGoogleLogin() {
+    // Wait up to 4s for GSI script to load (it's async defer)
+    if (typeof google === 'undefined') {
+      let waited = 0;
+      while (typeof google === 'undefined' && waited < 4000) {
+        await new Promise(r => setTimeout(r, 200));
+        waited += 200;
+      }
+    }
     if (typeof google === 'undefined') {
       showToast('Google login unavailable. Please use email.');
       return;
