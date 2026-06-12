@@ -982,7 +982,7 @@
   .blog-section { background: var(--gray-50); }
   .blog-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 24px;
   }
   .blog-card {
@@ -998,17 +998,15 @@
   }
   .blog-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
   .blog-img {
-    height: 200px;
+    height: 180px;
     background: linear-gradient(135deg, var(--blue-light), var(--green-light));
     display: flex; align-items: center; justify-content: center;
-    font-size: 48px;
     overflow: hidden;
     position: relative;
   }
-  .blog-card:first-child .blog-img { height: 240px; }
   .blog-img-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(26,79,138,0.3) 0%, transparent 60%);
+    background: linear-gradient(to top, rgba(26,79,138,0.25) 0%, transparent 60%);
   }
   .blog-body { padding: 24px; }
   .blog-tag {
@@ -1028,7 +1026,6 @@
     margin-bottom: 10px;
     letter-spacing: -0.015em;
   }
-  .blog-card:first-child .blog-title { font-size: 22px; }
   .blog-excerpt {
     font-size: 14px;
     color: var(--gray-400);
@@ -1036,13 +1033,46 @@
     line-height: 1.65;
     margin-bottom: 16px;
   }
+  .blog-read-more {
+    font-size: 13px; font-weight: 600; color: var(--blue);
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .blog-card:hover .blog-read-more { gap: 8px; }
+  .blog-read-more svg { transition: transform 0.2s; }
+  .blog-card:hover .blog-read-more svg { transform: translateX(3px); }
   .blog-meta {
     display: flex; align-items: center; gap: 12px;
     font-size: 12px;
     color: var(--gray-400);
     font-weight: 400;
+    margin-bottom: 16px;
   }
   .blog-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gray-100); }
+
+  /* Newsletter strip below guides */
+  .guides-nl {
+    margin-top: 24px;
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    border-radius: var(--radius-lg);
+    padding: 36px 40px;
+    display: flex; align-items: center; justify-content: space-between; gap: 40px;
+  }
+  .guides-nl-text { flex: 1; }
+  .guides-nl-title { font-family: var(--font-head); font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 6px; letter-spacing: -0.02em; }
+  .guides-nl-sub { font-size: 14px; color: rgba(255,255,255,0.8); font-weight: 300; }
+  .guides-nl-form { display: flex; gap: 10px; flex-shrink: 0; }
+  .guides-nl-input {
+    padding: 11px 16px; border-radius: 8px; border: none;
+    font-size: 14px; width: 220px; outline: none;
+    color: var(--gray-900);
+  }
+  .guides-nl-btn {
+    padding: 11px 22px; background: rgba(255,255,255,0.18); border: 1.5px solid rgba(255,255,255,0.5);
+    border-radius: 8px; color: #fff; font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .guides-nl-btn:hover { background: rgba(255,255,255,0.28); }
 
   /* Newsletter card */
   .newsletter-card {
@@ -1317,6 +1347,9 @@
   @media (max-width: 1024px) {
     .categories-grid { grid-template-columns: repeat(3, 1fr); }
     .blog-grid { grid-template-columns: 1fr 1fr; }
+    .guides-nl { flex-direction: column; gap: 20px; padding: 28px; }
+    .guides-nl-form { width: 100%; }
+    .guides-nl-input { flex: 1; width: auto; }
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
     .nav { padding: 0 24px; }
     .nav-links { gap: 2px; }
@@ -1351,6 +1384,8 @@
     .listings-grid { grid-template-columns: 1fr; }
 
     .blog-grid { grid-template-columns: 1fr; }
+    .guides-nl { padding: 24px 20px; }
+    .guides-nl-input { width: 100%; }
     .testimonials-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; gap: 32px; }
     .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
@@ -1697,6 +1732,21 @@
   /* Phone wrapper */
   .sm-phone-wrapper { display: flex; gap: 8px; }
   .sm-prefix-select { width: 86px; flex-shrink: 0; }
+
+  /* Category-specific chips (subcategory extras) */
+  #smSubDistWrap, #smExtraFilters { animation: smFadeIn 0.18s ease; }
+  @keyframes smFadeIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
+  .sm-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+  .sm-chip-input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .sm-chip-label {
+    display: inline-flex; align-items: center; padding: 5px 14px;
+    border: 1.5px solid #d1d9e0; border-radius: 20px; cursor: pointer;
+    font-size: 0.8125rem; color: #4a5568;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+    user-select: none; line-height: 1.3;
+  }
+  .sm-chip-label:hover { border-color: var(--blue); color: var(--blue); }
+  .sm-chip-input:checked + .sm-chip-label { background: var(--blue); border-color: var(--blue); color: #fff; }
   .sm-phone-input { flex: 1; }
 
   /* Checkbox */
@@ -2506,52 +2556,98 @@
 <section class="section blog-section" id="blog">
   <div class="section-inner">
     <div class="section-header reveal">
-      <div class="section-label">Resources & Guides</div>
-      <h2 class="section-title">Expat guides & news</h2>
-      <p class="section-sub">Practical articles written for people living in Slovakia — not just visiting it.</p>
+      <div class="section-label">Expat Essentials</div>
+      <h2 class="section-title">The guides every new arrival needs</h2>
+      <p class="section-sub">Step-by-step guidance on the paperwork that can't wait — written by someone who's been through it all.</p>
     </div>
     <div class="blog-grid">
+
       <a href="residence-permit-guide.html" class="blog-card reveal">
         <div class="blog-img">
-          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="rgba(26,79,138,0.35)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(26,79,138,0.35)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
           <div class="blog-img-overlay"></div>
         </div>
         <div class="blog-body">
           <div class="blog-tag">Bureaucracy & Admin</div>
-          <div class="blog-title">How to Get Your Temporary Residence Permit in Bratislava: A Step-by-Step Guide</div>
-          <div class="blog-excerpt">Everything you need to know about applying for a TRP — documents required, which office to visit, and how to avoid the most common mistakes.</div>
+          <div class="blog-title">How to Get Your Temporary Residence Permit in Bratislava</div>
+          <div class="blog-excerpt">Documents required, which office to visit, timelines, and the most common mistakes to avoid.</div>
           <div class="blog-meta">
             <span>12 min read</span>
             <div class="blog-meta-dot"></div>
             <span>March 28, 2026</span>
           </div>
+          <span class="blog-read-more">Read the guide <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </div>
       </a>
-      <a href="#" class="blog-card reveal" style="transition-delay: 100ms">
-        <div class="blog-img" style="height: 160px;">
-          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="rgba(26,79,138,0.35)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+
+      <a href="health-insurance-guide.html" class="blog-card reveal" style="transition-delay:80ms">
+        <div class="blog-img">
+          <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(26,79,138,0.35)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <div class="blog-img-overlay"></div>
         </div>
         <div class="blog-body">
           <div class="blog-tag">Healthcare</div>
-          <div class="blog-title">Registering for Slovak Health Insurance as a New Expat</div>
-          <div class="blog-excerpt">Which insurance company to choose, what documents to bring, and what you're actually covered for.</div>
+          <div class="blog-title">Slovak Health Insurance for Expats: Registration & Coverage</div>
+          <div class="blog-excerpt">Which insurer to choose, what documents to bring, and what you're actually covered for — including the 8-day deadline most people miss.</div>
           <div class="blog-meta">
-            <span>5 min read</span>
+            <span>9 min read</span>
             <div class="blog-meta-dot"></div>
-            <span>March 14, 2026</span>
+            <span>April 3, 2026</span>
           </div>
+          <span class="blog-read-more">Read the guide <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </div>
       </a>
-      <div class="newsletter-card reveal" style="transition-delay: 200ms">
-        <div class="nl-title">The weekly expat guide to Slovakia</div>
-        <div class="nl-sub">Every Friday: new listings, bureaucracy tips, and what's happening in the community.</div>
-        <div class="nl-form">
-          <input class="nl-input" type="email" placeholder="your@email.com">
-          <button class="nl-btn">Subscribe for free</button>
+
+      <a href="bank-account-guide.html" class="blog-card reveal" style="transition-delay:160ms">
+        <div class="blog-img">
+          <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(26,79,138,0.35)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          <div class="blog-img-overlay"></div>
         </div>
-        <div class="nl-privacy">No spam. Unsubscribe anytime.</div>
+        <div class="blog-body">
+          <div class="blog-tag">Banking & Finance</div>
+          <div class="blog-title">Opening a Bank Account in Slovakia as a Foreigner</div>
+          <div class="blog-excerpt">Which banks accept non-residents, what documents you need, and whether Revolut or a local account makes more sense for your situation.</div>
+          <div class="blog-meta">
+            <span>8 min read</span>
+            <div class="blog-meta-dot"></div>
+            <span>April 10, 2026</span>
+          </div>
+          <span class="blog-read-more">Read the guide <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+      </a>
+
+      <a href="zivnost-guide.html" class="blog-card reveal" style="transition-delay:240ms">
+        <div class="blog-img">
+          <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(26,79,138,0.35)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+          <div class="blog-img-overlay"></div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-tag">Self-Employment</div>
+          <div class="blog-title">How to Register a Živnosť (Trade Licence) in Slovakia</div>
+          <div class="blog-excerpt">The full step-by-step for EU and non-EU citizens — fees, documents, tax and insurance implications, and živnosť vs s.r.o. compared.</div>
+          <div class="blog-meta">
+            <span>11 min read</span>
+            <div class="blog-meta-dot"></div>
+            <span>April 17, 2026</span>
+          </div>
+          <span class="blog-read-more">Read the guide <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Newsletter strip -->
+    <div class="guides-nl reveal">
+      <div class="guides-nl-text">
+        <div class="guides-nl-title">The weekly expat guide to Slovakia</div>
+        <div class="guides-nl-sub">Every Friday: new listings, bureaucracy tips, and what's happening in the expat community. No spam, unsubscribe anytime.</div>
+      </div>
+      <div class="guides-nl-form">
+        <input class="guides-nl-input" type="email" placeholder="your@email.com">
+        <button class="guides-nl-btn">Subscribe free</button>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -2799,6 +2895,25 @@
             </select>
             <div class="sm-field-error" id="smCategoryErr">Please select a category.</div>
           </div>
+
+          <!-- Subcategory + District — shown when a category is chosen -->
+          <div id="smSubDistWrap" style="display:none">
+            <div class="sm-field-group">
+              <label class="sm-label" for="smSubcategory"><span id="smSubcategoryLabel">Subcategory</span></label>
+              <select class="sm-input sm-select" id="smSubcategory">
+                <option value="">Select…</option>
+              </select>
+            </div>
+            <div class="sm-field-group">
+              <label class="sm-label" for="smDistrict">District / Area</label>
+              <select class="sm-input sm-select" id="smDistrict">
+                <option value="">Select district…</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Category-specific extra filters — injected by JS -->
+          <div id="smExtraFilters"></div>
 
           <div class="sm-field-group">
             <label class="sm-label" for="smContactName">Contact Person Name <span class="sm-required">*</span></label>
@@ -3413,6 +3528,151 @@
     if (err)   err.classList.toggle('visible', show);
   }
 
+  /* ══════════════════════════════
+     Category metadata
+  ══════════════════════════════ */
+  const CAT_META = {
+    'Doctors & Specialists': {
+      subLabel: 'Specialty',
+      subs: ['General Practitioner','Cardiologist','Dermatologist','Pediatrician','Gynecologist','Dentist','Psychiatrist','Other'],
+      districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Online'],
+      extras: [
+        { key: 'insurance', label: 'Insurance accepted', type: 'multi',
+          opts: ['VšZP','Dôvera','Union','Self-pay'] }
+      ]
+    },
+    'Lawyers & Legal': {
+      subLabel: 'Specialisation',
+      subs: ['Immigration Law','Employment Law','Real Estate Law','Corporate Law','Family Law','Criminal Law','Tax Law','Corporate & Business','Tax & Accounting','Other'],
+      districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Online'],
+      extras: [
+        { key: 'fee_type', label: 'Fee type', type: 'radio',
+          opts: ['Hourly','Fixed Fee','Free Consult'] }
+      ]
+    },
+    'Banks & Finance': {
+      subLabel: 'Service type',
+      subs: ['Retail Bank','Private Bank','Accountant','Tax Advisor','Financial Advisor','Currency Exchange','Business Banking','Insurance'],
+      districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Online'],
+      extras: []
+    },
+    'Barbers & Hairdressers': {
+      subLabel: 'Service type',
+      subs: ["Barbershop (Men's)",'Hair Salon (Women\'s)','Unisex Salon','Colourist','Hair Extensions','Blow-dry Bar','Nail Salon','Spa & Wellness'],
+      districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Online'],
+      extras: [
+        { key: 'price_tier', label: 'Price range', type: 'radio',
+          opts: ['€','€€','€€€'] }
+      ]
+    },
+    'Electricians': {
+      subLabel: 'Service type',
+      subs: ['Emergency Call-out','Residential Wiring','Commercial Electrical','Smart Home','Inspection & Certification','EV Charger Installation'],
+      districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nationwide'],
+      extras: [
+        { key: 'availability', label: 'Availability', type: 'multi',
+          opts: ['24/7 Emergency','Same Day','By Appointment'] }
+      ]
+    },
+    'Plumbers': {
+      subLabel: 'Service type',
+      subs: ['Emergency Repair','Leak Detection','Bathroom Installation','Drain Cleaning','Boiler & Heating','Gas Certification'],
+      districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Bratislava-wide'],
+      extras: [
+        { key: 'availability', label: 'Availability', type: 'multi',
+          opts: ['24/7 Emergency','Same Day','By Appointment'] }
+      ]
+    },
+    'Builders & Construction': {
+      subLabel: 'Service type',
+      subs: ['Flooring & Tiling','Painting & Plastering','Structural & Extensions','General Handyman','Locksmith','Pest Control'],
+      districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Vajnory','Bratislava-wide'],
+      extras: []
+    },
+    'Tattoo Studios': {
+      subLabel: 'Studio type',
+      subs: ['Tattoo','Piercing','Laser Removal','Barbershop','Unisex Salon'],
+      districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Online'],
+      extras: [
+        { key: 'price_tier', label: 'Price range', type: 'radio',
+          opts: ['€','€€','€€€'] }
+      ]
+    },
+    'Vets': {
+      subLabel: 'Specialisation',
+      subs: ['General Practice','Emergency / 24h','Exotic Animals','Dermatology','Cats Only','Birds'],
+      districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Online'],
+      extras: []
+    },
+    'Real Estate': {
+      subLabel: 'Service type',
+      subs: ['Rental Agent','Sales Agent','Property Management','Property Lawyer','Relocation Service','Short-term / Expat Housing'],
+      districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Citywide'],
+      extras: []
+    },
+    'Pharmacies': {
+      subLabel: 'Service type',
+      subs: ['Community Pharmacy','Online Pharmacy','Compounding Pharmacy'],
+      districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Online'],
+      extras: []
+    },
+    'Moving & Relocation': {
+      subLabel: 'Service type',
+      subs: ['Local Moves','International Moves','Customs & Freight','Storage','Packing Service'],
+      districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Bratislava-wide'],
+      extras: []
+    },
+  };
+
+  function smUpdateCategoryFields(cat) {
+    const meta    = CAT_META[cat];
+    const wrap    = document.getElementById('smSubDistWrap');
+    const subSel  = document.getElementById('smSubcategory');
+    const subLbl  = document.getElementById('smSubcategoryLabel');
+    const distSel = document.getElementById('smDistrict');
+    const extraDiv = document.getElementById('smExtraFilters');
+
+    if (!meta) {
+      wrap.style.display = 'none';
+      extraDiv.innerHTML = '';
+      return;
+    }
+
+    subLbl.textContent = meta.subLabel;
+    subSel.innerHTML   = `<option value="">Select ${meta.subLabel.toLowerCase()}…</option>` +
+      meta.subs.map(s => `<option>${s}</option>`).join('');
+    distSel.innerHTML  = '<option value="">Select district…</option>' +
+      meta.districts.map(d => `<option>${d}</option>`).join('');
+    wrap.style.display = 'block';
+
+    if (!meta.extras.length) { extraDiv.innerHTML = ''; return; }
+
+    extraDiv.innerHTML = meta.extras.map(ex => {
+      const chips = ex.opts.map((opt, i) => {
+        const id   = `smEx_${ex.key}_${i}`;
+        const type = ex.type === 'radio' ? 'radio' : 'checkbox';
+        const name = ex.type === 'radio' ? `smExR_${ex.key}` : id;
+        return `<input class="sm-chip-input" type="${type}" id="${id}" name="${name}" value="${opt}" data-extkey="${ex.key}">` +
+               `<label class="sm-chip-label" for="${id}">${opt}</label>`;
+      }).join('');
+      return `<div class="sm-field-group"><label class="sm-label">${ex.label}</label>` +
+             `<div class="sm-chips">${chips}</div></div>`;
+    }).join('');
+  }
+
+  function smCollectExtraFilters() {
+    const result = {};
+    document.querySelectorAll('#smExtraFilters input[type="radio"]:checked').forEach(inp => {
+      result[inp.dataset.extkey] = inp.value;
+    });
+    document.querySelectorAll('#smExtraFilters input[type="checkbox"]:checked').forEach(inp => {
+      const k = inp.dataset.extkey;
+      if (!result[k]) result[k] = [];
+      result[k].push(inp.value);
+    });
+    return Object.keys(result).length ? result : null;
+  }
+
   function smValidateForm() {
     let valid = true;
     const required = [
@@ -3481,6 +3741,9 @@
       description:     document.getElementById('smDescription')?.value.trim(),
       english_speaking: document.getElementById('smEnglish')?.checked || false,
       plan:            smSelectedPlan,
+      subcategory:     document.getElementById('smSubcategory')?.value || null,
+      district:        document.getElementById('smDistrict')?.value    || null,
+      attributes:      smCollectExtraFilters(),
     };
 
     if (smSelectedPlan === 'premium') {
@@ -3540,6 +3803,9 @@
         social_links:     d.social_links     || null,
         about:            d.about            || null,
         opening_hours:    d.opening_hours    || null,
+        subcategory:      d.subcategory      || null,
+        district:         d.district         || null,
+        attributes:       d.attributes       || null,
       };
       const { error } = await _sb.from('businesses').insert(row);
       if (error) throw new Error(error.message);
@@ -3584,8 +3850,11 @@
 
     // Clear inputs
     ['smBizName','smCategory','smContactName','smPhone','smEmail',
-     'smAddress','smDescription','smAbout','smWebsite','smInstagram','smFacebook']
+     'smAddress','smDescription','smAbout','smWebsite','smInstagram','smFacebook',
+     'smSubcategory','smDistrict']
       .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+    document.getElementById('smSubDistWrap').style.display = 'none';
+    document.getElementById('smExtraFilters').innerHTML = '';
     ['smEnglish','smWaitlist'].forEach(id => {
       const el = document.getElementById(id); if (el) el.checked = false;
     });
@@ -3669,6 +3938,10 @@
   contBtn.addEventListener('click',  smContinue);
   backBtn.addEventListener('click',  () => smGoToStep(1));
   submitBtn.addEventListener('click', smSubmit);
+
+  document.getElementById('smCategory').addEventListener('change', e => {
+    smUpdateCategoryFields(e.target.value);
+  });
 
   // Success actions
   document.getElementById('smCloseSuccess').addEventListener('click', closeSubmitModal);
