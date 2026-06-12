@@ -1005,6 +1005,8 @@ async function initProfile() {
 // ─── SIDEBAR ───
 function renderSidebarUser() {
   const meta = currentUser.user_metadata || {};
+  console.log('user_metadata:', JSON.stringify(meta));
+  console.log('email:', currentUser.email, 'id:', currentUser.id);
   const name = meta.full_name || meta.name || currentUser.email?.split('@')[0] || 'You';
   const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
   const email = currentUser.email || '';
