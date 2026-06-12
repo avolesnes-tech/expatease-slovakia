@@ -86,16 +86,6 @@
   .nav-links a:hover { background: rgba(255,255,255,0.15); color: white; }
   .nav.scrolled .nav-links a:hover { background: var(--blue-light); color: var(--blue); }
   .nav-right { display: flex; align-items: center; gap: 12px; }
-  .lang-toggle { display: flex; background: rgba(255,255,255,0.15); border-radius: var(--radius-xl); padding: 3px; transition: var(--transition); }
-  .nav.scrolled .lang-toggle { background: var(--gray-50); }
-  .lang-btn {
-    font-family: var(--font-body); font-size: 12px; font-weight: 600;
-    padding: 4px 12px; border-radius: var(--radius-xl); border: none; cursor: pointer;
-    transition: var(--transition); background: transparent; color: rgba(255,255,255,0.7);
-  }
-  .lang-btn.active { background: white; color: var(--blue); box-shadow: 0 1px 4px rgba(0,0,0,0.12); }
-  .nav.scrolled .lang-btn { color: var(--gray-400); }
-  .nav.scrolled .lang-btn.active { color: var(--blue); }
   .nav-cta {
     font-family: var(--font-body); font-size: 13px; font-weight: 600;
     padding: 9px 20px; border-radius: var(--radius-xl); border: none; cursor: pointer;
@@ -126,9 +116,7 @@
   .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
   .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
   @media (max-width: 860px) {
-    .hamburger { display: flex; }
-    .nav-right .lang-toggle { display: none; }
-    .nav-right a.nav-cta { display: none; }
+    .hamburger { display: flex; }    .nav-right a.nav-cta { display: none; }
     .nav-links { display: none; }
   }
   .mobile-overlay {
@@ -397,10 +385,6 @@
     <li><a href="index.html#about">About</a></li>
   </ul>
   <div class="nav-right">
-    <div class="lang-toggle">
-      <button class="lang-btn active" id="btn-en">EN</button>
-      <button class="lang-btn" id="btn-sk">SK</button>
-    </div>
     <a href="index.html" class="nav-cta">+ Submit a Business</a>
   </div>
   <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
@@ -680,13 +664,6 @@
   function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 60); }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
-
-  const btnEn = document.getElementById('btn-en');
-  const btnSk = document.getElementById('btn-sk');
-  if (btnEn && btnSk) {
-    btnEn.addEventListener('click', () => { btnEn.classList.add('active'); btnSk.classList.remove('active'); });
-    btnSk.addEventListener('click', () => { btnSk.classList.add('active'); btnEn.classList.remove('active'); });
-  }
 
   (function() {
     var hamburger = document.getElementById('hamburger');
