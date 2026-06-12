@@ -3521,17 +3521,26 @@
     spinner.style.display   = 'block';
 
     try {
-      const res = await fetch('/submit-business', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(smCollectFormData()),
-      });
-      const json = await res.json();
-      if (res.ok && json.success) {
-        smShowSuccess();
-      } else if (event !== 'INITIAL_SESSION') {
-        throw new Error(json.error || 'Submission failed');
-      }
+      const d = smCollectFormData();
+      const row = {
+        name:             d.name,
+        category:         d.category,
+        phone:            d.phone,
+        email:            d.email,
+        address:          d.address,
+        description:      d.description,
+        plan:             d.plan === 'premium' ? 'premium' : 'basic',
+        contact_name:     d.contact_name,
+        english_speaking: d.english_speaking === true,
+        status:           'pending',
+        website:          d.website          || null,
+        social_links:     d.social_links     || null,
+        about:            d.about            || null,
+        opening_hours:    d.opening_hours    || null,
+      };
+      const { error } = await _sb.from('businesses').insert(row);
+      if (error) throw new Error(error.message);
+      smShowSuccess();
     } catch (err) {
       spinner.style.display = 'none';
       footer.style.display  = 'flex';
@@ -3548,7 +3557,7 @@
     const msg = document.getElementById('smSuccessMsg');
     if (smSelectedPlan === 'premium') {
       msg.textContent = 'Your Premium listing has been submitted for review. Our team will contact you to add your photos and confirm payment details — usually within 2–3 business days.';
-    } else if (event !== 'INITIAL_SESSION') {
+    } else {
       msg.textContent = 'Your listing has been submitted for review. We\'ll email you within 2 business days once it\'s live.';
     }
     smGoToStep(3);
