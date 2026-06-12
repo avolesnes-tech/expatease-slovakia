@@ -2737,6 +2737,7 @@
               <li class="sm-plan-feature">One-sentence description</li>
               <li class="sm-plan-feature">Contact person name</li>
               <li class="sm-plan-feature">English-speaking badge</li>
+              <li class="sm-plan-feature">Customer reviews</li>
             </ul>
           </div>
 
@@ -2756,6 +2757,7 @@
               <li class="sm-plan-feature">Photo gallery (up to 8)</li>
               <li class="sm-plan-feature">Website &amp; social links</li>
               <li class="sm-plan-feature">Opening hours</li>
+              <li class="sm-plan-feature">Respond to reviews</li>
             </ul>
           </div>
 
@@ -3123,6 +3125,7 @@
   'use strict';
 
   /* ── State ── */
+  let smCurrentStep  = 1;
   let smSelectedPlan = null;
   let smGalleryFiles = [];
   let smServiceCount = 0;
