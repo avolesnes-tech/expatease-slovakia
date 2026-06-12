@@ -643,6 +643,10 @@
       <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="currentColor"/>
       <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
     </symbol>
+    <symbol id="eb-icon-dark" viewBox="0 0 120 140">
+      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="#E8F1FB"/>
+      <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="#1A4F8A" letter-spacing="-2">EB</text>
+    </symbol>
   </defs>
 </svg>
 
@@ -650,7 +654,7 @@
 <!-- NAV -->
 <nav class="nav">
   <a href="index.html" class="nav-logo">
-    <svg class="nav-logo-svg" width="27" height="32" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light" class="logo-use-light"/><use href="#eb-icon" class="logo-use-dark" style="display:none"/></svg>
+    <svg class="nav-logo-svg" width="27" height="32" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light" class="logo-use-light"/><use href="#eb-icon-dark" class="logo-use-dark" style="display:none"/></svg>
     <span class="nav-logo-text">ExpatBase</span>
   </a>
   <a href="index.html" class="nav-back">
@@ -987,7 +991,7 @@ async function initProfile() {
 // ─── SIDEBAR ───
 function renderSidebarUser() {
   const meta = currentUser.user_metadata || {};
-  const name = meta.name || currentUser.email?.split('@')[0] || 'You';
+  const name = meta.full_name || meta.name || currentUser.email?.split('@')[0] || 'You';
   const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
   const email = currentUser.email || '';
 
@@ -1004,21 +1008,34 @@ function renderSidebarUser() {
 
 // ─── PROFILE DATA (extra table) ───
 async function loadProfileData() {
+  const meta = currentUser.user_metadata || {};
   const { data } = await sb.from('profiles')
     .select('country, interests, avatar_url')
     .eq('id', currentUser.id)
     .maybeSingle();
 
-  profileData = data || {};
+  // On first login: seed profiles row with Google avatar
+  if (!data) {
+    const googleAvatar = meta.avatar_url || meta.picture || null;
+    if (googleAvatar) {
+      await sb.from('profiles').upsert({
+        id: currentUser.id,
+        avatar_url: googleAvatar,
+        updated_at: new Date().toISOString()
+      });
+      profileData = { avatar_url: googleAvatar };
+    } else {
+      profileData = {};
+    }
+  } else {
+    profileData = data;
+  }
 
-  // Show avatar if exists
-  if (profileData.avatar_url) {
-    const img = document.createElement('img');
-    img.src = profileData.avatar_url;
-    img.alt = 'Profile photo';
+  // Show avatar: custom upload first, then Google profile photo
+  const avatarSrc = profileData.avatar_url || meta.avatar_url || meta.picture || null;
+  if (avatarSrc) {
     const circle = document.getElementById('sidebarAvatar');
-    circle.innerHTML = '';
-    circle.appendChild(img);
+    circle.innerHTML = `<img src="${avatarSrc}" alt="Profile photo" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
   }
 }
 
@@ -1073,7 +1090,7 @@ async function loadReviews() {
 // ─── RENDER OVERVIEW ───
 function renderOverview() {
   const meta = currentUser.user_metadata || {};
-  const name = meta.name || currentUser.email?.split('@')[0] || '—';
+  const name = meta.full_name || meta.name || currentUser.email?.split('@')[0] || '—';
   document.getElementById('ovName').textContent = name;
 
   const country = profileData.country || '';
@@ -1296,7 +1313,7 @@ function showSection(id, btn) {
 // ─── EDIT PROFILE ───
 function openEdit() {
   const meta = currentUser.user_metadata || {};
-  document.getElementById('editName').value = meta.name || '';
+  document.getElementById('editName').value = meta.full_name || meta.name || '';
   document.getElementById('editCountry').value = profileData.country || '';
 
   // Interest picker
@@ -1493,7 +1510,12 @@ function resetSuggest() {
 
 // ─── SIGN OUT ───
 async function doSignOut() {
-  await sb.auth.signOut();
+  try {
+    await sb.auth.signOut();
+  } catch (e) {
+    console.warn('signOut error:', e);
+  }
+  localStorage.removeItem('ee_favs');
   window.location.href = 'index.html';
 }
 
