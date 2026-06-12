@@ -959,20 +959,34 @@ let reviewsData = []; // array of review objects
 let pendingPhotoFile = null;
 
 // ─── INIT ───
+// Use onAuthStateChange as primary — handles both existing sessions
+// and OAuth redirects (where #access_token arrives async)
+let _profileInitDone = false;
+sb.auth.onAuthStateChange(async (event, session) => {
+  if (_profileInitDone) return;
+  if (event === 'SIGNED_IN' && session) {
+    _profileInitDone = true;
+    currentUser = session.user;
+    await initProfile();
+  } else if (event === 'SIGNED_OUT') {
+    window.location.href = 'index.html';
+  }
+});
+
+// Fallback: if already has a session before auth state fires
 (async () => {
   const { data: { session } } = await sb.auth.getSession();
-  if (!session) {
-    // Not logged in — redirect home
-    window.location.href = 'index.html';
-    return;
+  if (session && !_profileInitDone) {
+    _profileInitDone = true;
+    currentUser = session.user;
+    await initProfile();
+  } else if (!session) {
+    // Wait 2.5s for OAuth redirect to complete before giving up
+    setTimeout(() => {
+      if (!_profileInitDone) window.location.href = 'index.html';
+    }, 2500);
   }
-  currentUser = session.user;
-  await initProfile();
 })();
-
-sb.auth.onAuthStateChange((_event, session) => {
-  if (!session) window.location.href = 'index.html';
-});
 
 async function initProfile() {
   renderSidebarUser();
