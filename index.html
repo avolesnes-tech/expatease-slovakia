@@ -1448,19 +1448,14 @@
   .how-card:nth-child(3):hover .how-icon { background: #d97706; }
 
   /* ─── BLOG IMAGE — themed per article ─── */
-  .blog-card:nth-child(1) .blog-img {
-    background: linear-gradient(135deg, #0F3360 0%, #1A4F8A 70%, #2563EB 100%);
-  }
-  .blog-card:nth-child(2) .blog-img {
-    background: linear-gradient(135deg, #1D7A50 0%, #2E9E6B 100%);
-  }
-  .blog-card:nth-child(3) .blog-img {
-    background: linear-gradient(135deg, #4338CA 0%, #7C3AED 100%);
-  }
-  .blog-img svg { opacity: 0.35; }
+  .blog-card:nth-child(1) .blog-img { background: linear-gradient(135deg, #0F3360 0%, #1A4F8A 70%, #2563EB 100%); }
+  .blog-card:nth-child(2) .blog-img { background: linear-gradient(135deg, #1D7A50 0%, #2E9E6B 100%); }
+  .blog-card:nth-child(3) .blog-img { background: linear-gradient(135deg, #4338CA 0%, #7C3AED 100%); }
+  .blog-card:nth-child(4) .blog-img { background: linear-gradient(135deg, #B45309 0%, #D97706 100%); }
   .blog-card:nth-child(1) .blog-img svg,
   .blog-card:nth-child(2) .blog-img svg,
-  .blog-card:nth-child(3) .blog-img svg { stroke: rgba(255,255,255,0.7); opacity: 1; }
+  .blog-card:nth-child(3) .blog-img svg,
+  .blog-card:nth-child(4) .blog-img svg { stroke: rgba(255,255,255,0.7); opacity: 1; }
 
   /* ─── LISTING CARD — left accent ─── */
 
@@ -2899,10 +2894,8 @@
           <!-- Subcategory + District — shown when a category is chosen -->
           <div id="smSubDistWrap" style="display:none">
             <div class="sm-field-group">
-              <label class="sm-label" for="smSubcategory"><span id="smSubcategoryLabel">Subcategory</span></label>
-              <select class="sm-input sm-select" id="smSubcategory">
-                <option value="">Select…</option>
-              </select>
+              <label class="sm-label"><span id="smSubcategoryLabel">Subcategory</span> <span style="font-weight:400;color:var(--gray-400);font-size:12px">(select all that apply)</span></label>
+              <div class="sm-chips" id="smSubchips"></div>
             </div>
             <div class="sm-field-group">
               <label class="sm-label" for="smDistrict">District / Area</label>
@@ -3639,8 +3632,11 @@
     }
 
     subLbl.textContent = meta.subLabel;
-    subSel.innerHTML   = `<option value="">Select ${meta.subLabel.toLowerCase()}…</option>` +
-      meta.subs.map(s => `<option>${s}</option>`).join('');
+    document.getElementById('smSubchips').innerHTML = meta.subs.map((s, i) => {
+      const id = `smSub_${i}`;
+      return `<input class="sm-chip-input" type="checkbox" id="${id}" value="${s}" data-extkey="sub">` +
+             `<label class="sm-chip-label" for="${id}">${s}</label>`;
+    }).join('');
     distSel.innerHTML  = '<option value="">Select district…</option>' +
       meta.districts.map(d => `<option>${d}</option>`).join('');
     wrap.style.display = 'block';
@@ -3741,7 +3737,7 @@
       description:     document.getElementById('smDescription')?.value.trim(),
       english_speaking: document.getElementById('smEnglish')?.checked || false,
       plan:            smSelectedPlan,
-      subcategory:     document.getElementById('smSubcategory')?.value || null,
+      subcategories:   Array.from(document.querySelectorAll('#smSubchips .sm-chip-input:checked')).map(el => el.value),
       district:        document.getElementById('smDistrict')?.value    || null,
       attributes:      smCollectExtraFilters(),
     };
@@ -3803,7 +3799,7 @@
         social_links:     d.social_links     || null,
         about:            d.about            || null,
         opening_hours:    d.opening_hours    || null,
-        subcategory:      d.subcategory      || null,
+        subcategories:    d.subcategories?.length ? d.subcategories : null,
         district:         d.district         || null,
         attributes:       d.attributes       || null,
       };
@@ -3851,7 +3847,7 @@
     // Clear inputs
     ['smBizName','smCategory','smContactName','smPhone','smEmail',
      'smAddress','smDescription','smAbout','smWebsite','smInstagram','smFacebook',
-     'smSubcategory','smDistrict']
+     'smDistrict']
       .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
     document.getElementById('smSubDistWrap').style.display = 'none';
     document.getElementById('smExtraFilters').innerHTML = '';
