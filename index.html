@@ -661,6 +661,34 @@
  font-weight: 600;
  color: var(--blue);
  }
+ /* Premium listing card accent */
+ .listing-card.listing-premium {
+ border-left-color: var(--blue);
+ border-top: 2px solid var(--blue);
+ }
+ /* Verified badge */
+ .badge-verified {
+ background: var(--blue-light);
+ color: var(--blue);
+ font-size: 11px; font-weight: 700;
+ padding: 3px 9px; border-radius: var(--radius-xl);
+ display: inline-flex; align-items: center; gap: 4px;
+ letter-spacing: 0.02em;
+ }
+ .badge-verified::before { content: '✓'; }
+ /* Locked phone — shown on free listings */
+ .listing-phone-locked {
+ display: flex; align-items: center; gap: 8px;
+ font-size: 13px; color: var(--gray-400);
+ }
+ .listing-phone-locked .phone-blur {
+ filter: blur(4px); user-select: none;
+ color: var(--gray-700); font-size: 13px; letter-spacing: 0.04em;
+ }
+ .listing-phone-locked .phone-upgrade {
+ font-size: 11px; color: var(--blue); font-weight: 600; cursor: pointer;
+ white-space: nowrap;
+ }
  .listing-name {
  font-family: var(--font-head);
  font-size: 20px;
@@ -1763,6 +1791,15 @@
  flex-shrink: 0; margin-top: 1px;
  }
  .sm-plan-feature-base::before { content: '→'; color: var(--blue); }
+ .sm-plan-feature-no {
+ font-size: 12px; color: var(--gray-400); display: flex; align-items: flex-start; gap: 7px;
+ line-height: 1.4; text-decoration: line-through;
+ }
+ .sm-plan-feature-no::before {
+ content: '✕'; color: var(--gray-400); font-size: 10px;
+ flex-shrink: 0; margin-top: 1px; text-decoration: none; display: inline-block;
+ }
+ .sm-plan-price-note { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
 
  /* Step 1 footer */
  .sm-step1-footer { display: flex; flex-direction: column; gap: 10px; }
@@ -2727,7 +2764,7 @@
  <strong>Found your expert through ExpatBase?</strong>
  <span>Leave a review and help the next expat find the right person in Bratislava.</span>
  </div>
- <button class="btn-primary" style="flex-shrink:0; white-space:nowrap" onclick="openReview(null, null)">
+ <button class="btn-primary" style="flex-shrink:0; white-space:nowrap" onclick="openPlatformReview()">
  ★ Leave a review
  </button>
  </div>
@@ -2857,35 +2894,38 @@
  <div class="sm-plan-card" id="planBasic" data-plan="basic" role="button" tabindex="0" aria-pressed="false">
  <div class="sm-plan-name">Basic</div>
  <div class="sm-plan-price">Free</div>
- <div class="sm-plan-desc">Get discovered by expats in Bratislava instantly.</div>
+ <div class="sm-plan-desc">Get discovered by expats. No cost, no commitment.</div>
  <ul class="sm-plan-features">
- <li class="sm-plan-feature">Business name &amp; category</li>
- <li class="sm-plan-feature">Phone &amp; email</li>
- <li class="sm-plan-feature">Bratislava address</li>
- <li class="sm-plan-feature">One-sentence description</li>
- <li class="sm-plan-feature">Contact person name</li>
+ <li class="sm-plan-feature">Name, category &amp; district</li>
+ <li class="sm-plan-feature">Short description (150 chars)</li>
+ <li class="sm-plan-feature">Email contact</li>
  <li class="sm-plan-feature">English-speaking badge</li>
- <li class="sm-plan-feature">Customer reviews</li>
+ <li class="sm-plan-feature-no">Phone visible to expats</li>
+ <li class="sm-plan-feature-no">Verified badge</li>
+ <li class="sm-plan-feature-no">Photos</li>
+ <li class="sm-plan-feature-no">Priority placement</li>
+ <li class="sm-plan-feature">Edit profile anytime</li>
  </ul>
  </div>
 
  <!-- Premium -->
  <div class="sm-plan-card sm-plan-featured" id="planPremium" data-plan="premium" role="button" tabindex="0" aria-pressed="false">
- <div class="sm-plan-badge">Most Popular</div>
+ <div class="sm-plan-badge">Recommended</div>
  <div class="sm-plan-name">Premium</div>
- <div class="sm-plan-price">€9.90<span class="sm-plan-period">/month</span></div>
- <div class="sm-plan-desc">A full profile, photos, services, team &amp; more.</div>
+ <div class="sm-plan-price">€49<span class="sm-plan-period">/year</span></div>
+ <div class="sm-plan-price-note">Founder price · renews at €79</div>
+ <div class="sm-plan-desc">Full profile, priority placement &amp; analytics.</div>
  <ul class="sm-plan-features">
  <li class="sm-plan-feature sm-plan-feature-base">Everything in Basic</li>
- <li class="sm-plan-feature">Business logo</li>
- <li class="sm-plan-feature">Cover photo</li>
- <li class="sm-plan-feature">Full "About" section</li>
- <li class="sm-plan-feature">Services &amp; products list</li>
- <li class="sm-plan-feature">Team member profiles</li>
- <li class="sm-plan-feature">Photo gallery (up to 8)</li>
+ <li class="sm-plan-feature">Phone visible to expats</li>
+ <li class="sm-plan-feature">✦ Verified badge</li>
+ <li class="sm-plan-feature">Photos (up to 5)</li>
+ <li class="sm-plan-feature">Long description (600 chars)</li>
  <li class="sm-plan-feature">Website &amp; social links</li>
  <li class="sm-plan-feature">Opening hours</li>
- <li class="sm-plan-feature">Respond to reviews</li>
+ <li class="sm-plan-feature">Priority placement in category</li>
+ <li class="sm-plan-feature">Dashboard — views &amp; clicks</li>
+ <li class="sm-plan-feature">Edit profile anytime</li>
  </ul>
  </div>
 
@@ -3833,6 +3873,21 @@
  };
  const { error } = await _sb.from('businesses').insert(row);
  if (error) throw new Error(error.message);
+
+ // Send confirmation email to business + notify admin (fire-and-forget — don't block success screen)
+ fetch('/functions/send-email', {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify({
+ type: 'submission_confirm',
+ bizName: d.name,
+ contactName: d.contact_name,
+ bizEmail: d.email,
+ category: d.category,
+ plan: d.plan === 'premium' ? 'premium' : 'basic',
+ }),
+ }).catch(() => {}); // silent fail — Supabase insert already succeeded
+
  smShowSuccess();
  } catch (err) {
  spinner.style.display = 'none';
@@ -4190,6 +4245,25 @@
  </div>
 </div>
 
+<!-- PLATFORM REVIEW MODAL -->
+<div class="review-overlay" id="platformReviewOverlay">
+ <div class="review-modal">
+ <button class="auth-close" onclick="closePlatformReview()">×</button>
+ <div class="review-title">Rate ExpatBase Slovakia</div>
+ <div class="review-biz-name" style="display:block; margin-bottom:20px">How has ExpatBase helped you settle in Bratislava?</div>
+ <div class="star-picker" id="platformStarPicker">
+ <span class="star-pick" data-val="1" onclick="pickPlatformStar(1)">★</span>
+ <span class="star-pick" data-val="2" onclick="pickPlatformStar(2)">★</span>
+ <span class="star-pick" data-val="3" onclick="pickPlatformStar(3)">★</span>
+ <span class="star-pick" data-val="4" onclick="pickPlatformStar(4)">★</span>
+ <span class="star-pick" data-val="5" onclick="pickPlatformStar(5)">★</span>
+ </div>
+ <textarea class="review-textarea" id="platformReviewText" placeholder="Tell us what you found useful, what's missing, or what we could do better…" maxlength="500" oninput="document.getElementById('platformCharCount').textContent=this.value.length"></textarea>
+ <div class="review-char"><span id="platformCharCount">0</span>/500</div>
+ <button class="review-submit" id="platformReviewSubmitBtn" onclick="submitPlatformReview()">Submit</button>
+ </div>
+</div>
+
 <!-- TOAST -->
 <div class="auth-toast" id="authToast"></div>
 
@@ -4225,15 +4299,41 @@
  localStorage.setItem('ee_favs', JSON.stringify(favs));
  }
 
- // ─── INIT: restore session from localStorage ───
- (function () {
+ // ─── INIT: restore session — check localStorage first, then Supabase ───
+ (async function () {
  const member = getMember();
  if (member) {
  currentMember = member;
  onUserLoggedIn(member);
+ } else {
+ // Fall back to Supabase session (business owners logged in via profile.html)
+ try {
+ const { data: { session } } = await _sb.auth.getSession();
+ if (session?.user) {
+ const u = session.user;
+ const sbMember = {
+ name: u.user_metadata?.full_name || u.email.split('@')[0],
+ email: u.email,
+ };
+ currentMember = sbMember;
+ onUserLoggedIn(sbMember);
+ }
+ } catch (_) {}
  }
  updateFavButtons();
  })();
+
+ // Keep nav in sync when Supabase session changes (login/logout on other tabs)
+ _sb.auth.onAuthStateChange((_event, session) => {
+ if (session?.user && !getMember()) {
+ const u = session.user;
+ const sbMember = { name: u.user_metadata?.full_name || u.email.split('@')[0], email: u.email };
+ currentMember = sbMember;
+ onUserLoggedIn(sbMember);
+ } else if (!session && !getMember()) {
+ onUserLoggedOut();
+ }
+ });
 
  // ─── UI HELPERS ───
  function openAuth(view = 'register') {
@@ -4461,6 +4561,56 @@
  btn.disabled = false; btn.textContent = 'Submit review';
  closeReview();
  showToast('Thank you! Your review will appear after moderation.', true);
+ }
+
+ // ─── PLATFORM REVIEW ───
+ let platformStars = 0;
+
+ function openPlatformReview() {
+ platformStars = 0;
+ document.getElementById('platformReviewText').value = '';
+ document.getElementById('platformCharCount').textContent = '0';
+ document.querySelectorAll('#platformStarPicker .star-pick').forEach(s => s.classList.remove('active'));
+ document.getElementById('platformReviewOverlay').classList.add('open');
+ document.body.style.overflow = 'hidden';
+ }
+
+ function closePlatformReview() {
+ document.getElementById('platformReviewOverlay').classList.remove('open');
+ document.body.style.overflow = '';
+ }
+
+ document.getElementById('platformReviewOverlay').addEventListener('click', function(e) {
+ if (e.target === this) closePlatformReview();
+ });
+
+ function pickPlatformStar(val) {
+ platformStars = val;
+ document.querySelectorAll('#platformStarPicker .star-pick').forEach(s => {
+ s.classList.toggle('active', +s.dataset.val <= val);
+ });
+ }
+
+ async function submitPlatformReview() {
+ const text = document.getElementById('platformReviewText').value.trim();
+ if (!platformStars) { showToast('Please select a star rating.'); return; }
+ if (!text) { showToast('Please write a short review.'); return; }
+ const btn = document.getElementById('platformReviewSubmitBtn');
+ btn.disabled = true; btn.textContent = 'Submitting…';
+ try {
+ await _sb.from('reviews').insert({
+ business_id: 'expatbase',
+ business_name: 'ExpatBase Slovakia',
+ reviewer_name: currentMember?.name || null,
+ reviewer_email: currentMember?.email || null,
+ rating: platformStars,
+ body: text,
+ status: 'pending',
+ });
+ } catch(_) {}
+ closePlatformReview();
+ showToast('Thank you for your feedback!', true);
+ btn.disabled = false; btn.textContent = 'Submit';
  }
 
  // ─── PENDING ACTION (after join) ───
