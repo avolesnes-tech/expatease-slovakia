@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Draft and orphan pages — not for indexing
+Disallow: /anna-senselova.html
+Disallow: /expatease-slovakia.html
+Disallow: /logo-final.html
+Disallow: /logo-preview.html
+Disallow: /electricians.html
+Disallow: /tattoo.html
+
+Sitemap: https://expatbase.sk/sitemap.xml

@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ExpatBase Slovakia, Life in Slovakia, made simple.</title>
 <meta name="description" content="Find English-speaking doctors, lawyers, tradespeople and more in Bratislava. Or decode any Slovak form in seconds.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ExpatBase Slovakia">
+<meta property="og:title" content="ExpatBase Slovakia — Life in Slovakia, made simple">
+<meta property="og:description" content="Find English-speaking professionals in Bratislava. Doctors, lawyers, banks, handymen and more — verified by expats.">
+<meta property="og:url" content="https://expatbase.sk">
+<meta property="og:image" content="https://expatbase.sk/doctor.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ExpatBase Slovakia — Life in Slovakia, made simple">
+<meta name="twitter:description" content="Find English-speaking professionals in Bratislava. Doctors, lawyers, banks, handymen and more — verified by expats.">
+<meta name="twitter:image" content="https://expatbase.sk/doctor.webp">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -202,9 +212,9 @@
  opacity: 1;
  transform: scale(1);
  }
- .hero-slide-1 { background-image: url('barber.png'); }
- .hero-slide-2 { background-image: url('doctor.png'); }
- .hero-slide-3 { background-image: url('plumber.png'); }
+ .hero-slide-1 { background-image: url('barber.webp'); }
+ .hero-slide-2 { background-image: url('doctor.webp'); }
+ .hero-slide-3 { background-image: url('plumber.webp'); }
 
  /* Ken Burns effect on active */
  .hero-slide.active { animation: kenburns 8s ease-out forwards; }
@@ -2550,8 +2560,8 @@
  <div class="guides-nl-sub">Every Friday: new listings, bureaucracy tips, and what's happening in the expat community. No spam, unsubscribe anytime.</div>
  </div>
  <div class="guides-nl-form">
- <input class="guides-nl-input" type="email" placeholder="your@email.com">
- <button class="guides-nl-btn">Subscribe free</button>
+ <input class="guides-nl-input" type="email" id="guidesNlEmail" placeholder="your@email.com">
+ <button class="guides-nl-btn" id="guidesNlBtn">Subscribe free</button>
  </div>
  </div>
 
@@ -3209,7 +3219,7 @@
  const scrollBtn = document.getElementById('heroScrollBtn');
  if (scrollBtn) {
  scrollBtn.addEventListener('click', () => {
- document.querySelector('.how-section')?.scrollIntoView({ behavior: 'smooth' });
+ document.querySelector('#categories')?.scrollIntoView({ behavior: 'smooth' });
  });
  window.addEventListener('scroll', () => {
  scrollBtn.style.opacity = window.scrollY > 80 ? '0' : '';
@@ -3921,6 +3931,12 @@
  e.preventDefault(); openSubmitModal();
  });
 
+ // Auto-open modal when arriving via index.html#submit from category pages
+ if (window.location.hash === '#submit') {
+ history.replaceState(null, '', window.location.pathname);
+ openSubmitModal();
+ }
+
  // Close
  closeBtn.addEventListener('click', closeSubmitModal);
 
@@ -3986,6 +4002,33 @@
  // Opening hours
  smRenderHours();
 
+})();
+
+// Guides section newsletter
+(function() {
+ const btn = document.getElementById('guidesNlBtn');
+ const input = document.getElementById('guidesNlEmail');
+ if (!btn || !input) return;
+ btn.addEventListener('click', async () => {
+ const email = input.value.trim();
+ if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+ input.style.outline = '2px solid #e53e3e';
+ setTimeout(() => input.style.outline = '', 2000);
+ return;
+ }
+ btn.textContent = 'Subscribing…';
+ btn.disabled = true;
+ try {
+ await fetch('/functions/airtable-submit?table=Members', {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify({ Email: email, Newsletter: true, 'Submitted At': new Date().toISOString() })
+ });
+ } catch(_) {}
+ btn.textContent = 'You\'re in!';
+ input.value = '';
+ input.disabled = true;
+ });
 })();
 </script>
 
