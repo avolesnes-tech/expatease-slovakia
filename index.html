@@ -1455,16 +1455,22 @@
  .cookie-banner {
  flex-direction: column;
  gap: 16px;
- padding: 20px;
- bottom: 16px;
- left: 16px;
- transform: translateX(0) translateY(120px);
- width: calc(100vw - 32px);
- border-radius: 16px;
+ padding: 20px 20px calc(20px + env(safe-area-inset-bottom)) 20px;
+ bottom: 0;
+ left: 0;
+ right: 0;
+ transform: translateX(0) translateY(110%);
+ width: 100%;
+ border-radius: 20px 20px 0 0;
+ max-width: 100%;
  }
  .cookie-banner.visible { transform: translateX(0) translateY(0); }
  .cookie-btns { width: 100%; }
- .cookie-btn-accept, .cookie-btn-reject { flex: 1; text-align: center; }
+ .cookie-btn-accept, .cookie-btn-reject {
+ flex: 1; text-align: center;
+ padding: 13px 16px;
+ font-size: 14px;
+ }
  }
 
  /* ─── SCROLL INDICATOR ─── */
