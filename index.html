@@ -980,6 +980,69 @@
 
  /* ─── BLOG SECTION ─── */
  .blog-section { background: var(--gray-50); }
+
+ /* ─── GUIDE STRIP (Option A) ─── */
+ .guide-strip {
+ display: grid;
+ grid-template-columns: repeat(4, 1fr);
+ border: 1px solid var(--gray-100);
+ border-radius: var(--radius-lg);
+ overflow: hidden;
+ background: white;
+ }
+ .guide-strip-item {
+ display: flex;
+ flex-direction: column;
+ gap: 10px;
+ padding: 24px 22px;
+ text-decoration: none;
+ color: inherit;
+ border-right: 1px solid var(--gray-100);
+ transition: background 0.2s;
+ }
+ .guide-strip-item:last-child { border-right: none; }
+ .guide-strip-item:hover { background: var(--gray-50); }
+ .guide-strip-dot {
+ width: 8px;
+ height: 8px;
+ border-radius: 50%;
+ flex-shrink: 0;
+ }
+ .guide-strip-body { flex: 1; }
+ .guide-strip-title {
+ font-family: var(--font-head);
+ font-size: 15px;
+ font-weight: 700;
+ color: var(--gray-900);
+ letter-spacing: -0.01em;
+ line-height: 1.3;
+ margin-bottom: 5px;
+ }
+ .guide-strip-meta {
+ font-size: 12px;
+ color: var(--gray-400);
+ line-height: 1.5;
+ }
+ .guide-strip-arrow {
+ font-size: 16px;
+ color: var(--blue);
+ font-weight: 500;
+ transition: transform 0.2s;
+ align-self: flex-end;
+ }
+ .guide-strip-item:hover .guide-strip-arrow { transform: translateX(4px); }
+ @media (max-width: 700px) {
+ .guide-strip { grid-template-columns: 1fr 1fr; }
+ .guide-strip-item:nth-child(2) { border-right: none; }
+ .guide-strip-item:nth-child(1),
+ .guide-strip-item:nth-child(2) { border-bottom: 1px solid var(--gray-100); }
+ }
+ @media (max-width: 440px) {
+ .guide-strip { grid-template-columns: 1fr; }
+ .guide-strip-item { border-right: none; border-bottom: 1px solid var(--gray-100); }
+ .guide-strip-item:last-child { border-bottom: none; }
+ }
+
  .blog-grid {
  display: grid;
  grid-template-columns: 1fr 1fr;
@@ -998,16 +1061,16 @@
  }
  .blog-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
  .blog-img {
- height: 180px;
- background: linear-gradient(135deg, var(--blue-light), var(--green-light));
- display: flex; align-items: center; justify-content: center;
+ height: 68px;
+ background: var(--gray-50);
+ display: flex; align-items: center; justify-content: flex-start;
+ padding: 0 24px;
+ gap: 14px;
  overflow: hidden;
  position: relative;
+ border-bottom: 1px solid var(--gray-100);
  }
- .blog-img-overlay {
- position: absolute; inset: 0;
- background: linear-gradient(to top, rgba(26,79,138,0.25) 0%, transparent 60%);
- }
+ .blog-img-overlay { display: none; }
  .blog-body { padding: 24px; }
  .blog-tag {
  font-size: 11px;
@@ -1447,15 +1510,16 @@
  .how-card:nth-child(2):hover .how-icon { background: var(--green); }
  .how-card:nth-child(3):hover .how-icon { background: #d97706; }
 
- /* ─── BLOG IMAGE, themed per article ─── */
- .blog-card:nth-child(1) .blog-img { background: linear-gradient(135deg, #0F3360 0%, #1A4F8A 70%, #2563EB 100%); }
- .blog-card:nth-child(2) .blog-img { background: linear-gradient(135deg, #1D7A50 0%, #2E9E6B 100%); }
- .blog-card:nth-child(3) .blog-img { background: linear-gradient(135deg, #4338CA 0%, #7C3AED 100%); }
- .blog-card:nth-child(4) .blog-img { background: linear-gradient(135deg, #B45309 0%, #D97706 100%); }
- .blog-card:nth-child(1) .blog-img svg,
- .blog-card:nth-child(2) .blog-img svg,
- .blog-card:nth-child(3) .blog-img svg,
- .blog-card:nth-child(4) .blog-img svg { stroke: rgba(255,255,255,0.7); opacity: 1; }
+ /* ─── GUIDE CARDS — light icon strips ─── */
+ .blog-card:nth-child(1) .blog-img { background: rgba(26,79,138,0.05); }
+ .blog-card:nth-child(1) .blog-img svg { stroke: var(--blue); opacity: 0.75; }
+ .blog-card:nth-child(2) .blog-img { background: rgba(46,158,107,0.05); }
+ .blog-card:nth-child(2) .blog-img svg { stroke: var(--green); opacity: 0.75; }
+ .blog-card:nth-child(3) .blog-img { background: rgba(99,102,241,0.05); }
+ .blog-card:nth-child(3) .blog-img svg { stroke: #6366f1; opacity: 0.75; }
+ .blog-card:nth-child(4) .blog-img { background: rgba(245,158,11,0.05); }
+ .blog-card:nth-child(4) .blog-img svg { stroke: #d97706; opacity: 0.75; }
+ .blog-img svg { width: 28px; height: 28px; flex-shrink: 0; }
 
  /* ─── LISTING CARD, left accent ─── */
 
@@ -2151,6 +2215,105 @@
  }
  .mob-btn-ghost:hover { background: rgba(255,255,255,0.08); color: white; border-color: rgba(255,255,255,0.45) !important; }
 
+
+/* ─── HERO GUIDE PILLS ─── */
+.hero-guide-strip {
+ margin-top: 20px;
+ padding-top: 18px;
+ border-top: 1px solid rgba(255,255,255,0.13);
+}
+.hero-guide-label {
+ font-size: 10px;
+ font-weight: 600;
+ letter-spacing: 0.09em;
+ text-transform: uppercase;
+ color: rgba(255,255,255,0.42);
+ margin-bottom: 10px;
+}
+.hero-pills {
+ display: flex;
+ gap: 8px;
+ flex-wrap: wrap;
+}
+.hero-pill {
+ display: inline-flex;
+ align-items: center;
+ gap: 7px;
+ font-size: 13px;
+ font-weight: 500;
+ padding: 7px 15px;
+ border-radius: 100px;
+ background: rgba(255,255,255,0.09);
+ border: 1px solid rgba(255,255,255,0.18);
+ color: rgba(255,255,255,0.88);
+ text-decoration: none;
+ transition: background 0.2s, border-color 0.2s, color 0.2s;
+ line-height: 1;
+}
+.hero-pill:hover {
+ background: rgba(255,255,255,0.17);
+ border-color: rgba(255,255,255,0.35);
+ color: #fff;
+}
+.hero-pill-dot {
+ width: 6px;
+ height: 6px;
+ border-radius: 50%;
+ flex-shrink: 0;
+}
+@media (max-width: 600px) {
+ .hero-pill { font-size: 12px; padding: 6px 12px; }
+}
+
+ /* ─── REVIEW CTA BAND ─── */
+ .review-cta-band {
+ margin-top: 48px;
+ padding: 28px 36px;
+ background: var(--blue-light);
+ border-radius: var(--radius-lg);
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ gap: 24px;
+ }
+ .review-cta-band-text strong {
+ font-family: var(--font-head);
+ font-size: 18px;
+ font-weight: 700;
+ color: var(--gray-900);
+ display: block;
+ margin-bottom: 4px;
+ letter-spacing: -0.015em;
+ }
+ .review-cta-band-text span {
+ font-size: 14px;
+ color: var(--gray-400);
+ font-weight: 400;
+ }
+ @media (max-width: 640px) {
+ .review-cta-band { flex-direction: column; align-items: flex-start; padding: 22px 24px; }
+ }
+
+ /* ─── REVIEW MODAL additions ─── */
+ .review-biz-input {
+ width: 100%;
+ padding: 11px 14px;
+ border: 1.5px solid var(--gray-100);
+ border-radius: var(--radius-sm);
+ font-family: var(--font-body);
+ font-size: 14px;
+ color: var(--gray-900);
+ outline: none;
+ margin-bottom: 16px;
+ }
+ .review-biz-input:focus { border-color: var(--blue); }
+ .review-biz-label {
+ font-size: 12px;
+ font-weight: 600;
+ color: var(--gray-700);
+ margin-bottom: 6px;
+ display: block;
+ }
 </style>
 </head>
 <body>
@@ -2262,45 +2425,88 @@
  <button class="carousel-dot" data-slide="2"></button>
  </div>
 
- <div class="carousel-label" id="carousel-label">Barbers & Hairdressers</div>
-
  <div class="hero-content">
- <div class="hero-eyebrow">
- <span class="hero-eyebrow-flag"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:rgba(255,255,255,0.8)"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
- <span class="hero-eyebrow-text">Built for Bratislava's expat community</span>
- </div>
  <h1 class="hero-h1">Life in Slovakia,<br><em>made simple.</em></h1>
- <p class="hero-sub">Find English-speaking doctors, lawyers, tradespeople and more in Bratislava.</p>
+ <p class="hero-sub">English-speaking doctors, lawyers, tradespeople and more in Bratislava.</p>
  <div class="hero-ctas">
  <a href="#categories" class="btn-primary">Find an Expert →</a>
- <a href="#" class="btn-outline-white" onclick="openAuth('register'); return false;">
- <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
- Join the community
- </a>
+ <a href="#" class="btn-outline-white" onclick="openAuth('register'); return false;">Join the community</a>
+ <div class="hero-guide-strip">
+ <div class="hero-pills">
+ <a href="residence-permit-guide.html" class="hero-pill"><span class="hero-pill-dot" style="background:#60a5fa"></span>Residence permit</a>
+ <a href="health-insurance-guide.html" class="hero-pill"><span class="hero-pill-dot" style="background:#4ade80"></span>Health insurance</a>
+ <a href="bank-account-guide.html" class="hero-pill"><span class="hero-pill-dot" style="background:#a78bfa"></span>Bank account</a>
+ <a href="zivnost-guide.html" class="hero-pill"><span class="hero-pill-dot" style="background:#fbbf24"></span>Živnosť</a>
  </div>
- <div class="hero-trust">
- <div class="trust-item">
- <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
- <span>English-speaking only</span>
- </div>
- <div class="trust-item">
- <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
- <span class="counter" data-target="12" data-suffix=" expert categories">12 expert categories</span>
- </div>
- <div class="trust-item">
- <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
- <span>Free to search, always</span>
  </div>
  </div>
  </div>
 
  <button class="hero-scroll-indicator" id="heroScrollBtn" aria-label="Scroll down">
- <span>Scroll</span>
  <div class="hero-scroll-chevron">
  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
  </div>
  </button>
 </section>
+
+<!-- BLOG & NEWSLETTER -->
+<section class="section blog-section" id="blog">
+ <div class="section-inner">
+ <div class="section-header reveal">
+ <div class="section-label">Expat Essentials</div>
+ <h2 class="section-title">The guides every new arrival needs</h2>
+ </div>
+ <div class="guide-strip reveal">
+ <a href="residence-permit-guide.html" class="guide-strip-item">
+ <span class="guide-strip-dot" style="background:#1A4F8A"></span>
+ <div class="guide-strip-body">
+ <div class="guide-strip-title">Residence Permit</div>
+ <div class="guide-strip-meta">Documents, timelines, EU vs non-EU · 12 min</div>
+ </div>
+ <span class="guide-strip-arrow">→</span>
+ </a>
+ <a href="health-insurance-guide.html" class="guide-strip-item">
+ <span class="guide-strip-dot" style="background:#2E9E6B"></span>
+ <div class="guide-strip-body">
+ <div class="guide-strip-title">Health Insurance</div>
+ <div class="guide-strip-meta">Which insurer, registration, 8-day deadline · 9 min</div>
+ </div>
+ <span class="guide-strip-arrow">→</span>
+ </a>
+ <a href="bank-account-guide.html" class="guide-strip-item">
+ <span class="guide-strip-dot" style="background:#6366f1"></span>
+ <div class="guide-strip-body">
+ <div class="guide-strip-title">Bank Account</div>
+ <div class="guide-strip-meta">Which banks accept foreigners, what docs · 8 min</div>
+ </div>
+ <span class="guide-strip-arrow">→</span>
+ </a>
+ <a href="zivnost-guide.html" class="guide-strip-item">
+ <span class="guide-strip-dot" style="background:#d97706"></span>
+ <div class="guide-strip-body">
+ <div class="guide-strip-title">Živnosť</div>
+ <div class="guide-strip-meta">Trade licence, fees, taxes, EU vs non-EU · 11 min</div>
+ </div>
+ <span class="guide-strip-arrow">→</span>
+ </a>
+ </div>
+
+ <!-- Newsletter strip -->
+ <div class="guides-nl reveal">
+ <div class="guides-nl-text">
+ <div class="guides-nl-title">The weekly expat guide to Slovakia</div>
+ <div class="guides-nl-sub">Every Friday: new listings, bureaucracy tips, and what's happening in the expat community. No spam, unsubscribe anytime.</div>
+ </div>
+ <div class="guides-nl-form">
+ <input class="guides-nl-input" type="email" placeholder="your@email.com">
+ <button class="guides-nl-btn">Subscribe free</button>
+ </div>
+ </div>
+
+ </div>
+</section>
+
+
 
 <!-- CATEGORIES -->
 <section class="section" id="categories">
@@ -2400,208 +2606,7 @@
 </section>
 
 
-<!-- FEATURED LISTINGS -->
-<section class="section" id="listings">
- <div class="section-inner">
- <div class="section-header reveal" style="display:flex; align-items:flex-end; justify-content:space-between">
- <div>
- <div class="section-label">Verified by our team</div>
- <h2 class="section-title">Recently added experts</h2>
- <p class="section-sub">Reviewed by the expat community. Freshly verified.</p>
- </div>
- <a href="#" style="font-size:14px; font-weight:600; color:var(--blue); text-decoration:none; white-space:nowrap; padding-bottom:8px; flex-shrink:0">View all listings →</a>
- </div>
- <div class="listings-grid">
- <div class="listing-card reveal" style="transition-delay: 0ms">
- <div class="listing-top">
- <div class="listing-badges">
- <span class="badge badge-cat">🏥 Doctor</span>
- <span class="badge badge-en">🇬🇧 English</span>
- </div>
- <div class="listing-verified">✓ Verified</div>
- </div>
- <div class="listing-name">Dr. Martina Kováčová</div>
- <div class="listing-desc">General practitioner accepting new patients. Fluent English, German. Evening appointments available.</div>
- <div class="listing-stars">
- <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
- <span class="listing-rating">4.9</span>
- <span class="listing-reviews">(38 reviews)</span>
- </div>
- <div class="listing-meta">
- <div class="listing-meta-item"><span class="listing-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span> Staré Mesto, Bratislava I</div>
- <div class="listing-meta-item"><span class="listing-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span> +421 912 345 678</div>
- </div>
- <div class="listing-actions">
- <button class="btn-fav" data-id="listing-1" onclick="toggleFav(this, 'listing-1', 'Dr. Martina Kováčová')">
- <span>♡</span> Save
- </button>
- <div style="display:flex;align-items:center;gap:6px;">
- <a href="#" class="listing-link">View profile →</a>
- <button class="btn-review" onclick="openReview('listing-1', 'Dr. Martina Kováčová')">★ Review</button>
- </div>
- </div>
- </div>
- <div class="listing-card reveal" style="transition-delay: 100ms">
- <div class="listing-top">
- <div class="listing-badges">
- <span class="badge badge-cat">✂️ Barber</span>
- <span class="badge badge-en">🇬🇧 English</span>
- <span class="badge badge-new">New</span>
- </div>
- <div class="listing-verified">✓ Verified</div>
- </div>
- <div class="listing-name">The Craft Barbershop</div>
- <div class="listing-desc">Premium barbershop. Walk-ins welcome, booking recommended on weekends. International team.</div>
- <div class="listing-stars">
- <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
- <span class="listing-rating">4.8</span>
- <span class="listing-reviews">(61 reviews)</span>
- </div>
- <div class="listing-meta">
- <div class="listing-meta-item"><span class="listing-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span> Ružinov, Bratislava II</div>
- <div class="listing-meta-item"><span class="listing-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span> thecraftba.sk</div>
- </div>
- <div class="listing-actions">
- <button class="btn-fav" data-id="listing-2" onclick="toggleFav(this, 'listing-2', 'The Craft Barbershop')">
- <span>♡</span> Save
- </button>
- <div style="display:flex;align-items:center;gap:6px;">
- <a href="#" class="listing-link">View profile →</a>
- <button class="btn-review" onclick="openReview('listing-2', 'The Craft Barbershop')">★ Review</button>
- </div>
- </div>
- </div>
- <div class="listing-card reveal" style="transition-delay: 200ms">
- <div class="listing-top">
- <div class="listing-badges">
- <span class="badge badge-cat">🔌 Electrician</span>
- <span class="badge badge-en">🇬🇧 English</span>
- </div>
- <div class="listing-verified">✓ Verified</div>
- </div>
- <div class="listing-name">ElektroPro Bratislava</div>
- <div class="listing-desc">Certified electrical services. Apartments, offices, new installations. Same-day emergency service.</div>
- <div class="listing-stars">
- <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star" style="color:var(--gray-100)">★</span>
- <span class="listing-rating">4.5</span>
- <span class="listing-reviews">(24 reviews)</span>
- </div>
- <div class="listing-meta">
- <div class="listing-meta-item"><span class="listing-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span> Petržalka, Bratislava V</div>
- <div class="listing-meta-item"><span class="listing-meta-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span> +421 903 876 543</div>
- </div>
- <div class="listing-actions">
- <button class="btn-fav" data-id="listing-3" onclick="toggleFav(this, 'listing-3', 'ElektroPro Bratislava')">
- <span>♡</span> Save
- </button>
- <div style="display:flex;align-items:center;gap:6px;">
- <a href="#" class="listing-link">View profile →</a>
- <button class="btn-review" onclick="openReview('listing-3', 'ElektroPro Bratislava')">★ Review</button>
- </div>
- </div>
- </div>
- </div>
- </div>
-</section>
 
-<!-- BLOG & NEWSLETTER -->
-<section class="section blog-section" id="blog">
- <div class="section-inner">
- <div class="section-header reveal">
- <div class="section-label">Expat Essentials</div>
- <h2 class="section-title">The guides every new arrival needs</h2>
- <p class="section-sub">Step-by-step guidance on the paperwork that can't wait, written by someone who's been through it all.</p>
- </div>
- <div class="blog-grid">
-
- <a href="residence-permit-guide.html" class="blog-card reveal">
- <div class="blog-img">
- <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(26,79,138,0.35)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
- <div class="blog-img-overlay"></div>
- </div>
- <div class="blog-body">
- <div class="blog-tag">Bureaucracy & Admin</div>
- <div class="blog-title">How to Get Your Temporary Residence Permit in Bratislava</div>
- <div class="blog-excerpt">Documents required, which office to visit, timelines, and the most common mistakes to avoid.</div>
- <div class="blog-meta">
- <span>12 min read</span>
- <div class="blog-meta-dot"></div>
- <span>March 28, 2026</span>
- </div>
- <span class="blog-read-more">Read the guide <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
- </div>
- </a>
-
- <a href="health-insurance-guide.html" class="blog-card reveal" style="transition-delay:80ms">
- <div class="blog-img">
- <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(26,79,138,0.35)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
- <div class="blog-img-overlay"></div>
- </div>
- <div class="blog-body">
- <div class="blog-tag">Healthcare</div>
- <div class="blog-title">Slovak Health Insurance for Expats: Registration & Coverage</div>
- <div class="blog-excerpt">Which insurer to choose, what documents to bring, and what you're actually covered for, including the 8-day deadline most people miss.</div>
- <div class="blog-meta">
- <span>9 min read</span>
- <div class="blog-meta-dot"></div>
- <span>April 3, 2026</span>
- </div>
- <span class="blog-read-more">Read the guide <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
- </div>
- </a>
-
- <a href="bank-account-guide.html" class="blog-card reveal" style="transition-delay:160ms">
- <div class="blog-img">
- <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(26,79,138,0.35)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
- <div class="blog-img-overlay"></div>
- </div>
- <div class="blog-body">
- <div class="blog-tag">Banking & Finance</div>
- <div class="blog-title">Opening a Bank Account in Slovakia as a Foreigner</div>
- <div class="blog-excerpt">Which banks accept non-residents, what documents you need, and whether Revolut or a local account makes more sense for your situation.</div>
- <div class="blog-meta">
- <span>8 min read</span>
- <div class="blog-meta-dot"></div>
- <span>April 10, 2026</span>
- </div>
- <span class="blog-read-more">Read the guide <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
- </div>
- </a>
-
- <a href="zivnost-guide.html" class="blog-card reveal" style="transition-delay:240ms">
- <div class="blog-img">
- <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(26,79,138,0.35)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
- <div class="blog-img-overlay"></div>
- </div>
- <div class="blog-body">
- <div class="blog-tag">Self-Employment</div>
- <div class="blog-title">How to Register a Živnosť (Trade Licence) in Slovakia</div>
- <div class="blog-excerpt">The full step-by-step for EU and non-EU citizens, fees, documents, tax and insurance implications, and živnosť vs s.r.o. compared.</div>
- <div class="blog-meta">
- <span>11 min read</span>
- <div class="blog-meta-dot"></div>
- <span>April 17, 2026</span>
- </div>
- <span class="blog-read-more">Read the guide <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
- </div>
- </a>
-
- </div>
-
- <!-- Newsletter strip -->
- <div class="guides-nl reveal">
- <div class="guides-nl-text">
- <div class="guides-nl-title">The weekly expat guide to Slovakia</div>
- <div class="guides-nl-sub">Every Friday: new listings, bureaucracy tips, and what's happening in the expat community. No spam, unsubscribe anytime.</div>
- </div>
- <div class="guides-nl-form">
- <input class="guides-nl-input" type="email" placeholder="your@email.com">
- <button class="guides-nl-btn">Subscribe free</button>
- </div>
- </div>
-
- </div>
-</section>
 
 <!-- TESTIMONIALS -->
 <section class="section testimonials-section" id="about">
@@ -2650,6 +2655,16 @@
  </div>
  </div>
  </div>
+ </div>
+
+ <div class="review-cta-band reveal">
+ <div class="review-cta-band-text">
+ <strong>Had a good experience in Bratislava?</strong>
+ <span>Help other expats by sharing which businesses, doctors or services you'd recommend.</span>
+ </div>
+ <button class="btn-primary" style="flex-shrink:0; white-space:nowrap" onclick="openReview(null, null)">
+ ★ Write a review
+ </button>
  </div>
  </div>
 </section>
@@ -4065,7 +4080,11 @@
  <div class="review-modal">
  <button class="auth-close" onclick="closeReview()">×</button>
  <div class="review-title">Leave a review</div>
- <div class="review-biz-name" id="reviewBizName">Business name</div>
+ <div class="review-biz-name" id="reviewBizName" style="display:none">Business name</div>
+ <div id="reviewBizInputWrap" style="display:none; margin-bottom:4px">
+ <label class="review-biz-label" for="reviewBizNameInput">Which business are you reviewing?</label>
+ <input type="text" class="review-biz-input" id="reviewBizNameInput" placeholder="e.g. Dr. Kováčová, The Craft Barbershop…" autocomplete="off">
+ </div>
  <div class="star-picker" id="starPicker">
  <span class="star-pick" data-val="1" onclick="pickStar(1)">★</span>
  <span class="star-pick" data-val="2" onclick="pickStar(2)">★</span>
@@ -4281,10 +4300,16 @@
  openAuth('register');
  return;
  }
- currentReviewBizId = bizId;
- currentReviewBizName = bizName;
+ currentReviewBizId = bizId || null;
+ currentReviewBizName = bizName || null;
  selectedStars = 0;
- document.getElementById('reviewBizName').textContent = bizName;
+ const hasBiz = !!bizId;
+ const bizNameEl = document.getElementById('reviewBizName');
+ const bizInputWrap = document.getElementById('reviewBizInputWrap');
+ bizNameEl.style.display = hasBiz ? 'block' : 'none';
+ bizInputWrap.style.display = hasBiz ? 'none' : 'block';
+ if (hasBiz) bizNameEl.textContent = bizName;
+ else document.getElementById('reviewBizNameInput').value = '';
  document.getElementById('reviewText').value = '';
  document.getElementById('reviewCharCount').textContent = '0';
  document.querySelectorAll('.star-pick').forEach(s => s.classList.remove('active'));
@@ -4315,19 +4340,35 @@
  const text = document.getElementById('reviewText').value.trim();
  if (!text) { showToast('Please write a short review.'); return; }
 
+ const bizNameFinal = currentReviewBizId
+ ? currentReviewBizName
+ : (document.getElementById('reviewBizNameInput').value.trim());
+ if (!bizNameFinal) { showToast('Please enter the business name.'); return; }
+
  const btn = document.getElementById('reviewSubmitBtn');
  btn.disabled = true; btn.textContent = 'Submitting...';
 
- // Save locally
  try {
- const reviews = JSON.parse(localStorage.getItem('ee_reviews') || '[]');
- reviews.unshift({ bizId: currentReviewBizId, bizName: currentReviewBizName, rating: selectedStars, text, date: new Date().toISOString() });
- localStorage.setItem('ee_reviews', JSON.stringify(reviews));
- } catch(e) {}
+ const { error } = await _sb.from('reviews').insert({
+ business_id: currentReviewBizId || null,
+ business_name: bizNameFinal,
+ reviewer_name: currentMember?.name || null,
+ reviewer_email: currentMember?.email || null,
+ rating: selectedStars,
+ body: text,
+ status: 'pending'
+ });
+ if (error) throw error;
+ } catch(e) {
+ console.error('Review submit error:', e);
+ btn.disabled = false; btn.textContent = 'Submit review';
+ showToast('Something went wrong. Please try again.');
+ return;
+ }
 
  btn.disabled = false; btn.textContent = 'Submit review';
  closeReview();
- showToast('Thank you for your review!', true);
+ showToast('Thank you! Your review will appear after moderation.', true);
  }
 
  // ─── PENDING ACTION (after join) ───
