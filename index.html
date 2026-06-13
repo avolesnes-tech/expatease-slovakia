@@ -979,17 +979,46 @@
  .review-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
  /* ─── BLOG SECTION ─── */
- .blog-section { background: var(--gray-50); }
+ /* ─── GUIDES SECTION ─── */
+ .blog-section {
+ background: linear-gradient(135deg, #E4EFFE 0%, #EBF7F2 100%);
+ position: relative;
+ overflow: hidden;
+ }
+ .blog-section::before {
+ content: '';
+ position: absolute;
+ width: 480px; height: 480px;
+ background: radial-gradient(circle, rgba(26,79,138,0.12) 0%, transparent 70%);
+ border-radius: 50%;
+ top: -160px; right: -120px;
+ pointer-events: none;
+ }
+ .blog-section::after {
+ content: '';
+ position: absolute;
+ width: 360px; height: 360px;
+ background: radial-gradient(circle, rgba(46,158,107,0.13) 0%, transparent 70%);
+ border-radius: 50%;
+ bottom: -100px; left: -60px;
+ pointer-events: none;
+ }
+ .blog-section .section-inner { position: relative; z-index: 1; }
 
  /* ─── GUIDE STRIP (Option A) ─── */
  .guide-strip {
  display: grid;
  grid-template-columns: repeat(4, 1fr);
- border: 1px solid var(--gray-100);
+ border: none;
  border-radius: var(--radius-lg);
  overflow: hidden;
  background: white;
+ box-shadow: 0 6px 32px rgba(26,79,138,0.13), 0 1px 4px rgba(26,79,138,0.07);
  }
+ .guide-strip-item:nth-child(1) { border-top: 3px solid #1A4F8A; }
+ .guide-strip-item:nth-child(2) { border-top: 3px solid #2E9E6B; }
+ .guide-strip-item:nth-child(3) { border-top: 3px solid #6366f1; }
+ .guide-strip-item:nth-child(4) { border-top: 3px solid #d97706; }
  .guide-strip-item {
  display: flex;
  flex-direction: column;
@@ -1003,8 +1032,8 @@
  .guide-strip-item:last-child { border-right: none; }
  .guide-strip-item:hover { background: var(--gray-50); }
  .guide-strip-dot {
- width: 8px;
- height: 8px;
+ width: 10px;
+ height: 10px;
  border-radius: 50%;
  flex-shrink: 0;
  }
@@ -1031,6 +1060,9 @@
  align-self: flex-end;
  }
  .guide-strip-item:hover .guide-strip-arrow { transform: translateX(4px); }
+ /* ─── GUIDE ZIGZAG (mobile only) ─── */
+ .guide-zigzag-svg { display: none; }
+
  @media (max-width: 700px) {
  .guide-strip { grid-template-columns: 1fr 1fr; }
  .guide-strip-item:nth-child(2) { border-right: none; }
@@ -1039,8 +1071,21 @@
  }
  @media (max-width: 440px) {
  .guide-strip { grid-template-columns: 1fr; }
- .guide-strip-item { border-right: none; border-bottom: 1px solid var(--gray-100); }
- .guide-strip-item:last-child { border-bottom: none; }
+ .guide-strip-item { border-top: none !important; border-right: none; border-bottom: 1px solid var(--gray-100); }
+ .guide-strip-item:nth-child(1) { border-left: 4px solid #1A4F8A; }
+ .guide-strip-item:nth-child(2) { border-left: 4px solid #2E9E6B; }
+ .guide-strip-item:nth-child(3) { border-left: 4px solid #6366f1; }
+ .guide-strip-item:nth-child(4) { border-left: 4px solid #d97706; border-bottom: none; }
+ .blog-section {
+ background: linear-gradient(180deg, #1A4F8A 0px, #2260a8 56px, #E4EFFE 56px, #EBF7F2 100%);
+ }
+ .guide-zigzag-svg {
+ display: block;
+ position: absolute;
+ top: 0; left: 0; right: 0;
+ width: 100%; height: 56px;
+ }
+ .blog-section::before, .blog-section::after { display: none; }
  }
 
  .blog-grid {
@@ -2449,6 +2494,15 @@
 
 <!-- BLOG & NEWSLETTER -->
 <section class="section blog-section" id="blog">
+ <svg class="guide-zigzag-svg" viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true">
+ <path d="M0,0 L400,0 L400,30 L380,56 L360,30 L340,56 L320,30 L300,56 L280,30 L260,56 L240,30 L220,56 L200,30 L180,56 L160,30 L140,56 L120,30 L100,56 L80,30 L60,56 L40,30 L20,56 L0,30 Z" fill="url(#zz-g)"/>
+ <defs>
+ <linearGradient id="zz-g" x1="0%" y1="0%" x2="100%" y2="0%">
+ <stop offset="0%" stop-color="#1A4F8A"/>
+ <stop offset="100%" stop-color="#2E9E6B"/>
+ </linearGradient>
+ </defs>
+ </svg>
  <div class="section-inner">
  <div class="section-header reveal">
  <div class="section-label">Expat Essentials</div>
@@ -2848,15 +2902,15 @@
  <option>Doctors &amp; Specialists</option>
  <option>Lawyers &amp; Legal</option>
  <option>Banks &amp; Finance</option>
- <option>Barbers &amp; Hairdressers</option>
- <option>Electricians</option>
- <option>Plumbers</option>
+ <option>Hair, Beauty &amp; Tattoo</option>
+ <option>Handymen</option>
  <option>Builders &amp; Construction</option>
- <option>Tattoo Studios</option>
  <option>Vets</option>
  <option>Real Estate</option>
- <option>Pharmacies</option>
+ <option>Schools &amp; Learning</option>
  <option>Moving &amp; Relocation</option>
+ <option>Sports &amp; Leisure</option>
+ <option>Others</option>
  </select>
  <div class="sm-field-error" id="smCategoryErr">Please select a category.</div>
  </div>
@@ -3108,7 +3162,7 @@
  // Carousel
  const slides = document.querySelectorAll('.hero-slide');
  const dots = document.querySelectorAll('.carousel-dot');
- const labels = ['Barbers & Hairdressers', 'Doctors & Specialists', 'Electricians & Tradespeople'];
+ const labels = ['Hair, Beauty & Tattoo', 'Doctors & Specialists', 'Handymen'];
  const labelEl = document.getElementById('carousel-label');
  let current = 0;
  let interval;
@@ -3497,8 +3551,8 @@
  const CAT_META = {
  'Doctors & Specialists': {
  subLabel: 'Specialty',
- subs: ['General Practitioner','Cardiologist','Dermatologist','Pediatrician','Gynecologist','Dentist','Psychiatrist','Other'],
- districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Online'],
+ subs: ['General Practitioner','Cardiologist','Dermatologist','Pediatrician','Gynecologist','Dentist','Psychiatrist','Physiotherapist','Other'],
+ districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Online'],
  extras: [
  { key: 'insurance', label: 'Insurance accepted', type: 'multi',
  opts: ['VšZP','Dôvera','Union','Self-pay'] }
@@ -3506,38 +3560,29 @@
  },
  'Lawyers & Legal': {
  subLabel: 'Specialisation',
- subs: ['Immigration Law','Employment Law','Real Estate Law','Corporate Law','Family Law','Criminal Law','Tax Law','Corporate & Business','Tax & Accounting','Other'],
+ subs: ['Immigration Law','Employment Law','Real Estate Law','Corporate Law','Family Law','Criminal Law','Tax Law','Other'],
  districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Online'],
  extras: []
  },
  'Banks & Finance': {
  subLabel: 'Service type',
- subs: ['Retail Bank','Private Bank','Accountant','Tax Advisor','Financial Advisor','Currency Exchange','Business Banking','Insurance'],
+ subs: ['Retail Bank','Private Bank','Accountant','Tax Advisor','Financial Advisor','Currency Exchange','Business Banking','Insurance','Other'],
  districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Online'],
  extras: []
  },
- 'Barbers & Hairdressers': {
+ 'Hair, Beauty & Tattoo': {
  subLabel: 'Service type',
- subs: ["Barbershop (Men's)",'Hair Salon (Women\'s)','Unisex Salon','Colourist','Hair Extensions','Blow-dry Bar','Nail Salon','Spa & Wellness'],
- districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Online'],
+ subs: ["Barbershop (Men's)",'Hair Salon (Women\'s)','Unisex Salon','Colourist','Blow-dry Bar','Nail Salon','Spa & Wellness','Aesthetic Medicine','Tattoo','Piercing','Laser Removal','Other'],
+ districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto'],
  extras: [
  { key: 'price_tier', label: 'Price range', type: 'radio',
  opts: ['€','€€','€€€'] }
  ]
  },
- 'Electricians': {
+ 'Handymen': {
  subLabel: 'Service type',
- subs: ['Emergency Call-out','Residential Wiring','Commercial Electrical','Smart Home','Inspection & Certification','EV Charger Installation'],
- districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nationwide'],
- extras: [
- { key: 'availability', label: 'Availability', type: 'multi',
- opts: ['24/7 Emergency','Same Day','By Appointment'] }
- ]
- },
- 'Plumbers': {
- subLabel: 'Service type',
- subs: ['Emergency Repair','Leak Detection','Bathroom Installation','Drain Cleaning','Boiler & Heating','Gas Certification'],
- districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Bratislava-wide'],
+ subs: ['Emergency Plumbing','Emergency Electrician','General Handyman','Appliance Repair','Locksmith','Boiler & Heating','EV Charger Installation','Smart Home','Drain Cleaning','Residential Wiring','Other'],
+ districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Bratislava-wide'],
  extras: [
  { key: 'availability', label: 'Availability', type: 'multi',
  opts: ['24/7 Emergency','Same Day','By Appointment'] }
@@ -3545,41 +3590,44 @@
  },
  'Builders & Construction': {
  subLabel: 'Service type',
- subs: ['Flooring & Tiling','Painting & Plastering','Structural & Extensions','General Handyman','Locksmith','Pest Control'],
+ subs: ['Flooring & Tiling','Painting & Plastering','Structural & Extensions','Kitchen & Bathroom Renovation','Roofing','Other'],
  districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Vajnory','Bratislava-wide'],
  extras: []
  },
- 'Tattoo Studios': {
- subLabel: 'Studio type',
- subs: ['Tattoo','Piercing','Laser Removal','Barbershop','Unisex Salon'],
- districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Online'],
- extras: [
- { key: 'price_tier', label: 'Price range', type: 'radio',
- opts: ['€','€€','€€€'] }
- ]
- },
  'Vets': {
  subLabel: 'Specialisation',
- subs: ['General Practice','Emergency / 24h','Exotic Animals','Dermatology','Cats Only','Birds'],
- districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Online'],
+ subs: ['General Practice','Cats','Other Animals'],
+ districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto'],
  extras: []
  },
  'Real Estate': {
  subLabel: 'Service type',
- subs: ['Rental Agent','Sales Agent','Property Management','Property Lawyer','Relocation Service','Short-term / Expat Housing'],
+ subs: ['Rental Agent','Sales Agent','Property Management','Relocation Service','Short-term / Expat Housing','Property Lawyer','Other'],
  districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Citywide'],
  extras: []
  },
- 'Pharmacies': {
- subLabel: 'Service type',
- subs: ['Community Pharmacy','Online Pharmacy','Compounding Pharmacy'],
+ 'Schools & Learning': {
+ subLabel: 'Type',
+ subs: ['International School','Language School','Slovak Lessons','University / Higher Ed','Tutoring & Coaching','Kids Classes','Online Learning','Driving School','Other'],
  districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Online'],
  extras: []
  },
  'Moving & Relocation': {
  subLabel: 'Service type',
- subs: ['Local Moves','International Moves','Customs & Freight','Storage','Packing Service'],
+ subs: ['Local Moves','International Moves','Customs & Freight','Storage','Packing Service','Expat Relocation','Other'],
  districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Bratislava-wide'],
+ extras: []
+ },
+ 'Sports & Leisure': {
+ subLabel: 'Activity type',
+ subs: ['Gym / Fitness Centre','Personal Trainer','Yoga & Pilates','Swimming','Martial Arts & Combat','Sports Club','Outdoor & Adventure','Cycling','Other'],
+ districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Citywide'],
+ extras: []
+ },
+ 'Others': {
+ subLabel: 'Service type',
+ subs: ['Cleaning Service','Childcare / Nanny','IT & Tech Support','Car Mechanic','Photography','Translation & Interpretation','Catering & Events','Pest Control','Other'],
+ districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Online','Bratislava-wide'],
  extras: []
  },
  };
