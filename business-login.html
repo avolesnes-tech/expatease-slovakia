@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Login | ExpatBase Slovakia</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231A4F8A'/%3E%3Ctext x='16' y='22' font-family='Arial Black,sans-serif' font-size='16' font-weight='900' fill='white' text-anchor='middle'%3EEB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root {
+    --blue: #1A4F8A; --blue-dark: #0F3360; --green: #2E9E6B; --green-dark: #1D7A50;
+    --gray-50: #F4F6F9; --gray-100: #DDE3EC; --gray-400: #8C97A8; --gray-700: #3D4A5C; --gray-900: #1F2937;
+    --radius-md: 12px; --radius-lg: 20px; --radius-xl: 9999px;
+    --font-head: 'Urbanist', sans-serif; --font-body: 'DM Sans', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-body); color: var(--gray-900);
+    background: linear-gradient(160deg, #0d1829 0%, #0f1f14 100%);
+    min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px;
+  }
+  .card {
+    background: #fff; border-radius: var(--radius-lg); width: 100%; max-width: 420px;
+    padding: 40px 36px; box-shadow: 0 24px 64px rgba(0,0,0,0.28);
+  }
+  .logo { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; text-decoration: none; }
+  .logo-mark { width: 36px; height: 36px; border-radius: 9px; background: linear-gradient(135deg, var(--blue), var(--green)); display: flex; align-items: center; justify-content: center; color: #fff; font-family: var(--font-head); font-weight: 800; font-size: 15px; }
+  .logo-text { font-family: var(--font-head); font-weight: 700; font-size: 17px; color: var(--gray-900); }
+  h1 { font-family: var(--font-head); font-size: 23px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .sub { font-size: 14px; color: var(--gray-400); line-height: 1.6; margin-bottom: 26px; }
+  label { display: block; font-size: 12px; font-weight: 600; color: var(--gray-700); margin-bottom: 7px; }
+  input[type=email] {
+    width: 100%; padding: 13px 15px; border: 1.5px solid var(--gray-100); border-radius: var(--radius-md);
+    font-family: var(--font-body); font-size: 15px; color: var(--gray-900); transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  input[type=email]:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,79,138,0.12); }
+  .btn {
+    width: 100%; margin-top: 18px; padding: 14px 20px; border: none; cursor: pointer;
+    background: var(--green); color: #fff; border-radius: var(--radius-xl);
+    font-family: var(--font-body); font-size: 15px; font-weight: 600; transition: background 0.2s, opacity 0.2s;
+  }
+  .btn:hover { background: var(--green-dark); }
+  .btn:disabled { opacity: 0.65; cursor: default; }
+  .msg { margin-top: 18px; font-size: 14px; line-height: 1.6; padding: 14px 16px; border-radius: var(--radius-md); display: none; }
+  .msg.show { display: block; }
+  .msg.ok { background: #E6F7EF; color: #14532d; border: 1px solid rgba(46,158,107,0.3); }
+  .msg.err { background: #FEECEC; color: #7c1d1d; border: 1px solid rgba(229,62,62,0.3); }
+  .foot { margin-top: 24px; font-size: 13px; color: var(--gray-400); text-align: center; }
+  .foot a { color: var(--blue); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="card">
+  <a href="index.html" class="logo">
+    <span class="logo-mark">EB</span>
+    <span class="logo-text">ExpatBase Slovakia</span>
+  </a>
+  <h1>Manage your business</h1>
+  <p class="sub">Enter the email you used to submit your listing. We'll send you a secure login link — no password needed.</p>
+
+  <form id="loginForm">
+    <label for="email">Business email</label>
+    <input type="email" id="email" placeholder="you@yourbusiness.sk" autocomplete="email" required>
+    <button class="btn" type="submit" id="sendBtn">Send me a login link</button>
+  </form>
+
+  <div class="msg" id="msg"></div>
+
+  <div class="foot">Haven't listed yet? <a href="index.html#submit">Add your business</a></div>
+</div>
+
+<script>
+  const _sb = supabase.createClient(
+    'https://etxqrlrqbjcbjmitnspv.supabase.co',
+    'sb_publishable_i38f7jyt2HYOjUTNuOsklg_aMofdDvE'
+  );
+  const form = document.getElementById('loginForm');
+  const btn = document.getElementById('sendBtn');
+  const msg = document.getElementById('msg');
+  const emailEl = document.getElementById('email');
+
+  function showMsg(text, kind) {
+    msg.textContent = text;
+    msg.className = 'msg show ' + kind;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = emailEl.value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showMsg('Please enter a valid email address.', 'err');
+      return;
+    }
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    msg.className = 'msg';
+    try {
+      const { error } = await _sb.auth.signInWithOtp({
+        email,
+        options: { emailRedirectTo: window.location.origin + '/business-dashboard.html' }
+      });
+      if (error) throw error;
+      showMsg('Check your inbox — we sent a login link to ' + email + '. Click it to manage your listing. The link expires in 1 hour.', 'ok');
+      btn.textContent = 'Link sent ✓';
+      form.querySelector('input').disabled = true;
+    } catch (err) {
+      showMsg(err.message || 'Something went wrong. Please try again.', 'err');
+      btn.disabled = false;
+      btn.textContent = 'Send me a login link';
+    }
+  });
+</script>
+</body>
+</html>

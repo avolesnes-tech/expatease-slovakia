@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Business Dashboard | ExpatBase Slovakia</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231A4F8A'/%3E%3Ctext x='16' y='22' font-family='Arial Black,sans-serif' font-size='16' font-weight='900' fill='white' text-anchor='middle'%3EEB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root {
+    --blue: #1A4F8A; --blue-dark: #0F3360; --blue-light: #E8F1FB; --green: #2E9E6B; --green-dark: #1D7A50; --green-light: #E6F7EF;
+    --amber-light: #FEF6E7; --amber-text: #7c4a03;
+    --gray-50: #F4F6F9; --gray-100: #DDE3EC; --gray-400: #8C97A8; --gray-700: #3D4A5C; --gray-900: #1F2937;
+    --radius-md: 12px; --radius-lg: 20px; --radius-xl: 9999px;
+    --font-head: 'Urbanist', sans-serif; --font-body: 'DM Sans', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-body); color: var(--gray-900); background: var(--gray-50); min-height: 100vh; }
+  .topbar { background: #fff; border-bottom: 1px solid var(--gray-100); padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-mark { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--blue), var(--green)); display: flex; align-items: center; justify-content: center; color: #fff; font-family: var(--font-head); font-weight: 800; font-size: 13px; }
+  .logo-text { font-family: var(--font-head); font-weight: 700; font-size: 16px; color: var(--gray-900); }
+  .logout { background: none; border: 1px solid var(--gray-100); color: var(--gray-700); font-family: var(--font-body); font-size: 13px; font-weight: 500; padding: 8px 16px; border-radius: var(--radius-xl); cursor: pointer; transition: all 0.2s; }
+  .logout:hover { border-color: var(--gray-400); }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 36px 24px 80px; }
+  .state { text-align: center; padding: 80px 20px; color: var(--gray-400); font-size: 15px; }
+  .state a { color: var(--blue); text-decoration: none; font-weight: 600; }
+  .head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; }
+  h1 { font-family: var(--font-head); font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+  .status-badge { font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: var(--radius-xl); }
+  .status-pending { background: var(--amber-light); color: var(--amber-text); }
+  .status-approved { background: var(--green-light); color: var(--green-dark); }
+  .lead { font-size: 14px; color: var(--gray-400); margin-bottom: 28px; line-height: 1.6; }
+  .pending-note { background: var(--amber-light); color: var(--amber-text); border: 1px solid rgba(245,158,11,0.3); border-radius: var(--radius-md); padding: 14px 18px; font-size: 14px; line-height: 1.6; margin-bottom: 28px; }
+  .card { background: #fff; border: 1px solid var(--gray-100); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 20px; }
+  .card-title { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--gray-900); margin-bottom: 18px; }
+  .field { margin-bottom: 18px; }
+  .field:last-child { margin-bottom: 0; }
+  label { display: block; font-size: 12px; font-weight: 600; color: var(--gray-700); margin-bottom: 7px; }
+  input, textarea, select { width: 100%; padding: 12px 14px; border: 1.5px solid var(--gray-100); border-radius: var(--radius-md); font-family: var(--font-body); font-size: 15px; color: var(--gray-900); transition: border-color 0.2s, box-shadow 0.2s; background: #fff; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,79,138,0.12); }
+  input:disabled { background: var(--gray-50); color: var(--gray-400); }
+  textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+  .hint { font-size: 12px; color: var(--gray-400); margin-top: 6px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 520px) { .row { grid-template-columns: 1fr; } }
+  .savebar { position: sticky; bottom: 0; background: var(--gray-50); padding: 16px 0; display: flex; align-items: center; gap: 16px; }
+  .btn-save { background: var(--green); color: #fff; border: none; padding: 14px 32px; border-radius: var(--radius-xl); font-family: var(--font-body); font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s, opacity 0.2s; }
+  .btn-save:hover { background: var(--green-dark); }
+  .btn-save:disabled { opacity: 0.65; cursor: default; }
+  .save-msg { font-size: 14px; font-weight: 500; }
+  .save-msg.ok { color: var(--green-dark); }
+  .save-msg.err { color: #b91c1c; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { display: inline-flex; align-items: center; }
+  .chip input { width: auto; position: absolute; opacity: 0; pointer-events: none; }
+  .chip label { display: inline-block; margin: 0; padding: 8px 14px; border: 1.5px solid var(--gray-100); border-radius: var(--radius-xl); font-size: 13px; font-weight: 500; color: var(--gray-700); cursor: pointer; transition: all 0.18s; }
+  .chip input:checked + label { background: var(--blue-light); border-color: var(--blue); color: var(--blue); }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="index.html" class="logo"><span class="logo-mark">EB</span><span class="logo-text">ExpatBase Slovakia</span></a>
+  <button class="logout" id="logoutBtn" style="display:none">Log out</button>
+</div>
+
+<div class="wrap">
+  <div class="state" id="loadingState">Loading your dashboard…</div>
+
+  <div class="state" id="noSessionState" style="display:none">
+    You're not logged in.<br><br>
+    <a href="business-login.html">Go to business login →</a>
+  </div>
+
+  <div class="state" id="noListingState" style="display:none">
+    We couldn't find a listing for this email.<br><br>
+    <a href="index.html#submit">Submit your business →</a> &nbsp;·&nbsp; <a href="business-login.html">Try another email</a>
+  </div>
+
+  <div id="dashboard" style="display:none">
+    <div class="head">
+      <h1 id="bizTitle">Your listing</h1>
+      <span class="status-badge" id="statusBadge"></span>
+    </div>
+    <p class="lead" id="leadText"></p>
+    <div class="pending-note" id="pendingNote" style="display:none">
+      Your listing is awaiting review. You can edit it now — changes are saved and will go live once approved (usually within 2 business days).
+    </div>
+
+    <form id="editForm">
+      <div class="card">
+        <div class="card-title">Business details</div>
+        <div class="field">
+          <label for="fName">Business name</label>
+          <input type="text" id="fName" maxlength="120">
+        </div>
+        <div class="field">
+          <label for="fDesc">Short description</label>
+          <textarea id="fDesc" maxlength="600" placeholder="What you do, who you help, what makes you a good fit for expats."></textarea>
+          <div class="hint">Shown on your listing card. Up to 600 characters.</div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="fPhone">Phone</label>
+            <input type="tel" id="fPhone" placeholder="+421 912 345 678">
+          </div>
+          <div class="field">
+            <label for="fDistrict">District</label>
+            <input type="text" id="fDistrict" placeholder="e.g. Staré Mesto">
+          </div>
+        </div>
+        <div class="field">
+          <label for="fAddress">Address in Bratislava</label>
+          <input type="text" id="fAddress" placeholder="Street, number, postcode">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Online presence</div>
+        <div class="field">
+          <label for="fWebsite">Website</label>
+          <input type="url" id="fWebsite" placeholder="https://yourbusiness.sk">
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="fInstagram">Instagram</label>
+            <input type="text" id="fInstagram" placeholder="@yourbusiness">
+          </div>
+          <div class="field">
+            <label for="fFacebook">Facebook</label>
+            <input type="text" id="fFacebook" placeholder="facebook.com/yourbusiness">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Languages you serve clients in</div>
+        <div class="chips" id="langChips"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Account</div>
+        <div class="field">
+          <label for="fEmail">Login email</label>
+          <input type="email" id="fEmail" disabled>
+          <div class="hint">This is your login identity and can't be changed here. Contact us if you need to update it.</div>
+        </div>
+      </div>
+
+      <div class="savebar">
+        <button type="submit" class="btn-save" id="saveBtn">Save changes</button>
+        <span class="save-msg" id="saveMsg"></span>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const _sb = supabase.createClient(
+    'https://etxqrlrqbjcbjmitnspv.supabase.co',
+    'sb_publishable_i38f7jyt2HYOjUTNuOsklg_aMofdDvE'
+  );
+
+  const LANGS = ['English','Slovak','German','French','Russian','Ukrainian','Hungarian','Other'];
+  let bizRow = null;
+
+  const $ = (id) => document.getElementById(id);
+  function show(id) { $(id).style.display = (id === 'dashboard' || id.endsWith('State')) ? 'block' : ''; }
+  function hideAll() { ['loadingState','noSessionState','noListingState','dashboard'].forEach(s => $(s).style.display = 'none'); }
+
+  function buildLangChips(selected) {
+    const set = new Set(selected || []);
+    $('langChips').innerHTML = LANGS.map((l, i) =>
+      `<span class="chip"><input type="checkbox" id="lang${i}" value="${l}" ${set.has(l) ? 'checked' : ''}><label for="lang${i}">${l}</label></span>`
+    ).join('');
+  }
+
+  function renderListing(row) {
+    bizRow = row;
+    $('bizTitle').textContent = row.name || 'Your listing';
+    const approved = row.status === 'approved';
+    const badge = $('statusBadge');
+    badge.textContent = approved ? 'Live' : 'Pending review';
+    badge.className = 'status-badge ' + (approved ? 'status-approved' : 'status-pending');
+    $('leadText').textContent = approved
+      ? 'Your listing is live. Edits save instantly.'
+      : '';
+    $('pendingNote').style.display = approved ? 'none' : 'block';
+
+    $('fName').value = row.name || '';
+    $('fDesc').value = row.about || row.description || '';
+    $('fPhone').value = row.phone || '';
+    $('fDistrict').value = row.district || '';
+    $('fAddress').value = row.address || '';
+    $('fWebsite').value = row.website || '';
+    const social = row.social_links || {};
+    $('fInstagram').value = social.instagram || '';
+    $('fFacebook').value = social.facebook || '';
+    $('fEmail').value = row.email || '';
+    buildLangChips(row.languages);
+
+    hideAll(); show('dashboard');
+    $('logoutBtn').style.display = '';
+  }
+
+  async function init() {
+    const { data: { session } } = await _sb.auth.getSession();
+    if (!session || !session.user) {
+      hideAll(); show('noSessionState');
+      return;
+    }
+    const email = session.user.email;
+    const { data, error } = await _sb
+      .from('businesses')
+      .select('*')
+      .eq('owner_email', email)
+      .order('created_at', { ascending: false })
+      .limit(1);
+
+    if (error) {
+      hideAll(); show('noSessionState');
+      $('noSessionState').textContent = 'Error loading your listing: ' + error.message;
+      return;
+    }
+    if (!data || !data.length) {
+      hideAll(); show('noListingState');
+      $('logoutBtn').style.display = '';
+      return;
+    }
+    renderListing(data[0]);
+  }
+
+  $('editForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = $('saveBtn');
+    const sm = $('saveMsg');
+    btn.disabled = true; btn.textContent = 'Saving…'; sm.textContent = '';
+
+    const langs = Array.from(document.querySelectorAll('#langChips input:checked')).map(el => el.value);
+    const updates = {
+      name: $('fName').value.trim(),
+      about: $('fDesc').value.trim() || null,
+      description: $('fDesc').value.trim().slice(0, 150),
+      phone: $('fPhone').value.trim(),
+      district: $('fDistrict').value.trim() || null,
+      address: $('fAddress').value.trim(),
+      website: $('fWebsite').value.trim() || null,
+      social_links: {
+        instagram: $('fInstagram').value.trim() || null,
+        facebook: $('fFacebook').value.trim() || null,
+      },
+      languages: langs.length ? langs : ['English'],
+    };
+
+    const { error } = await _sb.from('businesses').update(updates).eq('id', bizRow.id);
+    btn.disabled = false; btn.textContent = 'Save changes';
+    if (error) {
+      sm.textContent = 'Could not save: ' + error.message;
+      sm.className = 'save-msg err';
+    } else {
+      sm.textContent = 'Saved ✓';
+      sm.className = 'save-msg ok';
+      setTimeout(() => { sm.textContent = ''; }, 3000);
+    }
+  });
+
+  $('logoutBtn').addEventListener('click', async () => {
+    await _sb.auth.signOut();
+    window.location.href = 'business-login.html';
+  });
+
+  // supabase-js auto-detects the magic-link tokens in the URL hash on load
+  init();
+</script>
+</body>
+</html>

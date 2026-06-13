@@ -34,7 +34,9 @@ async function sendBrevo(apiKey, payload) {
 // ── Email templates ──────────────────────────────────────────────
 
 function submissionConfirmEmail({ bizName, contactName, plan }) {
-  const planNote = plan === 'premium'
+  const planNote = plan === 'founding'
+    ? 'You\'re joining as a <strong>Founding Member</strong> — a complete profile, free during our launch. No payment is needed now, and we\'ll always give you advance notice before any paid plans launch.'
+    : plan === 'premium'
     ? 'You applied for a <strong>Premium listing</strong>. Our team will be in touch to arrange your photos and confirm payment once the listing is approved.'
     : 'You applied for a <strong>Basic (free) listing</strong>.';
 

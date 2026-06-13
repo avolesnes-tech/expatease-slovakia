@@ -1778,6 +1778,13 @@
  .sm-plans-grid {
  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;
  }
+ .sm-plans-grid-single {
+ grid-template-columns: 1fr; max-width: 380px; margin-left: auto; margin-right: auto;
+ }
+ .sm-founding-note {
+ font-size: 12px; color: var(--gray-400); text-align: center;
+ max-width: 420px; margin: -8px auto 22px; line-height: 1.5;
+ }
 
  /* Plan card */
  .sm-plan-card {
@@ -2917,7 +2924,7 @@
  <div class="submit-modal-progress">
  <div class="sm-step active" id="smstep1">
  <div class="sm-step-num">1</div>
- <div class="sm-step-label">Choose Plan</div>
+ <div class="sm-step-label">Get Started</div>
  </div>
  <div class="sm-step-line"></div>
  <div class="sm-step" id="smstep2">
@@ -2941,51 +2948,32 @@
  <!-- ── STEP 1: Plan selection ── -->
  <div class="sm-panel" id="smpanel1">
  <div class="sm-panel-intro">
- <h2 class="sm-panel-title" id="smModalTitle">List your business on ExpatBase</h2>
- <p class="sm-panel-sub">Choose the plan that fits your business. You can upgrade at any time.</p>
+ <h2 class="sm-panel-title" id="smModalTitle">Become a founding member of ExpatBase</h2>
+ <p class="sm-panel-sub">We're just launching. Founding members get a complete profile — free, no card required.</p>
  </div>
- <div class="sm-plans-grid">
+ <div class="sm-plans-grid sm-plans-grid-single">
 
- <!-- Basic -->
- <div class="sm-plan-card" id="planBasic" data-plan="basic" role="button" tabindex="0" aria-pressed="false">
- <div class="sm-plan-name">Basic</div>
+ <!-- Founding Member -->
+ <div class="sm-plan-card sm-plan-featured selected" id="planFounding" data-plan="premium" role="button" tabindex="0" aria-pressed="true">
+ <div class="sm-plan-badge">Founding Member</div>
+ <div class="sm-plan-name">Founding Member</div>
  <div class="sm-plan-price">Free</div>
- <div class="sm-plan-desc">Get discovered by expats. No cost, no commitment.</div>
+ <div class="sm-plan-price-note">during our launch · no payment, no card</div>
+ <div class="sm-plan-desc">A complete profile so English-speaking expats can find and contact you.</div>
  <ul class="sm-plan-features">
  <li class="sm-plan-feature">Name, category &amp; district</li>
- <li class="sm-plan-feature">Short description (150 chars)</li>
- <li class="sm-plan-feature">Email contact</li>
- <li class="sm-plan-feature">English-speaking badge</li>
- <li class="sm-plan-feature-no">Phone visible to expats</li>
- <li class="sm-plan-feature-no">Verified badge</li>
- <li class="sm-plan-feature-no">Photos</li>
- <li class="sm-plan-feature-no">Priority placement</li>
- <li class="sm-plan-feature">Edit profile anytime</li>
- </ul>
- </div>
-
- <!-- Premium -->
- <div class="sm-plan-card sm-plan-featured" id="planPremium" data-plan="premium" role="button" tabindex="0" aria-pressed="false">
- <div class="sm-plan-badge">Recommended</div>
- <div class="sm-plan-name">Premium</div>
- <div class="sm-plan-price">€49<span class="sm-plan-period">/year</span></div>
- <div class="sm-plan-price-note">Founder price · renews at €79</div>
- <div class="sm-plan-desc">Full profile, priority placement &amp; analytics.</div>
- <ul class="sm-plan-features">
- <li class="sm-plan-feature sm-plan-feature-base">Everything in Basic</li>
- <li class="sm-plan-feature">Phone visible to expats</li>
- <li class="sm-plan-feature">✦ Verified badge</li>
- <li class="sm-plan-feature">Photos (up to 5)</li>
- <li class="sm-plan-feature">Long description (600 chars)</li>
+ <li class="sm-plan-feature">Full description &amp; languages</li>
+ <li class="sm-plan-feature">Phone &amp; email visible to expats</li>
+ <li class="sm-plan-feature">Photos</li>
  <li class="sm-plan-feature">Website &amp; social links</li>
  <li class="sm-plan-feature">Opening hours</li>
- <li class="sm-plan-feature">Priority placement in category</li>
- <li class="sm-plan-feature">Dashboard — views &amp; clicks</li>
- <li class="sm-plan-feature">Edit profile anytime</li>
+ <li class="sm-plan-feature">Edit your profile anytime</li>
+ <li class="sm-plan-feature">✦ Founding Member badge — kept for good</li>
  </ul>
  </div>
 
  </div>
+ <p class="sm-founding-note">You'll always get advance notice before we introduce any paid plans — and founding members keep special benefits. No commitment.</p>
  <div class="sm-step1-footer">
  <button class="sm-continue-btn" id="smContinueBtn" disabled>Continue →</button>
  </div>
@@ -3409,6 +3397,8 @@
  overlay.classList.add('open');
  document.body.style.overflow = 'hidden';
  closeBtn.focus();
+ // Founding-member mode: a single plan, pre-selected so Continue is ready
+ smSelectPlan('premium');
  }
 
  function closeSubmitModal() {
@@ -3938,7 +3928,7 @@
  email: d.email,
  address: d.address,
  description: d.description,
- plan: d.plan === 'premium' ? 'premium' : 'basic',
+ plan: 'founding',
  contact_name: d.contact_name,
  english_speaking: d.english_speaking === true,
  languages: d.languages?.length ? d.languages : ['English'],
@@ -3964,7 +3954,7 @@
  contactName: d.contact_name,
  bizEmail: d.email,
  category: d.category,
- plan: d.plan === 'premium' ? 'premium' : 'basic',
+ plan: 'founding',
  }),
  }).catch(() => {}); // silent fail — Supabase insert already succeeded
 
@@ -3983,11 +3973,7 @@
  ══════════════════════════════ */
  function smShowSuccess() {
  const msg = document.getElementById('smSuccessMsg');
- if (smSelectedPlan === 'premium') {
- msg.textContent = 'Your Premium listing has been submitted for review. Our team will contact you to add your photos and confirm payment details, usually within 2–3 business days.';
- } else {
- msg.textContent = 'Your listing has been submitted for review. We\'ll email you within 2 business days once it\'s live.';
- }
+ msg.textContent = 'Welcome aboard, founding member! Your listing has been submitted for review. We\'ll email you within 2 business days once it\'s live — no payment needed.';
  smGoToStep(3);
  }
 
@@ -4061,6 +4047,8 @@
  if (teamBtn) teamBtn.disabled = false;
 
  smGoToStep(1);
+ // Founding-member mode: keep the single plan pre-selected
+ smSelectPlan('premium');
  }
 
  /* ══════════════════════════════
