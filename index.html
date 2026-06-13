@@ -1393,6 +1393,7 @@
  border: 1px solid rgba(255,255,255,0.1);
  display: flex; align-items: center; justify-content: center;
  font-size: 14px;
+ color: #7DD3A8;
  cursor: pointer;
  transition: var(--transition);
  text-decoration: none;
@@ -1435,6 +1436,50 @@
  transition: var(--transition);
  }
  .footer-legal a:hover { color: rgba(255,255,255,0.7); }
+
+ /* ─── FOOTER NEWSLETTER (minimal) ─── */
+ .footer-nl {
+ border-top: 1px solid rgba(255,255,255,0.08);
+ padding: 24px 0;
+ display: flex; align-items: center; justify-content: space-between;
+ gap: 24px; flex-wrap: wrap;
+ }
+ .footer-nl-text {
+ display: flex; flex-direction: column; gap: 2px;
+ }
+ .footer-nl-title {
+ font-family: var(--font-head); font-size: 15px; font-weight: 600;
+ color: rgba(255,255,255,0.92);
+ }
+ .footer-nl-sub {
+ font-size: 13px; color: rgba(255,255,255,0.4); font-weight: 300;
+ }
+ .footer-nl-form {
+ display: flex; gap: 8px; flex: 1; max-width: 380px; min-width: 260px;
+ }
+ .footer-nl-input {
+ flex: 1; padding: 10px 14px;
+ background: rgba(255,255,255,0.06);
+ border: 1px solid rgba(255,255,255,0.12);
+ border-radius: var(--radius-md);
+ color: white; font-family: var(--font-body); font-size: 14px;
+ transition: var(--transition);
+ }
+ .footer-nl-input::placeholder { color: rgba(255,255,255,0.35); }
+ .footer-nl-input:focus { outline: none; border-color: var(--green); background: rgba(255,255,255,0.1); }
+ .footer-nl-btn {
+ padding: 10px 20px;
+ background: var(--green); color: white;
+ border: none; border-radius: var(--radius-md);
+ font-family: var(--font-body); font-size: 14px; font-weight: 600;
+ cursor: pointer; white-space: nowrap; transition: var(--transition);
+ }
+ .footer-nl-btn:hover { background: var(--green-dark); }
+ .footer-nl-btn:disabled { opacity: 0.7; cursor: default; }
+ @media (max-width: 640px) {
+ .footer-nl { flex-direction: column; align-items: stretch; gap: 14px; }
+ .footer-nl-form { max-width: 100%; }
+ }
 
  /* ─── COOKIE BANNER ─── */
  .cookie-banner {
@@ -1851,6 +1896,7 @@
  }
  .sm-required { color: var(--blue); font-size: 10px; font-weight: 600; margin-left: 3px; }
  .sm-hint-inline { font-size: 11px; color: var(--gray-400); font-weight: 400; }
+ .sm-field-hint { font-size: 12px; color: var(--gray-400); margin-top: -2px; }
 
  /* Inputs */
  .sm-input {
@@ -2838,6 +2884,16 @@
  </ul>
  </div>
  </div>
+ <div class="footer-nl">
+ <div class="footer-nl-text">
+ <div class="footer-nl-title">Stay in the loop</div>
+ <div class="footer-nl-sub">New experts, bureaucracy tips &amp; expat news — once a week.</div>
+ </div>
+ <div class="footer-nl-form">
+ <input class="footer-nl-input" type="email" id="footerNlEmail" placeholder="your@email.com" aria-label="Email address">
+ <button class="footer-nl-btn" id="footerNlBtn">Subscribe</button>
+ </div>
+ </div>
  <div class="footer-bottom">
  <div class="footer-copy">© 2026 ExpatBase Slovakia. All rights reserved.</div>
  <div class="footer-legal">
@@ -3027,12 +3083,34 @@
  <div class="sm-field-error" id="smDescriptionErr">Please write a short description.</div>
  </div>
 
- <div class="sm-field-group sm-checkbox-group">
+ <div class="sm-field-group">
+ <label class="sm-label">Languages spoken <span class="sm-required">*</span></label>
+ <p class="sm-field-hint">Select all languages your team can serve clients in.</p>
+ <div class="sm-chips" id="smLangChips">
+ <input class="sm-chip-input" type="checkbox" id="smLangEN" value="English" checked>
+ <label class="sm-chip-label" for="smLangEN">🇬🇧 English</label>
+ <input class="sm-chip-input" type="checkbox" id="smLangSK" value="Slovak">
+ <label class="sm-chip-label" for="smLangSK">🇸🇰 Slovak</label>
+ <input class="sm-chip-input" type="checkbox" id="smLangDE" value="German">
+ <label class="sm-chip-label" for="smLangDE">🇩🇪 German</label>
+ <input class="sm-chip-input" type="checkbox" id="smLangFR" value="French">
+ <label class="sm-chip-label" for="smLangFR">🇫🇷 French</label>
+ <input class="sm-chip-input" type="checkbox" id="smLangRU" value="Russian">
+ <label class="sm-chip-label" for="smLangRU">🇷🇺 Russian</label>
+ <input class="sm-chip-input" type="checkbox" id="smLangUA" value="Ukrainian">
+ <label class="sm-chip-label" for="smLangUA">🇺🇦 Ukrainian</label>
+ <input class="sm-chip-input" type="checkbox" id="smLangHU" value="Hungarian">
+ <label class="sm-chip-label" for="smLangHU">🇭🇺 Hungarian</label>
+ <input class="sm-chip-input" type="checkbox" id="smLangOther" value="Other">
+ <label class="sm-chip-label" for="smLangOther">Other</label>
+ </div>
+ <div class="sm-field-group sm-checkbox-group" style="margin-top:12px">
  <label class="sm-checkbox-label">
- <input type="checkbox" class="sm-checkbox" id="smEnglish">
+ <input type="checkbox" class="sm-checkbox" id="smEnglish" checked>
  <span class="sm-checkbox-custom"></span>
- English-speaking, we'll add the 🇬🇧 badge to your listing
+ I confirm my business can serve clients in English
  </label>
+ </div>
  </div>
  </div><!-- /smFormBasic -->
 
@@ -3619,7 +3697,7 @@
  },
  'Banks & Finance': {
  subLabel: 'Service type',
- subs: ['Retail Bank','Private Bank','Accountant','Tax Advisor','Financial Advisor','Currency Exchange','Business Banking','Insurance','Other'],
+ subs: ['Bank','Accountant','Tax Advisor','Financial Advisor','Mortgage Advisor','Insurance','Other'],
  districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Online'],
  extras: []
  },
@@ -3804,6 +3882,7 @@
  address: document.getElementById('smAddress')?.value.trim(),
  description: document.getElementById('smDescription')?.value.trim(),
  english_speaking: document.getElementById('smEnglish')?.checked || false,
+ languages: Array.from(document.querySelectorAll('#smLangChips .sm-chip-input:checked')).map(el => el.value),
  plan: smSelectedPlan,
  subcategories: Array.from(document.querySelectorAll('#smSubchips .sm-chip-input:checked')).map(el => el.value),
  district: document.getElementById('smDistrict')?.value || null,
@@ -3862,6 +3941,7 @@
  plan: d.plan === 'premium' ? 'premium' : 'basic',
  contact_name: d.contact_name,
  english_speaking: d.english_speaking === true,
+ languages: d.languages?.length ? d.languages : ['English'],
  status: 'pending',
  website: d.website || null,
  social_links: d.social_links || null,
@@ -3937,6 +4017,8 @@
  ['smEnglish','smWaitlist'].forEach(id => {
  const el = document.getElementById(id); if (el) el.checked = false;
  });
+ document.getElementById('smEnglish').checked = true;
+ document.querySelectorAll('#smLangChips .sm-chip-input').forEach(el => { el.checked = el.value === 'English'; });
 
  // Clear counters
  const descCounter = document.getElementById('smDescCounter');
@@ -4087,6 +4169,34 @@
  input.value = '';
  input.disabled = true;
  });
+})();
+
+// Footer newsletter
+(function() {
+ const btn = document.getElementById('footerNlBtn');
+ const input = document.getElementById('footerNlEmail');
+ if (!btn || !input) return;
+ btn.addEventListener('click', async () => {
+ const email = input.value.trim();
+ if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+ input.style.outline = '2px solid #e53e3e';
+ setTimeout(() => input.style.outline = '', 2000);
+ return;
+ }
+ btn.textContent = 'Subscribing…';
+ btn.disabled = true;
+ try {
+ await fetch('/functions/airtable-submit?table=Members', {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify({ Email: email, Newsletter: true, 'Submitted At': new Date().toISOString() })
+ });
+ } catch(_) {}
+ btn.textContent = 'You\'re in!';
+ input.value = '';
+ input.disabled = true;
+ });
+ input.addEventListener('keydown', e => { if (e.key === 'Enter') btn.click(); });
 })();
 </script>
 
