@@ -4,1351 +4,1351 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231A4F8A'/%3E%3Ctext x='16' y='22' font-family='Arial Black,sans-serif' font-size='16' font-weight='900' fill='white' text-anchor='middle'%3EEB%3C/text%3E%3C/svg%3E">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>International Schools in Bratislava — ExpatBase Slovakia</title>
+<title>International Schools in Bratislava, ExpatBase Slovakia</title>
 <meta name="description" content="Find English-language international schools in Bratislava. IB, British, American and Montessori options. Slovak school law and enrolment explained.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
-  /* ─── CSS VARIABLES (identical to index.html) ─── */
-  :root {
-    --blue: #1A4F8A;
-    --blue-dark: #0F3360;
-    --blue-light: #E8F1FB;
-    --green: #2E9E6B;
-    --green-dark: #1D7A50;
-    --green-light: #E6F7EF;
-    --white: #FFFFFF;
-    --gray-50: #F4F6F9;
-    --gray-100: #DDE3EC;
-    --gray-400: #8C97A8;
-    --gray-700: #3D4A5C;
-    --gray-900: #1F2937;
-    --gold: #F6AD55;
-    --amber: #F59E0B;
-    --radius-sm: 6px;
-    --radius-md: 12px;
-    --radius-lg: 20px;
-    --radius-xl: 9999px;
-    --shadow-card: 0 2px 16px rgba(26,79,138,0.08);
-    --shadow-hover: 0 12px 40px rgba(26,79,138,0.16);
-    --shadow-nav: 0 2px 24px rgba(26,79,138,0.10);
-    --font-head: 'Urbanist', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
-    --transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
-  }
+ /* ─── CSS VARIABLES (identical to index.html) ─── */
+ :root {
+ --blue: #1A4F8A;
+ --blue-dark: #0F3360;
+ --blue-light: #E8F1FB;
+ --green: #2E9E6B;
+ --green-dark: #1D7A50;
+ --green-light: #E6F7EF;
+ --white: #FFFFFF;
+ --gray-50: #F4F6F9;
+ --gray-100: #DDE3EC;
+ --gray-400: #8C97A8;
+ --gray-700: #3D4A5C;
+ --gray-900: #1F2937;
+ --gold: #F6AD55;
+ --amber: #F59E0B;
+ --radius-sm: 6px;
+ --radius-md: 12px;
+ --radius-lg: 20px;
+ --radius-xl: 9999px;
+ --shadow-card: 0 2px 16px rgba(26,79,138,0.08);
+ --shadow-hover: 0 12px 40px rgba(26,79,138,0.16);
+ --shadow-nav: 0 2px 24px rgba(26,79,138,0.10);
+ --font-head: 'Urbanist', sans-serif;
+ --font-body: 'DM Sans', sans-serif;
+ --transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
+ }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; overflow-x: hidden; }
-  body {
-    font-family: var(--font-body);
-    color: var(--gray-900);
-    background: var(--white);
-    overflow-x: hidden;
-    line-height: 1.6;
-  }
+ *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ html { scroll-behavior: smooth; overflow-x: hidden; }
+ body {
+ font-family: var(--font-body);
+ color: var(--gray-900);
+ background: var(--white);
+ overflow-x: hidden;
+ line-height: 1.6;
+ }
 
-  /* ─── NAVBAR (pixel-perfect copy from index.html) ─── */
-  .nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    padding: 0 48px;
-    height: 72px;
-    display: flex; align-items: center; justify-content: space-between;
-    transition: var(--transition);
-    backdrop-filter: blur(0px);
-  }
-  .nav.scrolled {
-    background: rgba(255,255,255,0.94);
-    backdrop-filter: blur(16px);
-    box-shadow: var(--shadow-nav);
-  }
-  .nav-logo {
-    display: flex; align-items: center; gap: 10px;
-    text-decoration: none;
-  }
-  .nav-logo-mark {
-    flex-shrink: 0;
-    display: flex; align-items: center;
-    transition: transform 0.3s ease;
-  }
-  .nav-logo:hover .nav-logo-mark { transform: scale(1.08); }
-  .nav-logo-text {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 18px;
-    color: var(--white);
-    letter-spacing: -0.3px;
-    transition: var(--transition);
-  }
-  .nav.scrolled .nav-logo-text { color: var(--gray-900); }
-  .nav-links {
-    display: flex; align-items: center; gap: 8px;
-    list-style: none;
-  }
-  .nav-links a {
-    text-decoration: none;
-    font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 500;
-    color: rgba(255,255,255,0.88);
-    padding: 8px 14px;
-    border-radius: var(--radius-sm);
-    transition: var(--transition);
-    letter-spacing: 0.01em;
-  }
-  .nav.scrolled .nav-links a { color: var(--gray-700); }
-  .nav-links a:hover { background: rgba(255,255,255,0.15); color: white; }
-  .nav.scrolled .nav-links a:hover { background: var(--blue-light); color: var(--blue); }
-  .nav-links a.active { color: white; font-weight: 600; }
-  .nav.scrolled .nav-links a.active { color: var(--blue); }
-  .nav-right { display: flex; align-items: center; gap: 12px; }
-  .nav-cta {
-    font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 600;
-    padding: 9px 20px;
-    border-radius: var(--radius-xl);
-    border: none;
-    cursor: pointer;
-    background: var(--green);
-    color: white;
-    text-decoration: none;
-    transition: var(--transition);
-    letter-spacing: 0.01em;
-    position: relative;
-    overflow: hidden;
-    display: inline-flex; align-items: center; gap: 6px;
-  }
-  .nav.scrolled #joinCommunityBtn {
-    border-color: var(--blue);
-    color: var(--blue);
-    background: transparent;
-  }
-  .nav.scrolled #joinCommunityBtn:hover {
-    background: var(--blue-light);
-  }
-  .nav-cta::after {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 60%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-    transition: left 0.5s ease;
-  }
-  .nav-cta:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(46,158,107,0.35); }
-  .nav-cta:hover::after { left: 150%; }
+ /* ─── NAVBAR (pixel-perfect copy from index.html) ─── */
+ .nav {
+ position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+ padding: 0 48px;
+ height: 72px;
+ display: flex; align-items: center; justify-content: space-between;
+ transition: var(--transition);
+ backdrop-filter: blur(0px);
+ }
+ .nav.scrolled {
+ background: rgba(255,255,255,0.94);
+ backdrop-filter: blur(16px);
+ box-shadow: var(--shadow-nav);
+ }
+ .nav-logo {
+ display: flex; align-items: center; gap: 10px;
+ text-decoration: none;
+ }
+ .nav-logo-mark {
+ flex-shrink: 0;
+ display: flex; align-items: center;
+ transition: transform 0.3s ease;
+ }
+ .nav-logo:hover .nav-logo-mark { transform: scale(1.08); }
+ .nav-logo-text {
+ font-family: var(--font-head);
+ font-weight: 700;
+ font-size: 18px;
+ color: var(--white);
+ letter-spacing: -0.3px;
+ transition: var(--transition);
+ }
+ .nav.scrolled .nav-logo-text { color: var(--gray-900); }
+ .nav-links {
+ display: flex; align-items: center; gap: 8px;
+ list-style: none;
+ }
+ .nav-links a {
+ text-decoration: none;
+ font-family: var(--font-body);
+ font-size: 14px;
+ font-weight: 500;
+ color: rgba(255,255,255,0.88);
+ padding: 8px 14px;
+ border-radius: var(--radius-sm);
+ transition: var(--transition);
+ letter-spacing: 0.01em;
+ }
+ .nav.scrolled .nav-links a { color: var(--gray-700); }
+ .nav-links a:hover { background: rgba(255,255,255,0.15); color: white; }
+ .nav.scrolled .nav-links a:hover { background: var(--blue-light); color: var(--blue); }
+ .nav-links a.active { color: white; font-weight: 600; }
+ .nav.scrolled .nav-links a.active { color: var(--blue); }
+ .nav-right { display: flex; align-items: center; gap: 12px; }
+ .nav-cta {
+ font-family: var(--font-body);
+ font-size: 13px;
+ font-weight: 600;
+ padding: 9px 20px;
+ border-radius: var(--radius-xl);
+ border: none;
+ cursor: pointer;
+ background: var(--green);
+ color: white;
+ text-decoration: none;
+ transition: var(--transition);
+ letter-spacing: 0.01em;
+ position: relative;
+ overflow: hidden;
+ display: inline-flex; align-items: center; gap: 6px;
+ }
+ .nav.scrolled #joinCommunityBtn {
+ border-color: var(--blue);
+ color: var(--blue);
+ background: transparent;
+ }
+ .nav.scrolled #joinCommunityBtn:hover {
+ background: var(--blue-light);
+ }
+ .nav-cta::after {
+ content: '';
+ position: absolute;
+ top: 0; left: -100%;
+ width: 60%; height: 100%;
+ background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+ transition: left 0.5s ease;
+ }
+ .nav-cta:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(46,158,107,0.35); }
+ .nav-cta:hover::after { left: 150%; }
 
-  /* ─── HERO (department variant — no fullscreen) ─── */
-  .hero-dept {
-    position: relative;
-    min-height: 560px;
-    display: flex;
-    align-items: flex-end;
-    padding-bottom: 0;
-    overflow: hidden;
-    padding-top: 72px; /* nav height */
-  }
-  .hero-dept-bg {
-    position: absolute; inset: 0;
-    background-image: url('schools.webp');
-    background-size: cover;
-    background-position: center;
-    z-index: 0;
-  }
-  /* SVG noise texture overlay */
-  .hero-dept-noise {
-    position: absolute; inset: 0; z-index: 1;
-    opacity: 0.045;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  }
-  /* Blue overlay — matches homepage readability */
-  .hero-dept-glow {
-    position: absolute; inset: 0; z-index: 2;
-    background: linear-gradient(
-      105deg,
-      rgba(15,51,96,0.82) 0%,
-      rgba(26,79,138,0.65) 40%,
-      rgba(46,158,107,0.30) 100%
-    );
-  }
-  /* Bottom fade into white for smooth transition */
-  .hero-dept-bottom {
-    position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
-    height: 80px;
-    background: linear-gradient(to top, var(--white) 0%, transparent 100%);
-  }
-  .hero-dept-content {
-    position: relative; z-index: 5;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 72px 48px 80px;
-    width: 100%;
-  }
-  .hero-eyebrow {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(46,158,107,0.18);
-    border: 1px solid rgba(46,158,107,0.35);
-    border-radius: var(--radius-xl);
-    padding: 6px 16px 6px 10px;
-    margin-bottom: 24px;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.7s ease 0.15s forwards;
-  }
-  .hero-eyebrow-text {
-    font-family: var(--font-body);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #7DDFB8;
-  }
-  .hero-h1 {
-    font-family: var(--font-head);
-    font-size: clamp(2.4rem, 4.5vw, 4rem);
-    font-weight: 800;
-    line-height: 1.08;
-    letter-spacing: -0.03em;
-    color: white;
-    max-width: 660px;
-    margin-bottom: 20px;
-    opacity: 0;
-    transform: translateY(28px);
-    animation: fadeUp 0.8s ease 0.3s forwards;
-  }
-  .hero-sub {
-    font-family: var(--font-body);
-    font-size: 17px;
-    font-weight: 300;
-    color: rgba(255,255,255,0.78);
-    max-width: 520px;
-    line-height: 1.7;
-    margin-bottom: 32px;
-    opacity: 0;
-    transform: translateY(24px);
-    animation: fadeUp 0.8s ease 0.45s forwards;
-  }
-  /* Trust bar */
-  .hero-trust-bar {
-    display: flex; align-items: center; gap: 0;
-    flex-wrap: wrap;
-    margin-bottom: 36px;
-    opacity: 0;
-    transform: translateY(16px);
-    animation: fadeUp 0.7s ease 0.55s forwards;
-  }
-  .trust-stat {
-    display: flex; align-items: center; gap: 10px;
-    font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 500;
-    color: rgba(255,255,255,0.7);
-    padding: 0 20px;
-    border-right: 1px solid rgba(255,255,255,0.15);
-  }
-  .trust-stat:first-child { padding-left: 0; }
-  .trust-stat:last-child { border-right: none; }
-  .trust-stat strong {
-    font-family: var(--font-head);
-    font-size: 18px;
-    font-weight: 800;
-    color: white;
-    display: block;
-    line-height: 1.1;
-  }
-  .hero-ctas {
-    display: flex; gap: 14px; flex-wrap: wrap;
-    opacity: 0;
-    transform: translateY(16px);
-    animation: fadeUp 0.7s ease 0.65s forwards;
-  }
-  .btn-primary-green {
-    font-family: var(--font-body);
-    font-size: 15px;
-    font-weight: 600;
-    padding: 13px 26px;
-    border-radius: var(--radius-xl);
-    border: none;
-    cursor: pointer;
-    background: var(--green);
-    color: white;
-    text-decoration: none;
-    display: inline-flex; align-items: center; gap: 8px;
-    transition: var(--transition);
-    box-shadow: 0 4px 20px rgba(46,158,107,0.35);
-  }
-  .btn-primary-green:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(46,158,107,0.45); }
-  .btn-ghost-white {
-    font-family: var(--font-body);
-    font-size: 15px;
-    font-weight: 500;
-    padding: 13px 26px;
-    border-radius: var(--radius-xl);
-    border: 1.5px solid rgba(255,255,255,0.35);
-    cursor: pointer;
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(8px);
-    color: rgba(255,255,255,0.9);
-    text-decoration: none;
-    display: inline-flex; align-items: center; gap: 8px;
-    transition: var(--transition);
-  }
-  .btn-ghost-white:hover {
-    background: rgba(255,255,255,0.16);
-    border-color: rgba(255,255,255,0.6);
-    transform: translateY(-2px);
-  }
+ /* ─── HERO (department variant, no fullscreen) ─── */
+ .hero-dept {
+ position: relative;
+ min-height: 560px;
+ display: flex;
+ align-items: flex-end;
+ padding-bottom: 0;
+ overflow: hidden;
+ padding-top: 72px; /* nav height */
+ }
+ .hero-dept-bg {
+ position: absolute; inset: 0;
+ background-image: url('schools.webp');
+ background-size: cover;
+ background-position: center;
+ z-index: 0;
+ }
+ /* SVG noise texture overlay */
+ .hero-dept-noise {
+ position: absolute; inset: 0; z-index: 1;
+ opacity: 0.045;
+ background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+ }
+ /* Blue overlay, matches homepage readability */
+ .hero-dept-glow {
+ position: absolute; inset: 0; z-index: 2;
+ background: linear-gradient(
+ 105deg,
+ rgba(15,51,96,0.82) 0%,
+ rgba(26,79,138,0.65) 40%,
+ rgba(46,158,107,0.30) 100%
+ );
+ }
+ /* Bottom fade into white for smooth transition */
+ .hero-dept-bottom {
+ position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
+ height: 80px;
+ background: linear-gradient(to top, var(--white) 0%, transparent 100%);
+ }
+ .hero-dept-content {
+ position: relative; z-index: 5;
+ max-width: 1200px;
+ margin: 0 auto;
+ padding: 72px 48px 80px;
+ width: 100%;
+ }
+ .hero-eyebrow {
+ display: inline-flex; align-items: center; gap: 8px;
+ background: rgba(46,158,107,0.18);
+ border: 1px solid rgba(46,158,107,0.35);
+ border-radius: var(--radius-xl);
+ padding: 6px 16px 6px 10px;
+ margin-bottom: 24px;
+ opacity: 0;
+ transform: translateY(20px);
+ animation: fadeUp 0.7s ease 0.15s forwards;
+ }
+ .hero-eyebrow-text {
+ font-family: var(--font-body);
+ font-size: 12px;
+ font-weight: 600;
+ letter-spacing: 0.06em;
+ text-transform: uppercase;
+ color: #7DDFB8;
+ }
+ .hero-h1 {
+ font-family: var(--font-head);
+ font-size: clamp(2.4rem, 4.5vw, 4rem);
+ font-weight: 800;
+ line-height: 1.08;
+ letter-spacing: -0.03em;
+ color: white;
+ max-width: 660px;
+ margin-bottom: 20px;
+ opacity: 0;
+ transform: translateY(28px);
+ animation: fadeUp 0.8s ease 0.3s forwards;
+ }
+ .hero-sub {
+ font-family: var(--font-body);
+ font-size: 17px;
+ font-weight: 300;
+ color: rgba(255,255,255,0.78);
+ max-width: 520px;
+ line-height: 1.7;
+ margin-bottom: 32px;
+ opacity: 0;
+ transform: translateY(24px);
+ animation: fadeUp 0.8s ease 0.45s forwards;
+ }
+ /* Trust bar */
+ .hero-trust-bar {
+ display: flex; align-items: center; gap: 0;
+ flex-wrap: wrap;
+ margin-bottom: 36px;
+ opacity: 0;
+ transform: translateY(16px);
+ animation: fadeUp 0.7s ease 0.55s forwards;
+ }
+ .trust-stat {
+ display: flex; align-items: center; gap: 10px;
+ font-family: var(--font-body);
+ font-size: 13px;
+ font-weight: 500;
+ color: rgba(255,255,255,0.7);
+ padding: 0 20px;
+ border-right: 1px solid rgba(255,255,255,0.15);
+ }
+ .trust-stat:first-child { padding-left: 0; }
+ .trust-stat:last-child { border-right: none; }
+ .trust-stat strong {
+ font-family: var(--font-head);
+ font-size: 18px;
+ font-weight: 800;
+ color: white;
+ display: block;
+ line-height: 1.1;
+ }
+ .hero-ctas {
+ display: flex; gap: 14px; flex-wrap: wrap;
+ opacity: 0;
+ transform: translateY(16px);
+ animation: fadeUp 0.7s ease 0.65s forwards;
+ }
+ .btn-primary-green {
+ font-family: var(--font-body);
+ font-size: 15px;
+ font-weight: 600;
+ padding: 13px 26px;
+ border-radius: var(--radius-xl);
+ border: none;
+ cursor: pointer;
+ background: var(--green);
+ color: white;
+ text-decoration: none;
+ display: inline-flex; align-items: center; gap: 8px;
+ transition: var(--transition);
+ box-shadow: 0 4px 20px rgba(46,158,107,0.35);
+ }
+ .btn-primary-green:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(46,158,107,0.45); }
+ .btn-ghost-white {
+ font-family: var(--font-body);
+ font-size: 15px;
+ font-weight: 500;
+ padding: 13px 26px;
+ border-radius: var(--radius-xl);
+ border: 1.5px solid rgba(255,255,255,0.35);
+ cursor: pointer;
+ background: rgba(255,255,255,0.08);
+ backdrop-filter: blur(8px);
+ color: rgba(255,255,255,0.9);
+ text-decoration: none;
+ display: inline-flex; align-items: center; gap: 8px;
+ transition: var(--transition);
+ }
+ .btn-ghost-white:hover {
+ background: rgba(255,255,255,0.16);
+ border-color: rgba(255,255,255,0.6);
+ transform: translateY(-2px);
+ }
 
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
+ @keyframes fadeUp {
+ to { opacity: 1; transform: translateY(0); }
+ }
 
-  /* ─── BREADCRUMB ─── */
-  .breadcrumb {
-    background: var(--white);
-    border-bottom: 1px solid var(--gray-100);
-    padding: 12px 48px;
-  }
-  .breadcrumb-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex; align-items: center; gap: 8px;
-    font-size: 13px;
-    color: var(--gray-400);
-  }
-  .breadcrumb a {
-    color: var(--gray-400);
-    text-decoration: none;
-    transition: var(--transition);
-  }
-  .breadcrumb a:hover { color: var(--blue); }
-  .breadcrumb-sep {
-    color: var(--gray-100);
-    font-size: 12px;
-  }
-  .breadcrumb-current {
-    color: var(--gray-700);
-    font-weight: 500;
-  }
+ /* ─── BREADCRUMB ─── */
+ .breadcrumb {
+ background: var(--white);
+ border-bottom: 1px solid var(--gray-100);
+ padding: 12px 48px;
+ }
+ .breadcrumb-inner {
+ max-width: 1200px;
+ margin: 0 auto;
+ display: flex; align-items: center; gap: 8px;
+ font-size: 13px;
+ color: var(--gray-400);
+ }
+ .breadcrumb a {
+ color: var(--gray-400);
+ text-decoration: none;
+ transition: var(--transition);
+ }
+ .breadcrumb a:hover { color: var(--blue); }
+ .breadcrumb-sep {
+ color: var(--gray-100);
+ font-size: 12px;
+ }
+ .breadcrumb-current {
+ color: var(--gray-700);
+ font-weight: 500;
+ }
 
-  /* ─── FILTER BAR (sticky) ─── */
-  .filter-bar {
-    position: sticky;
-    top: 72px;
-    z-index: 100;
-    background: rgba(255,255,255,0.97);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--gray-100);
-    box-shadow: 0 2px 12px rgba(26,79,138,0.06);
-    padding: 16px 48px;
-    transition: var(--transition);
-  }
-  .filter-bar-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex; align-items: center; gap: 12px;
-    flex-wrap: wrap;
-  }
-  .filter-group {
-    display: flex; align-items: center; gap: 8px;
-  }
-  .filter-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--gray-400);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  .filter-select {
-    font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--gray-900);
-    padding: 8px 32px 8px 12px;
-    border: 1.5px solid var(--gray-100);
-    border-radius: var(--radius-md);
-    background: white;
-    outline: none;
-    cursor: pointer;
-    transition: var(--transition);
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238C97A8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-  }
-  .filter-select:hover, .filter-select:focus {
-    border-color: var(--blue);
-    box-shadow: 0 0 0 3px rgba(26,79,138,0.08);
-  }
-  /* Language pills */
-  .lang-pills {
-    display: flex; gap: 6px; flex-wrap: wrap;
-  }
-  .lang-pill {
-    font-family: var(--font-body);
-    font-size: 12px;
-    font-weight: 600;
-    padding: 6px 12px;
-    border-radius: var(--radius-xl);
-    border: 1.5px solid var(--gray-100);
-    background: white;
-    color: var(--gray-700);
-    cursor: pointer;
-    transition: var(--transition);
-    white-space: nowrap;
-  }
-  .lang-pill:hover { border-color: var(--blue); color: var(--blue); }
-  .lang-pill.active {
-    border-color: var(--green);
-    background: var(--green-light);
-    color: var(--green-dark);
-  }
-  /* Insurance toggle */
-  .insurance-toggle {
-    display: flex; align-items: center; gap: 8px;
-  }
-  .insurance-label {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--gray-700);
-    white-space: nowrap;
-  }
-  .ins-pills {
-    display: flex; gap: 4px; flex-wrap: wrap;
-  }
-  .ins-pill {
-    font-size: 11px;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: var(--radius-xl);
-    border: 1.5px solid var(--gray-100);
-    background: white;
-    color: var(--gray-400);
-    cursor: pointer;
-    transition: var(--transition);
-    white-space: nowrap;
-  }
-  .ins-pill:hover { border-color: var(--blue); color: var(--blue); }
-  .ins-pill.active {
-    border-color: var(--blue);
-    background: var(--blue-light);
-    color: var(--blue);
-  }
-  /* Reset */
-  .filter-reset {
-    margin-left: auto;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--gray-400);
-    background: none;
-    border: none;
-    cursor: pointer;
-    text-decoration: underline;
-    text-decoration-color: var(--gray-100);
-    text-underline-offset: 3px;
-    transition: var(--transition);
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .filter-reset:hover { color: var(--blue); text-decoration-color: var(--blue); }
-  /* Mobile filter toggle */
-  .filter-mobile-btn {
-    display: none;
-    font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 600;
-    padding: 9px 18px;
-    border-radius: var(--radius-md);
-    border: 1.5px solid var(--gray-100);
-    background: white;
-    color: var(--gray-700);
-    cursor: pointer;
-    transition: var(--transition);
-    align-items: center; gap: 8px;
-  }
-  .filter-mobile-btn:hover { border-color: var(--blue); color: var(--blue); }
-  .filter-desktop { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; flex: 1; }
+ /* ─── FILTER BAR (sticky) ─── */
+ .filter-bar {
+ position: sticky;
+ top: 72px;
+ z-index: 100;
+ background: rgba(255,255,255,0.97);
+ backdrop-filter: blur(12px);
+ border-bottom: 1px solid var(--gray-100);
+ box-shadow: 0 2px 12px rgba(26,79,138,0.06);
+ padding: 16px 48px;
+ transition: var(--transition);
+ }
+ .filter-bar-inner {
+ max-width: 1200px;
+ margin: 0 auto;
+ display: flex; align-items: center; gap: 12px;
+ flex-wrap: wrap;
+ }
+ .filter-group {
+ display: flex; align-items: center; gap: 8px;
+ }
+ .filter-label {
+ font-size: 12px;
+ font-weight: 600;
+ color: var(--gray-400);
+ letter-spacing: 0.04em;
+ text-transform: uppercase;
+ white-space: nowrap;
+ }
+ .filter-select {
+ font-family: var(--font-body);
+ font-size: 13px;
+ font-weight: 500;
+ color: var(--gray-900);
+ padding: 8px 32px 8px 12px;
+ border: 1.5px solid var(--gray-100);
+ border-radius: var(--radius-md);
+ background: white;
+ outline: none;
+ cursor: pointer;
+ transition: var(--transition);
+ appearance: none;
+ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238C97A8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+ background-repeat: no-repeat;
+ background-position: right 10px center;
+ }
+ .filter-select:hover, .filter-select:focus {
+ border-color: var(--blue);
+ box-shadow: 0 0 0 3px rgba(26,79,138,0.08);
+ }
+ /* Language pills */
+ .lang-pills {
+ display: flex; gap: 6px; flex-wrap: wrap;
+ }
+ .lang-pill {
+ font-family: var(--font-body);
+ font-size: 12px;
+ font-weight: 600;
+ padding: 6px 12px;
+ border-radius: var(--radius-xl);
+ border: 1.5px solid var(--gray-100);
+ background: white;
+ color: var(--gray-700);
+ cursor: pointer;
+ transition: var(--transition);
+ white-space: nowrap;
+ }
+ .lang-pill:hover { border-color: var(--blue); color: var(--blue); }
+ .lang-pill.active {
+ border-color: var(--green);
+ background: var(--green-light);
+ color: var(--green-dark);
+ }
+ /* Insurance toggle */
+ .insurance-toggle {
+ display: flex; align-items: center; gap: 8px;
+ }
+ .insurance-label {
+ font-size: 13px;
+ font-weight: 500;
+ color: var(--gray-700);
+ white-space: nowrap;
+ }
+ .ins-pills {
+ display: flex; gap: 4px; flex-wrap: wrap;
+ }
+ .ins-pill {
+ font-size: 11px;
+ font-weight: 600;
+ padding: 4px 10px;
+ border-radius: var(--radius-xl);
+ border: 1.5px solid var(--gray-100);
+ background: white;
+ color: var(--gray-400);
+ cursor: pointer;
+ transition: var(--transition);
+ white-space: nowrap;
+ }
+ .ins-pill:hover { border-color: var(--blue); color: var(--blue); }
+ .ins-pill.active {
+ border-color: var(--blue);
+ background: var(--blue-light);
+ color: var(--blue);
+ }
+ /* Reset */
+ .filter-reset {
+ margin-left: auto;
+ font-size: 13px;
+ font-weight: 500;
+ color: var(--gray-400);
+ background: none;
+ border: none;
+ cursor: pointer;
+ text-decoration: underline;
+ text-decoration-color: var(--gray-100);
+ text-underline-offset: 3px;
+ transition: var(--transition);
+ white-space: nowrap;
+ flex-shrink: 0;
+ }
+ .filter-reset:hover { color: var(--blue); text-decoration-color: var(--blue); }
+ /* Mobile filter toggle */
+ .filter-mobile-btn {
+ display: none;
+ font-family: var(--font-body);
+ font-size: 14px;
+ font-weight: 600;
+ padding: 9px 18px;
+ border-radius: var(--radius-md);
+ border: 1.5px solid var(--gray-100);
+ background: white;
+ color: var(--gray-700);
+ cursor: pointer;
+ transition: var(--transition);
+ align-items: center; gap: 8px;
+ }
+ .filter-mobile-btn:hover { border-color: var(--blue); color: var(--blue); }
+ .filter-desktop { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; flex: 1; }
 
-  /* ─── RESULTS BAR ─── */
-  .results-bar {
-    padding: 18px 48px;
-    border-bottom: 1px solid var(--gray-100);
-  }
-  .results-bar-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 16px;
-  }
-  .results-count {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--gray-700);
-  }
-  .results-count strong {
-    font-weight: 700;
-    color: var(--gray-900);
-  }
-  .sort-select {
-    font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--gray-900);
-    padding: 7px 28px 7px 12px;
-    border: 1.5px solid var(--gray-100);
-    border-radius: var(--radius-md);
-    background: white;
-    cursor: pointer;
-    outline: none;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238C97A8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 8px center;
-    transition: var(--transition);
-  }
-  .sort-select:hover, .sort-select:focus { border-color: var(--blue); }
+ /* ─── RESULTS BAR ─── */
+ .results-bar {
+ padding: 18px 48px;
+ border-bottom: 1px solid var(--gray-100);
+ }
+ .results-bar-inner {
+ max-width: 1200px;
+ margin: 0 auto;
+ display: flex; align-items: center; justify-content: space-between;
+ gap: 16px;
+ }
+ .results-count {
+ font-size: 14px;
+ font-weight: 500;
+ color: var(--gray-700);
+ }
+ .results-count strong {
+ font-weight: 700;
+ color: var(--gray-900);
+ }
+ .sort-select {
+ font-family: var(--font-body);
+ font-size: 13px;
+ font-weight: 500;
+ color: var(--gray-900);
+ padding: 7px 28px 7px 12px;
+ border: 1.5px solid var(--gray-100);
+ border-radius: var(--radius-md);
+ background: white;
+ cursor: pointer;
+ outline: none;
+ appearance: none;
+ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238C97A8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+ background-repeat: no-repeat;
+ background-position: right 8px center;
+ transition: var(--transition);
+ }
+ .sort-select:hover, .sort-select:focus { border-color: var(--blue); }
 
-  /* ─── SECTION SHARED ─── */
-  .section { padding: 72px 48px; }
-  .section-inner { max-width: 1200px; margin: 0 auto; }
+ /* ─── SECTION SHARED ─── */
+ .section { padding: 72px 48px; }
+ .section-inner { max-width: 1200px; margin: 0 auto; }
 
-  /* ─── DOCTOR CARDS GRID ─── */
-  .cards-section { padding: 48px 48px 72px; }
-  .doctor-grid {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
+ /* ─── DOCTOR CARDS GRID ─── */
+ .cards-section { padding: 48px 48px 72px; }
+ .doctor-grid {
+ max-width: 1200px;
+ margin: 0 auto;
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 24px;
+ }
 
-  /* ─── DOCTOR CARD ─── */
-  .doctor-card {
-    background: white;
-    border-radius: var(--radius-lg);
-    padding: 28px;
-    border: 1px solid var(--gray-100);
-    border-left: 3px solid transparent;
-    box-shadow: var(--shadow-card);
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-  .doctor-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: linear-gradient(to bottom, var(--blue), var(--green));
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 0.4s ease;
-  }
-  .doctor-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-hover);
-    border-color: var(--gray-100);
-  }
-  .doctor-card:hover::before { transform: scaleY(1); }
+ /* ─── DOCTOR CARD ─── */
+ .doctor-card {
+ background: white;
+ border-radius: var(--radius-lg);
+ padding: 28px;
+ border: 1px solid var(--gray-100);
+ border-left: 3px solid transparent;
+ box-shadow: var(--shadow-card);
+ transition: var(--transition);
+ position: relative;
+ overflow: hidden;
+ display: flex;
+ flex-direction: column;
+ }
+ .doctor-card::before {
+ content: '';
+ position: absolute;
+ left: 0; top: 0; bottom: 0;
+ width: 3px;
+ background: linear-gradient(to bottom, var(--blue), var(--green));
+ transform: scaleY(0);
+ transform-origin: top;
+ transition: transform 0.4s ease;
+ }
+ .doctor-card:hover {
+ transform: translateY(-4px);
+ box-shadow: var(--shadow-hover);
+ border-color: var(--gray-100);
+ }
+ .doctor-card:hover::before { transform: scaleY(1); }
 
-  /* Card header: avatar + basic info */
-  .card-header {
-    display: flex; align-items: flex-start; gap: 16px;
-    margin-bottom: 16px;
-  }
-  /* Avatar circle — placeholder for real photo */
-  .doctor-avatar {
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-head);
-    font-size: 18px;
-    font-weight: 800;
-    color: white;
-    flex-shrink: 0;
-    position: relative;
-    overflow: hidden;
-    /* Each avatar gets a colour via inline style or nth-child — see JS/CSS below */
-  }
-  /* Subtle shine overlay on avatar */
-  .doctor-avatar::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 60%);
-    border-radius: 50%;
-  }
-  .card-header-info { flex: 1; min-width: 0; }
-  .doctor-name {
-    font-family: var(--font-head);
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--gray-900);
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-    margin-bottom: 3px;
-  }
-  .doctor-specialty {
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--gray-400);
-    line-height: 1.4;
-  }
-  /* Language badges — most prominent element for expats */
-  .lang-badges {
-    display: flex; gap: 6px; flex-wrap: wrap;
-    margin-bottom: 14px;
-  }
-  .lang-badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: var(--radius-xl);
-    background: var(--blue-light);
-    color: var(--blue);
-    letter-spacing: 0.02em;
-  }
-  /* Availability badge */
-  .avail-badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: var(--radius-xl);
-    letter-spacing: 0.04em;
-  }
-  .avail-open {
-    background: var(--green-light);
-    color: var(--green-dark);
-  }
-  .avail-open::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--green);
-    flex-shrink: 0;
-  }
-  .avail-waitlist {
-    background: #FFF7ED;
-    color: #C05621;
-  }
-  .avail-waitlist::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--amber);
-    flex-shrink: 0;
-  }
-  /* Meta info */
-  .card-meta {
-    display: flex; flex-direction: column; gap: 7px;
-    margin-bottom: 14px;
-  }
-  .card-meta-item {
-    display: flex; align-items: flex-start; gap: 8px;
-    font-size: 13px;
-    color: var(--gray-700);
-    font-weight: 400;
-    line-height: 1.4;
-  }
-  .card-meta-icon {
-    width: 15px; height: 15px;
-    flex-shrink: 0;
-    color: var(--gray-400);
-    margin-top: 2px;
-  }
-  .card-meta-icon svg { width: 14px; height: 14px; }
-  /* Insurance line */
-  .card-insurance {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 12px;
-    color: var(--gray-400);
-    margin-bottom: 14px;
-    flex-wrap: wrap;
-  }
-  .ins-tag {
-    font-size: 11px;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 4px;
-    background: var(--gray-50);
-    color: var(--gray-700);
-    border: 1px solid var(--gray-100);
-  }
-  /* Stars */
-  .card-stars {
-    display: flex; align-items: center; gap: 4px;
-    margin-bottom: 16px;
-  }
-  .star { color: var(--gold); font-size: 13px; }
-  .star-empty { color: var(--gray-100); font-size: 13px; }
-  .rating-num {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--gray-900);
-    margin-left: 4px;
-  }
-  .rating-count {
-    font-size: 12px;
-    color: var(--gray-400);
-  }
-  /* Card footer CTA */
-  .card-footer {
-    margin-top: auto;
-    padding-top: 16px;
-    border-top: 1px solid var(--gray-100);
-  }
-  .btn-view-profile {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 600;
-    padding: 10px 20px;
-    border-radius: var(--radius-xl);
-    border: none;
-    cursor: pointer;
-    background: var(--green-light);
-    color: var(--green-dark);
-    text-decoration: none;
-    transition: var(--transition);
-    width: 100%;
-    justify-content: center;
-  }
-  .btn-view-profile:hover {
-    background: var(--green);
-    color: white;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(46,158,107,0.25);
-  }
-  .btn-view-profile svg { transition: transform 0.2s ease; }
-  .btn-view-profile:hover svg { transform: translateX(3px); }
+ /* Card header: avatar + basic info */
+ .card-header {
+ display: flex; align-items: flex-start; gap: 16px;
+ margin-bottom: 16px;
+ }
+ /* Avatar circle, placeholder for real photo */
+ .doctor-avatar {
+ width: 56px; height: 56px;
+ border-radius: 50%;
+ display: flex; align-items: center; justify-content: center;
+ font-family: var(--font-head);
+ font-size: 18px;
+ font-weight: 800;
+ color: white;
+ flex-shrink: 0;
+ position: relative;
+ overflow: hidden;
+ /* Each avatar gets a colour via inline style or nth-child, see JS/CSS below */
+ }
+ /* Subtle shine overlay on avatar */
+ .doctor-avatar::after {
+ content: '';
+ position: absolute; inset: 0;
+ background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 60%);
+ border-radius: 50%;
+ }
+ .card-header-info { flex: 1; min-width: 0; }
+ .doctor-name {
+ font-family: var(--font-head);
+ font-size: 17px;
+ font-weight: 700;
+ color: var(--gray-900);
+ letter-spacing: -0.02em;
+ line-height: 1.2;
+ margin-bottom: 3px;
+ }
+ .doctor-specialty {
+ font-size: 13px;
+ font-weight: 400;
+ color: var(--gray-400);
+ line-height: 1.4;
+ }
+ /* Language badges, most prominent element for expats */
+ .lang-badges {
+ display: flex; gap: 6px; flex-wrap: wrap;
+ margin-bottom: 14px;
+ }
+ .lang-badge {
+ display: inline-flex; align-items: center; gap: 5px;
+ font-size: 12px;
+ font-weight: 600;
+ padding: 4px 10px;
+ border-radius: var(--radius-xl);
+ background: var(--blue-light);
+ color: var(--blue);
+ letter-spacing: 0.02em;
+ }
+ /* Availability badge */
+ .avail-badge {
+ display: inline-flex; align-items: center; gap: 5px;
+ font-size: 11px;
+ font-weight: 600;
+ padding: 3px 10px;
+ border-radius: var(--radius-xl);
+ letter-spacing: 0.04em;
+ }
+ .avail-open {
+ background: var(--green-light);
+ color: var(--green-dark);
+ }
+ .avail-open::before {
+ content: '';
+ width: 6px; height: 6px;
+ border-radius: 50%;
+ background: var(--green);
+ flex-shrink: 0;
+ }
+ .avail-waitlist {
+ background: #FFF7ED;
+ color: #C05621;
+ }
+ .avail-waitlist::before {
+ content: '';
+ width: 6px; height: 6px;
+ border-radius: 50%;
+ background: var(--amber);
+ flex-shrink: 0;
+ }
+ /* Meta info */
+ .card-meta {
+ display: flex; flex-direction: column; gap: 7px;
+ margin-bottom: 14px;
+ }
+ .card-meta-item {
+ display: flex; align-items: flex-start; gap: 8px;
+ font-size: 13px;
+ color: var(--gray-700);
+ font-weight: 400;
+ line-height: 1.4;
+ }
+ .card-meta-icon {
+ width: 15px; height: 15px;
+ flex-shrink: 0;
+ color: var(--gray-400);
+ margin-top: 2px;
+ }
+ .card-meta-icon svg { width: 14px; height: 14px; }
+ /* Insurance line */
+ .card-insurance {
+ display: flex; align-items: center; gap: 6px;
+ font-size: 12px;
+ color: var(--gray-400);
+ margin-bottom: 14px;
+ flex-wrap: wrap;
+ }
+ .ins-tag {
+ font-size: 11px;
+ font-weight: 600;
+ padding: 2px 8px;
+ border-radius: 4px;
+ background: var(--gray-50);
+ color: var(--gray-700);
+ border: 1px solid var(--gray-100);
+ }
+ /* Stars */
+ .card-stars {
+ display: flex; align-items: center; gap: 4px;
+ margin-bottom: 16px;
+ }
+ .star { color: var(--gold); font-size: 13px; }
+ .star-empty { color: var(--gray-100); font-size: 13px; }
+ .rating-num {
+ font-size: 13px;
+ font-weight: 700;
+ color: var(--gray-900);
+ margin-left: 4px;
+ }
+ .rating-count {
+ font-size: 12px;
+ color: var(--gray-400);
+ }
+ /* Card footer CTA */
+ .card-footer {
+ margin-top: auto;
+ padding-top: 16px;
+ border-top: 1px solid var(--gray-100);
+ }
+ .btn-view-profile {
+ display: inline-flex; align-items: center; gap: 6px;
+ font-family: var(--font-body);
+ font-size: 14px;
+ font-weight: 600;
+ padding: 10px 20px;
+ border-radius: var(--radius-xl);
+ border: none;
+ cursor: pointer;
+ background: var(--green-light);
+ color: var(--green-dark);
+ text-decoration: none;
+ transition: var(--transition);
+ width: 100%;
+ justify-content: center;
+ }
+ .btn-view-profile:hover {
+ background: var(--green);
+ color: white;
+ transform: translateY(-1px);
+ box-shadow: 0 4px 16px rgba(46,158,107,0.25);
+ }
+ .btn-view-profile svg { transition: transform 0.2s ease; }
+ .btn-view-profile:hover svg { transform: translateX(3px); }
 
-  /* Avatar colour variants (nth-child) */
-  .doctor-card:nth-child(6n+1) .doctor-avatar { background: linear-gradient(135deg, #1A4F8A, #2E9E6B); }
-  .doctor-card:nth-child(6n+2) .doctor-avatar { background: linear-gradient(135deg, #1D7A50, #0F3360); }
-  .doctor-card:nth-child(6n+3) .doctor-avatar { background: linear-gradient(135deg, #7C3AED, #1A4F8A); }
-  .doctor-card:nth-child(6n+4) .doctor-avatar { background: linear-gradient(135deg, #0F3360, #2563EB); }
-  .doctor-card:nth-child(6n+5) .doctor-avatar { background: linear-gradient(135deg, #B45309, #F59E0B); }
-  .doctor-card:nth-child(6n+6) .doctor-avatar { background: linear-gradient(135deg, #065F46, #10B981); }
+ /* Avatar colour variants (nth-child) */
+ .doctor-card:nth-child(6n+1) .doctor-avatar { background: linear-gradient(135deg, #1A4F8A, #2E9E6B); }
+ .doctor-card:nth-child(6n+2) .doctor-avatar { background: linear-gradient(135deg, #1D7A50, #0F3360); }
+ .doctor-card:nth-child(6n+3) .doctor-avatar { background: linear-gradient(135deg, #7C3AED, #1A4F8A); }
+ .doctor-card:nth-child(6n+4) .doctor-avatar { background: linear-gradient(135deg, #0F3360, #2563EB); }
+ .doctor-card:nth-child(6n+5) .doctor-avatar { background: linear-gradient(135deg, #B45309, #F59E0B); }
+ .doctor-card:nth-child(6n+6) .doctor-avatar { background: linear-gradient(135deg, #065F46, #10B981); }
 
-  /* ─── LOAD MORE ─── */
-  .load-more-wrap {
-    text-align: center;
-    padding: 0 48px 72px;
-  }
-  .btn-load-more {
-    font-family: var(--font-body);
-    font-size: 15px;
-    font-weight: 600;
-    padding: 14px 32px;
-    border-radius: var(--radius-xl);
-    border: 1.5px solid var(--gray-100);
-    background: white;
-    color: var(--gray-700);
-    cursor: pointer;
-    transition: var(--transition);
-    display: inline-flex; align-items: center; gap: 8px;
-    box-shadow: var(--shadow-card);
-  }
-  .btn-load-more:hover {
-    border-color: var(--blue);
-    color: var(--blue);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-hover);
-  }
+ /* ─── LOAD MORE ─── */
+ .load-more-wrap {
+ text-align: center;
+ padding: 0 48px 72px;
+ }
+ .btn-load-more {
+ font-family: var(--font-body);
+ font-size: 15px;
+ font-weight: 600;
+ padding: 14px 32px;
+ border-radius: var(--radius-xl);
+ border: 1.5px solid var(--gray-100);
+ background: white;
+ color: var(--gray-700);
+ cursor: pointer;
+ transition: var(--transition);
+ display: inline-flex; align-items: center; gap: 8px;
+ box-shadow: var(--shadow-card);
+ }
+ .btn-load-more:hover {
+ border-color: var(--blue);
+ color: var(--blue);
+ transform: translateY(-2px);
+ box-shadow: var(--shadow-hover);
+ }
 
-  /* ─── HOW HEALTHCARE WORKS (educational) ─── */
-  .edu-section { background: var(--gray-50); }
-  .section-label {
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 12px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .section-label::before {
-    content: '';
-    display: inline-block;
-    width: 24px; height: 2px;
-    background: var(--green);
-    border-radius: 1px;
-  }
-  .section-title {
-    font-family: var(--font-head);
-    font-size: clamp(1.7rem, 3vw, 2.4rem);
-    font-weight: 700;
-    letter-spacing: -0.025em;
-    color: var(--gray-900);
-    margin-bottom: 16px;
-    line-height: 1.15;
-  }
-  .section-sub {
-    font-size: 16px;
-    font-weight: 300;
-    color: var(--gray-400);
-    max-width: 480px;
-    line-height: 1.7;
-    margin-bottom: 48px;
-  }
-  .edu-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-  .edu-card {
-    background: white;
-    border-radius: var(--radius-lg);
-    padding: 32px 28px;
-    border: 1px solid var(--gray-100);
-    box-shadow: var(--shadow-card);
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
-  }
-  .edu-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--blue), var(--green));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
-  }
-  .edu-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
-  .edu-card:hover::before { transform: scaleX(1); }
-  .edu-icon {
-    font-size: 32px;
-    margin-bottom: 16px;
-    display: block;
-  }
-  .edu-title {
-    font-family: var(--font-head);
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--gray-900);
-    margin-bottom: 10px;
-    letter-spacing: -0.02em;
-  }
-  .edu-text {
-    font-size: 14px;
-    color: var(--gray-400);
-    line-height: 1.75;
-    font-weight: 300;
-  }
-  .edu-text strong { color: var(--gray-700); font-weight: 600; }
+ /* ─── HOW HEALTHCARE WORKS (educational) ─── */
+ .edu-section { background: var(--gray-50); }
+ .section-label {
+ font-family: var(--font-body);
+ font-size: 11px;
+ font-weight: 600;
+ letter-spacing: 0.14em;
+ text-transform: uppercase;
+ color: var(--green);
+ margin-bottom: 12px;
+ display: flex; align-items: center; gap: 8px;
+ }
+ .section-label::before {
+ content: '';
+ display: inline-block;
+ width: 24px; height: 2px;
+ background: var(--green);
+ border-radius: 1px;
+ }
+ .section-title {
+ font-family: var(--font-head);
+ font-size: clamp(1.7rem, 3vw, 2.4rem);
+ font-weight: 700;
+ letter-spacing: -0.025em;
+ color: var(--gray-900);
+ margin-bottom: 16px;
+ line-height: 1.15;
+ }
+ .section-sub {
+ font-size: 16px;
+ font-weight: 300;
+ color: var(--gray-400);
+ max-width: 480px;
+ line-height: 1.7;
+ margin-bottom: 48px;
+ }
+ .edu-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 24px;
+ }
+ .edu-card {
+ background: white;
+ border-radius: var(--radius-lg);
+ padding: 32px 28px;
+ border: 1px solid var(--gray-100);
+ box-shadow: var(--shadow-card);
+ transition: var(--transition);
+ position: relative;
+ overflow: hidden;
+ }
+ .edu-card::before {
+ content: '';
+ position: absolute;
+ top: 0; left: 0; right: 0;
+ height: 3px;
+ background: linear-gradient(90deg, var(--blue), var(--green));
+ transform: scaleX(0);
+ transform-origin: left;
+ transition: transform 0.4s ease;
+ }
+ .edu-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+ .edu-card:hover::before { transform: scaleX(1); }
+ .edu-icon {
+ font-size: 32px;
+ margin-bottom: 16px;
+ display: block;
+ }
+ .edu-title {
+ font-family: var(--font-head);
+ font-size: 18px;
+ font-weight: 700;
+ color: var(--gray-900);
+ margin-bottom: 10px;
+ letter-spacing: -0.02em;
+ }
+ .edu-text {
+ font-size: 14px;
+ color: var(--gray-400);
+ line-height: 1.75;
+ font-weight: 300;
+ }
+ .edu-text strong { color: var(--gray-700); font-weight: 600; }
 
-  /* ─── FAQ ─── */
-  .faq-section { background: white; }
-  .faq-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    border: 1px solid var(--gray-100);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-  }
-  .faq-item {
-    border-bottom: 1px solid var(--gray-100);
-  }
-  .faq-item:last-child { border-bottom: none; }
-  .faq-question {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 22px 28px;
-    cursor: pointer;
-    transition: var(--transition);
-    gap: 16px;
-    user-select: none;
-    list-style: none;
-  }
-  .faq-question:hover { background: var(--gray-50); }
-  .faq-question-text {
-    font-family: var(--font-head);
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--gray-900);
-    letter-spacing: -0.01em;
-    flex: 1;
-  }
-  .faq-icon {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    background: var(--blue-light);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--blue);
-    flex-shrink: 0;
-    transition: var(--transition);
-  }
-  .faq-icon svg { width: 14px; height: 14px; transition: transform 0.3s ease; }
-  .faq-item.open .faq-icon { background: var(--blue); color: white; }
-  .faq-item.open .faq-icon svg { transform: rotate(45deg); }
-  .faq-answer {
-    display: none;
-    padding: 0 28px 22px;
-    font-size: 14px;
-    color: var(--gray-700);
-    line-height: 1.8;
-    font-weight: 300;
-    max-width: 680px;
-  }
-  .faq-item.open .faq-answer { display: block; }
-  .faq-answer a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+ /* ─── FAQ ─── */
+ .faq-section { background: white; }
+ .faq-list {
+ display: flex;
+ flex-direction: column;
+ gap: 0;
+ border: 1px solid var(--gray-100);
+ border-radius: var(--radius-lg);
+ overflow: hidden;
+ }
+ .faq-item {
+ border-bottom: 1px solid var(--gray-100);
+ }
+ .faq-item:last-child { border-bottom: none; }
+ .faq-question {
+ display: flex; align-items: center; justify-content: space-between;
+ padding: 22px 28px;
+ cursor: pointer;
+ transition: var(--transition);
+ gap: 16px;
+ user-select: none;
+ list-style: none;
+ }
+ .faq-question:hover { background: var(--gray-50); }
+ .faq-question-text {
+ font-family: var(--font-head);
+ font-size: 16px;
+ font-weight: 600;
+ color: var(--gray-900);
+ letter-spacing: -0.01em;
+ flex: 1;
+ }
+ .faq-icon {
+ width: 28px; height: 28px;
+ border-radius: 50%;
+ background: var(--blue-light);
+ display: flex; align-items: center; justify-content: center;
+ color: var(--blue);
+ flex-shrink: 0;
+ transition: var(--transition);
+ }
+ .faq-icon svg { width: 14px; height: 14px; transition: transform 0.3s ease; }
+ .faq-item.open .faq-icon { background: var(--blue); color: white; }
+ .faq-item.open .faq-icon svg { transform: rotate(45deg); }
+ .faq-answer {
+ display: none;
+ padding: 0 28px 22px;
+ font-size: 14px;
+ color: var(--gray-700);
+ line-height: 1.8;
+ font-weight: 300;
+ max-width: 680px;
+ }
+ .faq-item.open .faq-answer { display: block; }
+ .faq-answer a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
 
-  /* ─── RELATED DEPARTMENTS ─── */
-  .related-section { background: var(--gray-50); }
-  .related-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  .related-card {
-    background: white;
-    border-radius: var(--radius-lg);
-    padding: 28px 24px;
-    border: 1px solid var(--gray-100);
-    box-shadow: var(--shadow-card);
-    text-decoration: none;
-    display: block;
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
-  }
-  .related-card::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, var(--blue-light), var(--green-light));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  .related-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--green); }
-  .related-card:hover::after { opacity: 1; }
-  .related-card-inner { position: relative; z-index: 1; }
-  .related-icon {
-    width: 48px; height: 48px;
-    border-radius: 14px;
-    background: var(--blue-light);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--blue);
-    margin-bottom: 16px;
-    transition: var(--transition);
-  }
-  .related-icon svg { width: 24px; height: 24px; }
-  .related-card:hover .related-icon {
-    background: linear-gradient(135deg, var(--blue), var(--green));
-    color: white;
-  }
-  .related-name {
-    font-family: var(--font-head);
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--gray-900);
-    margin-bottom: 6px;
-    letter-spacing: -0.02em;
-  }
-  .related-desc {
-    font-size: 13px;
-    color: var(--gray-400);
-    line-height: 1.6;
-    margin-bottom: 16px;
-  }
-  .related-link {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--blue);
-    display: flex; align-items: center; gap: 4px;
-    transition: var(--transition);
-  }
-  .related-card:hover .related-link { gap: 8px; color: var(--green-dark); }
+ /* ─── RELATED DEPARTMENTS ─── */
+ .related-section { background: var(--gray-50); }
+ .related-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 20px;
+ }
+ .related-card {
+ background: white;
+ border-radius: var(--radius-lg);
+ padding: 28px 24px;
+ border: 1px solid var(--gray-100);
+ box-shadow: var(--shadow-card);
+ text-decoration: none;
+ display: block;
+ transition: var(--transition);
+ position: relative;
+ overflow: hidden;
+ }
+ .related-card::after {
+ content: '';
+ position: absolute; inset: 0;
+ background: linear-gradient(135deg, var(--blue-light), var(--green-light));
+ opacity: 0;
+ transition: opacity 0.3s ease;
+ }
+ .related-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--green); }
+ .related-card:hover::after { opacity: 1; }
+ .related-card-inner { position: relative; z-index: 1; }
+ .related-icon {
+ width: 48px; height: 48px;
+ border-radius: 14px;
+ background: var(--blue-light);
+ display: flex; align-items: center; justify-content: center;
+ color: var(--blue);
+ margin-bottom: 16px;
+ transition: var(--transition);
+ }
+ .related-icon svg { width: 24px; height: 24px; }
+ .related-card:hover .related-icon {
+ background: linear-gradient(135deg, var(--blue), var(--green));
+ color: white;
+ }
+ .related-name {
+ font-family: var(--font-head);
+ font-size: 18px;
+ font-weight: 700;
+ color: var(--gray-900);
+ margin-bottom: 6px;
+ letter-spacing: -0.02em;
+ }
+ .related-desc {
+ font-size: 13px;
+ color: var(--gray-400);
+ line-height: 1.6;
+ margin-bottom: 16px;
+ }
+ .related-link {
+ font-size: 13px;
+ font-weight: 600;
+ color: var(--blue);
+ display: flex; align-items: center; gap: 4px;
+ transition: var(--transition);
+ }
+ .related-card:hover .related-link { gap: 8px; color: var(--green-dark); }
 
-  /* ─── FOOTER (pixel-perfect copy from index.html) ─── */
-  .footer {
-    background: var(--gray-900);
-    color: white;
-    padding: 72px 48px 32px;
-  }
-  .footer-inner { max-width: 1200px; margin: 0 auto; }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 48px;
-    margin-bottom: 56px;
-  }
-  .footer-brand {}
-  .footer-logo {
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 16px;
-  }
-  .footer-logo-mark {
-    flex-shrink: 0;
-    display: flex; align-items: center;
-  }
-  .footer-logo-text {
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 17px;
-    color: white;
-  }
-  .footer-tagline {
-    font-size: 14px;
-    color: rgba(255,255,255,0.45);
-    font-weight: 300;
-    line-height: 1.7;
-    max-width: 240px;
-    margin-bottom: 24px;
-  }
-  .footer-socials { display: flex; gap: 10px; }
-  .footer-social {
-    width: 36px; height: 36px;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.1);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
-    cursor: pointer;
-    transition: var(--transition);
-    text-decoration: none;
-    color: white;
-  }
-  .footer-social:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
-  .footer-col-title {
-    font-family: var(--font-head);
-    font-size: 13px;
-    font-weight: 700;
-    color: white;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .footer-links a {
-    font-size: 14px;
-    font-weight: 300;
-    color: rgba(255,255,255,0.5);
-    text-decoration: none;
-    transition: var(--transition);
-  }
-  .footer-links a:hover { color: white; padding-left: 4px; }
-  .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.08);
-    padding-top: 28px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .footer-copy {
-    font-size: 13px;
-    color: rgba(255,255,255,0.3);
-    font-weight: 300;
-  }
-  .footer-legal { display: flex; gap: 24px; }
-  .footer-legal a {
-    font-size: 13px;
-    color: rgba(255,255,255,0.3);
-    text-decoration: none;
-    font-weight: 300;
-    transition: var(--transition);
-  }
-  .footer-legal a:hover { color: rgba(255,255,255,0.7); }
+ /* ─── FOOTER (pixel-perfect copy from index.html) ─── */
+ .footer {
+ background: var(--gray-900);
+ color: white;
+ padding: 72px 48px 32px;
+ }
+ .footer-inner { max-width: 1200px; margin: 0 auto; }
+ .footer-grid {
+ display: grid;
+ grid-template-columns: 2fr 1fr 1fr 1fr;
+ gap: 48px;
+ margin-bottom: 56px;
+ }
+ .footer-brand {}
+ .footer-logo {
+ display: flex; align-items: center; gap: 10px;
+ margin-bottom: 16px;
+ }
+ .footer-logo-mark {
+ flex-shrink: 0;
+ display: flex; align-items: center;
+ }
+ .footer-logo-text {
+ font-family: var(--font-head);
+ font-weight: 700;
+ font-size: 17px;
+ color: white;
+ }
+ .footer-tagline {
+ font-size: 14px;
+ color: rgba(255,255,255,0.45);
+ font-weight: 300;
+ line-height: 1.7;
+ max-width: 240px;
+ margin-bottom: 24px;
+ }
+ .footer-socials { display: flex; gap: 10px; }
+ .footer-social {
+ width: 36px; height: 36px;
+ border-radius: 10px;
+ background: rgba(255,255,255,0.08);
+ border: 1px solid rgba(255,255,255,0.1);
+ display: flex; align-items: center; justify-content: center;
+ font-size: 14px;
+ cursor: pointer;
+ transition: var(--transition);
+ text-decoration: none;
+ color: white;
+ }
+ .footer-social:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+ .footer-col-title {
+ font-family: var(--font-head);
+ font-size: 13px;
+ font-weight: 700;
+ color: white;
+ letter-spacing: 0.06em;
+ text-transform: uppercase;
+ margin-bottom: 20px;
+ }
+ .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+ .footer-links a {
+ font-size: 14px;
+ font-weight: 300;
+ color: rgba(255,255,255,0.5);
+ text-decoration: none;
+ transition: var(--transition);
+ }
+ .footer-links a:hover { color: white; padding-left: 4px; }
+ .footer-bottom {
+ border-top: 1px solid rgba(255,255,255,0.08);
+ padding-top: 28px;
+ display: flex; align-items: center; justify-content: space-between;
+ }
+ .footer-copy {
+ font-size: 13px;
+ color: rgba(255,255,255,0.3);
+ font-weight: 300;
+ }
+ .footer-legal { display: flex; gap: 24px; }
+ .footer-legal a {
+ font-size: 13px;
+ color: rgba(255,255,255,0.3);
+ text-decoration: none;
+ font-weight: 300;
+ transition: var(--transition);
+ }
+ .footer-legal a:hover { color: rgba(255,255,255,0.7); }
 
-  /* ─── MOBILE DRAWER (filter) ─── */
-  .filter-drawer-overlay {
-    display: none;
-    position: fixed; inset: 0; z-index: 500;
-    background: rgba(15,51,96,0.5);
-    backdrop-filter: blur(3px);
-  }
-  .filter-drawer-overlay.open { display: block; }
-  .filter-drawer {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    background: white;
-    border-radius: 20px 20px 0 0;
-    padding: 28px 24px 40px;
-    z-index: 501;
-    transform: translateY(100%);
-    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
-    max-height: 85vh;
-    overflow-y: auto;
-  }
-  .filter-drawer-overlay.open .filter-drawer {
-    transform: translateY(0);
-  }
-  .drawer-handle {
-    width: 40px; height: 4px;
-    background: var(--gray-100);
-    border-radius: 2px;
-    margin: 0 auto 24px;
-  }
-  .drawer-title {
-    font-family: var(--font-head);
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--gray-900);
-    margin-bottom: 24px;
-  }
-  .drawer-section { margin-bottom: 24px; }
-  .drawer-section-title {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--gray-400);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-  .drawer-apply {
-    width: 100%;
-    font-family: var(--font-body);
-    font-size: 15px;
-    font-weight: 600;
-    padding: 14px;
-    border-radius: var(--radius-xl);
-    border: none;
-    cursor: pointer;
-    background: linear-gradient(135deg, var(--blue), var(--green));
-    color: white;
-    transition: var(--transition);
-    margin-top: 8px;
-  }
-  .drawer-apply:hover { opacity: 0.9; }
+ /* ─── MOBILE DRAWER (filter) ─── */
+ .filter-drawer-overlay {
+ display: none;
+ position: fixed; inset: 0; z-index: 500;
+ background: rgba(15,51,96,0.5);
+ backdrop-filter: blur(3px);
+ }
+ .filter-drawer-overlay.open { display: block; }
+ .filter-drawer {
+ position: fixed;
+ bottom: 0; left: 0; right: 0;
+ background: white;
+ border-radius: 20px 20px 0 0;
+ padding: 28px 24px 40px;
+ z-index: 501;
+ transform: translateY(100%);
+ transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+ max-height: 85vh;
+ overflow-y: auto;
+ }
+ .filter-drawer-overlay.open .filter-drawer {
+ transform: translateY(0);
+ }
+ .drawer-handle {
+ width: 40px; height: 4px;
+ background: var(--gray-100);
+ border-radius: 2px;
+ margin: 0 auto 24px;
+ }
+ .drawer-title {
+ font-family: var(--font-head);
+ font-size: 18px;
+ font-weight: 700;
+ color: var(--gray-900);
+ margin-bottom: 24px;
+ }
+ .drawer-section { margin-bottom: 24px; }
+ .drawer-section-title {
+ font-size: 12px;
+ font-weight: 600;
+ color: var(--gray-400);
+ letter-spacing: 0.08em;
+ text-transform: uppercase;
+ margin-bottom: 10px;
+ }
+ .drawer-apply {
+ width: 100%;
+ font-family: var(--font-body);
+ font-size: 15px;
+ font-weight: 600;
+ padding: 14px;
+ border-radius: var(--radius-xl);
+ border: none;
+ cursor: pointer;
+ background: linear-gradient(135deg, var(--blue), var(--green));
+ color: white;
+ transition: var(--transition);
+ margin-top: 8px;
+ }
+ .drawer-apply:hover { opacity: 0.9; }
 
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 1024px) {
-    .doctor-grid { grid-template-columns: repeat(2, 1fr); }
-    .edu-grid { grid-template-columns: repeat(2, 1fr); }
-    .related-grid { grid-template-columns: repeat(2, 1fr); }
-    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-    .nav { padding: 0 24px; }
-    .filter-bar { padding: 14px 24px; }
-    .results-bar { padding: 14px 24px; }
-    .cards-section { padding: 36px 24px 56px; }
-    .load-more-wrap { padding: 0 24px 56px; }
-    .section { padding: 64px 24px; }
-    .breadcrumb { padding: 12px 24px; }
-    .hero-dept-content { padding: 64px 24px 72px; }
-  }
-  @media (max-width: 860px) {
-    .nav-links { display: none; }
-    .nav { padding: 0 20px; }
-  }
-  @media (max-width: 768px) {
-    .nav { padding: 0 16px; }
-    .nav-cta { font-size: 11px; padding: 7px 12px; }
-    .hero-dept-content { padding: 48px 20px 64px; }
-    .hero-h1 { font-size: 2.2rem; }
-    .hero-sub { font-size: 15px; }
-    .hero-trust-bar { gap: 0; }
-    .trust-stat { padding: 0 12px; font-size: 12px; }
-    .trust-stat strong { font-size: 16px; }
-    .hero-ctas { flex-direction: column; gap: 10px; }
-    .btn-primary-green, .btn-ghost-white { width: 100%; justify-content: center; }
-    .breadcrumb { padding: 10px 16px; }
-    .filter-bar { padding: 12px 16px; }
-    .filter-desktop { display: none; }
-    .filter-mobile-btn { display: inline-flex; }
-    .filter-reset { display: none; }
-    .results-bar { padding: 12px 16px; }
-    .cards-section { padding: 28px 16px 48px; }
-    .doctor-grid { grid-template-columns: 1fr; }
-    .load-more-wrap { padding: 0 16px 48px; }
-    .section { padding: 56px 16px; }
-    .edu-grid { grid-template-columns: 1fr; }
-    .related-grid { grid-template-columns: 1fr; }
-    .footer { padding: 56px 20px 28px; }
-    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
-    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
-  }
+ /* ─── RESPONSIVE ─── */
+ @media (max-width: 1024px) {
+ .doctor-grid { grid-template-columns: repeat(2, 1fr); }
+ .edu-grid { grid-template-columns: repeat(2, 1fr); }
+ .related-grid { grid-template-columns: repeat(2, 1fr); }
+ .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+ .nav { padding: 0 24px; }
+ .filter-bar { padding: 14px 24px; }
+ .results-bar { padding: 14px 24px; }
+ .cards-section { padding: 36px 24px 56px; }
+ .load-more-wrap { padding: 0 24px 56px; }
+ .section { padding: 64px 24px; }
+ .breadcrumb { padding: 12px 24px; }
+ .hero-dept-content { padding: 64px 24px 72px; }
+ }
+ @media (max-width: 860px) {
+ .nav-links { display: none; }
+ .nav { padding: 0 20px; }
+ }
+ @media (max-width: 768px) {
+ .nav { padding: 0 16px; }
+ .nav-cta { font-size: 11px; padding: 7px 12px; }
+ .hero-dept-content { padding: 48px 20px 64px; }
+ .hero-h1 { font-size: 2.2rem; }
+ .hero-sub { font-size: 15px; }
+ .hero-trust-bar { gap: 0; }
+ .trust-stat { padding: 0 12px; font-size: 12px; }
+ .trust-stat strong { font-size: 16px; }
+ .hero-ctas { flex-direction: column; gap: 10px; }
+ .btn-primary-green, .btn-ghost-white { width: 100%; justify-content: center; }
+ .breadcrumb { padding: 10px 16px; }
+ .filter-bar { padding: 12px 16px; }
+ .filter-desktop { display: none; }
+ .filter-mobile-btn { display: inline-flex; }
+ .filter-reset { display: none; }
+ .results-bar { padding: 12px 16px; }
+ .cards-section { padding: 28px 16px 48px; }
+ .doctor-grid { grid-template-columns: 1fr; }
+ .load-more-wrap { padding: 0 16px 48px; }
+ .section { padding: 56px 16px; }
+ .edu-grid { grid-template-columns: 1fr; }
+ .related-grid { grid-template-columns: 1fr; }
+ .footer { padding: 56px 20px 28px; }
+ .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+ .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+ }
 
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation: none !important; transition: none !important; }
-  }
-
-
-  /* ── ExpatBase logo SVG nav behaviour ── */
-  .nav-logo-svg { flex-shrink: 0; transition: opacity 0.28s ease; }
-  .nav.scrolled .logo-use-light { display: none !important; }
-  .nav.scrolled .logo-use-dark  { display: inline !important; }
-  .nav:not(.scrolled) .logo-use-light { display: inline !important; }
-  .nav:not(.scrolled) .logo-use-dark  { display: none !important; }
-  .footer-logo-mark { background: none !important; border-radius: 0 !important; width: auto !important; height: auto !important; }
-  .auth-logo-mark { background: none !important; border-radius: 0 !important; width: auto !important; height: auto !important; color: inherit; }
+ @media (prefers-reduced-motion: reduce) {
+ *, *::before, *::after { animation: none !important; transition: none !important; }
+ }
 
 
-  /* ─── HAMBURGER & MOBILE DRAWER ─── */
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 8px;
-    transition: background 0.2s;
-    flex-shrink: 0;
-    margin-left: 8px;
-  }
-  .hamburger:hover { background: rgba(255,255,255,0.1); }
-  .nav.scrolled .hamburger:hover { background: var(--gray-50); }
-  .hamburger span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: white;
-    border-radius: 2px;
-    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-    transform-origin: center;
-  }
-  .nav.scrolled .hamburger span { background: var(--gray-900); }
-  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-  @media (max-width: 860px) {
-    .hamburger { display: flex; }
-    .nav-right
-    .nav-right #openSubmitModalBtn { display: none; }
-    .nav-right #joinCommunityBtn { display: none; }
-    .nav-right a.nav-cta { display: none; }
-  }
-  .mobile-overlay {
-    position: fixed; inset: 0;
-    background: rgba(10,18,35,0.65);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    z-index: 998;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.32s ease;
-  }
-  .mobile-overlay.open { opacity: 1; pointer-events: all; }
-  .mobile-drawer {
-    position: fixed;
-    top: 0; right: 0;
-    width: min(300px, 84vw);
-    height: 100dvh;
-    background: linear-gradient(160deg, #0d1829 0%, #0f1f14 100%);
-    z-index: 999;
-    transform: translateX(100%);
-    transition: transform 0.36s cubic-bezier(0.4,0,0.2,1);
-    display: flex;
-    flex-direction: column;
-    box-shadow: -8px 0 40px rgba(0,0,0,0.4);
-  }
-  .mobile-drawer.open { transform: translateX(0); }
-  .mobile-drawer-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-    flex-shrink: 0;
-  }
-  .mobile-close {
-    background: rgba(255,255,255,0.08);
-    border: none;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: rgba(255,255,255,0.75);
-    font-size: 20px;
-    line-height: 1;
-    transition: background 0.2s, color 0.2s;
-    flex-shrink: 0;
-  }
-  .mobile-close:hover { background: rgba(255,255,255,0.15); color: white; }
-  .mobile-nav {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 20px 12px;
-    gap: 2px;
-    overflow-y: auto;
-  }
-  .mobile-nav a {
-    text-decoration: none;
-    font-family: var(--font-head);
-    font-weight: 600;
-    font-size: 19px;
-    color: rgba(255,255,255,0.82);
-    padding: 14px 16px;
-    border-radius: 12px;
-    transition: all 0.2s;
-    letter-spacing: -0.02em;
-    display: block;
-  }
-  .mobile-nav a:hover, .mobile-nav a.active {
-    background: rgba(255,255,255,0.07);
-    color: white;
-  }
-  .mobile-drawer-footer {
-    padding: 20px;
-    border-top: 1px solid rgba(255,255,255,0.07);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex-shrink: 0;
-  }
-  .mobile-drawer-footer .mob-btn {
-    font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 600;
-    padding: 13px 20px;
-    border-radius: 100px;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    transition: all 0.2s;
-    letter-spacing: 0.01em;
-  }
-  .mob-btn-primary { background: var(--green); color: white; }
-  .mob-btn-primary:hover { background: var(--green-dark); }
-  .mob-btn-ghost { background: transparent; color: rgba(255,255,255,0.8); border: 1.5px solid rgba(255,255,255,0.25) !important; }
-  .mob-btn-ghost:hover { background: rgba(255,255,255,0.08); color: white; }
+ /* ── ExpatBase logo SVG nav behaviour ── */
+ .nav-logo-svg { flex-shrink: 0; transition: opacity 0.28s ease; }
+ .nav.scrolled .logo-use-light { display: none !important; }
+ .nav.scrolled .logo-use-dark { display: inline !important; }
+ .nav:not(.scrolled) .logo-use-light { display: inline !important; }
+ .nav:not(.scrolled) .logo-use-dark { display: none !important; }
+ .footer-logo-mark { background: none !important; border-radius: 0 !important; width: auto !important; height: auto !important; }
+ .auth-logo-mark { background: none !important; border-radius: 0 !important; width: auto !important; height: auto !important; color: inherit; }
 
 
-  /* ─── EMPTY STATE ─── */
-  .empty-state {
-    padding: 72px 24px 80px;
-    text-align: center;
-    max-width: 460px;
-    margin: 0 auto;
-  }
-  .empty-state-icon {
-    width: 68px; height: 68px;
-    border-radius: 50%;
-    background: var(--gray-50);
-    border: 2px solid var(--gray-100);
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 22px;
-    color: var(--gray-400);
-  }
-  .empty-state-title {
-    font-family: var(--font-head);
-    font-size: 21px;
-    font-weight: 700;
-    color: var(--gray-900);
-    margin-bottom: 10px;
-  }
-  .empty-state-desc {
-    font-size: 14.5px;
-    color: var(--gray-400);
-    line-height: 1.65;
-    margin-bottom: 26px;
-  }
-  .empty-state .btn-primary-green {
-    display: inline-flex; align-items: center; gap: 8px;
-    text-decoration: none;
-  }
+ /* ─── HAMBURGER & MOBILE DRAWER ─── */
+ .hamburger {
+ display: none;
+ flex-direction: column;
+ justify-content: center;
+ gap: 5px;
+ background: none;
+ border: none;
+ cursor: pointer;
+ padding: 8px;
+ border-radius: 8px;
+ transition: background 0.2s;
+ flex-shrink: 0;
+ margin-left: 8px;
+ }
+ .hamburger:hover { background: rgba(255,255,255,0.1); }
+ .nav.scrolled .hamburger:hover { background: var(--gray-50); }
+ .hamburger span {
+ display: block;
+ width: 22px;
+ height: 2px;
+ background: white;
+ border-radius: 2px;
+ transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+ transform-origin: center;
+ }
+ .nav.scrolled .hamburger span { background: var(--gray-900); }
+ .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+ .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+ .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+ @media (max-width: 860px) {
+ .hamburger { display: flex; }
+ .nav-right
+ .nav-right #openSubmitModalBtn { display: none; }
+ .nav-right #joinCommunityBtn { display: none; }
+ .nav-right a.nav-cta { display: none; }
+ }
+ .mobile-overlay {
+ position: fixed; inset: 0;
+ background: rgba(10,18,35,0.65);
+ backdrop-filter: blur(6px);
+ -webkit-backdrop-filter: blur(6px);
+ z-index: 998;
+ opacity: 0;
+ pointer-events: none;
+ transition: opacity 0.32s ease;
+ }
+ .mobile-overlay.open { opacity: 1; pointer-events: all; }
+ .mobile-drawer {
+ position: fixed;
+ top: 0; right: 0;
+ width: min(300px, 84vw);
+ height: 100dvh;
+ background: linear-gradient(160deg, #0d1829 0%, #0f1f14 100%);
+ z-index: 999;
+ transform: translateX(100%);
+ transition: transform 0.36s cubic-bezier(0.4,0,0.2,1);
+ display: flex;
+ flex-direction: column;
+ box-shadow: -8px 0 40px rgba(0,0,0,0.4);
+ }
+ .mobile-drawer.open { transform: translateX(0); }
+ .mobile-drawer-header {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding: 20px 20px;
+ border-bottom: 1px solid rgba(255,255,255,0.07);
+ flex-shrink: 0;
+ }
+ .mobile-close {
+ background: rgba(255,255,255,0.08);
+ border: none;
+ border-radius: 50%;
+ width: 36px;
+ height: 36px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ cursor: pointer;
+ color: rgba(255,255,255,0.75);
+ font-size: 20px;
+ line-height: 1;
+ transition: background 0.2s, color 0.2s;
+ flex-shrink: 0;
+ }
+ .mobile-close:hover { background: rgba(255,255,255,0.15); color: white; }
+ .mobile-nav {
+ flex: 1;
+ display: flex;
+ flex-direction: column;
+ padding: 20px 12px;
+ gap: 2px;
+ overflow-y: auto;
+ }
+ .mobile-nav a {
+ text-decoration: none;
+ font-family: var(--font-head);
+ font-weight: 600;
+ font-size: 19px;
+ color: rgba(255,255,255,0.82);
+ padding: 14px 16px;
+ border-radius: 12px;
+ transition: all 0.2s;
+ letter-spacing: -0.02em;
+ display: block;
+ }
+ .mobile-nav a:hover, .mobile-nav a.active {
+ background: rgba(255,255,255,0.07);
+ color: white;
+ }
+ .mobile-drawer-footer {
+ padding: 20px;
+ border-top: 1px solid rgba(255,255,255,0.07);
+ display: flex;
+ flex-direction: column;
+ gap: 10px;
+ flex-shrink: 0;
+ }
+ .mobile-drawer-footer .mob-btn {
+ font-family: var(--font-body);
+ font-size: 14px;
+ font-weight: 600;
+ padding: 13px 20px;
+ border-radius: 100px;
+ border: none;
+ cursor: pointer;
+ text-align: center;
+ text-decoration: none;
+ display: block;
+ transition: all 0.2s;
+ letter-spacing: 0.01em;
+ }
+ .mob-btn-primary { background: var(--green); color: white; }
+ .mob-btn-primary:hover { background: var(--green-dark); }
+ .mob-btn-ghost { background: transparent; color: rgba(255,255,255,0.8); border: 1.5px solid rgba(255,255,255,0.25) !important; }
+ .mob-btn-ghost:hover { background: rgba(255,255,255,0.08); color: white; }
+
+
+ /* ─── EMPTY STATE ─── */
+ .empty-state {
+ padding: 72px 24px 80px;
+ text-align: center;
+ max-width: 460px;
+ margin: 0 auto;
+ }
+ .empty-state-icon {
+ width: 68px; height: 68px;
+ border-radius: 50%;
+ background: var(--gray-50);
+ border: 2px solid var(--gray-100);
+ display: flex; align-items: center; justify-content: center;
+ margin: 0 auto 22px;
+ color: var(--gray-400);
+ }
+ .empty-state-title {
+ font-family: var(--font-head);
+ font-size: 21px;
+ font-weight: 700;
+ color: var(--gray-900);
+ margin-bottom: 10px;
+ }
+ .empty-state-desc {
+ font-size: 14.5px;
+ color: var(--gray-400);
+ line-height: 1.65;
+ margin-bottom: 26px;
+ }
+ .empty-state .btn-primary-green {
+ display: inline-flex; align-items: center; gap: 8px;
+ text-decoration: none;
+ }
 
 </style>
 
@@ -1356,657 +1356,657 @@
 <body>
 <!-- SVG LOGO DEFS — reused across navbar and footer -->
 <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
-  <defs>
-    <linearGradient id="ebGrad" x1="0%" y1="0%" x2="90%" y2="110%">
-      <stop offset="0%"   stop-color="#1A4F8A"/>
-      <stop offset="100%" stop-color="#2E9E6B"/>
-    </linearGradient>
-    <linearGradient id="ebGradLight" x1="0%" y1="0%" x2="90%" y2="110%">
-      <stop offset="0%"   stop-color="#2E6FC4"/>
-      <stop offset="100%" stop-color="#35B87C"/>
-    </linearGradient>
-    <radialGradient id="ebHighlight" cx="38%" cy="28%" r="62%">
-      <stop offset="0%"   stop-color="white" stop-opacity=".22"/>
-      <stop offset="100%" stop-color="white" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="ebShadow" x="-25%" y="-10%" width="150%" height="160%">
-      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1A4F8A" flood-opacity=".30"/>
-    </filter>
-    <filter id="ebGlow" x="-30%" y="-15%" width="160%" height="170%">
-      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#2E9E6B" flood-opacity=".45"/>
-    </filter>
-    <symbol id="eb-icon" viewBox="0 0 120 140">
-      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
-        fill="url(#ebGrad)" filter="url(#ebShadow)"/>
-      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
-        fill="url(#ebHighlight)"/>
-      <text x="60" y="55" text-anchor="middle" dominant-baseline="middle"
-        font-family="'Urbanist','Segoe UI',system-ui,sans-serif"
-        font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
-    </symbol>
-    <symbol id="eb-icon-light" viewBox="0 0 120 140">
-      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
-        fill="url(#ebGradLight)" filter="url(#ebGlow)"/>
-      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
-        fill="url(#ebHighlight)"/>
-      <text x="60" y="55" text-anchor="middle" dominant-baseline="middle"
-        font-family="'Urbanist','Segoe UI',system-ui,sans-serif"
-        font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
-    </symbol>
-    <symbol id="eb-icon-dark" viewBox="0 0 120 140">
-      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="#E8F1FB"/>
-      <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="#1A4F8A" letter-spacing="-2">EB</text>
-    </symbol>
-  </defs>
+ <defs>
+ <linearGradient id="ebGrad" x1="0%" y1="0%" x2="90%" y2="110%">
+ <stop offset="0%" stop-color="#1A4F8A"/>
+ <stop offset="100%" stop-color="#2E9E6B"/>
+ </linearGradient>
+ <linearGradient id="ebGradLight" x1="0%" y1="0%" x2="90%" y2="110%">
+ <stop offset="0%" stop-color="#2E6FC4"/>
+ <stop offset="100%" stop-color="#35B87C"/>
+ </linearGradient>
+ <radialGradient id="ebHighlight" cx="38%" cy="28%" r="62%">
+ <stop offset="0%" stop-color="white" stop-opacity=".22"/>
+ <stop offset="100%" stop-color="white" stop-opacity="0"/>
+ </radialGradient>
+ <filter id="ebShadow" x="-25%" y="-10%" width="150%" height="160%">
+ <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1A4F8A" flood-opacity=".30"/>
+ </filter>
+ <filter id="ebGlow" x="-30%" y="-15%" width="160%" height="170%">
+ <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#2E9E6B" flood-opacity=".45"/>
+ </filter>
+ <symbol id="eb-icon" viewBox="0 0 120 140">
+ <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
+ fill="url(#ebGrad)" filter="url(#ebShadow)"/>
+ <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
+ fill="url(#ebHighlight)"/>
+ <text x="60" y="55" text-anchor="middle" dominant-baseline="middle"
+ font-family="'Urbanist','Segoe UI',system-ui,sans-serif"
+ font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
+ </symbol>
+ <symbol id="eb-icon-light" viewBox="0 0 120 140">
+ <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
+ fill="url(#ebGradLight)" filter="url(#ebGlow)"/>
+ <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z"
+ fill="url(#ebHighlight)"/>
+ <text x="60" y="55" text-anchor="middle" dominant-baseline="middle"
+ font-family="'Urbanist','Segoe UI',system-ui,sans-serif"
+ font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
+ </symbol>
+ <symbol id="eb-icon-dark" viewBox="0 0 120 140">
+ <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="#E8F1FB"/>
+ <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="#1A4F8A" letter-spacing="-2">EB</text>
+ </symbol>
+ </defs>
 </svg>
 
 <nav class="nav" id="navbar">
-  <a href="index.html" class="nav-logo">
-    <svg class="nav-logo-svg" width="27" height="32" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light" class="logo-use-light"/><use href="#eb-icon-dark" class="logo-use-dark" style="display:none"/></svg>
-    <span class="nav-logo-text">ExpatBase</span>
-  </a>
-  <ul class="nav-links">
-    <!-- Active: Find Experts -->
-    <li><a href="index.html#categories" class="active">Find Experts</a></li>
-    <li><a href="index.html#blog">Blog</a></li>
-    <li><a href="index.html#about">About</a></li>
-  </ul>
-  <div class="nav-right">
-    <a href="index.html" class="nav-cta">
-      + Submit a Business
-    </a>
-    <a href="index.html#join" class="nav-cta" style="background:transparent; border:1px solid rgba(255,255,255,0.4); margin-left:4px;" id="joinCommunityBtn">
-      Join the community
-    </a>
-  </div>
-  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+ <a href="index.html" class="nav-logo">
+ <svg class="nav-logo-svg" width="27" height="32" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light" class="logo-use-light"/><use href="#eb-icon-dark" class="logo-use-dark" style="display:none"/></svg>
+ <span class="nav-logo-text">ExpatBase</span>
+ </a>
+ <ul class="nav-links">
+ <!-- Active: Find Experts -->
+ <li><a href="index.html#categories" class="active">Find Experts</a></li>
+ <li><a href="index.html#blog">Blog</a></li>
+ <li><a href="index.html#about">About</a></li>
+ </ul>
+ <div class="nav-right">
+ <a href="index.html" class="nav-cta">
+ + Submit a Business
+ </a>
+ <a href="index.html#join" class="nav-cta" style="background:transparent; border:1px solid rgba(255,255,255,0.4); margin-left:4px;" id="joinCommunityBtn">
+ Join the community
+ </a>
+ </div>
+ <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+ <span></span><span></span><span></span>
+ </button>
 </nav>
 
 
 
 <!-- HERO -->
 <section class="hero-dept" id="hero">
-  <div class="hero-dept-bg"></div>
-  <div class="hero-dept-noise"></div>
-  <div class="hero-dept-glow"></div>
-  <div class="hero-dept-bottom"></div>
-  <div class="hero-dept-content">
-    <div class="hero-eyebrow">
-      <span style="font-size:16px;">🎓</span>
-      <span class="hero-eyebrow-text">Bratislava · International Schools &amp; Education</span>
-    </div>
-    <h1 class="hero-h1">Your child's education shouldn't stop at the border.</h1>
-    <p class="hero-sub">IB, British, American and bilingual schools in Bratislava — plus everything you need to know about Slovak education law, enrolment, and your rights as a parent.</p>
-    <div class="hero-trust-bar">
-      <div class="trust-stat"><div><strong>New</strong>listings this week</div></div>
+ <div class="hero-dept-bg"></div>
+ <div class="hero-dept-noise"></div>
+ <div class="hero-dept-glow"></div>
+ <div class="hero-dept-bottom"></div>
+ <div class="hero-dept-content">
+ <div class="hero-eyebrow">
+ <span style="font-size:16px;">🎓</span>
+ <span class="hero-eyebrow-text">Bratislava · International Schools &amp; Education</span>
+ </div>
+ <h1 class="hero-h1">Your child's education shouldn't stop at the border.</h1>
+ <p class="hero-sub">IB, British, American and bilingual schools in Bratislava, plus everything you need to know about Slovak education law, enrolment, and your rights as a parent.</p>
+ <div class="hero-trust-bar">
+ <div class="trust-stat"><div><strong>New</strong>listings this week</div></div>
 <div class="trust-stat"><div><strong>IB · EN · DE</strong>curricula</div></div>
 <div class="trust-stat"><div><strong>Ages</strong>2–19 covered</div></div>
 
-    </div>
-    <div class="hero-ctas">
-      <a href="#main-grid" class="btn-primary-green">
-        Browse all schools <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <a href="#edu-section" class="btn-ghost-white">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="12" r="1" fill="currentColor"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Slovak school law explained
-      </a>
-    </div>
-  </div>
+ </div>
+ <div class="hero-ctas">
+ <a href="#main-grid" class="btn-primary-green">
+ Browse all schools <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+ </a>
+ <a href="#edu-section" class="btn-ghost-white">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="12" r="1" fill="currentColor"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Slovak school law explained
+ </a>
+ </div>
+ </div>
 </section>
 
 <!-- BREADCRUMB -->
 <nav class="breadcrumb" aria-label="Breadcrumb">
-  <div class="breadcrumb-inner">
-    <a href="index.html">ExpatBase</a>
-    <span class="breadcrumb-sep">&rsaquo;</span>
-    <a href="index.html#categories">Find Experts</a>
-    <span class="breadcrumb-sep">&rsaquo;</span>
-    <span class="breadcrumb-current">International Schools &amp; Education</span>
-  </div>
+ <div class="breadcrumb-inner">
+ <a href="index.html">ExpatBase</a>
+ <span class="breadcrumb-sep">&rsaquo;</span>
+ <a href="index.html#categories">Find Experts</a>
+ <span class="breadcrumb-sep">&rsaquo;</span>
+ <span class="breadcrumb-current">International Schools &amp; Education</span>
+ </div>
 </nav>
 
 <!-- FILTER BAR -->
 <div class="filter-bar" id="filterBar">
-  <div class="filter-bar-inner">
-    <div class="filter-desktop">
-      
-    <div class="filter-group">
-      <label class="filter-label" for="filterLevel">Level</label>
-      <select class="filter-select" id="filterLevel"><option value="">All levels</option><option>Preschool (ages 2–5)</option><option>Primary (ages 6–11)</option><option>Secondary (ages 11–19)</option></select>
-    </div>
-    <div class="filter-group">
-      <label class="filter-label" for="filterCurriculum">Curriculum</label>
-      <select class="filter-select" id="filterCurriculum"><option value="">All curricula</option><option>IB (International Baccalaureate)</option><option>British / EYFS</option><option>American / AP</option><option>German</option><option>Montessori</option><option>Slovak state</option></select>
-    </div>
-    <div class="filter-group">
-      <label class="filter-label" for="filterDistrict">District</label>
-      <select class="filter-select" id="filterDistrict"><option value="">All areas</option><option>Staré Mesto</option><option>Ružinov</option><option>Karlova Ves</option><option>Nové Mesto</option><option>Rača</option><option>Near Bratislava</option></select>
-    </div><div class="filter-group">
-      <label class="filter-label">Language</label>
-      <div class="lang-pills">
-        <button class="lang-pill" type="button">EN</button>
-        <button class="lang-pill" type="button">DE</button>
-        <button class="lang-pill" type="button">Bilingual</button>
-      </div>
-    </div>
-      <button class="filter-reset" id="filterReset">Reset filters</button>
-    </div>
-    <button class="filter-mobile-btn" id="filterMobileBtn" aria-expanded="false" aria-controls="filterDrawerOverlay">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      Filters
-    </button>
-  </div>
+ <div class="filter-bar-inner">
+ <div class="filter-desktop">
+ 
+ <div class="filter-group">
+ <label class="filter-label" for="filterLevel">Level</label>
+ <select class="filter-select" id="filterLevel"><option value="">All levels</option><option>Preschool (ages 2–5)</option><option>Primary (ages 6–11)</option><option>Secondary (ages 11–19)</option></select>
+ </div>
+ <div class="filter-group">
+ <label class="filter-label" for="filterCurriculum">Curriculum</label>
+ <select class="filter-select" id="filterCurriculum"><option value="">All curricula</option><option>IB (International Baccalaureate)</option><option>British / EYFS</option><option>American / AP</option><option>German</option><option>Montessori</option><option>Slovak state</option></select>
+ </div>
+ <div class="filter-group">
+ <label class="filter-label" for="filterDistrict">District</label>
+ <select class="filter-select" id="filterDistrict"><option value="">All areas</option><option>Staré Mesto</option><option>Ružinov</option><option>Karlova Ves</option><option>Nové Mesto</option><option>Rača</option><option>Near Bratislava</option></select>
+ </div><div class="filter-group">
+ <label class="filter-label">Language</label>
+ <div class="lang-pills">
+ <button class="lang-pill" type="button">EN</button>
+ <button class="lang-pill" type="button">DE</button>
+ <button class="lang-pill" type="button">Bilingual</button>
+ </div>
+ </div>
+ <button class="filter-reset" id="filterReset">Reset filters</button>
+ </div>
+ <button class="filter-mobile-btn" id="filterMobileBtn" aria-expanded="false" aria-controls="filterDrawerOverlay">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+ Filters
+ </button>
+ </div>
 </div>
 
 <!-- RESULTS BAR -->
 <div class="results-bar">
-  <div class="results-bar-inner">
-    <div class="results-count">Showing <strong>12 schools</strong> in and around Bratislava</div>
-    <select class="sort-select" aria-label="Sort by">
-      <option>Sort: Best match</option>
-      <option>Sort: Highest rated</option>
-      <option>Sort: Most reviewed</option>
-      <option>Sort: A–Z</option>
-    </select>
-  </div>
+ <div class="results-bar-inner">
+ <div class="results-count">Showing <strong>12 schools</strong> in and around Bratislava</div>
+ <select class="sort-select" aria-label="Sort by">
+ <option>Sort: Best match</option>
+ <option>Sort: Highest rated</option>
+ <option>Sort: Most reviewed</option>
+ <option>Sort: A–Z</option>
+ </select>
+ </div>
 </div>
 
 <!-- CARDS -->
 <section class="cards-section" id="main-grid">
-  <div class="doctor-grid">
-    
-    <div class="doctor-card">
-      <div class="card-header">
-        <div class="doctor-avatar">BI</div>
-        <div class="card-header-info">
-          <div class="doctor-name">BISB — British International School</div>
-          <div class="doctor-specialty">IB Primary Years / Middle Years / Diploma</div>
-        </div>
-      </div>
-      <div class="lang-badges">
-        <span class="lang-badge">🌐 EN</span>
-        <span class="avail-waitlist avail-badge">open</span>
-      </div>
-      <div class="card-meta">
-        <div class="card-meta-item">
-          <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-          Karlova Ves
-        </div>
-        <div class="card-meta-item">
-          <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
-          Pekníkova 6, Bratislava
-        </div>
-        <div class="card-meta-item">
-          <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-          Ages 3–18 · IB curriculum
-        </div>
-      </div>
-      <div class="card-insurance">Insurance: <span class="ins-tag">IB World School</span></div>
-      <div class="card-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="rating-num">5.0</span><span class="rating-count">(142 reviews)</span></div>
-      <div class="card-footer">
-        <a href="#" class="btn-view-profile">View profile <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </div>
-    </div>
-    <div class="doctor-card">
-      <div class="card-header">
-        <div class="doctor-avatar">QS</div>
-        <div class="card-header-info">
-          <div class="doctor-name">QSI International School Bratislava</div>
-          <div class="doctor-specialty">American-style private school</div>
-        </div>
-      </div>
-      <div class="lang-badges">
-        <span class="lang-badge">🌐 EN</span>
-        <span class="avail-waitlist avail-badge">open</span>
-      </div>
-      <div class="card-meta">
-        <div class="card-meta-item">
-          <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-          Šamorín (20 km)
-        </div>
-        <div class="card-meta-item">
-          <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
-          Bus service from BA centre
-        </div>
-        <div class="card-meta-item">
-          <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-          Ages 3–18 · US curriculum
-        </div>
-      </div>
-      <div class="card-insurance">Insurance: <span class="ins-tag">US accredited</span></div>
-      <div class="card-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="rating-num">5.0</span><span class="rating-count">(89 reviews)</span></div>
-      <div class="card-footer">
-        <a href="#" class="btn-view-profile">View profile <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </div>
-    </div>
-    <div class="doctor-card">
-      <div class="card-header">
-        <div class="doctor-avatar">AM</div>
-        <div class="card-header-info">
-          <div class="doctor-name">American School of Bratislava</div>
-          <div class="doctor-specialty">Pre-K through Grade 12</div>
-        </div>
-      </div>
-      <div class="lang-badges">
-        <span class="lang-badge">🌐 EN</span>
-        <span class="avail-waitlist avail-badge">open</span>
-      </div>
-      <div class="card-meta">
-        <div class="card-meta-item">
-          <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-          Nové Mesto
-        </div>
-        <div class="card-meta-item">
-          <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
-          Hviezdoslavovo nám. area
-        </div>
-        <div class="card-meta-item">
-          <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-          Ages 3–18 · AP + IB options
-        </div>
-      </div>
-      <div class="card-insurance">Insurance: <span class="ins-tag">US + IB</span></div>
-      <div class="card-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span><span class="rating-num">4.0</span><span class="rating-count">(67 reviews)</span></div>
-      <div class="card-footer">
-        <a href="#" class="btn-view-profile">View profile <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </div>
-    </div>
-    <div class="doctor-card">
-      <div class="card-header">
-        <div class="doctor-avatar">DE</div>
-        <div class="card-header-info">
-          <div class="doctor-name">Deutsche Schule Bratislava</div>
-          <div class="doctor-specialty">German international school</div>
-        </div>
-      </div>
-      <div class="lang-badges">
-        <span class="lang-badge">🌐 DE</span><span class="lang-badge">🌐 EN</span>
-        <span class="avail-waitlist avail-badge">open</span>
-      </div>
-      <div class="card-meta">
-        <div class="card-meta-item">
-          <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-          Rača
-        </div>
-        <div class="card-meta-item">
-          <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
-          Kühnlova 1, Bratislava
-        </div>
-        <div class="card-meta-item">
-          <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-          Ages 5–19 · German curriculum
-        </div>
-      </div>
-      <div class="card-insurance">Insurance: <span class="ins-tag">German certified</span></div>
-      <div class="card-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span><span class="rating-num">4.0</span><span class="rating-count">(44 reviews)</span></div>
-      <div class="card-footer">
-        <a href="#" class="btn-view-profile">View profile <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </div>
-    </div>
-    <div class="doctor-card">
-      <div class="card-header">
-        <div class="doctor-avatar">MO</div>
-        <div class="card-header-info">
-          <div class="doctor-name">Montessori Primary Bratislava</div>
-          <div class="doctor-specialty">Montessori bilingual preschool &amp; primary</div>
-        </div>
-      </div>
-      <div class="lang-badges">
-        <span class="lang-badge">🌐 EN</span><span class="lang-badge">🌐 SK</span>
-        <span class="avail-waitlist avail-badge">waitlist</span>
-      </div>
-      <div class="card-meta">
-        <div class="card-meta-item">
-          <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-          Ružinov
-        </div>
-        <div class="card-meta-item">
-          <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
-          Near Ružinovský park
-        </div>
-        <div class="card-meta-item">
-          <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-          Ages 2–10 · Montessori
-        </div>
-      </div>
-      <div class="card-insurance">Insurance: <span class="ins-tag">AMI Montessori</span></div>
-      <div class="card-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="rating-num">5.0</span><span class="rating-count">(38 reviews)</span></div>
-      <div class="card-footer">
-        <a href="#" class="btn-view-profile">View profile <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </div>
-    </div>
-    <div class="doctor-card">
-      <div class="card-header">
-        <div class="doctor-avatar">EL</div>
-        <div class="card-header-info">
-          <div class="doctor-name">English Language Kindergarten BA</div>
-          <div class="doctor-specialty">Full English immersion preschool</div>
-        </div>
-      </div>
-      <div class="lang-badges">
-        <span class="lang-badge">🌐 EN</span>
-        <span class="avail-waitlist avail-badge">open</span>
-      </div>
-      <div class="card-meta">
-        <div class="card-meta-item">
-          <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-          Staré Mesto
-        </div>
-        <div class="card-meta-item">
-          <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
-          City centre location
-        </div>
-        <div class="card-meta-item">
-          <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-          Ages 2–6 · Play-based
-        </div>
-      </div>
-      <div class="card-insurance">Insurance: <span class="ins-tag">EYFS framework</span></div>
-      <div class="card-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span><span class="rating-num">4.0</span><span class="rating-count">(29 reviews)</span></div>
-      <div class="card-footer">
-        <a href="#" class="btn-view-profile">View profile <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </div>
-    </div>
-  </div>
+ <div class="doctor-grid">
+ 
+ <div class="doctor-card">
+ <div class="card-header">
+ <div class="doctor-avatar">BI</div>
+ <div class="card-header-info">
+ <div class="doctor-name">BISB, British International School</div>
+ <div class="doctor-specialty">IB Primary Years / Middle Years / Diploma</div>
+ </div>
+ </div>
+ <div class="lang-badges">
+ <span class="lang-badge">🌐 EN</span>
+ <span class="avail-waitlist avail-badge">open</span>
+ </div>
+ <div class="card-meta">
+ <div class="card-meta-item">
+ <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+ Karlova Ves
+ </div>
+ <div class="card-meta-item">
+ <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+ Pekníkova 6, Bratislava
+ </div>
+ <div class="card-meta-item">
+ <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+ Ages 3–18 · IB curriculum
+ </div>
+ </div>
+ <div class="card-insurance">Insurance: <span class="ins-tag">IB World School</span></div>
+ <div class="card-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="rating-num">5.0</span><span class="rating-count">(142 reviews)</span></div>
+ <div class="card-footer">
+ <a href="#" class="btn-view-profile">View profile <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+ </div>
+ </div>
+ <div class="doctor-card">
+ <div class="card-header">
+ <div class="doctor-avatar">QS</div>
+ <div class="card-header-info">
+ <div class="doctor-name">QSI International School Bratislava</div>
+ <div class="doctor-specialty">American-style private school</div>
+ </div>
+ </div>
+ <div class="lang-badges">
+ <span class="lang-badge">🌐 EN</span>
+ <span class="avail-waitlist avail-badge">open</span>
+ </div>
+ <div class="card-meta">
+ <div class="card-meta-item">
+ <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+ Šamorín (20 km)
+ </div>
+ <div class="card-meta-item">
+ <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+ Bus service from BA centre
+ </div>
+ <div class="card-meta-item">
+ <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+ Ages 3–18 · US curriculum
+ </div>
+ </div>
+ <div class="card-insurance">Insurance: <span class="ins-tag">US accredited</span></div>
+ <div class="card-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="rating-num">5.0</span><span class="rating-count">(89 reviews)</span></div>
+ <div class="card-footer">
+ <a href="#" class="btn-view-profile">View profile <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+ </div>
+ </div>
+ <div class="doctor-card">
+ <div class="card-header">
+ <div class="doctor-avatar">AM</div>
+ <div class="card-header-info">
+ <div class="doctor-name">American School of Bratislava</div>
+ <div class="doctor-specialty">Pre-K through Grade 12</div>
+ </div>
+ </div>
+ <div class="lang-badges">
+ <span class="lang-badge">🌐 EN</span>
+ <span class="avail-waitlist avail-badge">open</span>
+ </div>
+ <div class="card-meta">
+ <div class="card-meta-item">
+ <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+ Nové Mesto
+ </div>
+ <div class="card-meta-item">
+ <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+ Hviezdoslavovo nám. area
+ </div>
+ <div class="card-meta-item">
+ <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+ Ages 3–18 · AP + IB options
+ </div>
+ </div>
+ <div class="card-insurance">Insurance: <span class="ins-tag">US + IB</span></div>
+ <div class="card-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span><span class="rating-num">4.0</span><span class="rating-count">(67 reviews)</span></div>
+ <div class="card-footer">
+ <a href="#" class="btn-view-profile">View profile <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+ </div>
+ </div>
+ <div class="doctor-card">
+ <div class="card-header">
+ <div class="doctor-avatar">DE</div>
+ <div class="card-header-info">
+ <div class="doctor-name">Deutsche Schule Bratislava</div>
+ <div class="doctor-specialty">German international school</div>
+ </div>
+ </div>
+ <div class="lang-badges">
+ <span class="lang-badge">🌐 DE</span><span class="lang-badge">🌐 EN</span>
+ <span class="avail-waitlist avail-badge">open</span>
+ </div>
+ <div class="card-meta">
+ <div class="card-meta-item">
+ <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+ Rača
+ </div>
+ <div class="card-meta-item">
+ <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+ Kühnlova 1, Bratislava
+ </div>
+ <div class="card-meta-item">
+ <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+ Ages 5–19 · German curriculum
+ </div>
+ </div>
+ <div class="card-insurance">Insurance: <span class="ins-tag">German certified</span></div>
+ <div class="card-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span><span class="rating-num">4.0</span><span class="rating-count">(44 reviews)</span></div>
+ <div class="card-footer">
+ <a href="#" class="btn-view-profile">View profile <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+ </div>
+ </div>
+ <div class="doctor-card">
+ <div class="card-header">
+ <div class="doctor-avatar">MO</div>
+ <div class="card-header-info">
+ <div class="doctor-name">Montessori Primary Bratislava</div>
+ <div class="doctor-specialty">Montessori bilingual preschool &amp; primary</div>
+ </div>
+ </div>
+ <div class="lang-badges">
+ <span class="lang-badge">🌐 EN</span><span class="lang-badge">🌐 SK</span>
+ <span class="avail-waitlist avail-badge">waitlist</span>
+ </div>
+ <div class="card-meta">
+ <div class="card-meta-item">
+ <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+ Ružinov
+ </div>
+ <div class="card-meta-item">
+ <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+ Near Ružinovský park
+ </div>
+ <div class="card-meta-item">
+ <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+ Ages 2–10 · Montessori
+ </div>
+ </div>
+ <div class="card-insurance">Insurance: <span class="ins-tag">AMI Montessori</span></div>
+ <div class="card-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="rating-num">5.0</span><span class="rating-count">(38 reviews)</span></div>
+ <div class="card-footer">
+ <a href="#" class="btn-view-profile">View profile <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+ </div>
+ </div>
+ <div class="doctor-card">
+ <div class="card-header">
+ <div class="doctor-avatar">EL</div>
+ <div class="card-header-info">
+ <div class="doctor-name">English Language Kindergarten BA</div>
+ <div class="doctor-specialty">Full English immersion preschool</div>
+ </div>
+ </div>
+ <div class="lang-badges">
+ <span class="lang-badge">🌐 EN</span>
+ <span class="avail-waitlist avail-badge">open</span>
+ </div>
+ <div class="card-meta">
+ <div class="card-meta-item">
+ <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+ Staré Mesto
+ </div>
+ <div class="card-meta-item">
+ <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+ City centre location
+ </div>
+ <div class="card-meta-item">
+ <span class="card-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+ Ages 2–6 · Play-based
+ </div>
+ </div>
+ <div class="card-insurance">Insurance: <span class="ins-tag">EYFS framework</span></div>
+ <div class="card-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-empty">★</span><span class="rating-num">4.0</span><span class="rating-count">(29 reviews)</span></div>
+ <div class="card-footer">
+ <a href="#" class="btn-view-profile">View profile <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+ </div>
+ </div>
+ </div>
 </section>
 <!-- EDU SECTION -->
 <section class="section edu-section" id="edu-section">
-  <div class="section-inner">
-    <div class="section-label">Know before you enrol</div>
-    <h2 class="section-title">Education in Slovakia — what expat parents need to know.</h2>
-    <p class="section-sub">Compulsory schooling, international school status, and home education options.</p>
-    <div class="edu-grid">
-      
-    <div class="edu-card">
-      <span class="edu-icon">📚</span>
-      <div class="edu-title">Compulsory education in Slovakia</div>
-      <div class="edu-text"><strong>Zákon č. 245/2008 Z.z.</strong> (School Act) makes education compulsory for all children aged <strong>6–16</strong> residing in Slovakia, including expat children. Compulsory schooling begins in September of the year the child turns 6. Children of EU/EEA residents have the right to enrol in Slovak public schools free of charge. Non-EU residents on valid residence permits have the same right. Enrolment is at your local <em>základná škola</em> (primary school).</div>
-    </div>
-    <div class="edu-card">
-      <span class="edu-icon">🌍</span>
-      <div class="edu-title">International schools — legal status in Slovakia</div>
-      <div class="edu-text">International schools in Bratislava operate under Slovak law as private schools (<em>súkromné školy</em>). They must be authorised by the <strong>Ministry of Education (minedu.sk)</strong>. Schools offering the IB Diploma Programme are also accredited by the International Baccalaureate Organisation. BISB (Pekníkova 6) and QSI (Šamorín) are the longest-established expat-facing options. Annual fees range from €8 000 to €22 000+ depending on school and year group.</div>
-    </div>
-    <div class="edu-card">
-      <span class="edu-icon">🏠</span>
-      <div class="edu-title">Home education (domáce vzdelávanie)</div>
-      <div class="edu-text">Home education is legal in Slovakia under <strong>zákon č. 245/2008 Z.z., §24–§25</strong>. To home-educate, parents must apply to the headmaster of a "guarantor school" (<em>kmeňová škola</em>) which will oversee and evaluate the child's progress. The child sits exams at the guarantor school each year. Applications are submitted in May for the following September. This option is increasingly used by multilingual expat families.</div>
-    </div>
-    </div>
-  </div>
+ <div class="section-inner">
+ <div class="section-label">Know before you enrol</div>
+ <h2 class="section-title">Education in Slovakia, what expat parents need to know.</h2>
+ <p class="section-sub">Compulsory schooling, international school status, and home education options.</p>
+ <div class="edu-grid">
+ 
+ <div class="edu-card">
+ <span class="edu-icon">📚</span>
+ <div class="edu-title">Compulsory education in Slovakia</div>
+ <div class="edu-text"><strong>Zákon č. 245/2008 Z.z.</strong> (School Act) makes education compulsory for all children aged <strong>6–16</strong> residing in Slovakia, including expat children. Compulsory schooling begins in September of the year the child turns 6. Children of EU/EEA residents have the right to enrol in Slovak public schools free of charge. Non-EU residents on valid residence permits have the same right. Enrolment is at your local <em>základná škola</em> (primary school).</div>
+ </div>
+ <div class="edu-card">
+ <span class="edu-icon">🌍</span>
+ <div class="edu-title">International schools, legal status in Slovakia</div>
+ <div class="edu-text">International schools in Bratislava operate under Slovak law as private schools (<em>súkromné školy</em>). They must be authorised by the <strong>Ministry of Education (minedu.sk)</strong>. Schools offering the IB Diploma Programme are also accredited by the International Baccalaureate Organisation. BISB (Pekníkova 6) and QSI (Šamorín) are the longest-established expat-facing options. Annual fees range from €8 000 to €22 000+ depending on school and year group.</div>
+ </div>
+ <div class="edu-card">
+ <span class="edu-icon">🏠</span>
+ <div class="edu-title">Home education (domáce vzdelávanie)</div>
+ <div class="edu-text">Home education is legal in Slovakia under <strong>zákon č. 245/2008 Z.z., §24–§25</strong>. To home-educate, parents must apply to the headmaster of a "guarantor school" (<em>kmeňová škola</em>) which will oversee and evaluate the child's progress. The child sits exams at the guarantor school each year. Applications are submitted in May for the following September. This option is increasingly used by multilingual expat families.</div>
+ </div>
+ </div>
+ </div>
 </section>
 
 <!-- FAQ -->
 <section class="section faq-section">
-  <div class="section-inner">
-    <div class="section-label">Common questions</div>
-    <h2 class="section-title">Your questions about schools in Slovakia.</h2>
-    <p class="section-sub">Practical answers from parents who've navigated the Slovak education system.</p>
-    <div class="faq-list">
-      
-    <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
-        <span class="faq-question-text">Is school compulsory for my child in Slovakia?</span>
-        <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-      </div>
-      <div class="faq-answer">Yes. Zákon č. 245/2008 Z.z. makes education compulsory from age 6 to 16 for all children residing in Slovakia, regardless of nationality. You can fulfil this obligation through a Slovak public school, a private/international school, or home education (with a guarantor school). You are legally required to ensure your child is enrolled.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
-        <span class="faq-question-text">Do international school fees qualify for tax deductions?</span>
-        <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-      </div>
-      <div class="faq-answer">In general, no — standard school fees (školné) are not tax-deductible for employees under Slovak zákon č. 595/2003 Z.z. However, if your employer pays school fees as a non-financial benefit, this may be partially exempt from tax up to a limit. Consult an English-speaking accountant (see our Banks & Finance section) for your specific situation.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
-        <span class="faq-question-text">What's the difference between IB and the Slovak curriculum?</span>
-        <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-      </div>
-      <div class="faq-answer">The <em>International Baccalaureate (IB)</em> is a globally recognised programme taught in English, aiming for university admissions worldwide. The Slovak state curriculum (zákon č. 245/2008) is taught in Slovak and leads to the <em>maturita</em> school-leaving certificate, required for Slovak university admissions. BISB and QSI offer IB; the American School offers both AP and IB. Slovak public schools follow the state curriculum but some offer bilingual streams.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
-        <span class="faq-question-text">What documents do I need to enrol my child in a Slovak public school?</span>
-        <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-      </div>
-      <div class="faq-answer">You'll need: your child's birth certificate (with apostille and Slovak translation if non-Slovak), proof of residency (<em>potvrdenie o pobyte</em>), your residence permit or EU registration card, vaccination records. The school district is determined by your registered address. Contact your local district municipal office (<em>miestny úrad</em>) to confirm which school is assigned to your address.</div>
-    </div>
-    </div>
-  </div>
+ <div class="section-inner">
+ <div class="section-label">Common questions</div>
+ <h2 class="section-title">Your questions about schools in Slovakia.</h2>
+ <p class="section-sub">Practical answers from parents who've navigated the Slovak education system.</p>
+ <div class="faq-list">
+ 
+ <div class="faq-item">
+ <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
+ <span class="faq-question-text">Is school compulsory for my child in Slovakia?</span>
+ <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+ </div>
+ <div class="faq-answer">Yes. Zákon č. 245/2008 Z.z. makes education compulsory from age 6 to 16 for all children residing in Slovakia, regardless of nationality. You can fulfil this obligation through a Slovak public school, a private/international school, or home education (with a guarantor school). You are legally required to ensure your child is enrolled.</div>
+ </div>
+ <div class="faq-item">
+ <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
+ <span class="faq-question-text">Do international school fees qualify for tax deductions?</span>
+ <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+ </div>
+ <div class="faq-answer">In general, no, standard school fees (školné) are not tax-deductible for employees under Slovak zákon č. 595/2003 Z.z. However, if your employer pays school fees as a non-financial benefit, this may be partially exempt from tax up to a limit. Consult an English-speaking accountant (see our Banks & Finance section) for your specific situation.</div>
+ </div>
+ <div class="faq-item">
+ <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
+ <span class="faq-question-text">What's the difference between IB and the Slovak curriculum?</span>
+ <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+ </div>
+ <div class="faq-answer">The <em>International Baccalaureate (IB)</em> is a globally recognised programme taught in English, aiming for university admissions worldwide. The Slovak state curriculum (zákon č. 245/2008) is taught in Slovak and leads to the <em>maturita</em> school-leaving certificate, required for Slovak university admissions. BISB and QSI offer IB; the American School offers both AP and IB. Slovak public schools follow the state curriculum but some offer bilingual streams.</div>
+ </div>
+ <div class="faq-item">
+ <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
+ <span class="faq-question-text">What documents do I need to enrol my child in a Slovak public school?</span>
+ <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+ </div>
+ <div class="faq-answer">You'll need: your child's birth certificate (with apostille and Slovak translation if non-Slovak), proof of residency (<em>potvrdenie o pobyte</em>), your residence permit or EU registration card, vaccination records. The school district is determined by your registered address. Contact your local district municipal office (<em>miestny úrad</em>) to confirm which school is assigned to your address.</div>
+ </div>
+ </div>
+ </div>
 </section>
 
 <!-- RELATED -->
 <section class="section related-section">
-  <div class="section-inner">
-    <div class="section-label">Explore more</div>
-    <h2 class="section-title">Other services expats use</h2>
-    <p class="section-sub">Everything you need to settle in and live well in Bratislava.</p>
-    <div class="related-grid">
-      
-    <a href="doctors.html" class="related-card">
-      <div class="related-card-inner">
-        <div class="related-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg></div>
-        <div class="related-name">Doctors &amp; Specialists</div>
-        <div class="related-desc">Find English-speaking GPs and paediatricians for your family.</div>
-        <div class="related-link">Browse listings <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-      </div>
-    </a>
-    <a href="moving.html" class="related-card">
-      <div class="related-card-inner">
-        <div class="related-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/><polyline points="19 9 22 12 19 15"/><polyline points="9 19 12 22 15 19"/></svg></div>
-        <div class="related-name">Moving &amp; Relocation</div>
-        <div class="related-desc">Arrive prepared — relocation services and residency registration guides.</div>
-        <div class="related-link">Browse listings <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-      </div>
-    </a>
-    <a href="lawyers.html" class="related-card">
-      <div class="related-card-inner">
-        <div class="related-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <div class="related-name">Lawyers &amp; Legal</div>
-        <div class="related-desc">Immigration lawyers who can help with family residency permits.</div>
-        <div class="related-link">Browse listings <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-      </div>
-    </a>
-    </div>
-  </div>
+ <div class="section-inner">
+ <div class="section-label">Explore more</div>
+ <h2 class="section-title">Other services expats use</h2>
+ <p class="section-sub">Everything you need to settle in and live well in Bratislava.</p>
+ <div class="related-grid">
+ 
+ <a href="doctors.html" class="related-card">
+ <div class="related-card-inner">
+ <div class="related-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg></div>
+ <div class="related-name">Doctors &amp; Specialists</div>
+ <div class="related-desc">Find English-speaking GPs and paediatricians for your family.</div>
+ <div class="related-link">Browse listings <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+ </div>
+ </a>
+ <a href="moving.html" class="related-card">
+ <div class="related-card-inner">
+ <div class="related-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/><polyline points="19 9 22 12 19 15"/><polyline points="9 19 12 22 15 19"/></svg></div>
+ <div class="related-name">Moving &amp; Relocation</div>
+ <div class="related-desc">Arrive prepared, relocation services and residency registration guides.</div>
+ <div class="related-link">Browse listings <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+ </div>
+ </a>
+ <a href="lawyers.html" class="related-card">
+ <div class="related-card-inner">
+ <div class="related-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+ <div class="related-name">Lawyers &amp; Legal</div>
+ <div class="related-desc">Immigration lawyers who can help with family residency permits.</div>
+ <div class="related-link">Browse listings <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+ </div>
+ </a>
+ </div>
+ </div>
 </section>
 
 <footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <div class="footer-logo-mark">
-            <svg width="32" height="37" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light"/></svg>
-          </div>
-          <div class="footer-logo-text">ExpatBase Slovakia</div>
-        </div>
-        <p class="footer-tagline">Life in Slovakia, made simple. The #1 resource for English-speaking expats in Bratislava.</p>
-        <div class="footer-socials">
-          <a href="#" class="footer-social" aria-label="Facebook">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
-          <a href="#" class="footer-social" aria-label="Instagram">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </a>
-          <a href="#" class="footer-social" aria-label="X / Twitter">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </a>
-          <a href="#" class="footer-social" aria-label="LinkedIn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-        </div>
-      </div>
-      <div>
-        <div class="footer-col-title">Find Experts</div>
-                <ul class="footer-links">
-          <li><a href="doctors.html">Doctors &amp; Specialists</a></li>
-          <li><a href="lawyers.html">Lawyers &amp; Legal</a></li>
-          <li><a href="banks.html">Banks &amp; Finance</a></li>
-          <li><a href="barbers.html">Hair, Beauty &amp; Tattoo</a></li>
-          <li><a href="plumbers.html">Handymen</a></li>
-          <li><a href="builders.html">Builders &amp; Construction</a></li>
-          <li><a href="vets.html">Vets &amp; Pet Care</a></li>
-          <li><a href="real-estate.html">Real Estate</a></li>
-          <li><a href="schools.html">Schools &amp; Learning</a></li>
-          <li><a href="moving.html">Moving &amp; Relocation</a></li>
-          <li><a href="sports.html">Sports &amp; Leisure</a></li>
-          <li><a href="others.html">Other Services</a></li>
-        </ul>
-      </div>
-    <div class="footer-bottom">
-      <div class="footer-copy">© 2026 ExpatBase Slovakia. All rights reserved.</div>
-      <div class="footer-legal">
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Use</a>
-        <a href="cookie-policy.html">Cookie Policy</a>
-      </div>
-    </div>
-  </div>
+ <div class="footer-inner">
+ <div class="footer-grid">
+ <div class="footer-brand">
+ <div class="footer-logo">
+ <div class="footer-logo-mark">
+ <svg width="32" height="37" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light"/></svg>
+ </div>
+ <div class="footer-logo-text">ExpatBase Slovakia</div>
+ </div>
+ <p class="footer-tagline">Life in Slovakia, made simple. The #1 resource for English-speaking expats in Bratislava.</p>
+ <div class="footer-socials">
+ <a href="#" class="footer-social" aria-label="Facebook">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+ </a>
+ <a href="#" class="footer-social" aria-label="Instagram">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+ </a>
+ <a href="#" class="footer-social" aria-label="X / Twitter">
+ <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+ </a>
+ <a href="#" class="footer-social" aria-label="LinkedIn">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+ </a>
+ </div>
+ </div>
+ <div>
+ <div class="footer-col-title">Find Experts</div>
+ <ul class="footer-links">
+ <li><a href="doctors.html">Doctors &amp; Specialists</a></li>
+ <li><a href="lawyers.html">Lawyers &amp; Legal</a></li>
+ <li><a href="banks.html">Banks &amp; Finance</a></li>
+ <li><a href="barbers.html">Hair, Beauty &amp; Tattoo</a></li>
+ <li><a href="plumbers.html">Handymen</a></li>
+ <li><a href="builders.html">Builders &amp; Construction</a></li>
+ <li><a href="vets.html">Vets &amp; Pet Care</a></li>
+ <li><a href="real-estate.html">Real Estate</a></li>
+ <li><a href="schools.html">Schools &amp; Learning</a></li>
+ <li><a href="moving.html">Moving &amp; Relocation</a></li>
+ <li><a href="sports.html">Sports &amp; Leisure</a></li>
+ <li><a href="others.html">Other Services</a></li>
+ </ul>
+ </div>
+ <div class="footer-bottom">
+ <div class="footer-copy">© 2026 ExpatBase Slovakia. All rights reserved.</div>
+ <div class="footer-legal">
+ <a href="privacy-policy.html">Privacy Policy</a>
+ <a href="terms.html">Terms of Use</a>
+ <a href="cookie-policy.html">Cookie Policy</a>
+ </div>
+ </div>
+ </div>
 </footer>
 
 <!-- MOBILE FILTER DRAWER -->
 <div class="filter-drawer-overlay" id="filterDrawerOverlay" role="dialog" aria-modal="true" aria-label="Filters">
-  <div class="filter-drawer" id="filterDrawer">
-    <div class="drawer-handle"></div>
-    <div class="drawer-title">Filter results</div>
-    
+ <div class="filter-drawer" id="filterDrawer">
+ <div class="drawer-handle"></div>
+ <div class="drawer-title">Filter results</div>
+ 
 <div class="drawer-section">
-  <div class="drawer-section-title">Level</div>
-  <select class="filter-select" style="width:100%">
-    <option>All levels</option><option>Preschool</option><option>Primary</option><option>Secondary</option>
-  </select>
+ <div class="drawer-section-title">Level</div>
+ <select class="filter-select" style="width:100%">
+ <option>All levels</option><option>Preschool</option><option>Primary</option><option>Secondary</option>
+ </select>
 </div>
 <div class="drawer-section">
-  <div class="drawer-section-title">Curriculum</div>
-  <select class="filter-select" style="width:100%">
-    <option>All curricula</option><option>IB</option><option>British</option>
-    <option>American / AP</option><option>German</option><option>Montessori</option>
-  </select>
+ <div class="drawer-section-title">Curriculum</div>
+ <select class="filter-select" style="width:100%">
+ <option>All curricula</option><option>IB</option><option>British</option>
+ <option>American / AP</option><option>German</option><option>Montessori</option>
+ </select>
 </div>
 <div class="drawer-section">
-  <div class="drawer-section-title">Language</div>
-  <div class="lang-pills">
-    <button class="lang-pill">EN</button><button class="lang-pill">DE</button><button class="lang-pill">Bilingual</button>
-  </div>
+ <div class="drawer-section-title">Language</div>
+ <div class="lang-pills">
+ <button class="lang-pill">EN</button><button class="lang-pill">DE</button><button class="lang-pill">Bilingual</button>
+ </div>
 </div>
-    <button class="drawer-apply" onclick="document.getElementById('filterDrawerOverlay').classList.remove('open'); document.body.style.overflow='';">Apply filters</button>
-  </div>
+ <button class="drawer-apply" onclick="document.getElementById('filterDrawerOverlay').classList.remove('open'); document.body.style.overflow='';">Apply filters</button>
+ </div>
 </div>
 
 <script>
-  /* ── Navbar scroll effect ── */
-  const nav = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
+ /* ── Navbar scroll effect ── */
+ const nav = document.getElementById('navbar');
+ window.addEventListener('scroll', () => {
+ nav.classList.toggle('scrolled', window.scrollY > 60);
+ }, { passive: true });
 
-  /* ── Language toggle ── */
+ /* ── Language toggle ── */
 
-  /* ── Language pills toggle ── */
-  document.querySelectorAll('.lang-pill').forEach(pill => {
-    pill.addEventListener('click', () => {
-      pill.classList.toggle('active');
-    });
-  });
+ /* ── Language pills toggle ── */
+ document.querySelectorAll('.lang-pill').forEach(pill => {
+ pill.addEventListener('click', () => {
+ pill.classList.toggle('active');
+ });
+ });
 
-  /* ── Insurance pills toggle ── */
-  document.querySelectorAll('.ins-pill').forEach(pill => {
-    pill.addEventListener('click', () => {
-      pill.classList.toggle('active');
-    });
-  });
+ /* ── Insurance pills toggle ── */
+ document.querySelectorAll('.ins-pill').forEach(pill => {
+ pill.addEventListener('click', () => {
+ pill.classList.toggle('active');
+ });
+ });
 
-  /* ── Reset filters ── */
-  document.getElementById('filterReset')?.addEventListener('click', () => {
-    document.querySelectorAll('.lang-pill').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.ins-pill').forEach(p => p.classList.remove('active'));
-    document.getElementById('filterSpecialty').value = '';
-    document.getElementById('filterDistrict').value = '';
-  });
+ /* ── Reset filters ── */
+ document.getElementById('filterReset')?.addEventListener('click', () => {
+ document.querySelectorAll('.lang-pill').forEach(p => p.classList.remove('active'));
+ document.querySelectorAll('.ins-pill').forEach(p => p.classList.remove('active'));
+ document.getElementById('filterSpecialty').value = '';
+ document.getElementById('filterDistrict').value = '';
+ });
 
-  /* ── Mobile filter drawer ── */
-  const filterMobileBtn = document.getElementById('filterMobileBtn');
-  const drawerOverlay = document.getElementById('filterDrawerOverlay');
+ /* ── Mobile filter drawer ── */
+ const filterMobileBtn = document.getElementById('filterMobileBtn');
+ const drawerOverlay = document.getElementById('filterDrawerOverlay');
 
-  filterMobileBtn?.addEventListener('click', () => {
-    drawerOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    filterMobileBtn.setAttribute('aria-expanded', 'true');
-  });
+ filterMobileBtn?.addEventListener('click', () => {
+ drawerOverlay.classList.add('open');
+ document.body.style.overflow = 'hidden';
+ filterMobileBtn.setAttribute('aria-expanded', 'true');
+ });
 
-  drawerOverlay?.addEventListener('click', (e) => {
-    if (e.target === drawerOverlay) closeFilterDrawer();
-  });
+ drawerOverlay?.addEventListener('click', (e) => {
+ if (e.target === drawerOverlay) closeFilterDrawer();
+ });
 
-  function closeFilterDrawer() {
-    drawerOverlay.classList.remove('open');
-    document.body.style.overflow = '';
-    filterMobileBtn?.setAttribute('aria-expanded', 'false');
-  }
+ function closeFilterDrawer() {
+ drawerOverlay.classList.remove('open');
+ document.body.style.overflow = '';
+ filterMobileBtn?.setAttribute('aria-expanded', 'false');
+ }
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && drawerOverlay.classList.contains('open')) closeFilterDrawer();
-  });
+ document.addEventListener('keydown', (e) => {
+ if (e.key === 'Escape' && drawerOverlay.classList.contains('open')) closeFilterDrawer();
+ });
 
-  /* ── FAQ accordion ── */
-  function toggleFaq(questionEl) {
-    const item = questionEl.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    // Close all
-    document.querySelectorAll('.faq-item.open').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
-    });
-    // Open clicked if it was closed
-    if (!isOpen) {
-      item.classList.add('open');
-      questionEl.setAttribute('aria-expanded', 'true');
-    }
-  }
+ /* ── FAQ accordion ── */
+ function toggleFaq(questionEl) {
+ const item = questionEl.closest('.faq-item');
+ const isOpen = item.classList.contains('open');
+ // Close all
+ document.querySelectorAll('.faq-item.open').forEach(i => {
+ i.classList.remove('open');
+ i.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
+ });
+ // Open clicked if it was closed
+ if (!isOpen) {
+ item.classList.add('open');
+ questionEl.setAttribute('aria-expanded', 'true');
+ }
+ }
 
-  /* Keyboard support for FAQ */
-  document.querySelectorAll('.faq-question').forEach(q => {
-    q.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(q); }
-    });
-  });
+ /* Keyboard support for FAQ */
+ document.querySelectorAll('.faq-question').forEach(q => {
+ q.addEventListener('keydown', (e) => {
+ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(q); }
+ });
+ });
 
-  /* ── Load more (decorative for now) ── */
-  document.querySelector('.btn-load-more')?.addEventListener('click', function() {
-    this.textContent = 'Loading…';
-    this.disabled = true;
-    setTimeout(() => {
-      this.textContent = 'No more results';
-      this.style.opacity = '0.5';
-      this.style.cursor = 'default';
-    }, 1000);
-  });
+ /* ── Load more (decorative for now) ── */
+ document.querySelector('.btn-load-more')?.addEventListener('click', function() {
+ this.textContent = 'Loading...';
+ this.disabled = true;
+ setTimeout(() => {
+ this.textContent = 'No more results';
+ this.style.opacity = '0.5';
+ this.style.cursor = 'default';
+ }, 1000);
+ });
 
-  // ── Mobile menu ──
-  (function() {
-    var hamburger = document.getElementById('hamburger');
-    var overlay   = document.getElementById('mobileOverlay');
-    var drawer    = document.getElementById('mobileDrawer');
-    var closeBtn  = document.getElementById('mobileClose');
-    if (!hamburger) return;
-    window.openMobileMenu = function() {
-      hamburger.classList.add('open'); overlay.classList.add('open'); drawer.classList.add('open');
-      document.body.style.overflow = 'hidden'; hamburger.setAttribute('aria-expanded','true');
-    };
-    window.closeMobileMenu = function() {
-      hamburger.classList.remove('open'); overlay.classList.remove('open'); drawer.classList.remove('open');
-      document.body.style.overflow = ''; hamburger.setAttribute('aria-expanded','false');
-    };
-    hamburger.addEventListener('click', function() { hamburger.classList.contains('open') ? closeMobileMenu() : openMobileMenu(); });
-    overlay.addEventListener('click', closeMobileMenu);
-    closeBtn.addEventListener('click', closeMobileMenu);
-    drawer.querySelectorAll('.mobile-nav a').forEach(function(a){ a.addEventListener('click', closeMobileMenu); });
-    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMobileMenu(); });
-  })();
+ // ── Mobile menu ──
+ (function() {
+ var hamburger = document.getElementById('hamburger');
+ var overlay = document.getElementById('mobileOverlay');
+ var drawer = document.getElementById('mobileDrawer');
+ var closeBtn = document.getElementById('mobileClose');
+ if (!hamburger) return;
+ window.openMobileMenu = function() {
+ hamburger.classList.add('open'); overlay.classList.add('open'); drawer.classList.add('open');
+ document.body.style.overflow = 'hidden'; hamburger.setAttribute('aria-expanded','true');
+ };
+ window.closeMobileMenu = function() {
+ hamburger.classList.remove('open'); overlay.classList.remove('open'); drawer.classList.remove('open');
+ document.body.style.overflow = ''; hamburger.setAttribute('aria-expanded','false');
+ };
+ hamburger.addEventListener('click', function() { hamburger.classList.contains('open') ? closeMobileMenu() : openMobileMenu(); });
+ overlay.addEventListener('click', closeMobileMenu);
+ closeBtn.addEventListener('click', closeMobileMenu);
+ drawer.querySelectorAll('.mobile-nav a').forEach(function(a){ a.addEventListener('click', closeMobileMenu); });
+ document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMobileMenu(); });
+ })();
 
 </script>
 </body>

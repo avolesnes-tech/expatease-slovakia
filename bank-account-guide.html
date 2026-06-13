@@ -10,589 +10,668 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --blue: #1A4F8A;
-    --blue-dark: #0F3360;
-    --blue-light: #E8F1FB;
-    --green: #2E9E6B;
-    --green-dark: #1D7A50;
-    --green-light: #E6F7EF;
-    --white: #FFFFFF;
-    --gray-50: #F4F6F9;
-    --gray-100: #DDE3EC;
-    --gray-400: #8C97A8;
-    --gray-700: #3D4A5C;
-    --gray-900: #1F2937;
-    --gold: #F6AD55;
-    --amber: #F59E0B;
-    --radius-sm: 6px;
-    --radius-md: 12px;
-    --radius-lg: 20px;
-    --radius-xl: 9999px;
-    --shadow-card: 0 2px 16px rgba(26,79,138,0.08);
-    --shadow-hover: 0 12px 40px rgba(26,79,138,0.16);
-    --shadow-nav: 0 2px 24px rgba(26,79,138,0.10);
-    --font-head: 'Urbanist', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
-    --transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
-  }
+ :root {
+ --blue: #1A4F8A;
+ --blue-dark: #0F3360;
+ --blue-light: #E8F1FB;
+ --green: #2E9E6B;
+ --green-dark: #1D7A50;
+ --green-light: #E6F7EF;
+ --white: #FFFFFF;
+ --gray-50: #F4F6F9;
+ --gray-100: #DDE3EC;
+ --gray-400: #8C97A8;
+ --gray-700: #3D4A5C;
+ --gray-900: #1F2937;
+ --gold: #F6AD55;
+ --amber: #F59E0B;
+ --radius-sm: 6px;
+ --radius-md: 12px;
+ --radius-lg: 20px;
+ --radius-xl: 9999px;
+ --shadow-card: 0 2px 16px rgba(26,79,138,0.08);
+ --shadow-hover: 0 12px 40px rgba(26,79,138,0.16);
+ --shadow-nav: 0 2px 24px rgba(26,79,138,0.10);
+ --font-head: 'Urbanist', sans-serif;
+ --font-body: 'DM Sans', sans-serif;
+ --transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
+ }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; overflow-x: hidden; }
-  body {
-    font-family: var(--font-body);
-    color: var(--gray-900);
-    background: var(--white);
-    overflow-x: hidden;
-    line-height: 1.6;
-  }
+ *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ html { scroll-behavior: smooth; overflow-x: hidden; }
+ body {
+ font-family: var(--font-body);
+ color: var(--gray-900);
+ background: var(--white);
+ overflow-x: hidden;
+ line-height: 1.6;
+ }
 
-  .nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    padding: 0 48px; height: 72px;
-    display: flex; align-items: center; justify-content: space-between;
-    transition: var(--transition); backdrop-filter: blur(0px);
-  }
-  .nav.scrolled {
-    background: rgba(255,255,255,0.94); backdrop-filter: blur(16px);
-    box-shadow: var(--shadow-nav);
-  }
-  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-  .nav-logo-text {
-    font-family: var(--font-head); font-weight: 700; font-size: 18px;
-    color: var(--white); letter-spacing: -0.3px; transition: var(--transition);
-  }
-  .nav.scrolled .nav-logo-text { color: var(--gray-900); }
-  .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
-  .nav-links a {
-    text-decoration: none; font-family: var(--font-body); font-size: 14px; font-weight: 500;
-    color: rgba(255,255,255,0.88); padding: 8px 14px; border-radius: var(--radius-sm); transition: var(--transition);
-  }
-  .nav.scrolled .nav-links a { color: var(--gray-700); }
-  .nav-links a:hover { background: rgba(255,255,255,0.15); color: white; }
-  .nav.scrolled .nav-links a:hover { background: var(--blue-light); color: var(--blue); }
-  .nav-right { display: flex; align-items: center; gap: 12px; }
-  .nav-cta {
-    font-family: var(--font-body); font-size: 13px; font-weight: 600;
-    padding: 9px 20px; border-radius: var(--radius-xl); border: none; cursor: pointer;
-    background: var(--green); color: white; text-decoration: none;
-    transition: var(--transition); display: inline-flex; align-items: center; gap: 6px;
-  }
-  .nav-cta:hover { background: var(--green-dark); transform: translateY(-1px); }
-  .nav-logo-svg { flex-shrink: 0; }
-  .nav.scrolled .logo-use-light { display: none !important; }
-  .nav.scrolled .logo-use-dark  { display: inline !important; }
-  .nav:not(.scrolled) .logo-use-light { display: inline !important; }
-  .nav:not(.scrolled) .logo-use-dark  { display: none !important; }
+ .nav {
+ position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+ padding: 0 48px; height: 72px;
+ display: flex; align-items: center; justify-content: space-between;
+ transition: var(--transition); backdrop-filter: blur(0px);
+ }
+ .nav.scrolled {
+ background: rgba(255,255,255,0.94); backdrop-filter: blur(16px);
+ box-shadow: var(--shadow-nav);
+ }
+ .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+ .nav-logo-text {
+ font-family: var(--font-head); font-weight: 700; font-size: 18px;
+ color: var(--white); letter-spacing: -0.3px; transition: var(--transition);
+ }
+ .nav.scrolled .nav-logo-text { color: var(--gray-900); }
+ .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+ .nav-links a {
+ text-decoration: none; font-family: var(--font-body); font-size: 14px; font-weight: 500;
+ color: rgba(255,255,255,0.88); padding: 8px 14px; border-radius: var(--radius-sm); transition: var(--transition);
+ }
+ .nav.scrolled .nav-links a { color: var(--gray-700); }
+ .nav-links a:hover { background: rgba(255,255,255,0.15); color: white; }
+ .nav.scrolled .nav-links a:hover { background: var(--blue-light); color: var(--blue); }
+ .nav-right { display: flex; align-items: center; gap: 12px; }
+ .nav-cta {
+ font-family: var(--font-body); font-size: 13px; font-weight: 600;
+ padding: 9px 20px; border-radius: var(--radius-xl); border: none; cursor: pointer;
+ background: var(--green); color: white; text-decoration: none;
+ transition: var(--transition); display: inline-flex; align-items: center; gap: 6px;
+ }
+ .nav-cta:hover { background: var(--green-dark); transform: translateY(-1px); }
+ .nav-logo-svg { flex-shrink: 0; }
+ .nav.scrolled .logo-use-light { display: none !important; }
+ .nav.scrolled .logo-use-dark { display: inline !important; }
+ .nav:not(.scrolled) .logo-use-light { display: inline !important; }
+ .nav:not(.scrolled) .logo-use-dark { display: none !important; }
 
-  .hamburger {
-    display: none; flex-direction: column; justify-content: center; gap: 5px;
-    background: none; border: none; cursor: pointer; padding: 8px;
-    border-radius: 8px; transition: background 0.2s; flex-shrink: 0; margin-left: 8px;
-  }
-  .hamburger:hover { background: rgba(255,255,255,0.1); }
-  .nav.scrolled .hamburger:hover { background: var(--gray-50); }
-  .hamburger span {
-    display: block; width: 22px; height: 2px; background: white; border-radius: 2px;
-    transition: all 0.3s cubic-bezier(0.4,0,0.2,1); transform-origin: center;
-  }
-  .nav.scrolled .hamburger span { background: var(--gray-900); }
-  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-  @media (max-width: 860px) {
-    .hamburger { display: flex; }    .nav-right a.nav-cta { display: none; }
-    .nav-links { display: none; }
-  }
-  .mobile-overlay {
-    position: fixed; inset: 0; background: rgba(10,18,35,0.65);
-    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-    z-index: 998; opacity: 0; pointer-events: none; transition: opacity 0.32s ease;
-  }
-  .mobile-overlay.open { opacity: 1; pointer-events: all; }
-  .mobile-drawer {
-    position: fixed; top: 0; right: 0; width: min(300px, 84vw); height: 100dvh;
-    background: linear-gradient(160deg, #0d1829 0%, #0f1f14 100%);
-    z-index: 999; transform: translateX(100%);
-    transition: transform 0.36s cubic-bezier(0.4,0,0.2,1);
-    display: flex; flex-direction: column; box-shadow: -8px 0 40px rgba(0,0,0,0.4);
-  }
-  .mobile-drawer.open { transform: translateX(0); }
-  .mobile-drawer-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.07); flex-shrink: 0;
-  }
-  .mobile-close {
-    background: rgba(255,255,255,0.08); border: none; border-radius: 50%;
-    width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
-    cursor: pointer; color: rgba(255,255,255,0.75); font-size: 20px; line-height: 1;
-    transition: background 0.2s, color 0.2s; flex-shrink: 0;
-  }
-  .mobile-close:hover { background: rgba(255,255,255,0.15); color: white; }
-  .mobile-nav { flex: 1; display: flex; flex-direction: column; padding: 20px 12px; gap: 2px; overflow-y: auto; }
-  .mobile-nav a {
-    text-decoration: none; font-family: var(--font-head); font-weight: 600; font-size: 19px;
-    color: rgba(255,255,255,0.82); padding: 14px 16px; border-radius: 12px;
-    transition: all 0.2s; letter-spacing: -0.02em; display: block;
-  }
-  .mobile-nav a:hover { background: rgba(255,255,255,0.07); color: white; }
-  .mobile-drawer-footer {
-    padding: 20px; border-top: 1px solid rgba(255,255,255,0.07);
-    display: flex; flex-direction: column; gap: 10px; flex-shrink: 0;
-  }
-  .mobile-drawer-footer .mob-btn {
-    font-family: var(--font-body); font-size: 14px; font-weight: 600;
-    padding: 13px 20px; border-radius: 100px; border: none; cursor: pointer;
-    text-align: center; text-decoration: none; display: block; transition: all 0.2s;
-  }
-  .mob-btn-primary { background: var(--green); color: white; }
-  .mob-btn-primary:hover { background: var(--green-dark); }
-  .mob-btn-ghost { background: transparent; color: rgba(255,255,255,0.8); border: 1.5px solid rgba(255,255,255,0.25) !important; }
-  .mob-btn-ghost:hover { background: rgba(255,255,255,0.08); color: white; }
+ .hamburger {
+ display: none; flex-direction: column; justify-content: center; gap: 5px;
+ background: none; border: none; cursor: pointer; padding: 8px;
+ border-radius: 8px; transition: background 0.2s; flex-shrink: 0; margin-left: 8px;
+ }
+ .hamburger:hover { background: rgba(255,255,255,0.1); }
+ .nav.scrolled .hamburger:hover { background: var(--gray-50); }
+ .hamburger span {
+ display: block; width: 22px; height: 2px; background: white; border-radius: 2px;
+ transition: all 0.3s cubic-bezier(0.4,0,0.2,1); transform-origin: center;
+ }
+ .nav.scrolled .hamburger span { background: var(--gray-900); }
+ .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+ .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+ .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+ @media (max-width: 860px) {
+ .hamburger { display: flex; } .nav-right a.nav-cta { display: none; }
+ .nav-links { display: none; }
+ }
+ .mobile-overlay {
+ position: fixed; inset: 0; background: rgba(10,18,35,0.65);
+ backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+ z-index: 998; opacity: 0; pointer-events: none; transition: opacity 0.32s ease;
+ }
+ .mobile-overlay.open { opacity: 1; pointer-events: all; }
+ .mobile-drawer {
+ position: fixed; top: 0; right: 0; width: min(300px, 84vw); height: 100dvh;
+ background: linear-gradient(160deg, #0d1829 0%, #0f1f14 100%);
+ z-index: 999; transform: translateX(100%);
+ transition: transform 0.36s cubic-bezier(0.4,0,0.2,1);
+ display: flex; flex-direction: column; box-shadow: -8px 0 40px rgba(0,0,0,0.4);
+ }
+ .mobile-drawer.open { transform: translateX(0); }
+ .mobile-drawer-header {
+ display: flex; align-items: center; justify-content: space-between;
+ padding: 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.07); flex-shrink: 0;
+ }
+ .mobile-close {
+ background: rgba(255,255,255,0.08); border: none; border-radius: 50%;
+ width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+ cursor: pointer; color: rgba(255,255,255,0.75); font-size: 20px; line-height: 1;
+ transition: background 0.2s, color 0.2s; flex-shrink: 0;
+ }
+ .mobile-close:hover { background: rgba(255,255,255,0.15); color: white; }
+ .mobile-nav { flex: 1; display: flex; flex-direction: column; padding: 20px 12px; gap: 2px; overflow-y: auto; }
+ .mobile-nav a {
+ text-decoration: none; font-family: var(--font-head); font-weight: 600; font-size: 19px;
+ color: rgba(255,255,255,0.82); padding: 14px 16px; border-radius: 12px;
+ transition: all 0.2s; letter-spacing: -0.02em; display: block;
+ }
+ .mobile-nav a:hover { background: rgba(255,255,255,0.07); color: white; }
+ .mobile-drawer-footer {
+ padding: 20px; border-top: 1px solid rgba(255,255,255,0.07);
+ display: flex; flex-direction: column; gap: 10px; flex-shrink: 0;
+ }
+ .mobile-drawer-footer .mob-btn {
+ font-family: var(--font-body); font-size: 14px; font-weight: 600;
+ padding: 13px 20px; border-radius: 100px; border: none; cursor: pointer;
+ text-align: center; text-decoration: none; display: block; transition: all 0.2s;
+ }
+ .mob-btn-primary { background: var(--green); color: white; }
+ .mob-btn-primary:hover { background: var(--green-dark); }
+ .mob-btn-ghost { background: transparent; color: rgba(255,255,255,0.8); border: 1.5px solid rgba(255,255,255,0.25) !important; }
+ .mob-btn-ghost:hover { background: rgba(255,255,255,0.08); color: white; }
 
-  .article-hero {
-    position: relative;
-    background:
-      radial-gradient(ellipse at 20% 0%, rgba(46,158,107,0.25), transparent 55%),
-      linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, #16613f 100%);
-    padding: 150px 24px 64px; text-align: center; overflow: hidden;
-  }
-  .article-hero::after {
-    content: ''; position: absolute; inset: 0; opacity: 0.05; pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-  .article-hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
-  .article-eyebrow {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
-    border-radius: var(--radius-xl); padding: 6px 16px; margin-bottom: 24px;
-    font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
-    color: rgba(255,255,255,0.9);
-  }
-  .article-h1 {
-    font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 800; line-height: 1.12; letter-spacing: -0.03em;
-    color: white; margin-bottom: 18px;
-  }
-  .article-sub { font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.82); max-width: 600px; margin: 0 auto 24px; }
-  .article-meta {
-    display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;
-    font-size: 13px; color: rgba(255,255,255,0.6);
-  }
-  .article-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.4); }
+ .article-hero {
+ position: relative;
+ background:
+ radial-gradient(ellipse at 20% 0%, rgba(46,158,107,0.25), transparent 55%),
+ linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, #16613f 100%);
+ padding: 150px 24px 64px; text-align: center; overflow: hidden;
+ }
+ .article-hero::after {
+ content: ''; position: absolute; inset: 0; opacity: 0.05; pointer-events: none;
+ background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+ }
+ .article-hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+ .article-eyebrow {
+ display: inline-flex; align-items: center; gap: 8px;
+ background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+ border-radius: var(--radius-xl); padding: 6px 16px; margin-bottom: 24px;
+ font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+ color: rgba(255,255,255,0.9);
+ }
+ .article-h1 {
+ font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3.2rem);
+ font-weight: 800; line-height: 1.12; letter-spacing: -0.03em;
+ color: white; margin-bottom: 18px;
+ }
+ .article-sub { font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.82); max-width: 600px; margin: 0 auto 24px; }
+ .article-meta {
+ display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;
+ font-size: 13px; color: rgba(255,255,255,0.6);
+ }
+ .article-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.4); }
 
-  .article-wrap { max-width: 760px; margin: 0 auto; padding: 56px 24px 96px; }
-  .article-wrap h2 {
-    font-family: var(--font-head); font-size: 28px; font-weight: 800;
-    letter-spacing: -0.02em; color: var(--gray-900); margin: 56px 0 16px; scroll-margin-top: 96px;
-  }
-  .article-wrap h2:first-of-type { margin-top: 0; }
-  .article-wrap h3 {
-    font-family: var(--font-head); font-size: 20px; font-weight: 700;
-    color: var(--gray-900); margin: 32px 0 10px; scroll-margin-top: 96px;
-  }
-  .article-wrap p { font-size: 16px; line-height: 1.75; color: var(--gray-700); margin-bottom: 16px; }
-  .article-wrap ul, .article-wrap ol { margin: 0 0 16px 22px; color: var(--gray-700); }
-  .article-wrap li { font-size: 16px; line-height: 1.7; margin-bottom: 8px; }
-  .article-wrap a { color: var(--blue); font-weight: 500; text-decoration: underline; text-decoration-color: rgba(26,79,138,0.3); text-underline-offset: 3px; }
-  .article-wrap a:hover { text-decoration-color: var(--blue); }
-  .article-wrap strong { color: var(--gray-900); font-weight: 600; }
+ .article-wrap { max-width: 760px; margin: 0 auto; padding: 56px 24px 96px; }
+ .article-wrap h2 {
+ font-family: var(--font-head); font-size: 28px; font-weight: 800;
+ letter-spacing: -0.02em; color: var(--gray-900); margin: 56px 0 16px; scroll-margin-top: 96px;
+ }
+ .article-wrap h2:first-of-type { margin-top: 0; }
+ .article-wrap h3 {
+ font-family: var(--font-head); font-size: 20px; font-weight: 700;
+ color: var(--gray-900); margin: 32px 0 10px; scroll-margin-top: 96px;
+ }
+ .article-wrap p { font-size: 16px; line-height: 1.75; color: var(--gray-700); margin-bottom: 16px; }
+ .article-wrap ul, .article-wrap ol { margin: 0 0 16px 22px; color: var(--gray-700); }
+ .article-wrap li { font-size: 16px; line-height: 1.7; margin-bottom: 8px; }
+ .article-wrap a { color: var(--blue); font-weight: 500; text-decoration: underline; text-decoration-color: rgba(26,79,138,0.3); text-underline-offset: 3px; }
+ .article-wrap a:hover { text-decoration-color: var(--blue); }
+ .article-wrap strong { color: var(--gray-900); font-weight: 600; }
 
-  .toc {
-    background: var(--gray-50); border: 1px solid var(--gray-100);
-    border-radius: var(--radius-lg); padding: 24px 28px; margin-bottom: 40px;
-  }
-  .toc-title {
-    font-family: var(--font-head); font-size: 13px; font-weight: 700;
-    letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 12px;
-  }
-  .toc ol { margin: 0 0 0 20px; }
-  .toc li { font-size: 15px; margin-bottom: 6px; }
-  .toc a { text-decoration: none; color: var(--blue); font-weight: 500; }
-  .toc a:hover { text-decoration: underline; }
+ .toc {
+ background: var(--gray-50); border: 1px solid var(--gray-100);
+ border-radius: var(--radius-lg); padding: 24px 28px; margin-bottom: 40px;
+ }
+ .toc-title {
+ font-family: var(--font-head); font-size: 13px; font-weight: 700;
+ letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 12px;
+ }
+ .toc ol { margin: 0 0 0 20px; }
+ .toc li { font-size: 15px; margin-bottom: 6px; }
+ .toc a { text-decoration: none; color: var(--blue); font-weight: 500; }
+ .toc a:hover { text-decoration: underline; }
 
-  .callout {
-    border-radius: var(--radius-md); padding: 18px 22px; margin: 24px 0;
-    font-size: 15px; line-height: 1.65; display: flex; gap: 12px; align-items: flex-start;
-  }
-  .callout-icon { flex-shrink: 0; font-size: 18px; line-height: 1.4; }
-  .callout p { margin: 0; font-size: 15px; }
-  .callout-tip { background: var(--green-light); border: 1px solid rgba(46,158,107,0.25); }
-  .callout-tip p { color: #14532d; }
-  .callout-warn { background: #FEF6E7; border: 1px solid rgba(245,158,11,0.3); }
-  .callout-warn p { color: #7c4a03; }
-  .callout-info { background: var(--blue-light); border: 1px solid rgba(26,79,138,0.2); }
-  .callout-info p { color: var(--blue-dark); }
+ .callout {
+ border-radius: var(--radius-md); padding: 18px 22px; margin: 24px 0;
+ font-size: 15px; line-height: 1.65; display: flex; gap: 12px; align-items: flex-start;
+ }
+ .callout-icon { flex-shrink: 0; font-size: 18px; line-height: 1.4; }
+ .callout p { margin: 0; font-size: 15px; }
+ .callout-tip { background: var(--green-light); border: 1px solid rgba(46,158,107,0.25); }
+ .callout-tip p { color: #14532d; }
+ .callout-warn { background: #FEF6E7; border: 1px solid rgba(245,158,11,0.3); }
+ .callout-warn p { color: #7c4a03; }
+ .callout-info { background: var(--blue-light); border: 1px solid rgba(26,79,138,0.2); }
+ .callout-info p { color: var(--blue-dark); }
 
-  .check-card {
-    background: white; border: 1px solid var(--gray-100); border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card); padding: 26px 28px; margin: 24px 0;
-  }
-  .check-card-title {
-    font-family: var(--font-head); font-size: 17px; font-weight: 700;
-    color: var(--gray-900); margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
-  }
-  .check-list { list-style: none; margin: 0 !important; }
-  .check-list li {
-    padding-left: 30px; position: relative; margin-bottom: 10px !important; font-size: 15px !important;
-  }
-  .check-list li::before {
-    content: ''; position: absolute; left: 0; top: 3px;
-    width: 18px; height: 18px; border-radius: 50%;
-    background: var(--green-light);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E9E6B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
-    background-size: 11px; background-repeat: no-repeat; background-position: center;
-  }
+ .check-card {
+ background: white; border: 1px solid var(--gray-100); border-radius: var(--radius-lg);
+ box-shadow: var(--shadow-card); padding: 26px 28px; margin: 24px 0;
+ }
+ .check-card-title {
+ font-family: var(--font-head); font-size: 17px; font-weight: 700;
+ color: var(--gray-900); margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+ }
+ .check-list { list-style: none; margin: 0 !important; }
+ .check-list li {
+ padding-left: 30px; position: relative; margin-bottom: 10px !important; font-size: 15px !important;
+ }
+ .check-list li::before {
+ content: ''; position: absolute; left: 0; top: 3px;
+ width: 18px; height: 18px; border-radius: 50%;
+ background: var(--green-light);
+ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E9E6B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+ background-size: 11px; background-repeat: no-repeat; background-position: center;
+ }
 
-  .step { display: flex; gap: 18px; margin-bottom: 26px; }
-  .step-num {
-    flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--blue), var(--green));
-    color: white; font-family: var(--font-head); font-weight: 800; font-size: 16px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .step-body h3 { margin-top: 2px !important; margin-bottom: 8px !important; }
-  .step-body p { margin-bottom: 8px; }
+ .step { display: flex; gap: 18px; margin-bottom: 26px; }
+ .step-num {
+ flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
+ background: linear-gradient(135deg, var(--blue), var(--green));
+ color: white; font-family: var(--font-head); font-weight: 800; font-size: 16px;
+ display: flex; align-items: center; justify-content: center;
+ }
+ .step-body h3 { margin-top: 2px !important; margin-bottom: 8px !important; }
+ .step-body p { margin-bottom: 8px; }
 
-  .fee-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
-  .fee-table th {
-    text-align: left; font-family: var(--font-head); font-weight: 700; font-size: 13px;
-    letter-spacing: 0.04em; text-transform: uppercase; color: var(--gray-400);
-    padding: 10px 14px; border-bottom: 2px solid var(--gray-100);
-  }
-  .fee-table td { padding: 12px 14px; border-bottom: 1px solid var(--gray-100); color: var(--gray-700); }
-  .fee-table tr:last-child td { border-bottom: none; }
-  .fee-table td:last-child { font-weight: 600; color: var(--gray-900); white-space: nowrap; }
+ .fee-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
+ .fee-table th {
+ text-align: left; font-family: var(--font-head); font-weight: 700; font-size: 13px;
+ letter-spacing: 0.04em; text-transform: uppercase; color: var(--gray-400);
+ padding: 10px 14px; border-bottom: 2px solid var(--gray-100);
+ }
+ .fee-table td { padding: 12px 14px; border-bottom: 1px solid var(--gray-100); color: var(--gray-700); }
+ .fee-table tr:last-child td { border-bottom: none; }
+ .fee-table td:last-child { font-weight: 600; color: var(--gray-900); white-space: nowrap; }
 
-  .sources { background: var(--gray-50); border-radius: var(--radius-lg); padding: 26px 28px; margin-top: 48px; }
-  .sources ul { margin-left: 20px; }
-  .sources li { font-size: 14px !important; }
+ .sources { background: var(--gray-50); border-radius: var(--radius-lg); padding: 26px 28px; margin-top: 48px; }
+ .sources ul { margin-left: 20px; }
+ .sources li { font-size: 14px !important; }
 
-  .disclaimer {
-    margin-top: 32px; padding: 18px 22px; border-radius: var(--radius-md);
-    background: white; border: 1px dashed var(--gray-100);
-    font-size: 13px; color: var(--gray-400); line-height: 1.6;
-  }
+ .disclaimer {
+ margin-top: 32px; padding: 18px 22px; border-radius: var(--radius-md);
+ background: white; border: 1px dashed var(--gray-100);
+ font-size: 13px; color: var(--gray-400); line-height: 1.6;
+ }
 
-  .article-cta {
-    margin-top: 56px; border-radius: var(--radius-lg); padding: 36px 32px;
-    background: linear-gradient(135deg, var(--blue-dark), var(--blue) 60%, #16613f); text-align: center;
-  }
-  .article-cta-title { font-family: var(--font-head); font-size: 24px; font-weight: 800; color: white; margin-bottom: 10px; letter-spacing: -0.02em; }
-  .article-cta-sub { font-size: 15px; color: rgba(255,255,255,0.75); margin-bottom: 22px; }
-  .article-cta-btn {
-    display: inline-block; background: var(--green); color: white !important;
-    font-weight: 600; font-size: 15px; padding: 13px 30px; border-radius: var(--radius-xl);
-    text-decoration: none !important; transition: var(--transition);
-  }
-  .article-cta-btn:hover { background: var(--green-dark); transform: translateY(-1px); }
+ .article-cta {
+ margin-top: 56px; border-radius: var(--radius-lg); padding: 36px 32px;
+ background: linear-gradient(135deg, var(--blue-dark), var(--blue) 60%, #16613f); text-align: center;
+ }
+ .article-cta-title { font-family: var(--font-head); font-size: 24px; font-weight: 800; color: white; margin-bottom: 10px; letter-spacing: -0.02em; }
+ .article-cta-sub { font-size: 15px; color: rgba(255,255,255,0.75); margin-bottom: 22px; }
+ .article-cta-btn {
+ display: inline-block; background: var(--green); color: white !important;
+ font-weight: 600; font-size: 15px; padding: 13px 30px; border-radius: var(--radius-xl);
+ text-decoration: none !important; transition: var(--transition);
+ }
+ .article-cta-btn:hover { background: var(--green-dark); transform: translateY(-1px); }
 
-  .footer { background: var(--blue-dark); padding: 48px 24px 32px; text-align: center; }
-  .footer-logo { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px; }
-  .footer-logo-text { font-family: var(--font-head); font-weight: 700; font-size: 17px; color: white; }
-  .footer-links-row { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 22px; }
-  .footer-links-row a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; transition: color 0.2s; }
-  .footer-links-row a:hover { color: white; }
-  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.35); }
 
-  @media (max-width: 768px) {
-    .nav { padding: 0 16px; }
-    .article-wrap { padding: 40px 20px 72px; }
-    .article-wrap h2 { font-size: 24px; }
-    .fee-table { font-size: 13px; }
-    .fee-table th, .fee-table td { padding: 8px 8px; }
-  }
+ @media (max-width: 768px) {
+ .nav { padding: 0 16px; }
+ .article-wrap { padding: 40px 20px 72px; }
+ .article-wrap h2 { font-size: 24px; }
+ .fee-table { font-size: 13px; }
+ .fee-table th, .fee-table td { padding: 8px 8px; }
+ }
+ .footer { background: #0a1628; color: rgba(255,255,255,0.6); padding: 64px 40px 32px; }
+ .footer-inner { max-width: 1200px; margin: 0 auto; }
+ .footer-grid {
+ display: grid;
+ grid-template-columns: 2fr 1fr 1fr 1fr;
+ gap: 48px;
+ margin-bottom: 56px;
+ }
+ .footer-brand {}
+ .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+ .footer-logo-mark { width: 32px; height: 37px; }
+ .footer-logo-text { font-family: var(--font-head); font-weight: 700; font-size: 18px; color: white; letter-spacing: -0.02em; }
+ .footer-tagline { font-size: 13px; line-height: 1.65; color: rgba(255,255,255,0.45); max-width: 260px; margin-bottom: 24px; }
+ .footer-socials { display: flex; gap: 12px; }
+ .footer-social { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); text-decoration: none; transition: background 0.2s, color 0.2s; }
+ .footer-social:hover { background: rgba(255,255,255,0.14); color: white; }
+ .footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 20px; }
+ .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+ .footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px; transition: color 0.2s, padding-left 0.2s; }
+ .footer-links a:hover { color: white; padding-left: 4px; }
+ .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+ .footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+ .footer-legal { display: flex; gap: 24px; }
+ .footer-legal a { font-size: 12px; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+ .footer-legal a:hover { color: white; }
+ @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+ @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; gap: 28px; } .footer { padding: 48px 20px 28px; } .footer-bottom { flex-direction: column; align-items: flex-start; } }
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
-  <defs>
-    <linearGradient id="ebGrad" x1="0%" y1="0%" x2="90%" y2="110%">
-      <stop offset="0%" stop-color="#1A4F8A"/><stop offset="100%" stop-color="#2E9E6B"/>
-    </linearGradient>
-    <linearGradient id="ebGradLight" x1="0%" y1="0%" x2="90%" y2="110%">
-      <stop offset="0%" stop-color="#2E6FC4"/><stop offset="100%" stop-color="#35B87C"/>
-    </linearGradient>
-    <radialGradient id="ebHighlight" cx="38%" cy="28%" r="62%">
-      <stop offset="0%" stop-color="white" stop-opacity=".22"/><stop offset="100%" stop-color="white" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="ebShadow" x="-25%" y="-10%" width="150%" height="160%">
-      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1A4F8A" flood-opacity=".28"/>
-    </filter>
-    <filter id="ebGlow" x="-30%" y="-15%" width="160%" height="170%">
-      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#2E9E6B" flood-opacity=".45"/>
-    </filter>
-    <symbol id="eb-icon" viewBox="0 0 120 140">
-      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebGrad)" filter="url(#ebShadow)"/>
-      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebHighlight)"/>
-      <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
-    </symbol>
-    <symbol id="eb-icon-light" viewBox="0 0 120 140">
-      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebGradLight)" filter="url(#ebGlow)"/>
-      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebHighlight)"/>
-      <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
-    </symbol>
-    <symbol id="eb-icon-dark" viewBox="0 0 120 140">
-      <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="#E8F1FB"/>
-      <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="#1A4F8A" letter-spacing="-2">EB</text>
-    </symbol>
-  </defs>
+ <defs>
+ <linearGradient id="ebGrad" x1="0%" y1="0%" x2="90%" y2="110%">
+ <stop offset="0%" stop-color="#1A4F8A"/><stop offset="100%" stop-color="#2E9E6B"/>
+ </linearGradient>
+ <linearGradient id="ebGradLight" x1="0%" y1="0%" x2="90%" y2="110%">
+ <stop offset="0%" stop-color="#2E6FC4"/><stop offset="100%" stop-color="#35B87C"/>
+ </linearGradient>
+ <radialGradient id="ebHighlight" cx="38%" cy="28%" r="62%">
+ <stop offset="0%" stop-color="white" stop-opacity=".22"/><stop offset="100%" stop-color="white" stop-opacity="0"/>
+ </radialGradient>
+ <filter id="ebShadow" x="-25%" y="-10%" width="150%" height="160%">
+ <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1A4F8A" flood-opacity=".28"/>
+ </filter>
+ <filter id="ebGlow" x="-30%" y="-15%" width="160%" height="170%">
+ <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#2E9E6B" flood-opacity=".45"/>
+ </filter>
+ <symbol id="eb-icon" viewBox="0 0 120 140">
+ <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebGrad)" filter="url(#ebShadow)"/>
+ <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebHighlight)"/>
+ <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
+ </symbol>
+ <symbol id="eb-icon-light" viewBox="0 0 120 140">
+ <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebGradLight)" filter="url(#ebGlow)"/>
+ <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebHighlight)"/>
+ <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
+ </symbol>
+ <symbol id="eb-icon-dark" viewBox="0 0 120 140">
+ <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="#E8F1FB"/>
+ <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="#1A4F8A" letter-spacing="-2">EB</text>
+ </symbol>
+ </defs>
 </svg>
 
 <nav class="nav" id="navbar">
-  <a href="index.html" class="nav-logo">
-    <svg class="nav-logo-svg" width="27" height="32" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light" class="logo-use-light"/><use href="#eb-icon-dark" class="logo-use-dark" style="display:none"/></svg>
-    <span class="nav-logo-text">ExpatBase</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html#categories">Find Experts</a></li>
-    <li><a href="index.html#blog" class="active">Blog</a></li>
-    <li><a href="index.html#about">About</a></li>
-  </ul>
-  <div class="nav-right">
-    <a href="index.html" class="nav-cta">+ Submit a Business</a>
-  </div>
-  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+ <a href="index.html" class="nav-logo">
+ <svg class="nav-logo-svg" width="27" height="32" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light" class="logo-use-light"/><use href="#eb-icon-dark" class="logo-use-dark" style="display:none"/></svg>
+ <span class="nav-logo-text">ExpatBase</span>
+ </a>
+ <ul class="nav-links">
+ <li><a href="index.html#categories">Find Experts</a></li>
+ <li><a href="index.html#blog" class="active">Blog</a></li>
+ <li><a href="index.html#about">About</a></li>
+ </ul>
+ <div class="nav-right">
+ <a href="index.html" class="nav-cta">+ Submit a Business</a>
+ </div>
+ <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+ <span></span><span></span><span></span>
+ </button>
 </nav>
 <div class="mobile-overlay" id="mobileOverlay"></div>
 <aside class="mobile-drawer" id="mobileDrawer" aria-label="Navigation menu">
-  <div class="mobile-drawer-header">
-    <a href="index.html" class="nav-logo" style="text-decoration:none;">
-      <svg width="24" height="28" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light"/></svg>
-      <span class="nav-logo-text" style="font-size:16px;">ExpatBase</span>
-    </a>
-    <button class="mobile-close" id="mobileClose" aria-label="Close menu">&#x2715;</button>
-  </div>
-  <nav class="mobile-nav">
-    <a href="index.html#categories">Find Experts</a>
-    <a href="index.html#blog">Blog</a>
-    <a href="index.html#about">About</a>
-  </nav>
-  <div class="mobile-drawer-footer">
-    <a class="mob-btn mob-btn-primary" href="index.html">+ Submit a Business</a>
-    <a class="mob-btn mob-btn-ghost" href="index.html">Join the community</a>
-  </div>
+ <div class="mobile-drawer-header">
+ <a href="index.html" class="nav-logo" style="text-decoration:none;">
+ <svg width="24" height="28" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light"/></svg>
+ <span class="nav-logo-text" style="font-size:16px;">ExpatBase</span>
+ </a>
+ <button class="mobile-close" id="mobileClose" aria-label="Close menu">&#x2715;</button>
+ </div>
+ <nav class="mobile-nav">
+ <a href="index.html#categories">Find Experts</a>
+ <a href="index.html#blog">Blog</a>
+ <a href="index.html#about">About</a>
+ </nav>
+ <div class="mobile-drawer-footer">
+ <a class="mob-btn mob-btn-primary" href="index.html">+ Submit a Business</a>
+ <a class="mob-btn mob-btn-ghost" href="index.html">Join the community</a>
+ </div>
 </aside>
 
 <header class="article-hero">
-  <div class="article-hero-inner">
-    <div class="article-eyebrow">🇸🇰 &nbsp;Guides · Banking &amp; Finance</div>
-    <h1 class="article-h1">Opening a Bank Account in Slovakia as a Foreigner</h1>
-    <p class="article-sub">Which banks actually accept non-residents, what documents you need, and the fastest path to a working Slovak IBAN. Practical, honest, no fluff.</p>
-    <div class="article-meta">
-      <span>Updated June 2026</span>
-      <div class="dot"></div>
-      <span>8 min read</span>
-      <div class="dot"></div>
-      <span>Reviewed against bank websites &amp; nbs.sk</span>
-    </div>
-  </div>
+ <div class="article-hero-inner">
+ <div class="article-eyebrow">🇸🇰 &nbsp;Guides · Banking &amp; Finance</div>
+ <h1 class="article-h1">Opening a Bank Account in Slovakia as a Foreigner</h1>
+ <p class="article-sub">Which banks actually accept non-residents, what documents you need, and the fastest path to a working Slovak IBAN. Practical, honest, no fluff.</p>
+ <div class="article-meta">
+ <span>Updated June 2026</span>
+ <div class="dot"></div>
+ <span>8 min read</span>
+ <div class="dot"></div>
+ <span>Reviewed against bank websites &amp; nbs.sk</span>
+ </div>
+ </div>
 </header>
 
 <main class="article-wrap">
 
-  <div class="toc">
-    <div class="toc-title">In this guide</div>
-    <ol>
-      <li><a href="#tldr">The short version</a></li>
-      <li><a href="#do-you-need">Do you actually need a Slovak bank account?</a></li>
-      <li><a href="#banks-overview">Which banks accept foreigners</a></li>
-      <li><a href="#slsp">Slovenská sporiteľňa (SLSP)</a></li>
-      <li><a href="#tatra">Tatra banka</a></li>
-      <li><a href="#vub">VÚB banka</a></li>
-      <li><a href="#mbank">mBank &amp; Fio banka</a></li>
-      <li><a href="#neo">Neo-banks: Revolut, Wise, N26</a></li>
-      <li><a href="#documents">Documents you will need</a></li>
-      <li><a href="#fees">Fees comparison</a></li>
-      <li><a href="#faq">FAQ</a></li>
-    </ol>
-  </div>
+ <div class="toc">
+ <div class="toc-title">In this guide</div>
+ <ol>
+ <li><a href="#tldr">The short version</a></li>
+ <li><a href="#do-you-need">Do you actually need a Slovak bank account?</a></li>
+ <li><a href="#banks-overview">Which banks accept foreigners</a></li>
+ <li><a href="#slsp">Slovenská sporiteľňa (SLSP)</a></li>
+ <li><a href="#tatra">Tatra banka</a></li>
+ <li><a href="#vub">VÚB banka</a></li>
+ <li><a href="#mbank">mBank &amp; Fio banka</a></li>
+ <li><a href="#neo">Neo-banks: Revolut, Wise, N26</a></li>
+ <li><a href="#documents">Documents you will need</a></li>
+ <li><a href="#fees">Fees comparison</a></li>
+ <li><a href="#faq">FAQ</a></li>
+ </ol>
+ </div>
 
-  <h2 id="tldr">The short version</h2>
-  <p>Slovak banks are regulated by the <a href="https://www.nbs.sk/en/home" target="_blank" rel="noopener">National Bank of Slovakia (NBS)</a> and required by EU law to offer a basic payment account to any EU resident. In practice, most of the big banks want to see <strong>a Slovak address and some connection to Slovakia</strong> — an employment contract, trade license, or at least a residence registration certificate. Without these, you'll face more friction.</p>
-  <p>The <strong>fastest path to a Slovak IBAN</strong> while you're still getting settled is a neo-bank (Revolut, Wise, N26) — open one from your home country before you arrive, use it immediately, and switch to a local bank once you have your Slovak documents in order.</p>
+ <h2 id="tldr">The short version</h2>
+ <p>Slovak banks are regulated by the <a href="https://www.nbs.sk/en/home" target="_blank" rel="noopener">National Bank of Slovakia (NBS)</a> and required by EU law to offer a basic payment account to any EU resident. In practice, most of the big banks want to see <strong>a Slovak address and some connection to Slovakia</strong>, an employment contract, trade license, or at least a residence registration certificate. Without these, you'll face more friction.</p>
+ <p>The <strong>fastest path to a Slovak IBAN</strong> while you're still getting settled is a neo-bank (Revolut, Wise, N26), open one from your home country before you arrive, use it immediately, and switch to a local bank once you have your Slovak documents in order.</p>
 
-  <div class="callout callout-tip">
-    <div class="callout-icon">💡</div>
-    <p><strong>Pro tip.</strong> Your Slovak employer's payroll team will ask for a Slovak bank account number for salary payments. Open at least a Revolut account before your first payday — Slovak payroll systems accept IBAN from any EU bank, not just Slovak ones.</p>
-  </div>
+ <div class="callout callout-tip">
+ <div class="callout-icon">💡</div>
+ <p><strong>Pro tip.</strong> Your Slovak employer's payroll team will ask for a Slovak bank account number for salary payments. Open at least a Revolut account before your first payday, Slovak payroll systems accept IBAN from any EU bank, not just Slovak ones.</p>
+ </div>
 
-  <h2 id="do-you-need">Do you actually need a Slovak bank account?</h2>
-  <p>For many expats, especially short-term, the answer is <strong>no</strong> — a Revolut or Wise account with a European IBAN handles 90% of daily needs (salary, rent, utilities, online shopping). A Slovak bank account becomes useful — or necessary — when:</p>
-  <ul>
-    <li>Your employer specifically requires a Slovak IBAN (rare but happens)</li>
-    <li>You need a Slovak address-linked account for a mortgage or loan</li>
-    <li>You want to pay your živnosť social/health insurance contributions via SEPA standing order without foreign transaction fees</li>
-    <li>You have Slovak clients who prefer local bank transfers</li>
-    <li>You accumulate large amounts in EUR and want Slovak deposit guarantee protection (up to €100,000 per bank)</li>
-  </ul>
+ <h2 id="do-you-need">Do you actually need a Slovak bank account?</h2>
+ <p>For many expats, especially short-term, the answer is <strong>no</strong>, a Revolut or Wise account with a European IBAN handles 90% of daily needs (salary, rent, utilities, online shopping). A Slovak bank account becomes useful, or necessary, when:</p>
+ <ul>
+ <li>Your employer specifically requires a Slovak IBAN (rare but happens)</li>
+ <li>You need a Slovak address-linked account for a mortgage or loan</li>
+ <li>You want to pay your živnosť social/health insurance contributions via SEPA standing order without foreign transaction fees</li>
+ <li>You have Slovak clients who prefer local bank transfers</li>
+ <li>You accumulate large amounts in EUR and want Slovak deposit guarantee protection (up to €100,000 per bank)</li>
+ </ul>
 
-  <h2 id="banks-overview">Which banks accept foreigners</h2>
-  <p>There are five main retail banks in Slovakia. Their openness to foreign nationals ranges significantly:</p>
+ <h2 id="banks-overview">Which banks accept foreigners</h2>
+ <p>There are five main retail banks in Slovakia. Their openness to foreign nationals ranges significantly:</p>
 
-  <table class="fee-table">
-    <thead>
-      <tr><th>Bank</th><th>Non-residents accepted?</th><th>Online opening?</th><th>English service</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Slovenská sporiteľňa (SLSP)</td><td>Yes, with documentation</td><td>Partial (app)</td><td>Limited</td></tr>
-      <tr><td>Tatra banka</td><td>Yes, with employment/residence</td><td>Yes (app)</td><td>Yes</td></tr>
-      <tr><td>VÚB banka</td><td>Restrictive (paper form required)</td><td>No</td><td>Limited</td></tr>
-      <tr><td>mBank</td><td>Yes, EU citizens</td><td>Yes</td><td>Partial</td></tr>
-      <tr><td>Fio banka</td><td>Yes, EU citizens</td><td>Yes</td><td>Partial</td></tr>
-    </tbody>
-  </table>
+ <table class="fee-table">
+ <thead>
+ <tr><th>Bank</th><th>Non-residents accepted?</th><th>Online opening?</th><th>English service</th></tr>
+ </thead>
+ <tbody>
+ <tr><td>Slovenská sporiteľňa (SLSP)</td><td>Yes, with documentation</td><td>Partial (app)</td><td>Limited</td></tr>
+ <tr><td>Tatra banka</td><td>Yes, with employment/residence</td><td>Yes (app)</td><td>Yes</td></tr>
+ <tr><td>VÚB banka</td><td>Restrictive (paper form required)</td><td>No</td><td>Limited</td></tr>
+ <tr><td>mBank</td><td>Yes, EU citizens</td><td>Yes</td><td>Partial</td></tr>
+ <tr><td>Fio banka</td><td>Yes, EU citizens</td><td>Yes</td><td>Partial</td></tr>
+ </tbody>
+ </table>
 
-  <h2 id="slsp">Slovenská sporiteľňa (SLSP)</h2>
-  <p>The largest bank in Slovakia by client count. Part of the Erste Group. Accepts non-residents but expects you to demonstrate a <em>connection to Slovakia</em> — typically a work contract, trade license, or proof of property ownership.</p>
-  <div class="check-card">
-    <div class="check-card-title">📋 SLSP — documents typically required</div>
-    <ul class="check-list">
-      <li>Valid passport <strong>or</strong> EU national ID card</li>
-      <li>Proof of connection to Slovakia: employment contract, trade license, or residence registration certificate (<em>potvrdenie o pobyte</em>)</li>
-      <li>Slovak address (for correspondence — can be a friend's address initially if disclosed)</li>
-      <li>Tax identification number if self-employed</li>
-    </ul>
-  </div>
-  <p>You can start the opening process via the SLSP app (<em>George</em>), but in-person verification at a branch is required for non-residents. English-speaking staff are available at most Bratislava city-centre branches.</p>
+ <h2 id="slsp">Slovenská sporiteľňa (SLSP)</h2>
+ <p>The largest bank in Slovakia by client count. Part of the Erste Group. Accepts non-residents but expects you to demonstrate a <em>connection to Slovakia</em>, typically a work contract, trade license, or proof of property ownership.</p>
+ <div class="check-card">
+ <div class="check-card-title">📋 SLSP, documents typically required</div>
+ <ul class="check-list">
+ <li>Valid passport <strong>or</strong> EU national ID card</li>
+ <li>Proof of connection to Slovakia: employment contract, trade license, or residence registration certificate (<em>potvrdenie o pobyte</em>)</li>
+ <li>Slovak address (for correspondence, can be a friend's address initially if disclosed)</li>
+ <li>Tax identification number if self-employed</li>
+ </ul>
+ </div>
+ <p>You can start the opening process via the SLSP app (<em>George</em>), but in-person verification at a branch is required for non-residents. English-speaking staff are available at most Bratislava city-centre branches.</p>
 
-  <h2 id="tatra">Tatra banka</h2>
-  <p>Part of Raiffeisen Group, widely considered the most expat-friendly traditional Slovak bank. The app (<em>Tatra banka</em>) and internet banking are well-designed and partially available in English. For non-Slovak residents, Tatra banka's standard requirement is an <strong>employment contract with a Slovak employer</strong> or confirmation of self-employment. Some branches will open an account for EU citizens on just a passport + Slovak address.</p>
-  <div class="callout callout-tip">
-    <div class="callout-icon">💡</div>
-    <p><strong>Best bet for employed expats.</strong> If your employer has a corporate relationship with Tatra banka (common for multinational companies in Bratislava), opening a personal account as a new employee is usually fast-tracked — ask your HR department before going to a branch on your own.</p>
-  </div>
+ <h2 id="tatra">Tatra banka</h2>
+ <p>Part of Raiffeisen Group, widely considered the most expat-friendly traditional Slovak bank. The app (<em>Tatra banka</em>) and internet banking are well-designed and partially available in English. For non-Slovak residents, Tatra banka's standard requirement is an <strong>employment contract with a Slovak employer</strong> or confirmation of self-employment. Some branches will open an account for EU citizens on just a passport + Slovak address.</p>
+ <div class="callout callout-tip">
+ <div class="callout-icon">💡</div>
+ <p><strong>Best bet for employed expats.</strong> If your employer has a corporate relationship with Tatra banka (common for multinational companies in Bratislava), opening a personal account as a new employee is usually fast-tracked, ask your HR department before going to a branch on your own.</p>
+ </div>
 
-  <h2 id="vub">VÚB banka</h2>
-  <p>Part of Intesa Sanpaolo Group. VÚB has historically been the most restrictive for non-residents: their cross-border opening procedure (for EU citizens without Slovak residence) requires a <strong>paper application form in Slovak with an authenticated signature</strong> and submission in person. This procedure exists but is not widely advertised. In practice, if you already have a Slovak residence registration certificate and a Slovak address, opening at a branch is straightforward. If you do not, expect to be redirected to wait until you have that documentation.</p>
+ <h2 id="vub">VÚB banka</h2>
+ <p>Part of Intesa Sanpaolo Group. VÚB has historically been the most restrictive for non-residents: their cross-border opening procedure (for EU citizens without Slovak residence) requires a <strong>paper application form in Slovak with an authenticated signature</strong> and submission in person. This procedure exists but is not widely advertised. In practice, if you already have a Slovak residence registration certificate and a Slovak address, opening at a branch is straightforward. If you do not, expect to be redirected to wait until you have that documentation.</p>
 
-  <h2 id="mbank">mBank &amp; Fio banka</h2>
-  <p><strong>mBank</strong> (Polish-owned, operates in Slovakia, Czechia, Poland) is one of the more flexible options for EU citizens. Online application possible; the process is in Slovak but manageable with a browser translator. Monthly fee is typically the lowest of the major banks (often €0 with a minimum monthly transaction).</p>
-  <p><strong>Fio banka</strong> (Czech-Slovak bank) offers a basic free current account that EU citizens can open relatively easily. Their English support is limited, but the application process is short and can be partially completed online before visiting a branch.</p>
+ <h2 id="mbank">mBank &amp; Fio banka</h2>
+ <p><strong>mBank</strong> (Polish-owned, operates in Slovakia, Czechia, Poland) is one of the more flexible options for EU citizens. Online application possible; the process is in Slovak but manageable with a browser translator. Monthly fee is typically the lowest of the major banks (often €0 with a minimum monthly transaction).</p>
+ <p><strong>Fio banka</strong> (Czech-Slovak bank) offers a basic free current account that EU citizens can open relatively easily. Their English support is limited, but the application process is short and can be partially completed online before visiting a branch.</p>
 
-  <h2 id="neo">Neo-banks: Revolut, Wise, N26</h2>
-  <p>For most expats arriving in Slovakia, a neo-bank account is the <strong>immediate practical solution</strong> while traditional bank paperwork gets sorted. Key points:</p>
-  <ul>
-    <li><strong>Revolut</strong> — Lithuanian IBAN (LT...), fully EUR-capable, instant top-up, widely accepted in Slovakia. Open from anywhere with a selfie and ID. Free tier is sufficient for most needs.</li>
-    <li><strong>Wise</strong> — Belgian IBAN (BE...) or multi-currency. Excellent for receiving salary in EUR and converting to other currencies. Very transparent fees.</li>
-    <li><strong>N26</strong> — German IBAN (DE...). Full current account. Requires EU residence for signup; if you haven't registered your Slovak address yet, use your home country address initially.</li>
-  </ul>
-  <div class="callout callout-warn">
-    <div class="callout-icon">⚠️</div>
-    <p><strong>Limitations of neo-banks in Slovakia.</strong> Slovak landlords and some utilities providers still prefer Slovak IBAN (SK...) for direct debit mandates. A few older Slovak companies' payment systems reject non-Slovak IBANs despite EU rules requiring acceptance. Having a traditional Slovak account as a backup is worth it once you're settled.</p>
-  </div>
+ <h2 id="neo">Neo-banks: Revolut, Wise, N26</h2>
+ <p>For most expats arriving in Slovakia, a neo-bank account is the <strong>immediate practical solution</strong> while traditional bank paperwork gets sorted. Key points:</p>
+ <ul>
+ <li><strong>Revolut</strong>, Lithuanian IBAN (LT...), fully EUR-capable, instant top-up, widely accepted in Slovakia. Open from anywhere with a selfie and ID. Free tier is sufficient for most needs.</li>
+ <li><strong>Wise</strong>, Belgian IBAN (BE...) or multi-currency. Excellent for receiving salary in EUR and converting to other currencies. Very transparent fees.</li>
+ <li><strong>N26</strong>, German IBAN (DE...). Full current account. Requires EU residence for signup; if you haven't registered your Slovak address yet, use your home country address initially.</li>
+ </ul>
+ <div class="callout callout-warn">
+ <div class="callout-icon">⚠️</div>
+ <p><strong>Limitations of neo-banks in Slovakia.</strong> Slovak landlords and some utilities providers still prefer Slovak IBAN (SK...) for direct debit mandates. A few older Slovak companies' payment systems reject non-Slovak IBANs despite EU rules requiring acceptance. Having a traditional Slovak account as a backup is worth it once you're settled.</p>
+ </div>
 
-  <h2 id="documents">Documents you will need</h2>
-  <p>Regardless of which bank you choose, have these ready:</p>
-  <div class="check-card">
-    <div class="check-card-title">📋 Standard document package</div>
-    <ul class="check-list">
-      <li>Valid passport <strong>or</strong> EU national ID card (non-EU nationals: passport only)</li>
-      <li>Proof of Slovak address: rental contract, utility bill in your name, or residence registration certificate from the Foreign Police</li>
-      <li>Proof of income or connection to Slovakia: employment contract, trade license confirmation, or letter from employer</li>
-      <li>Slovak tax ID number (<em>DIČ</em>) if self-employed — register at your local tax office or via slovensko.sk before opening the account</li>
-      <li>Second ID document (helpful but not always required): driver's license, old passport</li>
-    </ul>
-  </div>
-  <div class="callout callout-info">
-    <div class="callout-icon">ℹ️</div>
-    <p><strong>Non-EU nationals</strong> face additional scrutiny due to AML/KYC requirements. Your bank will ask about the source of funds and may require additional documentation (home country bank statement, proof of employment). Processing times can be 2–4 weeks rather than the same-day opening EU citizens experience.</p>
-  </div>
+ <h2 id="documents">Documents you will need</h2>
+ <p>Regardless of which bank you choose, have these ready:</p>
+ <div class="check-card">
+ <div class="check-card-title">📋 Standard document package</div>
+ <ul class="check-list">
+ <li>Valid passport <strong>or</strong> EU national ID card (non-EU nationals: passport only)</li>
+ <li>Proof of Slovak address: rental contract, utility bill in your name, or residence registration certificate from the Foreign Police</li>
+ <li>Proof of income or connection to Slovakia: employment contract, trade license confirmation, or letter from employer</li>
+ <li>Slovak tax ID number (<em>DIČ</em>) if self-employed, register at your local tax office or via slovensko.sk before opening the account</li>
+ <li>Second ID document (helpful but not always required): driver's license, old passport</li>
+ </ul>
+ </div>
+ <div class="callout callout-info">
+ <div class="callout-icon">ℹ️</div>
+ <p><strong>Non-EU nationals</strong> face additional scrutiny due to AML/KYC requirements. Your bank will ask about the source of funds and may require additional documentation (home country bank statement, proof of employment). Processing times can be 2–4 weeks rather than the same-day opening EU citizens experience.</p>
+ </div>
 
-  <h2 id="fees">Fees comparison (2025–2026)</h2>
-  <table class="fee-table">
-    <thead>
-      <tr><th>Bank</th><th>Monthly fee</th><th>Card fee</th><th>ATM withdrawals</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Slovenská sporiteľňa</td><td>€2–4/month (waived with conditions)</td><td>Included</td><td>Free at SLSP ATMs</td></tr>
-      <tr><td>Tatra banka</td><td>€3–5/month (waived with salary crediting)</td><td>Included</td><td>Free at Tatra ATMs</td></tr>
-      <tr><td>VÚB banka</td><td>€2–4/month</td><td>Included</td><td>Free at VÚB ATMs</td></tr>
-      <tr><td>mBank</td><td>€0 (with 1 transaction/month)</td><td>Included</td><td>Free (up to limit)</td></tr>
-      <tr><td>Fio banka</td><td>€0</td><td>Free</td><td>Free (own ATMs)</td></tr>
-      <tr><td>Revolut (Standard)</td><td>€0</td><td>€6 one-time</td><td>€200/month free, then 2%</td></tr>
-    </tbody>
-  </table>
-  <p>Fees change frequently — always check the bank's current <em>Sadzobník poplatkov</em> (fee schedule) on their website before opening.</p>
+ <h2 id="fees">Fees comparison (2025–2026)</h2>
+ <table class="fee-table">
+ <thead>
+ <tr><th>Bank</th><th>Monthly fee</th><th>Card fee</th><th>ATM withdrawals</th></tr>
+ </thead>
+ <tbody>
+ <tr><td>Slovenská sporiteľňa</td><td>€2–4/month (waived with conditions)</td><td>Included</td><td>Free at SLSP ATMs</td></tr>
+ <tr><td>Tatra banka</td><td>€3–5/month (waived with salary crediting)</td><td>Included</td><td>Free at Tatra ATMs</td></tr>
+ <tr><td>VÚB banka</td><td>€2–4/month</td><td>Included</td><td>Free at VÚB ATMs</td></tr>
+ <tr><td>mBank</td><td>€0 (with 1 transaction/month)</td><td>Included</td><td>Free (up to limit)</td></tr>
+ <tr><td>Fio banka</td><td>€0</td><td>Free</td><td>Free (own ATMs)</td></tr>
+ <tr><td>Revolut (Standard)</td><td>€0</td><td>€6 one-time</td><td>€200/month free, then 2%</td></tr>
+ </tbody>
+ </table>
+ <p>Fees change frequently, always check the bank's current <em>Sadzobník poplatkov</em> (fee schedule) on their website before opening.</p>
 
-  <h2 id="faq">FAQ</h2>
-  <h3>Can I open an account before I arrive in Slovakia?</h3>
-  <p>For traditional Slovak banks, no — in-person verification is required. For Revolut, Wise, or N26, yes — you can open remotely from your home country using your passport. This is the recommended approach: arrive with a working European IBAN already set up.</p>
-  <h3>Do I need a Slovak address to open an account?</h3>
-  <p>Most traditional banks require some Slovak address for correspondence. In practice, a rental contract or a residence registration certificate (even a short-term one) is usually sufficient. VÚB is the strictest; SLSP and Tatra banka have more flexibility in practice.</p>
-  <h3>Will my salary be paid in EUR?</h3>
-  <p>Yes — Slovakia uses the Euro (EUR). All local salaries are in EUR. Currency conversion is not an issue within Slovakia.</p>
-  <h3>What if my account application is refused?</h3>
-  <p>Under EU Payment Accounts Directive (2014/92/EU), any EU resident is entitled to a <strong>basic payment account</strong> at a bank operating in Slovakia — refusal must be justified. If refused, ask the bank for the written reason. For complaints, contact the <a href="https://www.nbs.sk/en/home" target="_blank" rel="noopener">National Bank of Slovakia</a> (financial market supervisor) or the <em>Finančný arbiter</em> (Financial Arbitrator) for dispute resolution.</p>
+ <h2 id="faq">FAQ</h2>
+ <h3>Can I open an account before I arrive in Slovakia?</h3>
+ <p>For traditional Slovak banks, no, in-person verification is required. For Revolut, Wise, or N26, yes, you can open remotely from your home country using your passport. This is the recommended approach: arrive with a working European IBAN already set up.</p>
+ <h3>Do I need a Slovak address to open an account?</h3>
+ <p>Most traditional banks require some Slovak address for correspondence. In practice, a rental contract or a residence registration certificate (even a short-term one) is usually sufficient. VÚB is the strictest; SLSP and Tatra banka have more flexibility in practice.</p>
+ <h3>Will my salary be paid in EUR?</h3>
+ <p>Yes, Slovakia uses the Euro (EUR). All local salaries are in EUR. Currency conversion is not an issue within Slovakia.</p>
+ <h3>What if my account application is refused?</h3>
+ <p>Under EU Payment Accounts Directive (2014/92/EU), any EU resident is entitled to a <strong>basic payment account</strong> at a bank operating in Slovakia, refusal must be justified. If refused, ask the bank for the written reason. For complaints, contact the <a href="https://www.nbs.sk/en/home" target="_blank" rel="noopener">National Bank of Slovakia</a> (financial market supervisor) or the <em>Finančný arbiter</em> (Financial Arbitrator) for dispute resolution.</p>
 
-  <div class="sources">
-    <div class="toc-title">Sources used for this guide</div>
-    <ul>
-      <li><a href="https://www.nbs.sk/en/home" target="_blank" rel="noopener">National Bank of Slovakia (NBS) — nbs.sk</a></li>
-      <li><a href="https://www.slsp.sk" target="_blank" rel="noopener">Slovenská sporiteľňa — slsp.sk</a> (account conditions and documentation requirements)</li>
-      <li><a href="https://www.tatrabanka.sk" target="_blank" rel="noopener">Tatra banka — tatrabanka.sk</a></li>
-      <li><a href="https://www.vub.sk" target="_blank" rel="noopener">VÚB banka — vub.sk</a></li>
-      <li><a href="https://www.mbank.sk" target="_blank" rel="noopener">mBank Slovakia — mbank.sk</a></li>
-      <li>EU Payment Accounts Directive 2014/92/EU — right to basic payment account</li>
-    </ul>
-  </div>
+ <div class="sources">
+ <div class="toc-title">Sources used for this guide</div>
+ <ul>
+ <li><a href="https://www.nbs.sk/en/home" target="_blank" rel="noopener">National Bank of Slovakia (NBS), nbs.sk</a></li>
+ <li><a href="https://www.slsp.sk" target="_blank" rel="noopener">Slovenská sporiteľňa, slsp.sk</a> (account conditions and documentation requirements)</li>
+ <li><a href="https://www.tatrabanka.sk" target="_blank" rel="noopener">Tatra banka, tatrabanka.sk</a></li>
+ <li><a href="https://www.vub.sk" target="_blank" rel="noopener">VÚB banka, vub.sk</a></li>
+ <li><a href="https://www.mbank.sk" target="_blank" rel="noopener">mBank Slovakia, mbank.sk</a></li>
+ <li>EU Payment Accounts Directive 2014/92/EU, right to basic payment account</li>
+ </ul>
+ </div>
 
-  <div class="disclaimer">
-    <strong>Disclaimer:</strong> This guide is for general information only. Bank requirements and fee schedules change frequently — always verify directly with the bank before visiting a branch. This is not financial advice.
-  </div>
+ <div class="disclaimer">
+ <strong>Disclaimer:</strong> This guide is for general information only. Bank requirements and fee schedules change frequently, always verify directly with the bank before visiting a branch. This is not financial advice.
+ </div>
 
-  <div class="article-cta">
-    <div class="article-cta-title">Need help navigating Slovak finances?</div>
-    <div class="article-cta-sub">Find vetted English-speaking accountants and financial advisors in Bratislava in our directory.</div>
-    <a href="banks.html" class="article-cta-btn">Browse Banks &amp; Finance →</a>
-  </div>
+ <div class="article-cta">
+ <div class="article-cta-title">Need help navigating Slovak finances?</div>
+ <div class="article-cta-sub">Find vetted English-speaking accountants and financial advisors in Bratislava in our directory.</div>
+ <a href="banks.html" class="article-cta-btn">Browse Banks &amp; Finance →</a>
+ </div>
 
 </main>
 
 <footer class="footer">
-  <div class="footer-logo">
-    <svg width="26" height="30" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light"/></svg>
-    <span class="footer-logo-text">ExpatBase Slovakia</span>
-  </div>
-  <div class="footer-links-row">
-    <a href="index.html">Home</a>
-    <a href="index.html#categories">Find Experts</a>
-    <a href="index.html#blog">Blog</a>
-    <a href="banks.html">Banks &amp; Finance</a>
-    <a href="privacy-policy.html">Privacy</a>
-    <a href="terms.html">Terms</a>
-  </div>
-  <div class="footer-copy">© 2026 ExpatBase Slovakia. All rights reserved.</div>
+ <div class="footer-inner">
+ <div class="footer-grid">
+ <div class="footer-brand">
+ <div class="footer-logo">
+ <div class="footer-logo-mark">
+ <svg width="32" height="37" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light"/></svg>
+ </div>
+ <div class="footer-logo-text">ExpatBase Slovakia</div>
+ </div>
+ <p class="footer-tagline">Life in Slovakia, made simple. The #1 resource for English-speaking expats in Bratislava.</p>
+ <div class="footer-socials">
+ <a href="#" class="footer-social" aria-label="Facebook">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+ </a>
+ <a href="#" class="footer-social" aria-label="Instagram">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+ </a>
+ <a href="#" class="footer-social" aria-label="X / Twitter">
+ <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+ </a>
+ <a href="#" class="footer-social" aria-label="LinkedIn">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+ </a>
+ </div>
+ </div>
+ <div>
+ <div class="footer-col-title">Find Experts</div>
+ <ul class="footer-links">
+ <li><a href="doctors.html">Doctors &amp; Specialists</a></li>
+ <li><a href="lawyers.html">Lawyers &amp; Legal</a></li>
+ <li><a href="banks.html">Banks &amp; Finance</a></li>
+ <li><a href="barbers.html">Hair, Beauty &amp; Tattoo</a></li>
+ <li><a href="plumbers.html">Handymen</a></li>
+ <li><a href="builders.html">Builders &amp; Construction</a></li>
+ <li><a href="vets.html">Vets &amp; Pet Care</a></li>
+ <li><a href="real-estate.html">Real Estate</a></li>
+ <li><a href="schools.html">Schools &amp; Learning</a></li>
+ <li><a href="moving.html">Moving &amp; Relocation</a></li>
+ <li><a href="sports.html">Sports &amp; Leisure</a></li>
+ <li><a href="others.html">Other Services</a></li>
+ </ul>
+ </div>
+ <div>
+ <div class="footer-col-title">Guides</div>
+ <ul class="footer-links">
+ <li><a href="residence-permit-guide.html">Residence Permit Guide</a></li>
+ <li><a href="health-insurance-guide.html">Health Insurance</a></li>
+ <li><a href="bank-account-guide.html">Bank Account Setup</a></li>
+ <li><a href="zivnost-guide.html">Trade License (Živnosť)</a></li>
+ <li><a href="index.html#blog">All guides →</a></li>
+ </ul>
+ </div>
+ <div>
+ <div class="footer-col-title">Resources</div>
+ <ul class="footer-links">
+ <li><a href="index.html#blog">Blog</a></li>
+ <li><a href="#">Newsletter</a></li>
+ <li><a href="#">Submit a Business</a></li>
+ <li><a href="about.html">About ExpatBase</a></li>
+ <li><a href="#">Contact Us</a></li>
+ </ul>
+ </div>
+ </div>
+ <div class="footer-bottom">
+ <div class="footer-copy">© 2026 ExpatBase Slovakia. All rights reserved.</div>
+ <div class="footer-legal">
+ <a href="privacy-policy.html">Privacy Policy</a>
+ <a href="terms.html">Terms of Use</a>
+ <a href="cookie-policy.html">Cookie Policy</a>
+ </div>
+ </div>
+ </div>
 </footer>
 
 <script>
-  const nav = document.getElementById('navbar');
-  function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 60); }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+ const nav = document.getElementById('navbar');
+ function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 60); }
+ window.addEventListener('scroll', onScroll, { passive: true });
+ onScroll();
 
-  (function() {
-    var hamburger = document.getElementById('hamburger');
-    var overlay   = document.getElementById('mobileOverlay');
-    var drawer    = document.getElementById('mobileDrawer');
-    var closeBtn  = document.getElementById('mobileClose');
-    if (!hamburger) return;
-    function openM() {
-      hamburger.classList.add('open'); overlay.classList.add('open'); drawer.classList.add('open');
-      document.body.style.overflow = 'hidden'; hamburger.setAttribute('aria-expanded','true');
-    }
-    function closeM() {
-      hamburger.classList.remove('open'); overlay.classList.remove('open'); drawer.classList.remove('open');
-      document.body.style.overflow = ''; hamburger.setAttribute('aria-expanded','false');
-    }
-    hamburger.addEventListener('click', function() { hamburger.classList.contains('open') ? closeM() : openM(); });
-    overlay.addEventListener('click', closeM);
-    closeBtn.addEventListener('click', closeM);
-    drawer.querySelectorAll('.mobile-nav a').forEach(function(a){ a.addEventListener('click', closeM); });
-    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeM(); });
-  })();
+ (function() {
+ var hamburger = document.getElementById('hamburger');
+ var overlay = document.getElementById('mobileOverlay');
+ var drawer = document.getElementById('mobileDrawer');
+ var closeBtn = document.getElementById('mobileClose');
+ if (!hamburger) return;
+ function openM() {
+ hamburger.classList.add('open'); overlay.classList.add('open'); drawer.classList.add('open');
+ document.body.style.overflow = 'hidden'; hamburger.setAttribute('aria-expanded','true');
+ }
+ function closeM() {
+ hamburger.classList.remove('open'); overlay.classList.remove('open'); drawer.classList.remove('open');
+ document.body.style.overflow = ''; hamburger.setAttribute('aria-expanded','false');
+ }
+ hamburger.addEventListener('click', function() { hamburger.classList.contains('open') ? closeM() : openM(); });
+ overlay.addEventListener('click', closeM);
+ closeBtn.addEventListener('click', closeM);
+ drawer.querySelectorAll('.mobile-nav a').forEach(function(a){ a.addEventListener('click', closeM); });
+ document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeM(); });
+ })();
 </script>
 </body>
 </html>
