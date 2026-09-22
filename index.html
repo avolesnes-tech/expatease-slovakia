@@ -2114,6 +2114,13 @@
  background: var(--gray-100); padding: 3px 8px; border-radius: 4px;
  }
  .sm-payment-note { font-size: 12px; color: var(--gray-400); line-height: 1.5; margin-bottom: 12px; }
+ .sm-founding-perk { background: var(--green-light); border-color: rgba(46,158,107,0.28); }
+ .sm-founding-perk .sm-payment-price { color: var(--green-dark); }
+ .sm-founding-perk .sm-payment-note { color: #2c5a44; margin-bottom: 0; }
+ .sm-founding-tag {
+ font-size: 11px; font-weight: 700; color: #fff; letter-spacing: 0.05em; text-transform: uppercase;
+ background: var(--green); padding: 3px 9px; border-radius: 4px;
+ }
 
  /* Form footer */
  .sm-form-footer {
@@ -2173,7 +2180,20 @@
  }
  .sm-success-sub {
  font-size: 14px; color: var(--gray-400); line-height: 1.6;
- max-width: 400px; margin: 0 auto 28px;
+ max-width: 400px; margin: 0 auto 24px;
+ }
+ .sm-next-steps {
+ text-align: left; max-width: 420px; margin: 0 auto 28px;
+ display: flex; flex-direction: column; gap: 14px;
+ background: var(--gray-50); border: 1px solid var(--gray-100);
+ border-radius: var(--radius-md); padding: 20px 22px;
+ }
+ .sm-next-step { display: flex; gap: 12px; align-items: flex-start; font-size: 13px; color: var(--gray-700); line-height: 1.5; }
+ .sm-next-step strong { color: var(--gray-900); font-weight: 600; }
+ .sm-next-num {
+ flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+ background: var(--green); color: #fff; font-size: 12px; font-weight: 700;
+ display: flex; align-items: center; justify-content: center; margin-top: 1px;
  }
  .sm-success-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
  .sm-close-success-btn {
@@ -2188,6 +2208,7 @@
  color: var(--blue); background: var(--blue-light);
  border: none; border-radius: var(--radius-xl);
  padding: 10px 24px; cursor: pointer; transition: var(--transition);
+ text-decoration: none; display: inline-flex; align-items: center;
  }
  .sm-another-btn:hover { background: rgba(26,79,138,0.12); }
 
@@ -3192,18 +3213,13 @@
  <div class="sm-hours-grid" id="smHoursGrid"></div>
  </div>
 
- <!-- Payment mockup -->
- <div class="sm-payment-section">
+ <!-- Founding member perk -->
+ <div class="sm-payment-section sm-founding-perk">
  <div class="sm-payment-header">
- <span class="sm-payment-price">€9.90 / month</span>
- <span class="sm-payment-stripe">Stripe, coming soon</span>
+ <span class="sm-payment-price">Free for your first year</span>
+ <span class="sm-founding-tag">Founding perk</span>
  </div>
- <p class="sm-payment-note">Submit your listing now. We'll reach out to set up billing once your profile is approved, no payment required today.</p>
- <label class="sm-checkbox-label">
- <input type="checkbox" class="sm-checkbox" id="smWaitlist">
- <span class="sm-checkbox-custom"></span>
- Notify me when Premium billing launches
- </label>
+ <p class="sm-payment-note">As one of our first founding businesses, your complete profile — phone, photos, priority placement, the lot — is free for a full year. No card, no fees, nothing to pay today. We're building the directory together.</p>
  </div>
  </div><!-- /smFormPremium -->
 
@@ -3235,11 +3251,27 @@
  <path class="sm-checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
  </svg>
  </div>
- <h2 class="sm-success-title">You're on the list!</h2>
- <p class="sm-success-sub" id="smSuccessMsg">Your listing has been submitted for review. We'll be in touch within 2 business days.</p>
+ <h2 class="sm-success-title">Welcome aboard, founding member!</h2>
+ <p class="sm-success-sub" id="smSuccessMsg">Your listing has been submitted. Here's what happens next.</p>
+
+ <div class="sm-next-steps">
+ <div class="sm-next-step">
+ <span class="sm-next-num">1</span>
+ <div><strong>Check your inbox</strong><br>We've emailed you a confirmation. (Check spam if you don't see it.)</div>
+ </div>
+ <div class="sm-next-step">
+ <span class="sm-next-num">2</span>
+ <div><strong>We review your listing</strong><br>Usually within 2 business days. You'll get a "You're live!" email once it's approved.</div>
+ </div>
+ <div class="sm-next-step">
+ <span class="sm-next-num">3</span>
+ <div><strong>Manage it anytime</strong><br>Log in with this email to edit your profile, add photos and update details — no password needed.</div>
+ </div>
+ </div>
+
  <div class="sm-success-actions">
  <button class="sm-close-success-btn" id="smCloseSuccess">Close</button>
- <button class="sm-another-btn" id="smSubmitAnother">Submit Another →</button>
+ <a class="sm-another-btn" href="business-login.html">Manage my listing →</a>
  </div>
  </div><!-- /smpanel3 -->
 
@@ -4068,10 +4100,18 @@
  // Close
  closeBtn.addEventListener('click', closeSubmitModal);
 
- // Click on overlay background closes modal, e.target check ensures
- // clicks inside the panel (selects, inputs, buttons) never trigger this
+ // Click on overlay background closes modal — but NOT when the click is on
+ // the overlay's scrollbar, and NOT when a drag started inside the panel.
+ let smDownOnOverlayBg = false;
+ overlay.addEventListener('mousedown', e => {
+ const rect = overlay.getBoundingClientRect();
+ const onScrollbar = (e.clientX - rect.left) > overlay.clientWidth ||
+ (e.clientY - rect.top) > overlay.clientHeight;
+ smDownOnOverlayBg = (e.target === overlay) && !onScrollbar;
+ });
  overlay.addEventListener('click', e => {
- if (e.target === overlay) closeSubmitModal();
+ if (e.target === overlay && smDownOnOverlayBg) closeSubmitModal();
+ smDownOnOverlayBg = false;
  });
 
  // Escape only closes on step 1 or step 3, never mid-form (step 2)
@@ -4100,7 +4140,8 @@
 
  // Success actions
  document.getElementById('smCloseSuccess').addEventListener('click', closeSubmitModal);
- document.getElementById('smSubmitAnother').addEventListener('click', smReset);
+ const smAnotherEl = document.getElementById('smSubmitAnother');
+ if (smAnotherEl) smAnotherEl.addEventListener('click', smReset);
 
  // Logo / cover remove
  document.getElementById('smLogoRemove').addEventListener('click', () => {
