@@ -1,0 +1,106 @@
+/* ExpatBase — dynamic business listings from Supabase
+   Reads window.EB_CATEGORY, loads approved businesses for that category,
+   and renders them into the page's .cards-section grid.
+   Self-contained: no external dependency, safe to fail (keeps empty state). */
+(function () {
+  var SB = 'https://etxqrlrqbjcbjmitnspv.supabase.co';
+  var KEY = 'sb_publishable_i38f7jyt2HYOjUTNuOsklg_aMofdDvE';
+  var CATEGORY = window.EB_CATEGORY;
+  if (!CATEGORY) return;
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+  function initials(n) {
+    return String(n || '?').trim().split(/\s+/).slice(0, 2)
+      .map(function (w) { return w[0]; }).join('').toUpperCase();
+  }
+  function findGrid() {
+    var explicit = document.querySelector('[data-eb-grid]');
+    if (explicit) return explicit;
+    var sections = document.querySelectorAll('.cards-section');
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].querySelector('.empty-state')) return sections[i];
+    }
+    return sections[0] || null;
+  }
+  function injectCSS() {
+    if (document.getElementById('ebl-css')) return;
+    var st = document.createElement('style');
+    st.id = 'ebl-css';
+    st.textContent =
+    ".ebl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px}" +
+    ".ebl-card{background:#fff;border:1px solid #E4EBF3;border-radius:18px;padding:22px;box-shadow:0 2px 16px rgba(26,79,138,.08);display:flex;flex-direction:column;gap:12px;font-family:'DM Sans',system-ui,sans-serif;transition:transform .2s,box-shadow .2s}" +
+    ".ebl-card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(26,79,138,.16)}" +
+    ".ebl-head{display:flex;gap:14px;align-items:center}" +
+    ".ebl-av{width:52px;height:52px;border-radius:14px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Urbanist',system-ui,sans-serif;font-weight:800;font-size:18px;background:linear-gradient(135deg,#1A4F8A,#2E9E6B)}" +
+    ".ebl-name{font-family:'Urbanist',system-ui,sans-serif;font-weight:700;font-size:1.1rem;color:#0F3360;line-height:1.2}" +
+    ".ebl-cat{font-size:.82rem;color:#6B7A90}" +
+    ".ebl-badges{display:flex;gap:6px;flex-wrap:wrap}" +
+    ".ebl-badge{font-family:'Urbanist',system-ui,sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.04em;padding:3px 9px;border-radius:999px}" +
+    ".ebl-en{background:#E6F7EF;color:#1D7A50}" +
+    ".ebl-prem{background:linear-gradient(135deg,#0F3360,#2563EB);color:#fff}" +
+    ".ebl-desc{font-size:.92rem;color:#3B4A5E;margin:0;line-height:1.5}" +
+    ".ebl-contact{display:flex;flex-direction:column;gap:7px;margin-top:auto}" +
+    ".ebl-row{display:flex;gap:9px;align-items:flex-start;font-size:.9rem;color:#3B4A5E;text-decoration:none}" +
+    ".ebl-row span{color:#2E9E6B;flex:0 0 auto}" +
+    "a.ebl-row:hover{color:#1A4F8A}" +
+    ".ebl-links{display:flex;gap:8px;flex-wrap:wrap;font-size:.86rem;padding-top:10px;border-top:1px solid #EEF3F8}" +
+    ".ebl-links a{color:#1A4F8A;font-weight:600;text-decoration:none}" +
+    ".ebl-links a:hover{text-decoration:underline}";
+    document.head.appendChild(st);
+  }
+  function card(b) {
+    var prem = b.plan === 'premium';
+    var badges = [
+      b.english_speaking ? '<span class="ebl-badge ebl-en">English-speaking</span>' : '',
+      prem ? '<span class="ebl-badge ebl-prem">Premium</span>' : ''
+    ].join('');
+    var contact = [
+      b.phone ? '<a href="tel:' + esc(b.phone) + '" class="ebl-row"><span>☎</span>' + esc(b.phone) + '</a>' : '',
+      b.email ? '<a href="mailto:' + esc(b.email) + '" class="ebl-row"><span>✉</span>' + esc(b.email) + '</a>' : '',
+      b.address ? '<div class="ebl-row"><span>◎</span>' + esc(b.address) + '</div>' : ''
+    ].join('');
+    var extra = '';
+    if (prem) {
+      var s = b.social_links || {};
+      var links = [
+        b.website ? '<a href="' + esc(b.website) + '" target="_blank" rel="noopener">Website</a>' : '',
+        s.instagram ? '<a href="' + esc(s.instagram) + '" target="_blank" rel="noopener">Instagram</a>' : '',
+        s.facebook ? '<a href="' + esc(s.facebook) + '" target="_blank" rel="noopener">Facebook</a>' : ''
+      ].filter(Boolean).join(' · ');
+      if (links) extra = '<div class="ebl-links">' + links + '</div>';
+    }
+    return '<div class="ebl-card">' +
+      '<div class="ebl-head"><div class="ebl-av">' + esc(initials(b.name)) + '</div>' +
+      '<div class="ebl-hd"><div class="ebl-name">' + esc(b.name) + '</div>' +
+      '<div class="ebl-cat">' + esc(b.category) + '</div></div></div>' +
+      (badges.replace(/\s/g, '') ? '<div class="ebl-badges">' + badges + '</div>' : '') +
+      (b.description ? '<p class="ebl-desc">' + esc(b.description) + '</p>' : '') +
+      '<div class="ebl-contact">' + contact + '</div>' + extra + '</div>';
+  }
+  function render(rows) {
+    var grid = findGrid();
+    if (!grid) return;
+    var empty = grid.querySelector('.empty-state');
+    if (!rows || rows.length === 0) { if (empty) empty.style.display = ''; return; }
+    if (empty) empty.style.display = 'none';
+    injectCSS();
+    var holder = grid.querySelector('.ebl-grid');
+    if (!holder) { holder = document.createElement('div'); holder.className = 'ebl-grid'; grid.appendChild(holder); }
+    holder.innerHTML = rows.map(card).join('');
+  }
+  function load() {
+    var url = SB + '/rest/v1/businesses?status=eq.approved&category=eq.' +
+      encodeURIComponent(CATEGORY) + '&select=*&order=plan.desc,created_at.desc';
+    fetch(url, { headers: { apikey: KEY, Authorization: 'Bearer ' + KEY } })
+      .then(function (r) { return r.ok ? r.json() : []; })
+      .then(function (rows) { render(Array.isArray(rows) ? rows : []); })
+      .catch(function () { /* keep empty state on failure */ });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', load);
+  } else { load(); }
+})();
