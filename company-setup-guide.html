@@ -211,6 +211,11 @@
  .footer-legal a:hover { color: white; }
  @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
  @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; gap: 28px; } .footer { padding: 48px 20px 28px; } .footer-bottom { flex-direction: column; align-items: flex-start; } }
+
+/* eb-table-scroll-fix: keep wide tables from overflowing the page on mobile */
+.table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0;}
+.table-scroll .fee-table{margin:0;min-width:100%;}
+@media(max-width:768px){.table-scroll .fee-table td:last-child{white-space:normal;}}
 </style>
 </head>
 <body>
@@ -322,7 +327,7 @@
 
  <h2 id="choose">s.r.o. or živnosť — which is right for you?</h2>
  <p>An <strong>s.r.o.</strong> (<em>spoločnosť s ručením obmedzeným</em>) is Slovakia's private limited liability company — the most common company form. The biggest difference from a <strong>živnosť</strong> (trade licence) is liability: with an s.r.o. you generally risk only the company's assets, not your personal ones.</p>
- <table class="fee-table">
+ <div class="table-scroll"><table class="fee-table">
  <thead>
  <tr><th></th><th>Živnosť (sole trader)</th><th>s.r.o. (limited company)</th></tr>
  </thead>
@@ -334,7 +339,7 @@
  <tr><td><strong>Minimum tax</strong></td><td>No</td><td>Yes (daňová licencia)</td></tr>
  <tr><td><strong>Best for</strong></td><td>Solo freelancers, small side income</td><td>Growing business, partners, liability protection, hiring</td></tr>
  </tbody>
- </table>
+ </table></div>
  <p><strong>Choose an s.r.o.</strong> if you want liability protection, plan to grow, hire, or take on business partners, or your clients prefer dealing with a company. <strong>Choose a živnosť</strong> if you are a solo freelancer with modest income and want the simplest, cheapest setup — see our <a href="zivnost-guide.html">Živnosť guide</a>.</p>
 
  <h2 id="requirements">What you need before you start</h2>
@@ -365,7 +370,7 @@
  <p>You can file everything yourself electronically (you need an electronic ID card with a qualified signature), or use a lawyer or a formation service to handle it for you.</p>
 
  <h2 id="costs">Costs &amp; timeline (2026)</h2>
- <table class="fee-table">
+ <div class="table-scroll"><table class="fee-table">
  <thead>
  <tr><th>Item</th><th>Cost</th></tr>
  </thead>
@@ -377,13 +382,13 @@
  <tr><td>Signature verification</td><td>€2 (matrika) / €4.80 (notary) per signature</td></tr>
  <tr><td>Optional: lawyer or formation service</td><td>~€150–300</td></tr>
  </tbody>
- </table>
+ </table></div>
  <p>The <strong>share capital of €5,000 is not a cost</strong> — it is your own money that stays with the company and can be used for its operations. The real out-of-pocket cost of forming an s.r.o. yourself is roughly <strong>€220 plus trade-licence and signature fees</strong>; with a formation service, budget <strong>€150–300</strong> on top.</p>
  <p><strong>Timeline.</strong> Preparing the documents takes 1–3 days; the court then registers the company within <strong>2 working days</strong> of a complete, correct filing. End to end, expect about a week doing it yourself — faster with a service.</p>
 
  <h2 id="taxes">Taxes for an s.r.o. (2026)</h2>
  <p><strong>Corporate income tax</strong> (daň z príjmov právnickej osoby) is charged on the company's profit:</p>
- <table class="fee-table">
+ <div class="table-scroll"><table class="fee-table">
  <thead>
  <tr><th>Taxable income (profit)</th><th>Rate</th></tr>
  </thead>
@@ -392,10 +397,10 @@
  <tr><td>€100,001 – €5,000,000</td><td>21%</td></tr>
  <tr><td>Over €5,000,000</td><td>24%</td></tr>
  </tbody>
- </table>
+ </table></div>
  <p>Most new small companies fall in the <strong>10%</strong> band.</p>
  <p><strong>Minimum tax</strong> (daňová licencia) — an s.r.o. pays a minimum tax <strong>even in a loss-making year</strong>, based on its taxable income:</p>
- <table class="fee-table">
+ <div class="table-scroll"><table class="fee-table">
  <thead>
  <tr><th>Taxable income</th><th>Minimum tax / year</th></tr>
  </thead>
@@ -406,7 +411,7 @@
  <tr><td>€500,001 – €5,000,000</td><td>€3,840</td></tr>
  <tr><td>Over €5,000,000</td><td>€11,520</td></tr>
  </tbody>
- </table>
+ </table></div>
  <p>A <strong>newly formed company does not pay the minimum tax for the tax period in which it was established.</strong></p>
  <div class="callout callout-info">
  <div class="callout-icon">💶</div>

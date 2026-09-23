@@ -211,6 +211,11 @@
  .footer-legal a:hover { color: white; }
  @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
  @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; gap: 28px; } .footer { padding: 48px 20px 28px; } .footer-bottom { flex-direction: column; align-items: flex-start; } }
+
+/* eb-table-scroll-fix: keep wide tables from overflowing the page on mobile */
+.table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0;}
+.table-scroll .fee-table{margin:0;min-width:100%;}
+@media(max-width:768px){.table-scroll .fee-table td:last-child{white-space:normal;}}
 </style>
 </head>
 <body>
@@ -349,7 +354,7 @@
  <h2 id="types">Types of živnosť</h2>
  <p>Slovak law recognises three categories of živnosť, and the type you need determines your documentation requirements and fees:</p>
 
- <table class="fee-table">
+ <div class="table-scroll"><table class="fee-table">
  <thead>
  <tr><th>Type</th><th>Slovak name</th><th>What it covers</th><th>Extra requirements</th></tr>
  </thead>
@@ -358,7 +363,7 @@
  <tr><td><strong>Craft trade</strong></td><td>Remeselná živnosť</td><td>Trades requiring vocational training, plumber, electrician, carpenter, hairdresser, mechanic, cook, etc.</td><td>Proof of vocational qualification; zodpovedný zástupca if no permanent residence</td></tr>
  <tr><td><strong>Regulated trade</strong></td><td>Viazaná živnosť</td><td>Specialised professions, security services, some medical equipment, driving instructor, waste management, etc.</td><td>Specific qualification proof per trade; zodpovedný zástupca if no permanent residence</td></tr>
  </tbody>
- </table>
+ </table></div>
 
  <div class="callout callout-tip">
  <div class="callout-icon">💡</div>
@@ -442,7 +447,7 @@
 
  <h2 id="fees">Fees, updated April 2024</h2>
  <p>Administrative fees were revised in April 2024 under an amendment to Act 145/1995 Coll. Current rates:</p>
- <table class="fee-table">
+ <div class="table-scroll"><table class="fee-table">
  <thead>
  <tr><th>Action</th><th>Electronic (via portal)</th><th>In person</th></tr>
  </thead>
@@ -456,7 +461,7 @@
  <tr><td>Suspension of trade (prerušenie živnosti)</td><td>€0</td><td>€4</td></tr>
  <tr><td>Cancellation (zrušenie živnosti)</td><td>€0</td><td>€0</td></tr>
  </tbody>
- </table>
+ </table></div>
 
  <div class="callout callout-tip">
  <div class="callout-icon">💡</div>
@@ -495,7 +500,7 @@
 
  <h2 id="zivnost-vs-sro">Živnosť vs s.r.o., which to choose</h2>
  <p>Many expats wonder whether to register a živnosť or incorporate an <strong>s.r.o.</strong> (spoločnosť s ručením obmedzeným, the Slovak equivalent of a Limited Liability Company). Key differences:</p>
- <table class="fee-table">
+ <div class="table-scroll"><table class="fee-table">
  <thead>
  <tr><th>Factor</th><th>Živnosť (sole trader)</th><th>S.r.o. (LLC)</th></tr>
  </thead>
@@ -508,7 +513,7 @@
  <tr><td>Processing time</td><td>3 working days</td><td>Several weeks (court registration)</td></tr>
  <tr><td>Best for</td><td>Freelancers, solo consultants, small services</td><td>Larger operations, teams, liability-sensitive sectors</td></tr>
  </tbody>
- </table>
+ </table></div>
  <p>For most new expat freelancers in Slovakia, <strong>živnosť is the right starting point</strong>. You can always convert to s.r.o. later if your business grows, the conversion process exists but requires professional help.</p>
 
  <h2 id="faq">FAQ</h2>

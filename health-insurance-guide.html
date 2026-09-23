@@ -366,6 +366,11 @@
  .footer-legal a:hover { color: white; }
  @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
  @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; gap: 28px; } .footer { padding: 48px 20px 28px; } .footer-bottom { flex-direction: column; align-items: flex-start; } }
+
+/* eb-table-scroll-fix: keep wide tables from overflowing the page on mobile */
+.table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0;}
+.table-scroll .fee-table{margin:0;min-width:100%;}
+@media(max-width:768px){.table-scroll .fee-table td:last-child{white-space:normal;}}
 </style>
 </head>
 <body>
@@ -510,7 +515,7 @@
  <h2 id="three-insurers">The three public insurers</h2>
  <p>You have exactly three options. All are licensed by the <a href="https://www.udzs-sk.sk/en/" target="_blank" rel="noopener">Úrad pre dohľad nad zdravotnou starostlivosťou (ÚDZS)</a>, the Healthcare Surveillance Authority, and all provide the same legally-mandated basic benefits package. Competition exists in the extras: wellness programmes, dental contribution top-ups, discounts at gyms and pharmacies.</p>
 
- <table class="fee-table">
+ <div class="table-scroll"><table class="fee-table">
  <thead>
  <tr><th>Insurer</th><th>Type</th><th>English support</th><th>Website</th></tr>
  </thead>
@@ -519,7 +524,7 @@
  <tr><td><strong>Dôvera</strong> zdravotná poisťovňa</td><td>Private</td><td>Limited</td><td><a href="https://www.dovera.sk" target="_blank" rel="noopener">dovera.sk</a></td></tr>
  <tr><td><strong>Union</strong> zdravotná poisťovňa</td><td>Private</td><td><strong>Yes, online</strong></td><td><a href="https://www.union.sk" target="_blank" rel="noopener">union.sk</a></td></tr>
  </tbody>
- </table>
+ </table></div>
 
  <div class="callout callout-tip">
  <div class="callout-icon">💡</div>
@@ -574,7 +579,7 @@
  <h2 id="costs">How much it costs</h2>
  <p>Contributions are a percentage of your income, with a legally-set minimum. Rates are set in Act 580/2004 and updated periodically. The 2026 figures are:</p>
 
- <table class="fee-table">
+ <div class="table-scroll"><table class="fee-table">
  <thead>
  <tr><th>Your status</th><th>Who pays</th><th>Rate</th><th>2026 monthly minimum</th></tr>
  </thead>
@@ -584,7 +589,7 @@
  <tr><td>Voluntary insuree</td><td>You pay full amount</td><td>16%</td><td>€121.92/month</td></tr>
  <tr><td>State-insured (students, pensioners, children)</td><td>State pays</td><td>, </td><td>€0 for the individual</td></tr>
  </tbody>
- </table>
+ </table></div>
 
  <div class="callout callout-info">
  <div class="callout-icon">ℹ️</div>
@@ -623,7 +628,7 @@
  <p>Recognised providers used by expats in Slovakia include AXA, Allianz, UNIQA, and international expat plans (Cigna, Aetna, Bupa). Once you are legally required to be in the public system, private insurance is not a legal substitute, you must enroll in one of the three public funds.</p>
 
  <h2 id="deadlines">Key deadlines &amp; penalties</h2>
- <table class="fee-table">
+ <div class="table-scroll"><table class="fee-table">
  <thead>
  <tr><th>Trigger event</th><th>Deadline to register</th></tr>
  </thead>
@@ -634,7 +639,7 @@
  <tr><td>Annual insurer switch</td><td>Application by 30 September; change effective 1 January</td></tr>
  <tr><td>Termination of insurance obligation (e.g. leaving Slovakia)</td><td>8 calendar days to deregister</td></tr>
  </tbody>
- </table>
+ </table></div>
  <div class="callout callout-warn">
  <div class="callout-icon">⚠️</div>
  <p><strong>Late registration penalty.</strong> Under Act 580/2004 § 24, ÚDZS can fine you up to <strong>€3,319</strong> for late registration and up to <strong>€9,958</strong> for repeated violations. Additionally, any healthcare received during the uninsured gap can be billed to you directly at full price. Don't delay.</p>

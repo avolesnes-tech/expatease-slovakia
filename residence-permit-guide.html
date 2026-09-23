@@ -366,6 +366,11 @@
  .footer-legal a:hover { color: white; }
  @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
  @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; gap: 28px; } .footer { padding: 48px 20px 28px; } .footer-bottom { flex-direction: column; align-items: flex-start; } }
+
+/* eb-table-scroll-fix: keep wide tables from overflowing the page on mobile */
+.table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0;}
+.table-scroll .fee-table{margin:0;min-width:100%;}
+@media(max-width:768px){.table-scroll .fee-table td:last-child{white-space:normal;}}
 </style>
 </head>
 <body>
@@ -561,7 +566,7 @@
  </div>
 
  <h2 id="fees">Fees &amp; processing times</h2>
- <table class="fee-table">
+ <div class="table-scroll"><table class="fee-table">
  <thead>
  <tr><th>Item</th><th>Detail</th><th>Amount / time</th></tr>
  </thead>
@@ -574,7 +579,7 @@
  <tr><td>Decision deadline</td><td>Single permit (work + residence)</td><td>up to 60 days</td></tr>
  <tr><td>EU citizen registration</td><td>In person at Foreign Police</td><td>Free</td></tr>
  </tbody>
- </table>
+ </table></div>
  <p>Fees change periodically, always verify the current amount on the <a href="https://www.mic.iom.sk/en/residence/general-information/226-ake-vysoke-su-spravne-poplatky-pri-ziadosti.html" target="_blank" rel="noopener">MIC fee overview</a> before paying. Spouses of Slovak citizens and applicants under 18 are exempt.</p>
 
  <h2 id="after">After approval: card, insurance, medical check</h2>

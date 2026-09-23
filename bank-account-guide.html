@@ -332,6 +332,11 @@
  .footer-legal a:hover { color: white; }
  @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
  @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; gap: 28px; } .footer { padding: 48px 20px 28px; } .footer-bottom { flex-direction: column; align-items: flex-start; } }
+
+/* eb-table-scroll-fix: keep wide tables from overflowing the page on mobile */
+.table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0;}
+.table-scroll .fee-table{margin:0;min-width:100%;}
+@media(max-width:768px){.table-scroll .fee-table td:last-child{white-space:normal;}}
 </style>
 </head>
 <body>
@@ -462,7 +467,7 @@
  <h2 id="banks-overview">Which banks accept foreigners</h2>
  <p>There are five main retail banks in Slovakia. Their openness to foreign nationals ranges significantly:</p>
 
- <table class="fee-table">
+ <div class="table-scroll"><table class="fee-table">
  <thead>
  <tr><th>Bank</th><th>Non-residents accepted?</th><th>Online opening?</th><th>English service</th></tr>
  </thead>
@@ -473,7 +478,7 @@
  <tr><td>mBank</td><td>Yes, EU citizens</td><td>Yes</td><td>Partial</td></tr>
  <tr><td>Fio banka</td><td>Yes, EU citizens</td><td>Yes</td><td>Partial</td></tr>
  </tbody>
- </table>
+ </table></div>
 
  <h2 id="slsp">Slovenská sporiteľňa (SLSP)</h2>
  <p>The largest bank in Slovakia by client count. Part of the Erste Group. Accepts non-residents but expects you to demonstrate a <em>connection to Slovakia</em>, typically a work contract, trade license, or proof of property ownership.</p>
@@ -532,7 +537,7 @@
  </div>
 
  <h2 id="fees">Fees comparison (2025–2026)</h2>
- <table class="fee-table">
+ <div class="table-scroll"><table class="fee-table">
  <thead>
  <tr><th>Bank</th><th>Monthly fee</th><th>Card fee</th><th>ATM withdrawals</th></tr>
  </thead>
@@ -544,7 +549,7 @@
  <tr><td>Fio banka</td><td>€0</td><td>Free</td><td>Free (own ATMs)</td></tr>
  <tr><td>Revolut (Standard)</td><td>€0</td><td>€6 one-time</td><td>€200/month free, then 2%</td></tr>
  </tbody>
- </table>
+ </table></div>
  <p>Fees change frequently, always check the bank's current <em>Sadzobník poplatkov</em> (fee schedule) on their website before opening.</p>
 
  <h2 id="faq">FAQ</h2>

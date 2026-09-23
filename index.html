@@ -3307,11 +3307,13 @@
  current = (n + slides.length) % slides.length;
  slides[current].classList.add('active');
  dots[current].classList.add('active');
+ if (labelEl) {
  labelEl.style.opacity = '0';
  setTimeout(() => {
  labelEl.textContent = labels[current];
  labelEl.style.opacity = '1';
  }, 300);
+ }
  }
 
  function startCarousel() {
@@ -4295,7 +4297,7 @@
  </div>
  <button class="auth-submit" id="regSubmitBtn" onclick="doRegister()">Join the community →</button>
  <div class="auth-error-msg" id="regGeneralErr" style="display:none; text-align:center; margin-top:8px;"></div>
- <p class="auth-terms">By registering you agree to our <a href="privacy-policy.html">Terms of Service</a> and <a href="privacy-policy.html">Privacy Policy</a> (GDPR compliant).</p>
+ <p class="auth-terms">By registering you agree to our <a href="terms.html">Terms of Service</a> and <a href="privacy-policy.html">Privacy Policy</a> (GDPR compliant). You can edit or remove your listing anytime — just email <a href="mailto:hello@expatbase.sk">hello@expatbase.sk</a>.</p>
  <div class="auth-switch">Already a member? <a onclick="switchAuthView('login')" style="cursor:pointer;">Sign in</a></div>
  </div>
  <!-- Success panel (hidden initially) -->

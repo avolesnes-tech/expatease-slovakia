@@ -211,6 +211,11 @@
  .footer-legal a:hover { color: white; }
  @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
  @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; gap: 28px; } .footer { padding: 48px 20px 28px; } .footer-bottom { flex-direction: column; align-items: flex-start; } }
+
+/* eb-table-scroll-fix: keep wide tables from overflowing the page on mobile */
+.table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0;}
+.table-scroll .fee-table{margin:0;min-width:100%;}
+@media(max-width:768px){.table-scroll .fee-table td:last-child{white-space:normal;}}
 </style>
 </head>
 <body>
@@ -331,7 +336,7 @@
 
  <h2 id="rates">Income tax rates (2026)</h2>
  <p>From 2026 Slovakia has <strong>more progressive</strong> personal income tax. For <strong>employment, rental and other income</strong>, the annual tax base is taxed in bands:</p>
- <table class="fee-table">
+ <div class="table-scroll"><table class="fee-table">
  <thead>
  <tr><th>Annual tax base</th><th>Rate</th></tr>
  </thead>
@@ -341,7 +346,7 @@
  <tr><td>€60,349.22 – €75,010.32</td><td>30%</td></tr>
  <tr><td>Over €75,010.32</td><td>35%</td></tr>
  </tbody>
- </table>
+ </table></div>
  <p><strong>Business / self-employment income (SZČO)</strong> is treated more favourably:</p>
  <ul>
  <li>Taxable income <strong>up to €100,000</strong> → a flat <strong>15%</strong> on the tax base.</li>
