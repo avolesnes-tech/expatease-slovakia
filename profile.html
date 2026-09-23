@@ -911,12 +911,12 @@
 
  <div class="email-preview">
  <div class="preview-label">Email preview</div>
- <div class="preview-from" id="prevFrom">From: ExpatBase &lt;hello@expatease.sk&gt; · To: , </div>
+ <div class="preview-from" id="prevFrom">From: ExpatBase &lt;hello@expatbase.sk&gt; · To: , </div>
  <div class="preview-subject">Subject: We'd love to feature you on ExpatBase Slovakia</div>
  <div class="preview-body" id="prevBody">
  Hi <em id="prevName">there</em>,<br><br>
  We run ExpatBase, a directory of English-friendly businesses in Bratislava, trusted by the local expat community. <em id="prevNote"></em>We'd love to list your business so more expats can discover you.<br><br>
- Getting started is free. Reply to this email or visit <em>expatease.sk</em> to learn more.<br><br>
+ Getting started is free. Reply to this email or visit <em>expatbase.sk</em> to learn more.<br><br>
  , The ExpatBase team
  </div>
  </div>
@@ -1478,7 +1478,7 @@ function updateEmailPreview() {
  document.getElementById('prevName').textContent = name || 'there';
  document.getElementById('prevNote').textContent = note ? note + ' ' : '';
  document.getElementById('prevFrom').innerHTML =
- `From: ExpatBase &lt;hello@expatease.sk&gt; · To: ${email || ', '}`;
+ `From: ExpatBase &lt;hello@expatbase.sk&gt; · To: ${email || ', '}`;
 }
 
 async function submitSuggest() {

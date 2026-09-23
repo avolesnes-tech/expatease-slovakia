@@ -1,7 +1,8 @@
 /* ExpatBase — dynamic business listings from Supabase
    Reads window.EB_CATEGORY, loads approved businesses for that category,
-   and renders them into the page's .cards-section grid.
-   Self-contained: no external dependency, safe to fail (keeps empty state). */
+   takes over the page's listings grid: removes any hardcoded/sample cards
+   and shows real businesses, or a clean empty state.
+   Self-contained: no external dependency, safe to fail. */
 (function () {
   var SB = 'https://etxqrlrqbjcbjmitnspv.supabase.co';
   var KEY = 'sb_publishable_i38f7jyt2HYOjUTNuOsklg_aMofdDvE';
@@ -18,13 +19,13 @@
       .map(function (w) { return w[0]; }).join('').toUpperCase();
   }
   function findGrid() {
-    var explicit = document.querySelector('[data-eb-grid]');
-    if (explicit) return explicit;
-    var sections = document.querySelectorAll('.cards-section');
-    for (var i = 0; i < sections.length; i++) {
-      if (sections[i].querySelector('.empty-state')) return sections[i];
-    }
-    return sections[0] || null;
+    return document.querySelector('[data-eb-grid]')
+      || document.querySelector('[id$="-grid"]')
+      || (function () {
+        var secs = document.querySelectorAll('.cards-section');
+        for (var i = 0; i < secs.length; i++) if (secs[i].querySelector('.empty-state')) return secs[i];
+        return secs[0] || null;
+      })();
   }
   function injectCSS() {
     if (document.getElementById('ebl-css')) return;
@@ -49,7 +50,11 @@
     "a.ebl-row:hover{color:#1A4F8A}" +
     ".ebl-links{display:flex;gap:8px;flex-wrap:wrap;font-size:.86rem;padding-top:10px;border-top:1px solid #EEF3F8}" +
     ".ebl-links a{color:#1A4F8A;font-weight:600;text-decoration:none}" +
-    ".ebl-links a:hover{text-decoration:underline}";
+    ".ebl-links a:hover{text-decoration:underline}" +
+    ".ebl-empty{text-align:center;max-width:520px;margin:16px auto;padding:44px 26px;background:#fff;border:1px solid #E4EBF3;border-radius:20px;box-shadow:0 2px 16px rgba(26,79,138,.06);font-family:'DM Sans',system-ui,sans-serif}" +
+    ".ebl-empty h3{font-family:'Urbanist',system-ui,sans-serif;font-weight:800;color:#0F3360;font-size:1.3rem;margin:0 0 10px}" +
+    ".ebl-empty p{color:#6B7A90;margin:0 0 20px;line-height:1.55}" +
+    ".ebl-empty a{display:inline-block;background:linear-gradient(135deg,#1D7A50,#2E9E6B);color:#fff;font-family:'Urbanist',system-ui,sans-serif;font-weight:700;text-decoration:none;padding:12px 22px;border-radius:999px}";
     document.head.appendChild(st);
   }
   function card(b) {
@@ -84,21 +89,28 @@
   function render(rows) {
     var grid = findGrid();
     if (!grid) return;
-    var empty = grid.querySelector('.empty-state');
-    if (!rows || rows.length === 0) { if (empty) empty.style.display = ''; return; }
-    if (empty) empty.style.display = 'none';
     injectCSS();
-    var holder = grid.querySelector('.ebl-grid');
-    if (!holder) { holder = document.createElement('div'); holder.className = 'ebl-grid'; grid.appendChild(holder); }
-    holder.innerHTML = rows.map(card).join('');
+    // Take over the grid: remove any hardcoded/sample cards or empty state.
+    grid.innerHTML = '';
+    if (rows && rows.length) {
+      var holder = document.createElement('div');
+      holder.className = 'ebl-grid';
+      holder.innerHTML = rows.map(card).join('');
+      grid.appendChild(holder);
+    } else {
+      grid.innerHTML =
+        '<div class="ebl-empty"><h3>No listings yet</h3>' +
+        '<p>Be among the first verified English-speaking professionals in this category to appear here.</p>' +
+        '<a href="index.html#submit">List your business →</a></div>';
+    }
   }
   function load() {
     var url = SB + '/rest/v1/businesses?status=eq.approved&category=eq.' +
       encodeURIComponent(CATEGORY) + '&select=*&order=plan.desc,created_at.desc';
     fetch(url, { headers: { apikey: KEY, Authorization: 'Bearer ' + KEY } })
-      .then(function (r) { return r.ok ? r.json() : []; })
-      .then(function (rows) { render(Array.isArray(rows) ? rows : []); })
-      .catch(function () { /* keep empty state on failure */ });
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (rows) { if (rows) render(Array.isArray(rows) ? rows : []); })
+      .catch(function () { /* leave page untouched on failure */ });
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', load);

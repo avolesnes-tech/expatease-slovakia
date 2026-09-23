@@ -1,0 +1,53 @@
+{
+  "routes": [
+    {
+      "routePath": "/airtable-submit",
+      "mountPath": "/",
+      "method": "OPTIONS",
+      "module": [
+        "airtable-submit.js:onRequestOptions"
+      ]
+    },
+    {
+      "routePath": "/airtable-submit",
+      "mountPath": "/",
+      "method": "POST",
+      "module": [
+        "airtable-submit.js:onRequestPost"
+      ]
+    },
+    {
+      "routePath": "/send-email",
+      "mountPath": "/",
+      "method": "OPTIONS",
+      "module": [
+        "send-email.js:onRequestOptions"
+      ]
+    },
+    {
+      "routePath": "/send-email",
+      "mountPath": "/",
+      "method": "POST",
+      "module": [
+        "send-email.js:onRequestPost"
+      ]
+    },
+    {
+      "routePath": "/submit-business",
+      "mountPath": "/",
+      "method": "OPTIONS",
+      "module": [
+        "submit-business.js:onRequestOptions"
+      ]
+    },
+    {
+      "routePath": "/submit-business",
+      "mountPath": "/",
+      "method": "POST",
+      "module": [
+        "submit-business.js:onRequestPost"
+      ]
+    }
+  ],
+  "baseURL": "/"
+}
