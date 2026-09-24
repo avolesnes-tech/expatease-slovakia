@@ -2,12 +2,54 @@
    Reads window.EB_CATEGORY, loads approved businesses for that category,
    takes over the page's listings grid: removes any hardcoded/sample cards
    and shows real businesses, or a clean empty state.
+   Also records privacy-first, anonymous engagement events (profile views,
+   profile clicks, website click-throughs) to power monthly Pro stats.
    Self-contained: no external dependency, safe to fail. */
 (function () {
   var SB = 'https://etxqrlrqbjcbjmitnspv.supabase.co';
   var KEY = 'sb_publishable_i38f7jyt2HYOjUTNuOsklg_aMofdDvE';
   var CATEGORY = window.EB_CATEGORY;
   if (!CATEGORY) return;
+
+  /* ── anonymous visitor id (no personal data) ── */
+  function vid() {
+    try {
+      var v = localStorage.getItem('eb_vid');
+      if (!v) {
+        v = (window.crypto && crypto.randomUUID)
+          ? crypto.randomUUID()
+          : ('v' + Date.now() + Math.random().toString(36).slice(2));
+        localStorage.setItem('eb_vid', v);
+      }
+      return v;
+    } catch (e) { return null; }
+  }
+  /* dedupe profile impressions to once per visitor per business per day */
+  function seenToday(id) {
+    try {
+      var day = new Date().toISOString().slice(0, 10);
+      var o = JSON.parse(localStorage.getItem('eb_seen') || '{}');
+      if (o.day !== day) o = { day: day, ids: {} };
+      if (o.ids[id]) return true;
+      o.ids[id] = 1;
+      localStorage.setItem('eb_seen', JSON.stringify(o));
+      return false;
+    } catch (e) { return false; }
+  }
+  function track(type, bizId) {
+    if (!bizId) return;
+    try {
+      fetch(SB + '/rest/v1/events', {
+        method: 'POST',
+        headers: {
+          apikey: KEY, Authorization: 'Bearer ' + KEY,
+          'Content-Type': 'application/json', Prefer: 'return=minimal'
+        },
+        body: JSON.stringify({ business_id: bizId, type: type, visitor_id: vid() }),
+        keepalive: true
+      }).catch(function () {});
+    } catch (e) { /* never break the page */ }
+  }
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
@@ -58,7 +100,8 @@
     document.head.appendChild(st);
   }
   function card(b) {
-    var prem = b.plan === 'premium';
+    /* founding partners get Pro-level display (website/socials) during launch */
+    var prem = b.plan === 'premium' || b.plan === 'founding';
     var badges = [
       b.english_speaking ? '<span class="ebl-badge ebl-en">English-speaking</span>' : '',
       prem ? '<span class="ebl-badge ebl-prem">Premium</span>' : ''
@@ -72,19 +115,48 @@
     if (prem) {
       var s = b.social_links || {};
       var links = [
-        b.website ? '<a href="' + esc(b.website) + '" target="_blank" rel="noopener">Website</a>' : '',
-        s.instagram ? '<a href="' + esc(s.instagram) + '" target="_blank" rel="noopener">Instagram</a>' : '',
-        s.facebook ? '<a href="' + esc(s.facebook) + '" target="_blank" rel="noopener">Facebook</a>' : ''
+        b.website ? '<a class="ebl-weblink" href="' + esc(b.website) + '" target="_blank" rel="noopener">Website</a>' : '',
+        s.instagram ? '<a class="ebl-weblink" href="' + esc(s.instagram) + '" target="_blank" rel="noopener">Instagram</a>' : '',
+        s.facebook ? '<a class="ebl-weblink" href="' + esc(s.facebook) + '" target="_blank" rel="noopener">Facebook</a>' : ''
       ].filter(Boolean).join(' · ');
       if (links) extra = '<div class="ebl-links">' + links + '</div>';
     }
-    return '<div class="ebl-card">' +
+    return '<div class="ebl-card" data-eb-id="' + esc(b.id) + '">' +
       '<div class="ebl-head"><div class="ebl-av">' + esc(initials(b.name)) + '</div>' +
       '<div class="ebl-hd"><div class="ebl-name">' + esc(b.name) + '</div>' +
       '<div class="ebl-cat">' + esc(b.category) + '</div></div></div>' +
       (badges.replace(/\s/g, '') ? '<div class="ebl-badges">' + badges + '</div>' : '') +
       (b.description ? '<p class="ebl-desc">' + esc(b.description) + '</p>' : '') +
       '<div class="ebl-contact">' + contact + '</div>' + extra + '</div>';
+  }
+  function setupTracking(holder) {
+    /* impressions: one 'view' per visitor per business per day */
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            io.unobserve(en.target);
+            var id = en.target.getAttribute('data-eb-id');
+            if (id && !seenToday(id)) track('view', id);
+          }
+        });
+      }, { threshold: 0.5 });
+      holder.querySelectorAll('.ebl-card').forEach(function (c) { io.observe(c); });
+    }
+    /* clicks: website click-throughs, contact clicks, and profile clicks */
+    holder.addEventListener('click', function (e) {
+      var cardEl = e.target.closest('.ebl-card');
+      if (!cardEl) return;
+      var id = cardEl.getAttribute('data-eb-id');
+      if (!id) return;
+      var link = e.target.closest('a');
+      if (link) {
+        var href = link.getAttribute('href') || '';
+        if (link.classList.contains('ebl-weblink') || /^https?:/i.test(href)) { track('website_click', id); return; }
+        if (/^tel:|^mailto:/i.test(href)) { track('contact_click', id); return; }
+      }
+      track('profile_click', id);
+    });
   }
   function render(rows) {
     var grid = findGrid();
@@ -97,6 +169,7 @@
       holder.className = 'ebl-grid';
       holder.innerHTML = rows.map(card).join('');
       grid.appendChild(holder);
+      setupTracking(holder);
     } else {
       grid.innerHTML =
         '<div class="ebl-empty"><h3>No listings yet</h3>' +

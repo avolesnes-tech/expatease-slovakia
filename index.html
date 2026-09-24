@@ -2594,12 +2594,17 @@
  </div>
 
  <div class="hero-content">
+ <a href="for-businesses.html" class="hero-biz-banner" style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);color:#fff;text-decoration:none;padding:8px 14px;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:13.5px;line-height:1.35;margin-bottom:22px;max-width:520px">
+ <span style="font-family:'Urbanist',sans-serif;font-weight:800;font-size:10.5px;letter-spacing:.07em;background:#2E9E6B;color:#fff;padding:3px 8px;border-radius:6px;flex:0 0 auto">FOR BUSINESSES</span>
+ <span>Serve English-speaking clients in Bratislava? <strong style="font-weight:700">List your profile free →</strong></span>
+ </a>
  <h1 class="hero-h1">Life in Slovakia,<br><em>made simple.</em></h1>
  <p class="hero-sub">English-speaking doctors, lawyers, tradespeople and more in Bratislava.</p>
  <div class="hero-ctas">
  <a href="#categories" class="btn-primary">Find an Expert →</a>
- <a href="#" class="btn-outline-white" onclick="openAuth('register'); return false;">Join the community</a>
+ <a href="for-businesses.html" class="btn-outline-white">List Your Business Free</a>
  </div>
+ <a href="#" onclick="openAuth('register'); return false;" style="display:inline-block;margin-top:14px;color:rgba(255,255,255,0.82);font-size:14px;text-decoration:underline;text-underline-offset:3px">or join the expat community</a>
  </div>
 
  <button class="hero-scroll-indicator" id="heroScrollBtn" aria-label="Scroll down">
@@ -3116,9 +3121,14 @@
  </div>
  </div><!-- /smFormBasic -->
 
+ <div id="smMoreToggle" class="sm-field-group" style="margin-top:10px">
+ <button type="button" id="smMoreBtn" class="sm-add-btn" style="width:100%;justify-content:center">+ Add photos, opening hours &amp; links (optional)</button>
+ <p style="font-size:12.5px;color:#6B7A90;text-align:center;margin:8px 0 0">Optional — add these now to stand out, or skip and finish later from your profile.</p>
+ </div>
+
  <!-- Premium-only fields -->
  <div id="smFormPremium" style="display:none">
- <div class="sm-section-title sm-section-divider">Premium Details</div>
+ <div class="sm-section-title sm-section-divider">Optional — make your profile stand out</div>
 
  <!-- Logo -->
  <div class="sm-field-group">
@@ -3206,7 +3216,9 @@
  <div class="sm-hours-grid" id="smHoursGrid"></div>
  </div>
 
- <!-- Founding partner perk -->
+ </div><!-- /smFormPremium -->
+
+ <!-- Founding partner perk (always visible) -->
  <div class="sm-payment-section sm-founding-perk">
  <div class="sm-payment-header">
  <span class="sm-payment-price">Free for 6 months</span>
@@ -3214,7 +3226,6 @@
  </div>
  <p class="sm-payment-note">As one of our first founding businesses, your complete profile — phone, photos, priority placement, the lot — is free for your first 6 months. No card, no fees, nothing to pay today. We're building the directory together.</p>
  </div>
- </div><!-- /smFormPremium -->
 
  <div class="sm-field-group" style="margin-top:4px">
  <label style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:#3B4A5E;cursor:pointer;line-height:1.45">
@@ -3479,7 +3490,9 @@
  function smContinue() {
  if (!smSelectedPlan) return;
  const premiumSection = document.getElementById('smFormPremium');
- premiumSection.style.display = smSelectedPlan === 'premium' ? 'block' : 'none';
+ premiumSection.style.display = 'none';
+ var _mt = document.getElementById('smMoreToggle');
+ if (_mt) _mt.style.display = '';
  smGoToStep(2);
  }
 
@@ -4098,6 +4111,12 @@
  // Open triggers
  var _osb = document.getElementById('openSubmitModalBtn');
  if (_osb) _osb.addEventListener('click', function(e){ e.preventDefault(); openSubmitModal(); });
+
+ var _moreBtn = document.getElementById('smMoreBtn');
+ if (_moreBtn) _moreBtn.addEventListener('click', function(){
+ var ps = document.getElementById('smFormPremium'); if (ps) ps.style.display = 'block';
+ var mt = document.getElementById('smMoreToggle'); if (mt) mt.style.display = 'none';
+ });
 
  // Auto-open modal when arriving via index.html#submit from category pages
  if (window.location.hash === '#submit') {
