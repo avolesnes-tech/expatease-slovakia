@@ -2542,9 +2542,7 @@
  <li><a href="about.html">About</a></li>
  </ul>
  <div class="nav-right">
- <button class="nav-cta" id="openSubmitModalBtn">
- + Submit a Business
- </button>
+ <a class="nav-cta" href="for-businesses.html" style="text-decoration:none;">For Businesses</a>
  <div id="authNavArea">
  <button class="nav-cta" id="joinCommunityBtn" style="background: transparent; border: 1px solid rgba(255,255,255,0.4); margin-left: 4px;">
  Join the community
@@ -2571,9 +2569,7 @@
  <a href="about.html">About</a>
  </nav>
  <div class="mobile-drawer-footer">
- <button class="mob-btn mob-btn-primary" onclick="closeMobileMenu(); setTimeout(()=>{ document.getElementById('submitModal').classList.add('visible'); document.body.style.overflow='hidden'; }, 200);">
- + Submit a Business
- </button>
+ <a class="mob-btn mob-btn-primary" href="for-businesses.html" style="text-decoration:none;">For Businesses</a>
  <button class="mob-btn mob-btn-ghost" onclick="closeMobileMenu(); setTimeout(()=>openAuth('register'), 200);">
  Join the community
  </button>
@@ -2826,6 +2822,20 @@
 </section>
 
 <!-- FOOTER -->
+<section id="for-business" style="background:#0B1F3A;color:#fff;position:relative;overflow:hidden">
+ <div style="max-width:1100px;margin:0 auto;padding:64px 24px;display:flex;gap:40px;flex-wrap:wrap;align-items:center;justify-content:space-between;position:relative;z-index:1">
+ <div style="max-width:560px">
+ <div style="display:inline-flex;align-items:center;gap:8px;font-family:'Urbanist',sans-serif;font-weight:800;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:#8fe0b6;background:rgba(46,158,107,.14);border:1px solid rgba(46,158,107,.34);padding:6px 13px;border-radius:999px;margin-bottom:16px">&#129309; For businesses &middot; Partners</div>
+ <h2 style="font-family:'Urbanist',sans-serif;font-weight:900;font-size:32px;line-height:1.1;color:#fff;margin:0 0 12px">Reach English-speaking clients in Bratislava.</h2>
+ <p style="font-size:16px;color:rgba(255,255,255,.82);margin:0 0 24px">List your business free and get found by expats searching for services in English. Upgrade only if you want more.</p>
+ <a href="for-businesses.html" style="display:inline-flex;align-items:center;gap:8px;font-family:'Urbanist',sans-serif;font-weight:800;font-size:16px;color:#0B1F3A;background:linear-gradient(135deg,#8fe0b6,#2E9E6B);padding:14px 26px;border-radius:999px;text-decoration:none">Become a founding partner &rarr;</a>
+ </div>
+ <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:26px 28px;min-width:250px">
+ <div style="font-family:'Urbanist',sans-serif;font-weight:900;font-size:30px;color:#fff;line-height:1">Free<span style="font-size:14px;font-weight:600;color:rgba(255,255,255,.6)"> &nbsp;to list</span></div>
+ <p style="font-size:13.5px;color:rgba(255,255,255,.72);margin:12px 0 0;line-height:1.5">List free forever. Founding partners get Pro <strong style="color:#8fe0b6">free for 6 months</strong>, then a special early rate. No card today.</p>
+ </div>
+ </div>
+</section>
 <footer class="footer">
  <div class="footer-inner">
  <div class="footer-grid">
@@ -2888,7 +2898,7 @@
  <ul class="footer-links">
  <li><a href="#blog">Guides</a></li>
  <li><a href="#">Newsletter</a></li>
- <li><a href="#">Submit a Business</a></li>
+ <li><a href="for-businesses.html">For Businesses</a></li>
  <li><a href="about.html">About ExpatBase</a></li>
  <li><a href="#">Contact Us</a></li>
  <li><a href="mailto:hello@expatbase.sk">hello@expatbase.sk</a></li>
@@ -2952,15 +2962,15 @@
  <!-- ── STEP 1: Plan selection ── -->
  <div class="sm-panel" id="smpanel1">
  <div class="sm-panel-intro">
- <h2 class="sm-panel-title" id="smModalTitle">Become a founding member of ExpatBase</h2>
- <p class="sm-panel-sub">We're just launching. Founding members get a complete profile — free, no card required.</p>
+ <h2 class="sm-panel-title" id="smModalTitle">Become a founding partner of ExpatBase</h2>
+ <p class="sm-panel-sub">We're just launching. Founding partners get a complete profile — free, no card required.</p>
  </div>
  <div class="sm-plans-grid sm-plans-grid-single">
 
- <!-- Founding Member -->
+ <!-- Founding Partner -->
  <div class="sm-plan-card sm-plan-featured selected" id="planFounding" data-plan="premium" role="button" tabindex="0" aria-pressed="true">
- <div class="sm-plan-badge">Founding Member</div>
- <div class="sm-plan-name">Founding Member</div>
+ <div class="sm-plan-badge">Founding Partner</div>
+ <div class="sm-plan-name">Founding Partner</div>
  <div class="sm-plan-price">Free</div>
  <div class="sm-plan-price-note">during our launch · no payment, no card</div>
  <div class="sm-plan-desc">A complete profile so English-speaking expats can find and contact you.</div>
@@ -2972,12 +2982,12 @@
  <li class="sm-plan-feature">Website &amp; social links</li>
  <li class="sm-plan-feature">Opening hours</li>
  <li class="sm-plan-feature">Edit your profile anytime</li>
- <li class="sm-plan-feature">✦ Founding Member badge — kept for good</li>
+ <li class="sm-plan-feature">✦ Founding Partner badge — kept for good</li>
  </ul>
  </div>
 
  </div>
- <p class="sm-founding-note">You'll always get advance notice before we introduce any paid plans — and founding members keep special benefits. No commitment.</p>
+ <p class="sm-founding-note">You'll always get advance notice before we introduce any paid plans — and founding partners keep special benefits. No commitment.</p>
  <div class="sm-step1-footer">
  <button class="sm-continue-btn" id="smContinueBtn" disabled>Continue →</button>
  </div>
@@ -3196,15 +3206,22 @@
  <div class="sm-hours-grid" id="smHoursGrid"></div>
  </div>
 
- <!-- Founding member perk -->
+ <!-- Founding partner perk -->
  <div class="sm-payment-section sm-founding-perk">
  <div class="sm-payment-header">
- <span class="sm-payment-price">Free for your first year</span>
+ <span class="sm-payment-price">Free for 6 months</span>
  <span class="sm-founding-tag">Founding perk</span>
  </div>
- <p class="sm-payment-note">As one of our first founding businesses, your complete profile — phone, photos, priority placement, the lot — is free for a full year. No card, no fees, nothing to pay today. We're building the directory together.</p>
+ <p class="sm-payment-note">As one of our first founding businesses, your complete profile — phone, photos, priority placement, the lot — is free for your first 6 months. No card, no fees, nothing to pay today. We're building the directory together.</p>
  </div>
  </div><!-- /smFormPremium -->
+
+ <div class="sm-field-group" style="margin-top:4px">
+ <label style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:#3B4A5E;cursor:pointer;line-height:1.45">
+ <input type="checkbox" id="smAttestEN" style="margin-top:3px;flex:0 0 auto;width:16px;height:16px">
+ <span>I confirm this business can serve clients in English (or the languages selected above). Listings that don't may be removed.</span>
+ </label>
+ </div>
 
  <!-- Error banner -->
  <div class="sm-error-banner" id="smErrorBanner" style="display:none">
@@ -3234,7 +3251,7 @@
  <path class="sm-checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
  </svg>
  </div>
- <h2 class="sm-success-title">Welcome aboard, founding member!</h2>
+ <h2 class="sm-success-title">Welcome aboard, founding partner!</h2>
  <p class="sm-success-sub" id="smSuccessMsg">Your listing has been submitted. Here's what happens next.</p>
 
  <div class="sm-next-steps">
@@ -3927,6 +3944,13 @@
  ══════════════════════════════ */
  async function smSubmit() {
  if (!smValidateForm()) return;
+ var _att = document.getElementById('smAttestEN');
+ if (_att && !_att.checked) {
+ var _eb = document.getElementById('smErrorBanner');
+ document.getElementById('smErrorMsg').textContent = 'Please confirm your business can serve clients in English before submitting.';
+ if (_eb) _eb.style.display = 'flex';
+ return;
+ }
 
  const footer = document.getElementById('smFormFooter');
  const errBanner = document.getElementById('smErrorBanner');
@@ -3990,7 +4014,7 @@
  ══════════════════════════════ */
  function smShowSuccess() {
  const msg = document.getElementById('smSuccessMsg');
- msg.textContent = 'Welcome aboard, founding member! Your listing has been submitted for review. We\'ll email you within 2 business days once it\'s live — no payment needed.';
+ msg.textContent = 'Welcome aboard, founding partner! Your listing has been submitted for review. We\'ll email you within 2 business days once it\'s live — no payment needed.';
  smGoToStep(3);
  }
 
@@ -4072,9 +4096,8 @@
  Event wiring
  ══════════════════════════════ */
  // Open triggers
- document.getElementById('openSubmitModalBtn').addEventListener('click', e => {
- e.preventDefault(); openSubmitModal();
- });
+ var _osb = document.getElementById('openSubmitModalBtn');
+ if (_osb) _osb.addEventListener('click', function(e){ e.preventDefault(); openSubmitModal(); });
 
  // Auto-open modal when arriving via index.html#submit from category pages
  if (window.location.hash === '#submit') {
