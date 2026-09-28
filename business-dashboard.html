@@ -217,7 +217,7 @@
     const { data, error } = await _sb
       .from('businesses')
       .select('*')
-      .eq('owner_email', email)
+      .eq('email', email)
       .order('created_at', { ascending: false })
       .limit(1);
 
