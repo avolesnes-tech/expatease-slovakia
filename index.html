@@ -3998,7 +3998,7 @@
  if (error) throw new Error(error.message);
 
  // Send confirmation email to business + notify admin (fire-and-forget — don't block success screen)
- fetch('/functions/send-email', {
+ fetch('/send-email', {
  method: 'POST',
  headers: { 'Content-Type': 'application/json' },
  body: JSON.stringify({
