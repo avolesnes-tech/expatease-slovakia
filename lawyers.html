@@ -1365,6 +1365,43 @@
 <style>/* eb-mobile-faq-fix */@media (max-width:768px){.faq-section .section-inner>div[style*="1fr 2fr"]{grid-template-columns:1fr !important;gap:36px !important;}}</style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+ <defs>
+ <linearGradient id="ebGrad" x1="0%" y1="0%" x2="90%" y2="110%">
+ <stop offset="0%" stop-color="#1A4F8A"/><stop offset="100%" stop-color="#2E9E6B"/>
+ </linearGradient>
+ <linearGradient id="ebGradLight" x1="0%" y1="0%" x2="90%" y2="110%">
+ <stop offset="0%" stop-color="#2E6FC4"/><stop offset="100%" stop-color="#35B87C"/>
+ </linearGradient>
+ <radialGradient id="ebHighlight" cx="38%" cy="28%" r="62%">
+ <stop offset="0%" stop-color="white" stop-opacity=".22"/><stop offset="100%" stop-color="white" stop-opacity="0"/>
+ </radialGradient>
+ <filter id="ebShadow" x="-25%" y="-10%" width="150%" height="160%">
+ <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1A4F8A" flood-opacity=".28"/>
+ </filter>
+ <filter id="ebGlow" x="-30%" y="-15%" width="160%" height="170%">
+ <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#2E9E6B" flood-opacity=".45"/>
+ </filter>
+ <symbol id="eb-icon" viewBox="0 0 120 140">
+ <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebGrad)" filter="url(#ebShadow)"/>
+ <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebHighlight)"/>
+ <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
+ </symbol>
+ <symbol id="eb-icon-light" viewBox="0 0 120 140">
+ <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebGradLight)" filter="url(#ebGlow)"/>
+ <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebHighlight)"/>
+ <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
+ </symbol>
+ <symbol id="eb-icon-mono" viewBox="0 0 120 140">
+ <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="currentColor"/>
+ <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
+ </symbol>
+ <symbol id="eb-icon-dark" viewBox="0 0 120 140">
+ <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="#E8F1FB"/>
+ <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="#1A4F8A" letter-spacing="-2">EB</text>
+ </symbol>
+ </defs>
+</svg>
 <!-- SVG LOGO DEFS — reused across navbar and footer -->
 <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
  <defs>

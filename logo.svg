@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="140" viewBox="0 0 120 140" role="img" aria-label="ExpatBase">
+  <defs>
+    <linearGradient id="ebGrad" x1="0%" y1="0%" x2="90%" y2="110%">
+      <stop offset="0%" stop-color="#1A4F8A"/>
+      <stop offset="100%" stop-color="#2E9E6B"/>
+    </linearGradient>
+    <radialGradient id="ebHighlight" cx="38%" cy="28%" r="62%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebGrad)"/>
+  <path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebHighlight)"/>
+  <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist, 'Trebuchet MS', system-ui, sans-serif" font-weight="900" font-size="36" fill="#ffffff" letter-spacing="-2">EB</text>
+</svg>
