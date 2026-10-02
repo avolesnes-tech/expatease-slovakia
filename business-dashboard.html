@@ -312,9 +312,14 @@
       sm.textContent = 'Could not save: ' + error.message;
       sm.className = 'save-msg err';
     } else {
-      sm.textContent = 'Saved ✓';
       sm.className = 'save-msg ok';
-      setTimeout(() => { sm.textContent = ''; }, 3000);
+      if (bizRow.status === 'approved') {
+        sm.textContent = 'Saved ✓ — opening your profile…';
+        setTimeout(() => { window.location.href = 'expert.html?id=' + bizRow.id; }, 800);
+      } else {
+        sm.textContent = 'Saved ✓ — your profile page will open here once approved.';
+        setTimeout(() => { sm.textContent = ''; }, 4500);
+      }
     }
   });
 
