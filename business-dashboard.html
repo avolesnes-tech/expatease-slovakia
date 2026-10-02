@@ -137,6 +137,39 @@
         </div>
       </div>
 
+      <div class="card" id="proCard" style="display:none">
+        <div class="card-title">Full profile page <span style="font-weight:500;color:var(--gray-400);font-size:12px">— Premium</span></div>
+        <div class="field">
+          <label for="fTagline">Tagline</label>
+          <input type="text" id="fTagline" maxlength="120" placeholder="One line that sums you up">
+          <div class="hint">Shown at the top of your profile page.</div>
+        </div>
+        <div class="field">
+          <label>Logo</label>
+          <div style="display:flex;align-items:center;gap:14px">
+            <img id="logoPrev" alt="" style="width:64px;height:64px;border-radius:14px;object-fit:cover;background:var(--gray-50);display:none">
+            <input type="file" id="fLogo" accept="image/*">
+          </div>
+        </div>
+        <div class="field">
+          <label>Cover photo</label>
+          <div style="display:flex;align-items:center;gap:14px">
+            <img id="coverPrev" alt="" style="width:130px;height:60px;border-radius:10px;object-fit:cover;background:var(--gray-50);display:none">
+            <input type="file" id="fCover" accept="image/*">
+          </div>
+        </div>
+        <div class="field">
+          <label>Gallery photos</label>
+          <div id="galPrev" class="chips" style="margin-bottom:10px"></div>
+          <input type="file" id="fGallery" accept="image/*" multiple>
+          <div class="hint">A few photos of your work, team or space.</div>
+        </div>
+        <div class="field">
+          <label for="fHours">Opening hours</label>
+          <textarea id="fHours" maxlength="400" placeholder="Mon-Fri 9:00-17:00&#10;Sat 9:00-12:00"></textarea>
+        </div>
+      </div>
+
       <div class="card">
         <div class="card-title">Languages you serve clients in</div>
         <div class="chips" id="langChips"></div>
@@ -167,6 +200,7 @@
 
   const LANGS = ['English','Slovak','German','French','Russian','Ukrainian','Hungarian','Other'];
   let bizRow = null;
+  let logoUrl=null, coverUrl=null, galleryArr=[];
 
   const $ = (id) => document.getElementById(id);
   function show(id) { $(id).style.display = (id === 'dashboard' || id.endsWith('State')) ? 'block' : ''; }
@@ -202,6 +236,17 @@
     $('fFacebook').value = social.facebook || '';
     $('fEmail').value = row.email || '';
     buildLangChips(row.languages);
+
+    const prem = (row.plan === 'premium' || row.plan === 'founding');
+    $('proCard').style.display = prem ? '' : 'none';
+    logoUrl = row.logo_url || null;
+    coverUrl = row.cover_url || null;
+    galleryArr = Array.isArray(row.gallery) ? row.gallery.slice() : [];
+    $('fTagline').value = row.tagline || '';
+    $('fHours').value = row.hours || '';
+    if (logoUrl) { $('logoPrev').src = logoUrl; $('logoPrev').style.display = ''; }
+    if (coverUrl) { $('coverPrev').src = coverUrl; $('coverPrev').style.display = ''; }
+    renderGalPrev();
 
     hideAll(); show('dashboard');
     $('logoutBtn').style.display = '';
@@ -254,6 +299,11 @@
         facebook: $('fFacebook').value.trim() || null,
       },
       languages: langs.length ? langs : ['English'],
+      tagline: $('fTagline').value.trim() || null,
+      hours: $('fHours').value.trim() || null,
+      logo_url: logoUrl,
+      cover_url: coverUrl,
+      gallery: galleryArr,
     };
 
     const { error } = await _sb.from('businesses').update(updates).eq('id', bizRow.id);
@@ -272,6 +322,34 @@
     await _sb.auth.signOut();
     window.location.href = 'business-login.html';
   });
+
+  async function uploadMedia(file, kind) {
+    const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+    const path = bizRow.id + '/' + kind + '_' + Date.now() + '.' + ext;
+    const { error } = await _sb.storage.from('business-media').upload(path, file, { upsert: true, cacheControl: '3600' });
+    if (error) throw error;
+    return _sb.storage.from('business-media').getPublicUrl(path).data.publicUrl;
+  }
+  function renderGalPrev() {
+    $('galPrev').innerHTML = galleryArr.map(function (u, i) {
+      return '<span style="position:relative;display:inline-block;margin:0 8px 8px 0"><img src="' + u + '" style="width:62px;height:62px;object-fit:cover;border-radius:10px"><button type="button" data-i="' + i + '" class="galdel" style="position:absolute;top:-7px;right:-7px;background:#b91c1c;color:#fff;border:none;border-radius:50%;width:20px;height:20px;cursor:pointer;font-size:13px;line-height:1">\u00d7</button></span>';
+    }).join('');
+    $('galPrev').querySelectorAll('.galdel').forEach(function (btn) {
+      btn.addEventListener('click', function () { galleryArr.splice(+btn.getAttribute('data-i'), 1); renderGalPrev(); });
+    });
+  }
+  function bindUpload(inputId, kind, cb) {
+    $(inputId).addEventListener('change', async function (e) {
+      const files = Array.from(e.target.files || []); if (!files.length) return;
+      $(inputId).disabled = true;
+      try { for (const f of files) { const url = await uploadMedia(f, kind); cb(url); } }
+      catch (err) { alert('Upload failed: ' + (err.message || err)); }
+      $(inputId).disabled = false; e.target.value = '';
+    });
+  }
+  bindUpload('fLogo', 'logo', function (u) { logoUrl = u; $('logoPrev').src = u; $('logoPrev').style.display = ''; });
+  bindUpload('fCover', 'cover', function (u) { coverUrl = u; $('coverPrev').src = u; $('coverPrev').style.display = ''; });
+  bindUpload('fGallery', 'gal', function (u) { galleryArr.push(u); renderGalPrev(); });
 
   // supabase-js auto-detects the magic-link tokens in the URL hash on load
   init();
