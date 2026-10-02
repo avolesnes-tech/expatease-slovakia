@@ -68,6 +68,8 @@
   a.srow:hover{color:var(--blue)}
   .cta{display:block;text-align:center;background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;font-family:var(--head);font-weight:700;text-decoration:none;padding:13px;border-radius:999px;margin-top:14px}
   .cta.secondary{background:#fff;color:var(--blue);border:1.5px solid var(--gray-200);margin-top:10px}
+  .cta.wa{background:#25D366;color:#fff;margin-top:10px}
+  .cta.wa:hover{background:#1ebe5b}
   .mapbox{border:0;width:100%;height:200px;border-radius:14px;margin-top:4px}
   aside .card{position:sticky;top:84px}
   @media(max-width:820px){aside .card{position:static}}
@@ -232,9 +234,9 @@
     if(social.facebook) contact+='<a class="srow" href="'+esc(social.facebook)+'" target="_blank" rel="noopener"><span class="ic">◈</span>Facebook</a>';
     var cta='';
     if(b.website) cta+='<a class="cta" href="'+esc(b.website)+'" target="_blank" rel="noopener" data-x="web">Visit website</a>';
-    if(b.phone) cta+='<a class="cta secondary" href="tel:'+esc(b.phone)+'" data-x="call">Call now</a>';
+    if(b.phone){ var wa=String(b.phone).replace(/\D/g,''); if(wa.indexOf('00')===0){wa=wa.slice(2);} else if(wa.charAt(0)==='0'){wa='421'+wa.slice(1);} cta+='<a class="cta wa" href="https://wa.me/'+wa+'" target="_blank" rel="noopener" data-x="wa">Message on WhatsApp</a>'; }
     var map='';
-    if(b.address){var qq=encodeURIComponent((b.address||'')+', '+(b.district?b.district+', ':'')+'Bratislava, Slovakia');map='<div class="card"><h2>Location</h2><iframe class="mapbox" loading="lazy" src="https://www.google.com/maps?q='+qq+'&output=embed"></iframe></div>';}
+    if(b.address){var qq=encodeURIComponent((b.address||'')+', '+(b.district?b.district+', ':'')+'Bratislava, Slovakia');map='<div class="card"><h2>Location</h2><iframe class="mapbox" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q='+qq+'&z=16&output=embed"></iframe><a class="srow" style="padding-top:12px" href="https://www.google.com/maps/search/?api=1&query='+qq+'" target="_blank" rel="noopener"><span class="ic">\u2197</span>Open in Google Maps</a></div>';}
     document.getElementById('colSide').innerHTML='<div class="card"><h2>Contact</h2>'+(contact||'<p>No contact details yet.</p>')+cta+'</div>'+map;
 
     document.getElementById('loading').style.display='none';
