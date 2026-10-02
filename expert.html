@@ -280,7 +280,7 @@
       if(alreadyReviewed()){msg.className='rev-msg err';msg.textContent='You’ve already reviewed this business.';return;}
       var btn=document.getElementById('revSubmit');btn.disabled=true;btn.textContent='Submitting…';
       try{
-        var r=await _sb.from('reviews').insert({business_id:b.id,business_name:b.name,reviewer_name:m.name,reviewer_email:m.email,rating:rvStars,body:body,status:'approved'});
+        var r=await _sb.from('reviews').insert({business_id:b.id,business_name:b.name,reviewer_name:m.name,reviewer_email:m.email,rating:rvStars,review_text:body});
         if(r.error) throw r.error;
         try{localStorage.setItem(REVKEY,'1');}catch(_){ }
         document.getElementById('revForm').innerHTML='<div class="rev-empty">Thank you! Your review is now live. ✅</div>';
@@ -293,7 +293,7 @@
   function starHtml(n){var out='';for(var i=1;i<=5;i++){out+='<span'+(i<=Math.round(n)?'':' class="off"')+'>\u2605</span>';}return '<span class="stars">'+out+'</span>';}
   function fmtDate(iso){try{var d=new Date(iso);return d.toLocaleDateString('en-GB',{month:'short',year:'numeric'});}catch(e){return '';}}
   function loadReviews(id){
-    fetch(SB+'/rest/v1/reviews?business_id=eq.'+encodeURIComponent(id)+'&status=eq.approved&select=rating,reviewer_name,body,created_at&order=created_at.desc',{headers:{apikey:KEY,Authorization:'Bearer '+KEY}})
+    fetch(SB+'/rest/v1/reviews?business_id=eq.'+encodeURIComponent(id)+'&select=rating,reviewer_name,review_text,created_at&order=created_at.desc',{headers:{apikey:KEY,Authorization:'Bearer '+KEY}})
       .then(function(r){return r.ok?r.json():[];})
       .then(function(list){
         list=Array.isArray(list)?list:[];
