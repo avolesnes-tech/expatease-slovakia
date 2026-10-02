@@ -77,17 +77,18 @@
     ".ebl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px}" +
     ".ebl-card{background:#fff;border:1px solid #E4EBF3;border-radius:18px;padding:22px;box-shadow:0 2px 16px rgba(26,79,138,.08);display:flex;flex-direction:column;gap:12px;font-family:'DM Sans',system-ui,sans-serif;transition:transform .2s,box-shadow .2s}" +
     ".ebl-card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(26,79,138,.16)}" +
-    ".ebl-head{display:flex;gap:14px;align-items:center}" +
+    ".ebl-head{display:flex;gap:14px;align-items:center;min-width:0}" +
+    ".ebl-hd{min-width:0}" +
     ".ebl-av{width:52px;height:52px;border-radius:14px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Urbanist',system-ui,sans-serif;font-weight:800;font-size:18px;background:linear-gradient(135deg,#1A4F8A,#2E9E6B)}" +
-    ".ebl-name{font-family:'Urbanist',system-ui,sans-serif;font-weight:700;font-size:1.1rem;color:#0F3360;line-height:1.2}" +
+    ".ebl-name{font-family:'Urbanist',system-ui,sans-serif;font-weight:700;font-size:1.1rem;color:#0F3360;line-height:1.2;overflow-wrap:anywhere;word-break:break-word}" +
     ".ebl-cat{font-size:.82rem;color:#6B7A90}" +
     ".ebl-badges{display:flex;gap:6px;flex-wrap:wrap}" +
     ".ebl-badge{font-family:'Urbanist',system-ui,sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.04em;padding:3px 9px;border-radius:999px}" +
     ".ebl-en{background:#E6F7EF;color:#1D7A50}" +
     ".ebl-prem{background:linear-gradient(135deg,#0F3360,#2563EB);color:#fff}" +
-    ".ebl-desc{font-size:.92rem;color:#3B4A5E;margin:0;line-height:1.5}" +
+    ".ebl-desc{font-size:.92rem;color:#3B4A5E;margin:0;line-height:1.5;overflow-wrap:anywhere;word-break:break-word}" +
     ".ebl-contact{display:flex;flex-direction:column;gap:7px;margin-top:auto}" +
-    ".ebl-row{display:flex;gap:9px;align-items:flex-start;font-size:.9rem;color:#3B4A5E;text-decoration:none}" +
+    ".ebl-row{display:flex;gap:9px;align-items:flex-start;font-size:.9rem;color:#3B4A5E;text-decoration:none;min-width:0;overflow-wrap:anywhere;word-break:break-word}" +
     ".ebl-row span{color:#2E9E6B;flex:0 0 auto}" +
     "a.ebl-row:hover{color:#1A4F8A}" +
     ".ebl-links{display:flex;gap:8px;flex-wrap:wrap;font-size:.86rem;padding-top:10px;border-top:1px solid #EEF3F8}" +
