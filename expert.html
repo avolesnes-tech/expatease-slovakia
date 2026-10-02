@@ -23,6 +23,7 @@
   .nav{background:#fff;border-bottom:1px solid var(--gray-100);height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:20}
   .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
   .nav-logo-text{font-family:var(--head);font-weight:700;font-size:18px;color:var(--gray-900);letter-spacing:-.3px}
+  .eb-nav{filter:drop-shadow(0 1px 1.5px rgba(15,51,96,.3))}
   .nav-links{display:flex;gap:22px;align-items:center}
   .nav-links a{font-size:14px;color:var(--gray-700);text-decoration:none;font-weight:500}
   .nav-links a:hover{color:var(--blue)}
@@ -36,9 +37,9 @@
   .crumbs a:hover{color:var(--blue)}
   .idrow{display:flex;align-items:center;gap:22px;padding:22px 0 30px}
   @media(max-width:560px){.idrow{flex-direction:column;align-items:flex-start;gap:16px}}
-  .logo-chip{width:96px;height:96px;flex:0 0 auto;background:#fff;border:1px solid var(--gray-200);border-radius:22px;box-shadow:0 8px 24px rgba(26,79,138,.12);display:flex;align-items:center;justify-content:center;padding:12px;overflow:hidden}
-  .logo-chip img{max-width:100%;max-height:100%;object-fit:contain;display:block}
-  .logo-chip.initials{background:linear-gradient(135deg,var(--blue),var(--green));color:#fff;font-family:var(--head);font-weight:900;font-size:38px;padding:0}
+  .logo-chip{height:100px;min-width:100px;max-width:264px;flex:0 0 auto;background:#fff;border:1px solid var(--gray-200);border-radius:22px;box-shadow:0 8px 24px rgba(26,79,138,.12);display:flex;align-items:center;justify-content:center;padding:14px 20px;overflow:hidden}
+  .logo-chip img{height:100%;width:auto;max-width:224px;object-fit:contain;display:block}
+  .logo-chip.initials{width:100px;min-width:100px;max-width:100px;height:100px;background:linear-gradient(135deg,var(--blue),var(--green));color:#fff;font-family:var(--head);font-weight:900;font-size:40px;padding:0}
   .idmeta{min-width:0}
   .idmeta h1{font-family:var(--head);font-weight:800;font-size:2rem;color:var(--blue-dark);letter-spacing:-.02em;line-height:1.08;overflow-wrap:anywhere}
   @media(max-width:560px){.idmeta h1{font-size:1.55rem}}
@@ -98,6 +99,13 @@
   .rev-submit:disabled{opacity:.6;cursor:default}
   .rev-msg{margin-top:10px;font-size:.9rem;font-weight:500}
   .rev-msg.ok{color:var(--green-dark)}.rev-msg.err{color:#b91c1c}
+  .rev-note{color:var(--gray-600);font-size:.82rem;margin:-2px 0 12px;line-height:1.5}
+  .rev-report{color:var(--gray-400);font-size:.78rem;text-decoration:none;margin-left:10px}
+  .rev-report:hover{color:#b91c1c;text-decoration:underline}
+  .rev-gate{color:var(--gray-700);font-size:.92rem;margin-bottom:4px;line-height:1.55}
+  .rev-asyou{color:var(--green-dark);font-weight:600;font-size:.88rem;margin-bottom:6px}
+  .rev-check{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--gray-700);font-weight:400;margin-top:12px}
+  .rev-check input{width:auto}
   .state{text-align:center;padding:90px 20px;color:var(--gray-400)}
   .state h2{font-family:var(--head);color:var(--blue-dark);font-size:1.3rem;margin-bottom:10px}
   .state a{color:var(--blue);text-decoration:none;font-weight:600}
@@ -112,12 +120,12 @@
 <body>
 <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true"><defs>
   <linearGradient id="ebGradLight" x1="0%" y1="0%" x2="90%" y2="110%"><stop offset="0%" stop-color="#1A4F8A"/><stop offset="100%" stop-color="#2E9E6B"/></linearGradient>
-  <symbol id="eb-icon-light" viewBox="0 0 120 140"><path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebGradLight)"/><text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text></symbol>
+  <radialGradient id="ebHi" cx="38%" cy="26%" r="62%"><stop offset="0%" stop-color="#fff" stop-opacity=".25"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient><symbol id="eb-icon-light" viewBox="0 0 120 140"><path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebGradLight)"/><path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebHi)"/><text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text></symbol>
 </defs></svg>
 
 <nav class="nav">
   <a href="index.html" class="nav-logo">
-    <svg width="27" height="32" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light"/></svg>
+    <svg class="eb-nav" width="30" height="35" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light"/></svg>
     <span class="nav-logo-text">ExpatBase</span>
   </a>
   <div class="nav-links">
@@ -191,17 +199,27 @@
     if(b.languages&&b.languages.length) main+='<div class="card"><h2>Languages</h2><div class="langline">'+b.languages.map(function(l){return '<span class="langtag">'+esc(l)+'</span>';}).join('')+'</div></div>';
     main+='<div class="card" id="reviewsCard">'+
       '<h2>Reviews</h2>'+
+      '<p class="rev-note">Reviews come from people who contacted or used this business. We don\u2019t edit or pay for reviews, and we remove any that break our guidelines.</p>'+
       '<div id="revAgg"></div>'+
       '<div id="revList"></div>'+
       '<button type="button" class="rev-btn" id="revToggle">Write a review</button>'+
       '<div class="rev-form" id="revForm">'+
-        '<label>Your rating</label>'+
-        '<div class="star-pick" id="revStars"><span data-v="1">\u2605</span><span data-v="2">\u2605</span><span data-v="3">\u2605</span><span data-v="4">\u2605</span><span data-v="5">\u2605</span></div>'+
-        '<label for="revName">Your name</label><input id="revName" maxlength="80" placeholder="e.g. Sarah M.">'+
-        '<label for="revEmail">Email (optional, never shown publicly)</label><input id="revEmail" type="email" placeholder="you@example.com">'+
-        '<label for="revText">Your review</label><textarea id="revText" maxlength="500" placeholder="What made your experience good — or what could be better?"></textarea>'+
-        '<button type="button" class="rev-submit" id="revSubmit">Submit review</button>'+
-        '<div class="rev-msg" id="revMsg"></div>'+
+        '<div id="revJoin">'+
+          '<p class="rev-gate">Reviews are for ExpatBase community members — it keeps them genuine. Join free to post yours.</p>'+
+          '<label for="jName">Your name</label><input id="jName" maxlength="80" placeholder="e.g. Sarah M.">'+
+          '<label for="jEmail">Email (kept private)</label><input id="jEmail" type="email" placeholder="you@example.com">'+
+          '<label class="rev-check"><input type="checkbox" id="jNews"> Send me the occasional ExpatBase newsletter</label>'+
+          '<button type="button" class="rev-submit" id="joinBtn">Join &amp; write a review</button>'+
+          '<div class="rev-msg" id="joinMsg"></div>'+
+        '</div>'+
+        '<div id="revWrite" style="display:none">'+
+          '<p class="rev-asyou" id="revAsYou"></p>'+
+          '<label>Your rating</label>'+
+          '<div class="star-pick" id="revStars"><span data-v="1">\u2605</span><span data-v="2">\u2605</span><span data-v="3">\u2605</span><span data-v="4">\u2605</span><span data-v="5">\u2605</span></div>'+
+          '<label for="revText">Your review</label><textarea id="revText" maxlength="500" placeholder="What made your experience good — or what could be better?"></textarea>'+
+          '<button type="button" class="rev-submit" id="revSubmit">Submit review</button>'+
+          '<div class="rev-msg" id="revMsg"></div>'+
+        '</div>'+
       '</div></div>';
     document.getElementById('colMain').innerHTML=main||'<div class="card"><p>This expert hasn\'t added more details yet.</p></div>';
 
@@ -228,25 +246,45 @@
     lb.addEventListener('click',function(e){if(e.target===lb)lb.classList.remove('open');});
     document.querySelectorAll('[data-x]').forEach(function(el){el.addEventListener('click',function(){var x=el.getAttribute('data-x');track(x==='web'?'website_click':'contact_click',b.id);});});
 
-    // ---- reviews ----
+    // ---- reviews (community members only) ----
+    var REVKEY='eb_rev_'+b.id;
     var rvStars=0;
-    var sp=document.getElementById('revStars');
-    sp.querySelectorAll('span').forEach(function(st){
-      st.addEventListener('click',function(){rvStars=+st.getAttribute('data-v');sp.querySelectorAll('span').forEach(function(x){x.classList.toggle('on',+x.getAttribute('data-v')<=rvStars);});});
+    function ebMember(){ try{var m=JSON.parse(localStorage.getItem('ee_member')||'null'); if(m&&m.email) return m;}catch(_){ } return null; }
+    function wireStars(){ var sp=document.getElementById('revStars'); if(!sp||sp._wired)return; sp._wired=1; sp.querySelectorAll('span').forEach(function(st){ st.addEventListener('click',function(){rvStars=+st.getAttribute('data-v');sp.querySelectorAll('span').forEach(function(x){x.classList.toggle('on',+x.getAttribute('data-v')<=rvStars);});}); }); }
+    function showWrite(){ var m=ebMember(); document.getElementById('revJoin').style.display='none'; document.getElementById('revWrite').style.display='block'; document.getElementById('revAsYou').textContent='Posting as '+(m?m.name:'you'); wireStars(); }
+    function alreadyReviewed(){ try{return !!localStorage.getItem(REVKEY);}catch(_){return false;} }
+    var toggle=document.getElementById('revToggle');
+    if(alreadyReviewed()){ toggle.textContent='You’ve reviewed this business'; toggle.disabled=true; toggle.style.opacity='.6'; toggle.style.cursor='default'; }
+    toggle.addEventListener('click',function(){
+      var f=document.getElementById('revForm'); f.classList.toggle('open');
+      if(ebMember()){ showWrite(); } else { document.getElementById('revJoin').style.display='block'; document.getElementById('revWrite').style.display='none'; }
     });
-    document.getElementById('revToggle').addEventListener('click',function(){document.getElementById('revForm').classList.toggle('open');});
+    document.getElementById('joinBtn').addEventListener('click',function(){
+      var jm=document.getElementById('joinMsg');
+      var nm=document.getElementById('jName').value.trim();
+      var em=document.getElementById('jEmail').value.trim();
+      if(!nm){jm.className='rev-msg err';jm.textContent='Please add your name.';return;}
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){jm.className='rev-msg err';jm.textContent='Please add a valid email.';return;}
+      var news=document.getElementById('jNews').checked;
+      try{ fetch('/functions/airtable-submit?table=Members',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({Name:nm,Email:em,Newsletter:news,'Submitted At':new Date().toISOString()})}).catch(function(){}); }catch(_){ }
+      try{ localStorage.setItem('ee_member',JSON.stringify({name:nm,email:em,newsletter:news,joinedAt:new Date().toISOString()})); }catch(_){ }
+      showWrite();
+    });
     document.getElementById('revSubmit').addEventListener('click',async function(){
-      var msg=document.getElementById('revMsg');
-      var name=document.getElementById('revName').value.trim();
+      var msg=document.getElementById('revMsg'); var m=ebMember();
+      if(!m){document.getElementById('revWrite').style.display='none';document.getElementById('revJoin').style.display='block';return;}
       var body=document.getElementById('revText').value.trim();
       if(!rvStars){msg.className='rev-msg err';msg.textContent='Please pick a star rating.';return;}
-      if(!name){msg.className='rev-msg err';msg.textContent='Please add your name.';return;}
-      if(!body){msg.className='rev-msg err';msg.textContent='Please write a short review.';return;}
-      var btn=document.getElementById('revSubmit');btn.disabled=true;btn.textContent='Submitting\u2026';
+      if(body.length<8){msg.className='rev-msg err';msg.textContent='Please write a little more about your experience.';return;}
+      if(/https?:\/\//i.test(body)){msg.className='rev-msg err';msg.textContent='Please remove links from your review.';return;}
+      if(alreadyReviewed()){msg.className='rev-msg err';msg.textContent='You’ve already reviewed this business.';return;}
+      var btn=document.getElementById('revSubmit');btn.disabled=true;btn.textContent='Submitting…';
       try{
-        var r=await _sb.from('reviews').insert({business_id:b.id,business_name:b.name,reviewer_name:name,reviewer_email:document.getElementById('revEmail').value.trim()||null,rating:rvStars,body:body,status:'pending'});
+        var r=await _sb.from('reviews').insert({business_id:b.id,business_name:b.name,reviewer_name:m.name,reviewer_email:m.email,rating:rvStars,body:body,status:'approved'});
         if(r.error) throw r.error;
-        document.getElementById('revForm').innerHTML='<div class="rev-empty">Thank you! Your review will appear here after a quick moderation check. \u2705</div>';
+        try{localStorage.setItem(REVKEY,'1');}catch(_){ }
+        document.getElementById('revForm').innerHTML='<div class="rev-empty">Thank you! Your review is now live. ✅</div>';
+        loadReviews(b.id);
       }catch(e){btn.disabled=false;btn.textContent='Submit review';msg.className='rev-msg err';msg.textContent='Could not submit: '+(e.message||e);}
     });
     loadReviews(b.id);
