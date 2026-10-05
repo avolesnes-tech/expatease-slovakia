@@ -132,6 +132,8 @@
   .foot{background:var(--blue-dark);color:#cdd9ea;text-align:center;padding:30px 20px;font-size:.86rem}
   .foot a{color:#fff;text-decoration:none}
 </style>
+
+<link rel="canonical" href="https://expatbase.sk/expert.html">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true"><defs>
@@ -205,6 +207,20 @@
       '<div class="idmeta"><h1>'+esc(b.name)+'</h1><div class="cat">'+esc(b.category||'')+'</div>'+(badges?'<div class="badges">'+badges+'</div>':'')+'<div class="rev-agg" id="idAgg" style="display:none"></div></div>';
     var _ib=document.getElementById('idband');
     if(b.cover_url&&_ib){_ib.classList.add('has-cover');var _cv=document.createElement('div');_cv.className='cover';_cv.style.backgroundImage="url('"+String(b.cover_url).replace(/'/g,"%27")+"')";var _sc=document.createElement('div');_sc.className='scrim';_ib.insertBefore(_sc,_ib.firstChild);_ib.insertBefore(_cv,_ib.firstChild);}
+    try{
+      var _u='https://expatbase.sk/expert.html?id='+b.id;
+      var _ld={"@context":"https://schema.org","@type":"LocalBusiness","name":b.name,"url":_u};
+      if(b.category)_ld.description=b.category;
+      if(b.address)_ld.address={"@type":"PostalAddress","streetAddress":b.address,"addressLocality":(b.district||'Bratislava'),"addressRegion":"Bratislava","addressCountry":"SK"};
+      if(b.phone)_ld.telephone=b.phone;
+      if(b.website)_ld.sameAs=[b.website];
+      if(b.logo_url)_ld.image=b.logo_url; else if(b.cover_url)_ld.image=b.cover_url;
+      var _e=document.createElement('script');_e.type='application/ld+json';_e.id='ld-biz';_e.textContent=JSON.stringify(_ld);document.head.appendChild(_e);
+      var _bc={"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://expatbase.sk/"},{"@type":"ListItem","position":2,"name":(b.category||'Experts'),"item":"https://expatbase.sk/"+catSlug(b.category)},{"@type":"ListItem","position":3,"name":b.name,"item":_u}]};
+      var _e2=document.createElement('script');_e2.type='application/ld+json';_e2.textContent=JSON.stringify(_bc);document.head.appendChild(_e2);
+      var _can=document.querySelector('link[rel="canonical"]'); if(_can)_can.href=_u;
+      document.title=b.name+' | ExpatBase Slovakia';
+    }catch(_){}
 
     // main column
     var main='';
@@ -328,8 +344,9 @@
         var summary=starHtml(avg)+'<span class="score">'+avgR.toFixed(1)+'</span><span class="cnt">('+list.length+' review'+(list.length>1?'s':'')+')</span>';
         agg.className='rev-agg';agg.innerHTML=summary;agg.style.marginTop='0';agg.style.marginBottom='8px';
         if(idAgg){idAgg.innerHTML=summary;idAgg.style.display='flex';}
+        try{var _le=document.getElementById('ld-biz');if(_le){var _o=JSON.parse(_le.textContent);_o.aggregateRating={"@type":"AggregateRating","ratingValue":avgR,"reviewCount":list.length,"bestRating":5,"worstRating":1};_le.textContent=JSON.stringify(_o);}}catch(_){}
         listEl.innerHTML=list.map(function(rv){
-          return '<div class="rev-item"><div class="rev-top"><span class="rev-who">'+esc(rv.reviewer_name||'Anonymous')+'</span><span class="rev-date">'+fmtDate(rv.created_at)+'</span></div>'+starHtml(rv.rating)+'<div class="rev-body">'+esc(rv.body||'')+'</div></div>';
+          return '<div class="rev-item"><div class="rev-top"><span class="rev-who">'+esc(rv.reviewer_name||'Anonymous')+'</span><span class="rev-date">'+fmtDate(rv.created_at)+'</span></div>'+starHtml(rv.rating)+'<div class="rev-body">'+esc(rv.review_text||'')+'</div></div>';
         }).join('');
       })
       .catch(function(){});
