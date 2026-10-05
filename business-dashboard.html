@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   :root {
     --blue: #1A4F8A; --blue-dark: #0F3360; --blue-light: #E8F1FB; --green: #2E9E6B; --green-dark: #1D7A50; --green-light: #E6F7EF;
@@ -64,7 +63,7 @@
 </head>
 <body>
 <div class="topbar">
-  <a href="index.html" class="logo"><svg width="30" height="35" viewBox="0 0 120 140" aria-hidden="true" style="flex:0 0 auto"><defs><linearGradient id="ebLogoGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1A4F8A"/><stop offset="1" stop-color="#2E9E6B"/></linearGradient></defs><path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebLogoGrad)"/><text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text></svg><span class="logo-text">ExpatBase Slovakia</span></a>
+  <a href="index.html" class="logo"><svg width="30" height="35" viewBox="0 0 120 140" aria-hidden="true" style="flex:0 0 auto"><defs><linearGradient id="ebLogoGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1A4F8A"/><stop offset="1" stop-color="#2E9E6B"/></linearGradient></defs><path d="M60 132 C 36 110 18 86 18 54 A 42 42 0 1 1 102 54 C 102 86 84 110 60 132 Z" fill="url(#ebLogoGrad)"/><text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text></svg><span class="logo-text">ExpatBase Slovakia</span></a>
   <button class="logout" id="logoutBtn" style="display:none">Log out</button>
 </div>
 
@@ -192,6 +191,7 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   const _sb = supabase.createClient(
     'https://etxqrlrqbjcbjmitnspv.supabase.co',

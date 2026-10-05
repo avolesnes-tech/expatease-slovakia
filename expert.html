@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   :root{
     --blue:#1A4F8A;--blue-dark:#0F3360;--blue-light:#E8F1FB;--green:#2E9E6B;--green-dark:#1D7A50;--green-light:#E6F7EF;
@@ -30,7 +29,22 @@
   @media(max-width:640px){.nav-links{display:none}}
 
   /* identity band — soft brand tint, matches site's airy look */
-  .idband{background:linear-gradient(135deg,#EAF2FB 0%,#E9F8F0 100%);border-bottom:1px solid var(--gray-100)}
+  /* identity band — brand hero; cover photo overlays when the business has one */
+  .idband{position:relative;overflow:hidden;background:linear-gradient(130deg,#0F3360 0%,#17518A 58%,#1E7A5A 100%)}
+  .idband::after{content:"";position:absolute;right:-90px;top:-110px;width:360px;height:360px;background:radial-gradient(circle,rgba(46,158,107,.38),transparent 70%);z-index:0;pointer-events:none}
+  .idband .cover{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0}
+  .idband .scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(125deg,rgba(9,26,51,.86) 0%,rgba(9,26,51,.60) 52%,rgba(12,58,43,.66) 100%)}
+  .idband .wrap{position:relative;z-index:2}
+  .idband.has-cover{min-height:300px;display:flex;flex-direction:column;justify-content:flex-end}
+  .idband.has-cover .idrow{padding-top:30px;padding-bottom:34px}
+  .idband .crumbs,.idband .crumbs a{color:rgba(255,255,255,.72)}
+  .idband .crumbs a:hover{color:#fff}
+  .idband .idmeta h1{color:#fff}
+  .idband .idmeta .cat{color:rgba(255,255,255,.86)}
+  .idband .logo-chip{box-shadow:0 12px 32px rgba(0,0,0,.30)}
+  .idband .rev-agg .score{color:#fff}
+  .idband .rev-agg .cnt{color:rgba(255,255,255,.82)}
+  .idband .b-prem{background:linear-gradient(135deg,#F5C451,#E0A32E);color:#3A2A06}
   .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
   .crumbs{font-size:13px;color:var(--gray-600);padding:18px 0 0}
   .crumbs a{text-decoration:none;color:var(--gray-600)}
@@ -71,8 +85,8 @@
   .cta.wa{background:#25D366;color:#fff;margin-top:10px}
   .cta.wa:hover{background:#1ebe5b}
   .mapbox{border:0;width:100%;height:200px;border-radius:14px;margin-top:4px}
-  aside .card{position:sticky;top:84px}
-  @media(max-width:820px){aside .card{position:static}}
+
+
 
   /* reviews */
   .rev-agg{display:flex;align-items:center;gap:9px;margin-top:12px}
@@ -122,7 +136,7 @@
 <body>
 <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true"><defs>
   <linearGradient id="ebGradLight" x1="0%" y1="0%" x2="90%" y2="110%"><stop offset="0%" stop-color="#1A4F8A"/><stop offset="100%" stop-color="#2E9E6B"/></linearGradient>
-  <radialGradient id="ebHi" cx="38%" cy="26%" r="62%"><stop offset="0%" stop-color="#fff" stop-opacity=".25"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient><symbol id="eb-icon-light" viewBox="0 0 120 140"><path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebGradLight)"/><path d="M 16 50 A 44 44 0 0 0 104 50 C 104 96 78 124 60 132 C 42 124 16 96 16 50 Z" fill="url(#ebHi)"/><text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text></symbol>
+  <radialGradient id="ebHi" cx="38%" cy="26%" r="62%"><stop offset="0%" stop-color="#fff" stop-opacity=".25"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient><symbol id="eb-icon-light" viewBox="0 0 120 140"><path d="M60 132 C 36 110 18 86 18 54 A 42 42 0 1 1 102 54 C 102 86 84 110 60 132 Z" fill="url(#ebGradLight)"/><path d="M60 132 C 36 110 18 86 18 54 A 42 42 0 1 1 102 54 C 102 86 84 110 60 132 Z" fill="url(#ebHi)"/><text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text></symbol>
 </defs></svg>
 
 <nav class="nav">
@@ -145,7 +159,7 @@
 </div>
 
 <div id="profile" style="display:none">
-  <div class="idband">
+  <div class="idband" id="idband">
     <div class="wrap">
       <div class="crumbs" id="crumbs"></div>
       <div class="idrow" id="idrow"></div>
@@ -159,6 +173,7 @@
 <div class="lb" id="lightbox"><span class="lb-close" id="lbClose">&times;</span><img id="lbImg" src="" alt=""></div>
 <footer class="foot">© <span id="yr"></span> ExpatBase Slovakia · <a href="index.html">Home</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   var SB='https://etxqrlrqbjcbjmitnspv.supabase.co';
   var KEY='sb_publishable_i38f7jyt2HYOjUTNuOsklg_aMofdDvE';
@@ -175,7 +190,7 @@
     var prem=b.plan==='premium'||b.plan==='founding';
     var social=b.social_links||{};
     var gallery=Array.isArray(b.gallery)?b.gallery.slice():[];
-    var photos=(b.cover_url?[b.cover_url]:[]).concat(gallery);
+    var photos=gallery;
     document.title=(b.name||'Expert')+' | ExpatBase Slovakia';
 
     document.getElementById('crumbs').innerHTML='<a href="index.html">ExpatBase</a> › <a href="'+catSlug(b.category)+'">'+esc(b.category||'Experts')+'</a> › '+esc(b.name);
@@ -188,6 +203,8 @@
     if(prem) badges+='<span class="badge b-prem">Premium</span>';
     document.getElementById('idrow').innerHTML=chip+
       '<div class="idmeta"><h1>'+esc(b.name)+'</h1><div class="cat">'+esc(b.category||'')+'</div>'+(badges?'<div class="badges">'+badges+'</div>':'')+'<div class="rev-agg" id="idAgg" style="display:none"></div></div>';
+    var _ib=document.getElementById('idband');
+    if(b.cover_url&&_ib){_ib.classList.add('has-cover');var _cv=document.createElement('div');_cv.className='cover';_cv.style.backgroundImage="url('"+String(b.cover_url).replace(/'/g,"%27")+"')";var _sc=document.createElement('div');_sc.className='scrim';_ib.insertBefore(_sc,_ib.firstChild);_ib.insertBefore(_cv,_ib.firstChild);}
 
     // main column
     var main='';
@@ -235,9 +252,10 @@
     var cta='';
     if(b.website) cta+='<a class="cta" href="'+esc(b.website)+'" target="_blank" rel="noopener" data-x="web">Visit website</a>';
     if(b.phone){ var wa=String(b.phone).replace(/\D/g,''); if(wa.indexOf('00')===0){wa=wa.slice(2);} else if(wa.charAt(0)==='0'){wa='421'+wa.slice(1);} cta+='<a class="cta wa" href="https://wa.me/'+wa+'" target="_blank" rel="noopener" data-x="wa">Message on WhatsApp</a>'; }
-    var map='';
-    if(b.address){var qq=encodeURIComponent((b.address||'')+', '+(b.district?b.district+', ':'')+'Bratislava, Slovakia');map='<div class="card"><h2>Location</h2><iframe class="mapbox" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q='+qq+'&z=16&output=embed"></iframe><a class="srow" style="padding-top:12px" href="https://www.google.com/maps/search/?api=1&query='+qq+'" target="_blank" rel="noopener"><span class="ic">\u2197</span>Open in Google Maps</a></div>';}
+    var map='';var ebAddr='';
+    if(b.address){ebAddr=(b.address||'')+', '+(b.district?b.district+', ':'')+'Bratislava, Slovakia';var qq=encodeURIComponent(ebAddr);map='<div class="card"><h2>Location</h2><iframe id="ebMap" class="mapbox" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q='+qq+'&z=16&output=embed"></iframe><a class="srow" style="padding-top:12px" href="https://www.google.com/maps/search/?api=1&query='+qq+'" target="_blank" rel="noopener"><span class="ic">\u2197</span>Open in Google Maps</a></div>';}
     document.getElementById('colSide').innerHTML='<div class="card"><h2>Contact</h2>'+(contact||'<p>No contact details yet.</p>')+cta+'</div>'+map;
+    if(ebAddr){fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&addressdetails=0&q='+encodeURIComponent(ebAddr)).then(function(r){return r.json();}).then(function(g){var el=document.getElementById('ebMap');if(el&&g&&g.length){el.src='https://maps.google.com/maps?q='+g[0].lat+','+g[0].lon+'&z=16&output=embed';}}).catch(function(){});}
 
     document.getElementById('loading').style.display='none';
     document.getElementById('profile').style.display='block';
