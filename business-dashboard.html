@@ -339,7 +339,7 @@
   }
   function renderGalPrev() {
     $('galPrev').innerHTML = galleryArr.map(function (u, i) {
-      return '<span style="position:relative;display:inline-block;margin:0 8px 8px 0"><img src="' + u + '" style="width:62px;height:62px;object-fit:cover;border-radius:10px"><button type="button" data-i="' + i + '" class="galdel" style="position:absolute;top:-7px;right:-7px;background:#b91c1c;color:#fff;border:none;border-radius:50%;width:20px;height:20px;cursor:pointer;font-size:13px;line-height:1">\u00d7</button></span>';
+      return '<span style="position:relative;display:inline-block;margin:0 8px 8px 0"><img alt="Business photo" src="' + u + '" style="width:62px;height:62px;object-fit:cover;border-radius:10px"><button type="button" data-i="' + i + '" class="galdel" style="position:absolute;top:-7px;right:-7px;background:#b91c1c;color:#fff;border:none;border-radius:50%;width:20px;height:20px;cursor:pointer;font-size:13px;line-height:1">\u00d7</button></span>';
     }).join('');
     $('galPrev').querySelectorAll('.galdel').forEach(function (btn) {
       btn.addEventListener('click', function () { galleryArr.splice(+btn.getAttribute('data-i'), 1); renderGalPrev(); });
