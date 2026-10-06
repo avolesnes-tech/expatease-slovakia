@@ -119,7 +119,7 @@
  }
  .about-hero-inner {
  max-width: 960px; margin: 0 auto; position: relative; z-index: 1;
- display: grid; grid-template-columns: 1fr 360px; gap: 64px; align-items: center;
+ display: grid; grid-template-columns: 1fr 300px; gap: 56px; align-items: center;
  }
  .hero-eyebrow {
  display: inline-flex; align-items: center; gap: 8px;
@@ -233,13 +233,51 @@
 
  @media (max-width: 860px) {
  .about-hero-inner { grid-template-columns: 1fr; gap: 48px; }
- .founder-photo-wrap { order: -1; max-width: 280px; margin: 0 auto; }
+ .founder-photo-wrap { order: -1; max-width: 210px; margin: 0 auto; }
  .stats-row { grid-template-columns: 1fr 1fr; }
  .stats-row .stat-card:last-child { grid-column: span 2; }
  .mission-card { padding: 28px 24px; }
  .nav { padding: 0 16px; }
  .story-wrap { padding: 64px 20px 60px; }
  }
+
+/* ─── STANDARD FOOTER (aligned with rest of site) ─── */
+.footer { background: var(--gray-900); color: white; padding: 72px 48px 32px; text-align: left; }
+.footer-inner { max-width: 1200px; margin: 0 auto; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+.footer-brand {}
+.footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.footer-logo-mark { flex-shrink: 0; display: flex; align-items: center; }
+.footer-logo-text { font-family: var(--font-head); font-weight: 700; font-size: 17px; color: white; }
+.footer-tagline { font-size: 14px; color: rgba(255,255,255,0.45); font-weight: 300; line-height: 1.7; max-width: 240px; margin-bottom: 24px; }
+.footer-socials { display: flex; gap: 10px; }
+.footer-social { width: 36px; height: 36px; border-radius: 10px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 14px; color: white; cursor: pointer; transition: var(--transition); text-decoration: none; }
+.footer-social:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+.footer-col-title { font-family: var(--font-head); font-size: 13px; font-weight: 700; color: white; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; padding: 0; margin: 0; }
+.footer-links a { font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.5); text-decoration: none; transition: var(--transition); }
+.footer-links a:hover { color: white; padding-left: 4px; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px; display: flex; align-items: center; justify-content: space-between; }
+.footer-copy { font-size: 13px; color: rgba(255,255,255,0.3); font-weight: 300; }
+.footer-legal { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-legal a { font-size: 13px; color: rgba(255,255,255,0.3); text-decoration: none; font-weight: 300; transition: var(--transition); }
+.footer-legal a:hover { color: rgba(255,255,255,0.7); }
+@media (max-width: 860px) {
+  .footer { padding: 56px 20px 28px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; margin-bottom: 36px; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; align-items: center; }
+  .footer-legal { justify-content: center; }
+}
+/* ─── ABOUT: tighter hero/photo on small screens ─── */
+@media (max-width: 560px) {
+  .about-hero { padding: 100px 18px 52px; }
+  .about-hero-inner { gap: 30px; }
+  .hero-h1 { font-size: 1.95rem; }
+  .founder-photo-wrap { max-width: 190px; }
+  .story-wrap { padding: 56px 20px 52px; }
+  .stats-row { grid-template-columns: 1fr; gap: 14px; }
+}
+
 </style>
 
 <link rel="canonical" href="https://expatbase.sk/about.html">
@@ -288,7 +326,7 @@
  </a>
  <ul class="nav-links">
  <li><a href="index.html#categories">Find Experts</a></li>
- <li><a href="index.html#guides">Guides</a></li>
+ <li><a href="index.html#blog">Guides</a></li>
  <li><a href="about.html" class="active">About</a></li>
  </ul>
  <div class="nav-right">
@@ -309,7 +347,7 @@
  </div>
  <nav class="mobile-nav">
  <a href="index.html#categories">Find Experts</a>
- <a href="index.html#guides">Guides</a>
+ <a href="index.html#blog">Guides</a>
  <a href="about.html">About</a>
  </nav>
  <div class="mobile-drawer-footer">
@@ -428,19 +466,57 @@
 
 <!-- FOOTER -->
 <footer class="footer">
+ <div class="footer-inner">
+ <div class="footer-grid">
+ <div class="footer-brand">
  <div class="footer-logo">
- <svg width="26" height="30" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light"/></svg>
- <span class="footer-logo-text">ExpatBase Slovakia</span>
+ <div class="footer-logo-mark">
+ <svg width="32" height="37" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-dark"/></svg>
  </div>
- <div class="footer-links-row">
- <a href="index.html">Home</a>
- <a href="index.html#categories">Find Experts</a>
- <a href="index.html#guides">Guides</a>
- <a href="about.html">About</a>
- <a href="privacy-policy.html">Privacy</a>
- <a href="terms.html">Terms</a>
+ <div class="footer-logo-text">ExpatBase Slovakia</div>
  </div>
+ <p class="footer-tagline">Life in Slovakia, made simple. The #1 resource for English-speaking expats in Bratislava.</p>
+ <div class="footer-socials">
+ <a href="#" class="footer-social" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+ <a href="#" class="footer-social" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+ <a href="#" class="footer-social" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+ </div>
+ </div>
+ <div>
+ <div class="footer-col-title">Find Experts</div>
+ <ul class="footer-links">
+ <li><a href="doctors.html">Doctors &amp; Specialists</a></li>
+ <li><a href="lawyers.html">Lawyers &amp; Legal</a></li>
+ <li><a href="banks.html">Banks &amp; Finance</a></li>
+ <li><a href="barbers.html">Hair, Beauty &amp; Tattoo</a></li>
+ <li><a href="plumbers.html">Handymen</a></li>
+ <li><a href="vets.html">Vets &amp; Pet Care</a></li>
+ <li><a href="real-estate.html">Real Estate</a></li>
+ <li><a href="schools.html">Schools &amp; Learning</a></li>
+ <li><a href="others.html">Other Services</a></li>
+ </ul>
+ </div>
+ <div>
+ <div class="footer-col-title">ExpatBase</div>
+ <ul class="footer-links">
+ <li><a href="index.html">Home</a></li>
+ <li><a href="index.html#blog">Guides</a></li>
+ <li><a href="about.html">About</a></li>
+ <li><a href="for-businesses.html">For Businesses</a></li>
+ <li><a href="#" data-contact-open>Contact Us</a></li>
+ </ul>
+ </div>
+ </div>
+ <div class="footer-bottom">
  <div class="footer-copy">© 2026 ExpatBase Slovakia. All rights reserved.</div>
+ <div class="footer-legal">
+ <a href="privacy-policy.html">Privacy Policy</a>
+ <a href="terms.html">Terms of Use</a>
+ <a href="cookie-policy.html">Cookie Policy</a>
+ <a href="#" data-contact-open>Contact Us</a>
+ </div>
+ </div>
+ </div>
 </footer>
 
 <script>
