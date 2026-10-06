@@ -1451,8 +1451,8 @@
  </a>
  <ul class="nav-links">
  <li><a href="index.html#categories" class="active">Find Experts</a></li>
- <li><a href="index.html#guides">Guides</a></li>
- <li><a href="index.html#about">About</a></li>
+ <li><a href="index.html#blog">Guides</a></li>
+ <li><a href="about.html">About</a></li>
  </ul>
  <div class="nav-right">
  <button class="nav-cta" onclick="window.location='for-businesses.html'">
@@ -1466,6 +1466,26 @@
  <span></span><span></span><span></span>
  </button>
 </nav>
+<!-- Mobile menu -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<aside class="mobile-drawer" id="mobileDrawer" aria-label="Navigation menu">
+ <div class="mobile-drawer-header">
+ <a href="index.html" class="nav-logo" style="text-decoration:none;">
+ <svg width="24" height="28" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light"/></svg>
+ <span class="nav-logo-text" style="font-size:16px;">ExpatBase</span>
+ </a>
+ <button class="mobile-close" id="mobileClose" aria-label="Close menu">&#x2715;</button>
+ </div>
+ <nav class="mobile-nav">
+ <a href="index.html#categories">Find Experts</a>
+ <a href="index.html#blog">Guides</a>
+ <a href="about.html">About</a>
+ </nav>
+ <div class="mobile-drawer-footer">
+ <a class="mob-btn mob-btn-primary" href="for-businesses.html" style="text-decoration:none;">For Businesses</a>
+ <a class="mob-btn mob-btn-ghost" href="index.html">Join the community</a>
+ </div>
+</aside>
 
 
 
@@ -1817,6 +1837,7 @@
  <a href="privacy-policy.html">Privacy Policy</a>
  <a href="terms.html">Terms of Use</a>
  <a href="cookie-policy.html">Cookie Policy</a>
+ <a href="#" data-contact-open>Contact Us</a>
  </div>
  </div>
  </div>
@@ -1995,5 +2016,7 @@
 
 <script>window.EB_CATEGORY="Banks & Finance";</script>
 <script src="listings.js" defer></script>
+<script src="counts.js" defer></script>
+<script src="contact.js" defer></script>
 </body>
 </html>

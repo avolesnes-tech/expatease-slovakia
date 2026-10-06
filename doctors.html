@@ -1447,8 +1447,8 @@
  <ul class="nav-links">
  <!-- Active: Find Experts -->
  <li><a href="index.html#categories" class="active">Find Experts</a></li>
- <li><a href="index.html#guides">Guides</a></li>
- <li><a href="index.html#about">About</a></li>
+ <li><a href="index.html#blog">Guides</a></li>
+ <li><a href="about.html">About</a></li>
  </ul>
  <div class="nav-right">
  <a href="index.html" class="nav-cta">
@@ -1474,8 +1474,8 @@
  </div>
  <nav class="mobile-nav">
  <a href="index.html#categories">Find Experts</a>
- <a href="index.html#guides">Guides</a>
- <a href="index.html#about">About</a>
+ <a href="index.html#blog">Guides</a>
+ <a href="about.html">About</a>
  </nav>
  <div class="mobile-drawer-footer">
  <a class="mob-btn mob-btn-primary" href="index.html">
@@ -1572,12 +1572,20 @@
  <select class="filter-select" id="filterSpecialty" aria-label="Filter by specialty">
  <option value="">All specialties</option>
  <option>General Practitioner</option>
- <option>Cardiologist</option>
- <option>Dermatologist</option>
  <option>Pediatrician</option>
- <option>Gynecologist</option>
  <option>Dentist</option>
+ <option>Gynecologist</option>
+ <option>Dermatologist</option>
+ <option>Ophthalmologist</option>
+ <option>ENT (Ear, Nose &amp; Throat)</option>
+ <option>Orthopedist</option>
+ <option>Cardiologist</option>
+ <option>Neurologist</option>
  <option>Psychiatrist</option>
+ <option>Psychologist / Therapist</option>
+ <option>Physiotherapist</option>
+ <option>Endocrinologist</option>
+ <option>Urologist</option>
  <option>Other</option>
  </select>
  </div>
@@ -1708,7 +1716,7 @@
  </div>
  </div>
  <div class="faq-answer">
- Not necessarily, but it helps. All 48 doctors listed here speak at least English. That said, administrative staff at clinics and hospitals may only speak Slovak. When booking an appointment, specify that you need an English-speaking doctor. Our listings clearly show which languages each doctor speaks.
+ Not necessarily, but it helps. All doctors listed here speak at least English. That said, administrative staff at clinics and hospitals may only speak Slovak. When booking an appointment, specify that you need an English-speaking doctor. Our listings clearly show which languages each doctor speaks.
  </div>
  </div>
 
@@ -1780,7 +1788,7 @@
 
  <div class="related-grid">
  <!-- Lawyers -->
- <a href="#" class="related-card">
+ <a href="lawyers.html" class="related-card">
  <div class="related-card-inner">
  <div class="related-icon">
  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -1788,14 +1796,14 @@
  <div class="related-name">Lawyers &amp; Legal</div>
  <p class="related-desc">Residence permits, employment contracts, property law, all explained in English.</p>
  <span class="related-link">
- Browse 31 lawyers
+ <span data-eb-count="Lawyers &amp; Legal" data-eb-noun="lawyers" data-eb-prefix="Browse ">Browse lawyers</span>
  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
  </span>
  </div>
  </a>
 
  <!-- Banks -->
- <a href="#" class="related-card">
+ <a href="banks.html" class="related-card">
  <div class="related-card-inner">
  <div class="related-icon">
  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
@@ -1803,14 +1811,14 @@
  <div class="related-name">Banks &amp; Finance</div>
  <p class="related-desc">Open a Slovak bank account, understand your tax obligations, find an accountant.</p>
  <span class="related-link">
- Browse 14 listings
+ <span data-eb-count="Banks &amp; Finance" data-eb-noun="listings" data-eb-prefix="Browse ">Browse listings</span>
  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
  </span>
  </div>
  </a>
 
  <!-- Real Estate -->
- <a href="#" class="related-card">
+ <a href="real-estate.html" class="related-card">
  <div class="related-card-inner">
  <div class="related-icon">
  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -1818,7 +1826,7 @@
  <div class="related-name">Real Estate</div>
  <p class="related-desc">Find English-speaking agents and landlords who understand expat needs and contracts.</p>
  <span class="related-link">
- Browse 34 listings
+ <span data-eb-count="Real Estate" data-eb-noun="listings" data-eb-prefix="Browse ">Browse listings</span>
  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
  </span>
  </div>
@@ -1883,17 +1891,17 @@
  <li><a href="company-setup-guide.html">Setting up a company (s.r.o.)</a></li>
  <li><a href="tax-guide.html">Taxes for expats</a></li>
  <li><a href="pension-guide.html">Pension system</a></li>
- <li><a href="index.html#guides">All guides →</a></li>
+ <li><a href="index.html#blog">All guides →</a></li>
  </ul>
  </div>
  <div>
  <div class="footer-col-title">Resources</div>
  <ul class="footer-links">
- <li><a href="index.html#guides">Guides</a></li>
+ <li><a href="index.html#blog">Guides</a></li>
  <li><a href="#">Newsletter</a></li>
  <li><a href="for-businesses.html">For Businesses</a></li>
  <li><a href="about.html">About ExpatBase</a></li>
- <li><a href="#">Contact Us</a></li>
+ <li><a href="#" data-contact-open>Contact Us</a></li>
  </ul>
  </div>
  </div>
@@ -1921,12 +1929,20 @@
  <select class="filter-select" style="width:100%;" aria-label="Filter by specialty">
  <option value="">All specialties</option>
  <option>General Practitioner</option>
- <option>Cardiologist</option>
- <option>Dermatologist</option>
  <option>Pediatrician</option>
- <option>Gynecologist</option>
  <option>Dentist</option>
+ <option>Gynecologist</option>
+ <option>Dermatologist</option>
+ <option>Ophthalmologist</option>
+ <option>ENT (Ear, Nose &amp; Throat)</option>
+ <option>Orthopedist</option>
+ <option>Cardiologist</option>
+ <option>Neurologist</option>
  <option>Psychiatrist</option>
+ <option>Psychologist / Therapist</option>
+ <option>Physiotherapist</option>
+ <option>Endocrinologist</option>
+ <option>Urologist</option>
  <option>Other</option>
  </select>
  </div>
@@ -2098,5 +2114,7 @@
 
 <script>window.EB_CATEGORY="Doctors & Specialists";</script>
 <script src="listings.js" defer></script>
+<script src="counts.js" defer></script>
+<script src="contact.js" defer></script>
 </body>
 </html>

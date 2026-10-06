@@ -205,6 +205,21 @@ export async function onRequestPost(context) {
       return response({ success: true });
     }
 
+    if (type === 'contact') {
+      const { name, email, message, company } = body;
+      if (company) return response({ success: true }); // honeypot: silently accept bots
+      if (!email || !message) return response({ error: 'Missing fields' }, 400);
+      const esc = (s) => String(s || '').replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]));
+      await sendBrevo(apiKey, {
+        sender: FROM,
+        to: [{ email: 'hello@expatbase.sk', name: 'ExpatBase' }],
+        replyTo: { email, name: name || email },
+        subject: `[ExpatBase] Contact form — ${name || email}`,
+        htmlContent: `<p><strong>From:</strong> ${esc(name)} &lt;${esc(email)}&gt;</p><p><strong>Message:</strong></p><p>${esc(message).replace(/\n/g, '<br>')}</p>`,
+      });
+      return response({ success: true });
+    }
+
     return response({ error: 'Unknown email type' }, 400);
 
   } catch (err) {
