@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pre firmy — Pridajte sa na ExpatBase | Oslovte anglicky hovoriacich expatov v Bratislave</title>
+<meta name="description" content="Buďte videní anglicky hovoriacimi expatmi v Bratislave. Zapíšte svoju firmu na ExpatBase zadarmo — upgrade až keď budete chcieť. Zakladajúci partneri majú Pro na 6 mesiacov zdarma.">
+<link rel="canonical" href="https://expatbase.sk/for-businesses-sk.html">
+<meta property="og:title" content="Pre firmy — ExpatBase">
+<meta property="og:description" content="Expati hľadajú po anglicky. Postarajte sa, aby našli práve vás. Bezplatný zápis, voliteľný upgrade — zakladajúci partneri majú Pro 6 mesiacov zdarma.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#1A4F8A; --blue-dark:#0F3360; --green:#2E9E6B; --green-dark:#1D7A50;
+  --ink:#0F3360; --gray-700:#3B4A5E; --gray-500:#6B7A90; --gray-100:#E4EBF3;
+  --bg:#F7FAFD; --white:#fff;
+  --head:'Urbanist',system-ui,sans-serif; --body:'DM Sans',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:var(--body);color:var(--gray-700);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-100)}
+.nav-inner{display:flex;align-items:center;gap:26px;height:66px}
+.logo{display:flex;align-items:center;gap:9px;font-family:var(--head);font-weight:800;font-size:20px;color:var(--ink)}
+.nav-links{display:flex;gap:22px;margin-left:8px;list-style:none}
+.nav-links a{font-family:var(--head);font-weight:600;font-size:15px;color:var(--gray-700)}
+.nav-links a:hover,.nav-links a.active{color:var(--blue)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:16px}
+.lang-switch{display:inline-flex;border:1px solid var(--gray-100);border-radius:999px;overflow:hidden;font-family:var(--head);font-weight:700;font-size:12.5px}
+.lang-switch a{padding:6px 11px;color:var(--gray-500)}
+.lang-switch a.on{background:var(--blue);color:#fff}
+.btn-nav{font-family:var(--head);font-weight:700;font-size:14px;color:#fff;background:linear-gradient(135deg,var(--green-dark),var(--green));padding:10px 18px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;border:0}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;background:#0B1F3A;color:#fff}
+.hero::before{content:"";position:absolute;width:540px;height:540px;border-radius:50%;background:radial-gradient(circle,rgba(46,158,107,.30),transparent 66%);top:-180px;right:-140px}
+.hero::after{content:"";position:absolute;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.20),transparent 70%);bottom:-200px;left:-140px}
+.hero-inner{position:relative;z-index:1;padding:84px 24px;max-width:730px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--head);font-weight:800;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:#8fe0b6;background:rgba(46,158,107,.14);border:1px solid rgba(46,158,107,.34);padding:6px 13px;border-radius:999px;margin-bottom:20px}
+.hero h1{font-family:var(--head);font-weight:900;font-size:50px;line-height:1.05;letter-spacing:-.02em;color:#fff;margin-bottom:18px}
+.hero h1 em{font-style:normal;color:#8fe0b6}
+.hero p{font-size:19px;color:rgba(255,255,255,.85);max-width:600px;margin-bottom:14px}
+.hero .free-line{font-family:var(--head);font-weight:700;font-size:17px;color:#8fe0b6;margin-bottom:30px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn-primary{font-family:var(--head);font-weight:800;font-size:16px;color:#0B1F3A;background:#fff;padding:15px 28px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;box-shadow:0 12px 32px rgba(0,0,0,.25);transition:.2s;cursor:pointer;border:0}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-ghost{font-family:var(--head);font-weight:700;font-size:15px;color:#fff;border:1.5px solid rgba(255,255,255,.45);padding:14px 22px;border-radius:999px}
+.btn-ghost:hover{background:rgba(255,255,255,.1)}
+
+.section{padding:70px 0}
+.section-head{text-align:center;max-width:680px;margin:0 auto 44px}
+.section-eyebrow{font-family:var(--head);font-weight:700;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--green-dark)}
+.section-title{font-family:var(--head);font-weight:800;font-size:34px;color:var(--ink);letter-spacing:-.01em;margin-top:8px}
+.section-sub{color:var(--gray-500);font-size:16px;margin-top:12px}
+
+.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.benefit{background:#fff;border:1px solid var(--gray-100);border-radius:18px;padding:26px 24px;box-shadow:0 2px 16px rgba(26,79,138,.06)}
+.benefit .ic{width:46px;height:46px;border-radius:12px;background:#EAF2FD;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px}
+.benefit h3{font-family:var(--head);font-weight:700;font-size:17px;color:var(--ink);margin-bottom:7px}
+.benefit p{font-size:14.5px;color:var(--gray-500)}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.step{text-align:center;padding:0 10px}
+.step .n{width:44px;height:44px;margin:0 auto 14px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--green));color:#fff;font-family:var(--head);font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center}
+.step h3{font-family:var(--head);font-weight:700;font-size:17px;color:var(--ink);margin-bottom:6px}
+.step p{font-size:14.5px;color:var(--gray-500)}
+
+.plans-wrap{background:#fff;border-top:1px solid var(--gray-100);border-bottom:1px solid var(--gray-100)}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:820px;margin:0 auto}
+.plan{border:1px solid var(--gray-100);border-radius:22px;padding:32px 28px;background:#fff}
+.plan.pro{border:2px solid var(--green);box-shadow:0 16px 44px rgba(46,158,107,.14);position:relative}
+.plan .pname{font-family:var(--head);font-weight:800;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-500)}
+.plan.pro .pname{color:var(--green-dark)}
+.plan .pprice{font-family:var(--head);font-weight:900;font-size:40px;color:var(--ink);line-height:1;margin:10px 0 4px}
+.plan .pprice small{font-size:15px;font-weight:600;color:var(--gray-500)}
+.plan .psub{font-size:14px;color:var(--gray-500);margin-bottom:20px;min-height:44px}
+.plan ul{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:24px}
+.plan li{display:flex;gap:10px;font-size:14.5px;color:var(--gray-700)}
+.plan li .ck{color:var(--green);font-weight:800}
+.plan .pbtn{display:block;text-align:center;font-family:var(--head);font-weight:800;font-size:15px;padding:13px;border-radius:999px;cursor:pointer;border:0;width:100%}
+.plan .pbtn.ghost{border:1.6px solid var(--blue);color:var(--blue-dark);background:#fff}
+.plan .pbtn.solid{color:#fff;background:linear-gradient(135deg,var(--green-dark),var(--green))}
+.pill{position:absolute;top:-13px;left:50%;transform:translateX(-50%);font-family:var(--head);font-weight:800;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--green-dark);padding:5px 14px;border-radius:999px;white-space:nowrap}
+
+.founding{background:linear-gradient(135deg,#0F3360,#1A4F8A);color:#fff;border-radius:24px;padding:44px 40px;text-align:center;max-width:820px;margin:0 auto}
+.founding .fp-tag{display:inline-block;font-family:var(--head);font-weight:800;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:#0B1F3A;background:#8fe0b6;padding:4px 12px;border-radius:999px;margin-bottom:16px}
+.founding h2{font-family:var(--head);font-weight:900;font-size:30px;color:#fff;margin-bottom:12px;letter-spacing:-.01em}
+.founding p{color:rgba(255,255,255,.84);font-size:16px;max-width:560px;margin:0 auto 24px}
+.founding .btn-primary{color:#0B1F3A}
+
+.faq{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.qa{background:#fff;border:1px solid var(--gray-100);border-radius:14px;padding:20px 22px}
+.qa h4{font-family:var(--head);font-weight:700;font-size:16px;color:var(--ink);margin-bottom:6px}
+.qa p{font-size:14.5px;color:var(--gray-500)}
+
+.foot{background:#0F3360;color:rgba(255,255,255,.7);padding:38px 0;font-size:14px}
+.foot-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.foot a{color:rgba(255,255,255,.7)} .foot a:hover{color:#fff}
+.foot-links{display:flex;gap:20px;flex-wrap:wrap}
+
+/* REGISTRATION MODAL */
+.reg-ov{position:fixed;inset:0;z-index:1000;display:none;align-items:flex-start;justify-content:center;padding:40px 18px;background:rgba(10,18,35,.6);backdrop-filter:blur(6px);overflow-y:auto}
+.reg-ov.open{display:flex}
+.reg-card{width:100%;max-width:560px;background:#fff;border-radius:22px;box-shadow:0 24px 70px rgba(10,18,35,.35);overflow:hidden;font-family:var(--body);animation:regin .22s ease}
+@keyframes regin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.reg-head{background:linear-gradient(135deg,var(--blue),var(--green));padding:24px 28px;color:#fff;position:relative}
+.reg-head h2{font-family:var(--head);font-weight:800;font-size:1.35rem;margin:0}
+.reg-head p{font-size:.9rem;opacity:.92;margin:5px 0 0}
+.reg-x{position:absolute;top:18px;right:18px;width:34px;height:34px;border:0;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:18px;cursor:pointer}
+.reg-x:hover{background:rgba(255,255,255,.3)}
+.reg-body{padding:24px 28px 28px}
+.reg-plans{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
+.reg-plan{border:1.6px solid var(--gray-100);border-radius:16px;padding:16px;cursor:pointer;transition:.15s;background:#fff;text-align:left}
+.reg-plan:hover{border-color:var(--green)}
+.reg-plan.sel{border-color:var(--green);box-shadow:0 0 0 3px rgba(46,158,107,.14)}
+.reg-plan .rp-n{font-family:var(--head);font-weight:800;font-size:15px;color:var(--ink)}
+.reg-plan .rp-p{font-family:var(--head);font-weight:800;font-size:13px;color:var(--green-dark);margin-top:3px}
+.reg-plan .rp-d{font-size:12.5px;color:var(--gray-500);margin-top:6px;line-height:1.45}
+.reg-field{margin-bottom:14px}
+.reg-field label{display:block;font-family:var(--head);font-size:.82rem;font-weight:700;color:var(--gray-700);margin-bottom:6px}
+.reg-field .req{color:#c0392b}
+.reg-field input,.reg-field select,.reg-field textarea{width:100%;box-sizing:border-box;border:1px solid var(--gray-100);border-radius:12px;padding:11px 13px;font-size:.95rem;font-family:inherit;color:var(--ink);background:#fff;transition:.15s}
+.reg-field input:focus,.reg-field select:focus,.reg-field textarea:focus{outline:0;border-color:var(--green);box-shadow:0 0 0 3px rgba(46,158,107,.14)}
+.reg-field textarea{resize:vertical;min-height:72px}
+.reg-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.reg-langs{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+.reg-lang{display:inline-flex;align-items:center;gap:6px;border:1.4px solid var(--gray-100);border-radius:999px;padding:7px 13px;font-size:.85rem;cursor:pointer;user-select:none}
+.reg-lang input{width:auto;margin:0}
+.reg-lang.on{border-color:var(--green);background:#E6F7EF;color:var(--green-dark);font-weight:600}
+.reg-pro-only{display:none}
+.reg-pro-only.show{display:block}
+.reg-hint{font-size:.78rem;color:var(--gray-500);margin-top:-8px;margin-bottom:14px}
+.reg-send{width:100%;border:0;border-radius:999px;padding:14px;font-family:var(--head);font-weight:800;font-size:1rem;color:#fff;background:linear-gradient(135deg,var(--green-dark),var(--green));cursor:pointer;transition:.15s}
+.reg-send:hover{opacity:.93}
+.reg-send:disabled{opacity:.6;cursor:default}
+.reg-status{font-size:.88rem;margin-top:12px;text-align:center;min-height:1.1em}
+.reg-status.err{color:#c0392b}
+.reg-note{font-size:.78rem;color:var(--gray-500);text-align:center;margin-top:12px;line-height:1.5}
+.reg-done{text-align:center;padding:20px 6px}
+.reg-done .tick{width:60px;height:60px;border-radius:50%;background:#E6F7EF;color:var(--green-dark);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:30px}
+.reg-done h3{font-family:var(--head);font-weight:800;color:var(--ink);font-size:1.25rem;margin:0 0 8px}
+.reg-done p{color:var(--gray-500);font-size:.95rem;margin:0}
+.reg-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+@media(max-width:860px){
+  .nav-links{display:none}
+  .hero h1{font-size:37px}
+  .hero-inner{padding:60px 24px}
+  .benefits{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr;gap:28px}
+  .plans{grid-template-columns:1fr}
+  .section-title{font-size:27px}
+  .reg-plans{grid-template-columns:1fr}
+  .reg-row{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .nav-inner{gap:12px}
+  .nav-right{gap:10px}
+  .nav-right a[href="business-login.html"]{display:none}
+  .btn-nav{padding:9px 13px;font-size:13px}
+  .logo{font-size:18px}
+}
+</style>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231A4F8A'/%3E%3Ctext x='16' y='22' font-family='Arial Black,sans-serif' font-size='16' font-weight='900' fill='white' text-anchor='middle'%3EEB%3C/text%3E%3C/svg%3E">
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7dd3174682984f72b6609a6d522b1f98"}'></script><!-- End Cloudflare Web Analytics -->
+<script defer src="cookie-consent.js"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="logo"><svg width="27" height="32" viewBox="0 0 120 140" aria-hidden="true" style="flex:0 0 auto"><defs><linearGradient id="ebFB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1A4F8A"/><stop offset="1" stop-color="#2E9E6B"/></linearGradient></defs><path d="M60 132 C 36 110 18 86 18 54 A 42 42 0 1 1 102 54 C 102 86 84 110 60 132 Z" fill="url(#ebFB)"/><text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text></svg>ExpatBase</a>
+    <ul class="nav-links">
+      <li><a href="index.html#categories">Nájsť expertov</a></li>
+      <li><a href="index.html#blog">Sprievodcovia</a></li>
+      <li><a href="about.html">O nás</a></li>
+      <li><a href="for-businesses-sk.html" class="active">Pre firmy</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="lang-switch"><a href="for-businesses.html">EN</a><a href="for-businesses-sk.html" class="on">SK</a></span>
+      <a href="business-login.html" style="font-family:var(--head);font-weight:600;font-size:14px;color:var(--gray-700)">Prihlásiť sa</a>
+      <button class="btn-nav" data-reg-open>Pridať firmu →</button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <span class="eyebrow">🤝 Pre firmy · Staňte sa partnerom</span>
+    <h1>Expati hľadajú.<br><em>Postarajte sa, aby našli vás.</em></h1>
+    <p>Každý deň si cudzinci v Bratislave hľadajú lekára, právnika, inštalatéra či kaderníčku, s ktorými sa dohovoria <strong>po anglicky</strong>. ExpatBase je miesto, kde hľadajú — dostaňte svoju firmu priamo pred nich.</p>
+    <p class="free-line">✦ &nbsp;Zapíšte sa zadarmo. Bez karty, bez háčika. Upgrade až keď budete chcieť.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" data-reg-open>Vytvoriť bezplatný zápis →</button>
+      <a href="#benefits" class="btn-ghost">Prečo sa pridať</a>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section" id="benefits">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Prečo sa pridať</div>
+      <h2 class="section-title">Zákazníci, ku ktorým sa konkurencia nedostane</h2>
+      <p class="section-sub">Tisíce expatov na Slovensku chcú nakupovať od firiem, ktoré hovoria ich jazykom. ExpatBase je spôsob, akým vás nájdu.</p>
+    </div>
+    <div class="benefits">
+      <div class="benefit"><div class="ic">🔎</div><h3>Nájdu vás — vo svojom jazyku</h3><p>Expati nehľadajú po slovensky, takže vás na Googli ani Zozname nenájdu. Na ExpatBase vás nájdu presne podľa služby, ktorú potrebujú, po anglicky.</p></div>
+      <div class="benefit"><div class="ic">🌍</div><h3>Verné, rastúce publikum</h3><p>Oslovte zohratú, rýchlo rastúcu komunitu cudzincov, ktorí tu žijú a pracujú — zákazníkov, ktorých väčšina firiem prehliada a ktorí zostávajú verní tým, čo ich prijmú.</p></div>
+      <div class="benefit"><div class="ic">✅</div><h3>Dôvera na prvý pohľad</h3><p>Overené miesto v katalógu postavenom pre expatov povie neistému nováčikovi za sekundu „táto firma mi rozumie" — ešte skôr, než zavolá.</p></div>
+      <div class="benefit"><div class="ic">🗂️</div><h3>Profil, ktorý predáva za vás</h3><p>Fotky, otváracie hodiny, web, sociálne siete a recenzie — všetko, čo váhajúci nováčik potrebuje, aby prestal scrollovať a vybral si práve vás.</p></div>
+      <div class="benefit"><div class="ic">⭐</div><h3>Recenzie, ktoré robia prácu za vás</h3><p>Jeden spokojný expat klient vám získa ďalších desať. Reálne recenzie premenia odporúčania na marketing, ktorý beží nonstop.</p></div>
+      <div class="benefit"><div class="ic">📈</div><h3>Buďte prvé meno, ktoré uvidia</h3><p>S upgradom vystúpite na vrch svojej kategórie a budete videní skôr, než sa konkurencia vôbec objaví.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" style="background:#fff;border-top:1px solid var(--gray-100);border-bottom:1px solid var(--gray-100)">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Ako to funguje</div>
+      <h2 class="section-title">Od registrácie k viditeľnosti v troch krokoch</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Pridajte svoju firmu</h3><p>Pár údajov, asi dve minúty. A je to — ste vnútri.</p></div>
+      <div class="step"><div class="n">2</div><h3>Overíme a zverejníme</h3><p>Potvrdíme, že naozaj obslúžite klientov po anglicky, a váš profil ide naživo do správnej kategórie.</p></div>
+      <div class="step"><div class="n">3</div><h3>Expati sa ozvú</h3><p>Nájdu vás a spoja sa s vami priamo. Kedykoľvek môžete upgradnúť a osloviť ich ešte viac.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANS -->
+<section class="section plans-wrap" id="plans">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Jednoducho a férovo</div>
+      <h2 class="section-title">Začnite zadarmo. Rastite, keď budete pripravení.</h2>
+      <p class="section-sub">Základný zápis je zadarmo natrvalo. Či spravíte viac, je úplne na vás — nikdy žiadny háčik.</p>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <div class="pname">Basic</div>
+        <div class="pprice">Zadarmo<small> &nbsp;navždy</small></div>
+        <div class="psub">Všetko, čo potrebujete, aby vás expati objavili.</div>
+        <ul>
+          <li><span class="ck">✓</span> Názov firmy a kategória</li>
+          <li><span class="ck">✓</span> Telefón, e-mail a adresa</li>
+          <li><span class="ck">✓</span> Jednoriadkový popis</li>
+          <li><span class="ck">✓</span> Zaradenie vo vyhľadávaní a kategórii</li>
+        </ul>
+        <button class="pbtn ghost" data-reg-open data-reg-plan="basic">Vytvoriť bezplatný zápis</button>
+      </div>
+      <div class="plan pro">
+        <span class="pill">Zakladajúci partneri: 6 mesiacov zdarma</span>
+        <div class="pname">Pro</div>
+        <div class="pprice">Upgrade<small> &nbsp;keď budete chcieť</small></div>
+        <div class="psub">Všetko z Basic — plus nástroje, aby ste vynikli a získali viac klientov. <strong>Prvých 6 mesiacov zdarma</strong> ako zakladajúci partner.</div>
+        <ul>
+          <li><span class="ck">✓</span> Všetko z Basic, a navyše:</li>
+          <li><span class="ck">✓</span> Plný profil: fotky, hodiny, web a sociálne siete</li>
+          <li><span class="ck">✓</span> Prioritné umiestnenie v kategórii</li>
+          <li><span class="ck">✓</span> Zvýraznené recenzie a odznak Partner</li>
+        </ul>
+        <button class="pbtn solid" data-reg-open data-reg-plan="premium">Stať sa zakladajúcim partnerom →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDING -->
+<section class="section">
+  <div class="wrap">
+    <div class="founding">
+      <span class="fp-tag">Zakladajúci partner</span>
+      <h2>6 mesiacov zdarma — naše poďakovanie za to, že ste pri tom od začiatku.</h2>
+      <p>ExpatBase budujeme spoločne. Pridajte sa teraz ako zakladajúci partner a získajte plný Pro profil <strong>na prvých 6 mesiacov zdarma</strong> — bez karty, dnes neplatíte nič. Len vaša firma, pred expatmi, ktorí ju potrebujú.</p>
+      <button class="btn-primary" data-reg-open data-reg-plan="premium">Vytvoriť bezplatný zápis →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="background:#fff;border-top:1px solid var(--gray-100)">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Dobré vedieť</div>
+      <h2 class="section-title">Odpovede na otázky</h2>
+    </div>
+    <div class="faq">
+      <div class="qa"><h4>Je to naozaj zadarmo?</h4><p>Áno. Základný zápis je zadarmo natrvalo — žiadna karta, nič sa neplatí. Platíte len vtedy, ak sa sami rozhodnete upgradnúť na Pro.</p></div>
+      <div class="qa"><h4>Čo pridáva upgrade?</h4><p>Plný profil (fotky, otváracie hodiny, web, sociálne siete), prioritné umiestnenie v kategórii, zvýraznené recenzie a odznak Partner.</p></div>
+      <div class="qa"><h4>Aká je ponuka pre zakladajúcich partnerov?</h4><p>Pridajte sa počas nášho spustenia a získajte plný Pro profil na prvých 6 mesiacov zdarma. Potom môžete zostať na bezplatnom Basic zápise, ako dlho chcete — bez záväzkov.</p></div>
+      <div class="qa"><h4>Kto môže byť zapísaný?</h4><p>Akákoľvek firma v okolí Bratislavy, ktorá vie skutočne obslúžiť klientov po anglicky (alebo v ďalších jazykoch, ktoré si zvolíte). Každý zápis overujeme — a zápisy, ktoré v skutočnosti neobslúžia klientov po anglicky, môžu byť odstránené, aby katalóg zostal pre expatov dôveryhodný.</p></div>
+      <div class="qa"><h4>Môžem svoj zápis upraviť alebo zrušiť?</h4><p>Kedykoľvek. <a href="business-login.html" style="color:var(--blue);font-weight:600">Prihláste sa e-mailom svojho zápisu</a> a upravte si profil sami — pošleme bezpečný odkaz, bez hesla. Alebo nám napíšte a pomôžeme. Vaše dáta zostávajú v EÚ.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <div>© 2026 ExpatBase Slovakia</div>
+    <div class="foot-links">
+      <a href="index.html#categories">Nájsť expertov</a>
+      <a href="index.html#blog">Sprievodcovia</a>
+      <a href="for-businesses-sk.html">Pre firmy</a>
+      <a href="privacy-policy.html">Súkromie</a>
+      <a href="terms.html">Podmienky</a>
+      <a href="#" data-contact-open>Kontakt</a>
+    </div>
+  </div>
+</footer>
+
+<!-- REGISTRATION MODAL (SK) -->
+<div class="reg-ov" id="regOv" role="dialog" aria-modal="true" aria-labelledby="regTitle">
+  <div class="reg-card">
+    <div class="reg-head">
+      <button class="reg-x" id="regX" aria-label="Zavrieť">&#x2715;</button>
+      <h2 id="regTitle">Pridajte svoju firmu</h2>
+      <p>Pár údajov a ste v katalógu. Zápis je zdarma, bez karty.</p>
+    </div>
+    <div class="reg-body" id="regBody">
+      <form id="regForm" novalidate>
+        <div class="reg-plans">
+          <button type="button" class="reg-plan sel" data-plan="basic">
+            <div class="rp-n">Basic</div><div class="rp-p">Zadarmo navždy</div>
+            <div class="rp-d">Názov, kategória, kontakt a popis. Objavia vás vo vyhľadávaní.</div>
+          </button>
+          <button type="button" class="reg-plan" data-plan="premium">
+            <div class="rp-n">Pro — zakladajúci partner</div><div class="rp-p">6 mesiacov zdarma</div>
+            <div class="rp-d">Plný profil: fotky, web, sociálne siete a prioritné umiestnenie.</div>
+          </button>
+        </div>
+
+        <div class="reg-field"><label for="regName">Názov firmy <span class="req">*</span></label><input id="regName" name="name" type="text" required></div>
+        <div class="reg-field"><label for="regCat">Kategória <span class="req">*</span></label>
+          <select id="regCat" name="category" required>
+            <option value="">Vyberte kategóriu…</option>
+            <option value="Doctors &amp; Specialists">Lekári a špecialisti</option>
+            <option value="Lawyers &amp; Legal">Právnici a právo</option>
+            <option value="Banks &amp; Finance">Banky a financie</option>
+            <option value="Hair, Beauty &amp; Tattoo">Vlasy, krása a tetovanie</option>
+            <option value="Handymen">Údržbári</option>
+            <option value="Builders &amp; Construction">Stavbári a stavebníctvo</option>
+            <option value="Vets">Veterinári</option>
+            <option value="Real Estate">Reality</option>
+            <option value="Schools &amp; Learning">Školy a vzdelávanie</option>
+            <option value="Moving &amp; Relocation">Sťahovanie a presun</option>
+            <option value="Sports &amp; Leisure">Šport a voľný čas</option>
+            <option value="Others">Ostatné</option>
+          </select>
+        </div>
+        <div class="reg-field"><label for="regContact">Kontaktná osoba <span class="req">*</span></label><input id="regContact" name="contact_name" type="text" required></div>
+        <div class="reg-row">
+          <div class="reg-field"><label for="regEmail">E-mail <span class="req">*</span></label><input id="regEmail" name="email" type="email" required></div>
+          <div class="reg-field"><label for="regPhone">Telefón <span class="req">*</span></label><input id="regPhone" name="phone" type="tel" placeholder="+421 …" required></div>
+        </div>
+        <div class="reg-field"><label for="regAddr">Adresa <span class="req">*</span></label><input id="regAddr" name="address" type="text" placeholder="Ulica, mesto" required></div>
+        <div class="reg-field"><label for="regDesc">Krátky popis <span class="req">*</span></label><textarea id="regDesc" name="description" maxlength="180" placeholder="Jednou-dvoma vetami, čo ponúkate (max 180 znakov)."></textarea></div>
+
+        <div class="reg-field">
+          <label>Jazyky, v ktorých obslúžite klientov <span class="req">*</span></label>
+          <div class="reg-langs" id="regLangs">
+            <label class="reg-lang on"><input type="checkbox" value="English" checked> 🇬🇧 Angličtina</label>
+            <label class="reg-lang"><input type="checkbox" value="Slovak"> 🇸🇰 Slovenčina</label>
+            <label class="reg-lang"><input type="checkbox" value="German"> 🇩🇪 Nemčina</label>
+            <label class="reg-lang"><input type="checkbox" value="French"> 🇫🇷 Francúzština</label>
+          </div>
+        </div>
+
+        <div class="reg-pro-only" id="regProBlock">
+          <div class="reg-field"><label for="regWeb">Webová stránka</label><input id="regWeb" name="website" type="url" placeholder="https://…"></div>
+          <div class="reg-row">
+            <div class="reg-field"><label for="regIg">Instagram</label><input id="regIg" type="url" placeholder="https://instagram.com/…"></div>
+            <div class="reg-field"><label for="regFb">Facebook</label><input id="regFb" type="url" placeholder="https://facebook.com/…"></div>
+          </div>
+          <div class="reg-field"><label for="regAbout">O firme (dlhší popis)</label><textarea id="regAbout" placeholder="Predstavte svoju firmu podrobnejšie."></textarea></div>
+        </div>
+
+        <div class="reg-hp"><label>Firma (nevypĺňať)<input name="company" tabindex="-1" autocomplete="off"></label></div>
+
+        <button type="submit" class="reg-send" id="regSend">Odoslať zápis →</button>
+        <div class="reg-status" id="regStatus" role="status"></div>
+        <div class="reg-note">Dnes neplatíte nič. Profil overíme a ozveme sa na zadaný e-mail. Vaše dáta zostávajú v EÚ.</div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  var SB_URL='https://etxqrlrqbjcbjmitnspv.supabase.co';
+  var SB_KEY='sb_publishable_i38f7jyt2HYOjUTNuOsklg_aMofdDvE';
+  var _sb=null;
+  function sb(){ try{ if(!_sb && window.supabase) _sb=window.supabase.createClient(SB_URL,SB_KEY);}catch(e){} return _sb; }
+
+  var ov=document.getElementById('regOv');
+  var form=document.getElementById('regForm');
+  var statusEl=document.getElementById('regStatus');
+  var proBlock=document.getElementById('regProBlock');
+  var plan='basic';
+
+  function setPlan(p){
+    plan=p;
+    document.querySelectorAll('.reg-plan').forEach(function(b){ b.classList.toggle('sel', b.getAttribute('data-plan')===p); });
+    proBlock.classList.toggle('show', p==='premium');
+  }
+  document.querySelectorAll('.reg-plan').forEach(function(b){
+    b.addEventListener('click', function(){ setPlan(b.getAttribute('data-plan')); });
+  });
+
+  function open(preplan){
+    if(preplan) setPlan(preplan);
+    ov.classList.add('open'); document.body.style.overflow='hidden';
+    setTimeout(function(){ var n=document.getElementById('regName'); if(n) n.focus(); }, 60);
+  }
+  function close(){ ov.classList.remove('open'); document.body.style.overflow=''; }
+
+  document.querySelectorAll('[data-reg-open]').forEach(function(el){
+    el.addEventListener('click', function(e){ e.preventDefault(); open(el.getAttribute('data-reg-plan')); });
+  });
+  document.getElementById('regX').addEventListener('click', close);
+  ov.addEventListener('click', function(e){ if(e.target===ov) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && ov.classList.contains('open')) close(); });
+
+  // language chip styling
+  document.querySelectorAll('#regLangs .reg-lang input').forEach(function(ch){
+    ch.addEventListener('change', function(){ ch.closest('.reg-lang').classList.toggle('on', ch.checked); });
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    statusEl.className='reg-status'; statusEl.textContent='';
+    if(form.company.value){ done(); return; } // honeypot
+
+    var langs=Array.from(document.querySelectorAll('#regLangs .reg-lang input:checked')).map(function(c){return c.value;});
+    var get=function(id){ var el=document.getElementById(id); return el?el.value.trim():''; };
+    var row={
+      name:get('regName'), category:get('regCat'), contact_name:get('regContact'),
+      email:get('regEmail'), phone:get('regPhone'), address:get('regAddr'),
+      description:get('regDesc'),
+      english_speaking: langs.indexOf('English')!==-1,
+      languages: langs,
+      subcategories: [], district: null,
+      plan: plan==='premium'?'premium':'basic'
+    };
+    if(plan==='premium'){
+      row.about=get('regAbout')||null;
+      row.website=get('regWeb')||null;
+      row.social_links={ instagram:get('regIg')||null, facebook:get('regFb')||null };
+    }
+
+    // validation
+    var reqd=['name','category','contact_name','email','phone','address','description'];
+    for(var i=0;i<reqd.length;i++){ if(!row[reqd[i]]){ statusEl.className='reg-status err'; statusEl.textContent='Prosím vyplňte všetky povinné polia (*).'; return; } }
+    if(langs.length===0){ statusEl.className='reg-status err'; statusEl.textContent='Vyberte aspoň jeden jazyk.'; return; }
+    if(!/^\S+@\S+\.\S+$/.test(row.email)){ statusEl.className='reg-status err'; statusEl.textContent='Zadajte platný e-mail.'; return; }
+
+    var client=sb();
+    if(!client){ statusEl.className='reg-status err'; statusEl.textContent='Nepodarilo sa spojiť so serverom. Skúste znova, prosím.'; return; }
+
+    var btn=document.getElementById('regSend');
+    btn.disabled=true; btn.textContent='Odosielam…';
+
+    client.from('businesses').insert(row).then(function(res){
+      if(res && res.error){ throw res.error; }
+      done();
+    }).catch(function(err){
+      btn.disabled=false; btn.textContent='Odoslať zápis →';
+      statusEl.className='reg-status err';
+      statusEl.textContent='Niečo sa pokazilo. Skúste znova alebo napíšte na hello@expatbase.sk.';
+    });
+  });
+
+  function done(){
+    document.getElementById('regBody').innerHTML=
+      '<div class="reg-done"><div class="tick">&#10003;</div>'+
+      '<h3>Zápis odoslaný!</h3>'+
+      '<p>Ďakujeme. Váš profil čoskoro overíme a ozveme sa vám na zadaný e-mail. Vitajte na ExpatBase. 💙</p></div>';
+    setTimeout(close, 3400);
+  }
+})();
+</script>
+<script src="contact.js" defer></script>
+</body>
+</html>
