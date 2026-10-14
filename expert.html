@@ -79,6 +79,14 @@
   .srow .ic{color:var(--green);flex:0 0 auto;font-size:1.05rem;width:20px;text-align:center}
   a.srow:hover{color:var(--blue)}
   .cta{display:block;text-align:center;background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;font-family:var(--head);font-weight:700;text-decoration:none;padding:13px;border-radius:999px;margin-top:14px}
+  .oh-pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--head);font-weight:700;font-size:.82rem;padding:5px 12px;border-radius:999px;margin-bottom:10px}
+  .oh-pill.on{background:var(--green-light);color:var(--green-dark)}
+  .oh-pill.off{background:var(--gray-50);color:var(--gray-600)}
+  .oh-pill .dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:0 0 auto}
+  .oh-row{display:flex;justify-content:space-between;gap:14px;font-size:.93rem;color:var(--gray-700);padding:7px 0;border-bottom:1px solid var(--gray-50)}
+  .oh-row:last-child{border-bottom:none}
+  .oh-row.today{font-weight:700;color:var(--blue-dark)}
+  .oh-row .oh-cl{color:var(--gray-400)}
   .cta.secondary{background:#fff;color:var(--blue);border:1.5px solid var(--gray-200);margin-top:10px}
   .cta.wa{background:#25D366;color:#fff;margin-top:10px}
   .cta.wa:hover{background:#1ebe5b}
@@ -188,6 +196,39 @@
   function q(name){return new URLSearchParams(location.search).get(name);}
   function track(type,id){try{fetch(SB+'/rest/v1/events',{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({business_id:id,type:type}),keepalive:true}).catch(function(){});}catch(e){}}
 
+  var EB_DAYS=[['monday','Monday'],['tuesday','Tuesday'],['wednesday','Wednesday'],['thursday','Thursday'],['friday','Friday'],['saturday','Saturday'],['sunday','Sunday']];
+  function ebMin(t){var m=/^(\d{1,2}):(\d{2})$/.exec(String(t||''));if(!m)return null;var h=+m[1],mi=+m[2];if(h>23||mi>59)return null;return h*60+mi;}
+  function ebNowBA(){
+    try{
+      var p={};
+      new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Bratislava',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false})
+        .formatToParts(new Date()).forEach(function(x){p[x.type]=x.value;});
+      var ord={Mon:0,Tue:1,Wed:2,Thu:3,Fri:4,Sat:5,Sun:6};
+      if(Object.prototype.hasOwnProperty.call(ord,p.weekday)) return {day:ord[p.weekday],min:((+p.hour)%24)*60+(+p.minute)};
+    }catch(e){}
+    var n=new Date();return {day:(n.getDay()+6)%7,min:n.getHours()*60+n.getMinutes()};
+  }
+  function ebHoursCard(oh,txt){
+    if(!oh||typeof oh!=='object') oh=null;
+    var i,any=false;
+    if(oh) for(i=0;i<EB_DAYS.length;i++){var c=oh[EB_DAYS[i][0]];if(c&&c.open&&ebMin(c.from)!==null&&ebMin(c.to)!==null){any=true;break;}}
+    if(!any) return txt?'<div class="card"><h2>Opening hours</h2><p>'+esc(txt)+'</p></div>':'';
+    var now=ebNowBA();
+    var td=oh[EB_DAYS[now.day][0]]||{};
+    var tF=ebMin(td.from),tT=ebMin(td.to);
+    var isOpen=!!(td.open&&tF!==null&&tT!==null&&now.min>=tF&&now.min<tT);
+    var label;
+    if(isOpen){label='Open now \u00b7 until '+esc(td.to);}
+    else if(td.open&&tF!==null&&tT!==null&&now.min<tF){label='Opens today at '+esc(td.from);}
+    else{label='Closed now';}
+    var rows='';
+    for(i=0;i<EB_DAYS.length;i++){
+      var d=oh[EB_DAYS[i][0]]||{},op=!!(d.open&&ebMin(d.from)!==null&&ebMin(d.to)!==null);
+      rows+='<div class="oh-row'+(i===now.day?' today':'')+'"><span>'+EB_DAYS[i][1]+'</span>'+
+            (op?'<span>'+esc(d.from)+'\u2009\u2013\u2009'+esc(d.to)+'</span>':'<span class="oh-cl">Closed</span>')+'</div>';
+    }
+    return '<div class="card"><h2>Opening hours</h2><div class="oh-pill '+(isOpen?'on':'off')+'"><span class="dot"></span>'+label+'</div>'+rows+'</div>';
+  }
   function render(b){
     var prem=b.plan==='premium'||b.plan==='founding';
     var social=b.social_links||{};
@@ -270,7 +311,7 @@
     if(b.phone){ var wa=String(b.phone).replace(/\D/g,''); if(wa.indexOf('00')===0){wa=wa.slice(2);} else if(wa.charAt(0)==='0'){wa='421'+wa.slice(1);} cta+='<a class="cta wa" href="https://wa.me/'+wa+'" target="_blank" rel="noopener" data-x="wa">Message on WhatsApp</a>'; }
     var map='';var ebAddr='';
     if(b.address){ebAddr=(b.address||'')+', '+(b.district?b.district+', ':'')+'Bratislava, Slovakia';var qq=encodeURIComponent(ebAddr);map='<div class="card"><h2>Location</h2><iframe id="ebMap" class="mapbox" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q='+qq+'&z=16&output=embed"></iframe><a class="srow" style="padding-top:12px" href="https://www.google.com/maps/search/?api=1&query='+qq+'" target="_blank" rel="noopener"><span class="ic">\u2197</span>Open in Google Maps</a></div>';}
-    document.getElementById('colSide').innerHTML='<div class="card"><h2>Contact</h2>'+(contact||'<p>No contact details yet.</p>')+cta+'</div>'+map;
+    document.getElementById('colSide').innerHTML='<div class="card"><h2>Contact</h2>'+(contact||'<p>No contact details yet.</p>')+cta+'</div>'+ebHoursCard(b.opening_hours,b.hours)+map;
     if(ebAddr){fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&addressdetails=0&q='+encodeURIComponent(ebAddr)).then(function(r){return r.json();}).then(function(g){var el=document.getElementById('ebMap');if(el&&g&&g.length){el.src='https://maps.google.com/maps?q='+g[0].lat+','+g[0].lon+'&z=16&output=embed';}}).catch(function(){});}
 
     document.getElementById('loading').style.display='none';

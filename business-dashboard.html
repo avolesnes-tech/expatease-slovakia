@@ -43,6 +43,16 @@
   input:disabled { background: var(--gray-50); color: var(--gray-400); }
   textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
   .hint { font-size: 12px; color: var(--gray-400); margin-top: 6px; }
+  .oh-edit { border: 1.5px solid var(--gray-100); border-radius: var(--radius-md); overflow: hidden; }
+  .oh-e-row { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-bottom: 1px solid var(--gray-100); }
+  .oh-e-row:last-child { border-bottom: none; }
+  .oh-e-row.off { background: var(--gray-50); }
+  .oh-e-day { display: flex; align-items: center; gap: 8px; margin: 0; flex: 1 1 auto; min-width: 116px; font-size: 13px; font-weight: 600; color: var(--gray-900); cursor: pointer; }
+  .oh-e-day input[type=checkbox] { width: 16px; height: 16px; flex: 0 0 auto; margin: 0; accent-color: var(--green); cursor: pointer; }
+  .oh-edit input[type=time] { width: auto; flex: 0 0 auto; padding: 7px 9px; font-size: 13px; border-radius: 9px; }
+  .oh-edit input[type=time]:disabled { background: var(--gray-50); color: var(--gray-400); }
+  .oh-e-dash { color: var(--gray-400); flex: 0 0 auto; }
+  @media (max-width: 400px) { .oh-e-day { min-width: 0; } .oh-edit input[type=time] { padding: 6px 7px; } }
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   @media (max-width: 520px) { .row { grid-template-columns: 1fr; } }
   .savebar { position: sticky; bottom: 0; background: var(--gray-50); padding: 16px 0; display: flex; align-items: center; gap: 16px; }
@@ -164,8 +174,9 @@
           <div class="hint">A few photos of your work, team or space.</div>
         </div>
         <div class="field">
-          <label for="fHours">Opening hours</label>
-          <textarea id="fHours" maxlength="400" placeholder="Mon-Fri 9:00-17:00&#10;Sat 9:00-12:00"></textarea>
+          <label>Opening hours</label>
+          <div id="fHoursGrid" class="oh-edit"></div>
+          <div class="hint">Shown on your public profile with a live “Open now” badge. Untick a day to show it as closed.</div>
         </div>
       </div>
 
@@ -213,6 +224,47 @@
     ).join('');
   }
 
+  const OH_DAYS = [['monday','Monday'],['tuesday','Tuesday'],['wednesday','Wednesday'],['thursday','Thursday'],['friday','Friday'],['saturday','Saturday'],['sunday','Sunday']];
+  function ohToggle(k) {
+    const c = $('oh_' + k + '_open');
+    if (!c) return;
+    $('oh_' + k + '_from').disabled = !c.checked;
+    $('oh_' + k + '_to').disabled = !c.checked;
+    const row = c.closest('.oh-e-row');
+    if (row) row.classList.toggle('off', !c.checked);
+  }
+  function ohBuild(oh) {
+    const g = $('fHoursGrid');
+    if (!g) return;
+    oh = (oh && typeof oh === 'object') ? oh : {};
+    g.innerHTML = OH_DAYS.map(d => {
+      const v = oh[d[0]] || {};
+      return '<div class="oh-e-row">' +
+        '<label class="oh-e-day"><input type="checkbox" id="oh_' + d[0] + '_open"' + (v.open ? ' checked' : '') + '><span>' + d[1] + '</span></label>' +
+        '<input type="time" id="oh_' + d[0] + '_from" value="' + (v.from || '09:00') + '">' +
+        '<span class="oh-e-dash">\u2013</span>' +
+        '<input type="time" id="oh_' + d[0] + '_to" value="' + (v.to || '17:00') + '">' +
+      '</div>';
+    }).join('');
+    OH_DAYS.forEach(d => {
+      const c = $('oh_' + d[0] + '_open');
+      if (!c) return;
+      c.addEventListener('change', () => ohToggle(d[0]));
+      ohToggle(d[0]);
+    });
+  }
+  function ohCollect() {
+    const out = {};
+    let anyOpen = false;
+    OH_DAYS.forEach(d => {
+      const c = $('oh_' + d[0] + '_open');
+      if (!c) return;
+      out[d[0]] = { open: !!c.checked, from: $('oh_' + d[0] + '_from').value || '09:00', to: $('oh_' + d[0] + '_to').value || '17:00' };
+      if (c.checked) anyOpen = true;
+    });
+    return anyOpen ? out : null;
+  }
+
   function renderListing(row) {
     bizRow = row;
     $('bizTitle').textContent = row.name || 'Your listing';
@@ -243,7 +295,7 @@
     coverUrl = row.cover_url || null;
     galleryArr = Array.isArray(row.gallery) ? row.gallery.slice() : [];
     $('fTagline').value = row.tagline || '';
-    $('fHours').value = row.hours || '';
+    ohBuild(row.opening_hours);
     if (logoUrl) { $('logoPrev').src = logoUrl; $('logoPrev').style.display = ''; }
     if (coverUrl) { $('coverPrev').src = coverUrl; $('coverPrev').style.display = ''; }
     renderGalPrev();
@@ -262,7 +314,7 @@
     const { data, error } = await _sb
       .from('businesses')
       .select('*')
-      .eq('email', email)
+      .ilike('email', email)
       .order('created_at', { ascending: false })
       .limit(1);
 
@@ -300,7 +352,7 @@
       },
       languages: langs.length ? langs : ['English'],
       tagline: $('fTagline').value.trim() || null,
-      hours: $('fHours').value.trim() || null,
+      opening_hours: ohCollect(),
       logo_url: logoUrl,
       cover_url: coverUrl,
       gallery: galleryArr,
