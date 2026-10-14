@@ -84,11 +84,20 @@ function submissionConfirmEmail({ bizName, contactName, plan }) {
   };
 }
 
-function approvalNotifyEmail({ bizName, contactName, profileUrl, loginUrl, bizEmail }) {
+function approvalNotifyEmail({ bizName, contactName, profileUrl, loginUrl, bizEmail, tips }) {
+  const li = (t) =>
+    `<tr><td valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#2E9E6B;font-weight:bold;">&bull;</td>` +
+    `<td style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#1F2937;">${t}</td></tr>`;
+
+  const tipsBlock = (tips && tips.length)
+    ? `A few details are still missing from your profile. Each one makes it easier for someone to choose you:<br><br>
+      <table cellpadding="5" cellspacing="0" border="0">${tips.map(li).join('')}</table><br>`
+    : `Your profile is already complete \u2014 which puts you ahead of most listings. The one thing that would strengthen it further is a review from a client you have worked with.<br><br>`;
+
   return {
-    subject: `V\u00e1\u0161 profil na ExpatBase je online \u2014 ${bizName}`,
+    subject: `${bizName} is now live on ExpatBase`,
     htmlContent: `<!DOCTYPE html>
-<html lang="sk">
+<html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body bgcolor="#FFFFFF" style="margin:0;background-color:#FFFFFF;">
 <table width="600" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" style="width:600px;max-width:100%;background-color:#FFFFFF;border:1px solid #E4EBF3;">
@@ -96,41 +105,34 @@ function approvalNotifyEmail({ bizName, contactName, profileUrl, loginUrl, bizEm
   <tr><td bgcolor="#0F3360" style="background-color:#0F3360;">
     <table width="100%" cellpadding="22" cellspacing="0" border="0"><tr>
       <td align="left" valign="middle" bgcolor="#0F3360" style="background-color:#0F3360;"><a href="https://expatbase.sk/"><img src="https://expatbase.sk/mail/email-logo.png" width="170" alt="ExpatBase" border="0" style="display:block;width:170px;"></a></td>
-      <td align="right" valign="middle" bgcolor="#0F3360" style="background-color:#0F3360;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#8FE0B6;">V\u00e1\u0161 profil je spusten\u00fd</td>
+      <td align="right" valign="middle" bgcolor="#0F3360" style="background-color:#0F3360;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#8FE0B6;">Your listing is live</td>
     </tr></table>
   </td></tr>
 
   <tr><td>
     <table width="100%" cellpadding="30" cellspacing="0" border="0"><tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:24px;color:#1F2937;">
 
-Dobr\u00fd de\u0148, ${contactName},<br><br>
-<span style="font-size:17px;">m\u00e1m pre v\u00e1s dobr\u00fa spr\u00e1vu \u2014 profil <b style="color:#0F3360;">${bizName}</b> je od tejto chv\u00edle <b>naživo na ExpatBase.sk</b>.</span><br><br>
-Cudzinci, ktor\u00ed v Bratislave h\u013eadaj\u00fa anglicky hovoriacich odborn\u00edkov, v\u00e1s u\u017e n\u00e1jdu a m\u00f4\u017eu v\u00e1s priamo kontaktova\u0165.<br><br>
+Dear ${contactName},<br><br>
+<span style="font-size:17px;">Your application has been reviewed and approved. <b style="color:#0F3360;">${bizName}</b> is now listed on ExpatBase.sk.</span><br><br>
+Foreigners living in Bratislava use ExpatBase to find professionals who can look after them in English. Most of them know exactly what they need \u2014 what they are missing is someone they can trust to understand them. From today, your business is one of the names they will find.<br><br>
 
       <table cellpadding="0" cellspacing="0" border="0" align="center"><tr>
         <td align="center" bgcolor="#2E9E6B" style="background-color:#2E9E6B;border-radius:999px;">
-          <table cellpadding="14" cellspacing="0" border="0"><tr><td bgcolor="#2E9E6B" align="center" style="background-color:#2E9E6B;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:bold;">&nbsp;&nbsp;&nbsp;<a href="${profileUrl}" style="color:#FFFFFF;text-decoration:none;font-weight:bold;">Pozrie\u0165 si m\u00f4j profil</a>&nbsp;&nbsp;&nbsp;</td></tr></table>
+          <table cellpadding="14" cellspacing="0" border="0"><tr><td bgcolor="#2E9E6B" align="center" style="background-color:#2E9E6B;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:bold;">&nbsp;&nbsp;&nbsp;<a href="${profileUrl}" style="color:#FFFFFF;text-decoration:none;font-weight:bold;">View your listing</a>&nbsp;&nbsp;&nbsp;</td></tr></table>
         </td>
       </tr></table>
 <br><br>
       <table width="100%" cellpadding="20" cellspacing="0" border="0" bgcolor="#E8F1FB" style="background-color:#E8F1FB;"><tr><td bgcolor="#E8F1FB" style="background-color:#E8F1FB;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:23px;color:#1F2937;">
-        <span style="font-size:17px;font-weight:bold;color:#0F3360;">Ako si profil kedyko\u013evek uprav\u00edte</span><br><br>
-        <b>1.</b> Otvorte <a href="${loginUrl}" style="color:#1A4F8A;font-weight:bold;">${loginUrl}</a><br>
-        <b>2.</b> Zadajte e-mail <b>${bizEmail}</b> \u2014 presne ten, ktor\u00fd ste uviedli pri registr\u00e1cii<br>
-        <b>3.</b> Do min\u00faty v\u00e1m pr\u00edde prihlasovac\u00ed odkaz. Kliknete na\u0148 a ste vn\u00fatri.<br><br>
-        \u017diadne heslo si nevytv\u00e1rate. Odkaz plat\u00ed jednu hodinu; ak vypr\u0161\u00ed, jednoducho si vy\u017eiadajte nov\u00fd.
+        <span style="font-size:17px;font-weight:bold;color:#0F3360;">Managing your listing</span><br><br>
+        <b>1.</b> Go to <a href="${loginUrl}" style="color:#1A4F8A;font-weight:bold;">${loginUrl.replace(/^https:\/\//, '').replace(/\.html$/, '')}</a><br>
+        <b>2.</b> Enter <b>${bizEmail}</b> \u2014 the address you registered with<br>
+        <b>3.</b> A sign-in link arrives within a minute. Click it and you are in.<br><br>
+        There is no password to create. The link is valid for one hour; request a new one at any time.
       </td></tr></table>
 <br><br>
-\u010co sa oplat\u00ed doplni\u0165, aby v\u00e1s expati kontaktovali \u010dastej\u0161ie:<br><br>
-      <table cellpadding="5" cellspacing="0" border="0">
-        <tr><td valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;">\u2022</td><td style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#1F2937;"><b>Logo a fotky</b> \u2014 profil s obr\u00e1zkom m\u00e1 v\u00fdrazne vy\u0161\u0161iu mieru preklikov.</td></tr>
-        <tr><td valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;">\u2022</td><td style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#1F2937;"><b>Otv\u00e1racie hodiny</b> \u2014 na profile sa zobrazia so \u017eiv\u00fdm ozna\u010den\u00edm \u201eOpen now\u201c.</td></tr>
-        <tr><td valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;">\u2022</td><td style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#1F2937;"><b>Dlh\u0161\u00ed popis</b> \u2014 pokojne tri a\u017e \u0161tyri vety o tom, \u010do presne rob\u00edte a pre koho.</td></tr>
-        <tr><td valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;">\u2022</td><td style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#1F2937;"><b>Recenzia od spokojn\u00e9ho klienta</b> \u2014 pod\u013ea recenzi\u00ed sa expati rozhoduj\u00fa najviac.</td></tr>
-      </table>
-<br>
-Ak by \u010doko\u013evek nefungovalo, alebo si profil rad\u0161ej nech\u00e1te doplni\u0165 odo m\u0148a, sta\u010d\u00ed odp\u00edsa\u0165 na tento e-mail.<br><br>
-Prajem pekn\u00fd de\u0148,<br><br>
+${tipsBlock}
+Should anything not work as expected, simply reply to this email.<br><br>
+Kind regards,<br><br>
 
       <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td height="1" bgcolor="#E4EBF3" style="background-color:#E4EBF3;font-size:1px;line-height:1px;">&nbsp;</td></tr></table>
       <br>
@@ -139,7 +141,7 @@ Prajem pekn\u00fd de\u0148,<br><br>
         <td width="16">&nbsp;&nbsp;&nbsp;</td>
         <td valign="middle" style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:21px;color:#5A6676;">
           <span style="font-size:16px;font-weight:bold;color:#0F3360;">Anna Lockwoodov\u00e1</span><br>
-          Zakladate\u013eka, ExpatBase.sk<br>
+          Founder, ExpatBase.sk<br>
           <a href="mailto:hello@expatbase.sk" style="color:#1A4F8A;text-decoration:none;">hello@expatbase.sk</a> &nbsp;\u00b7&nbsp; <a href="https://expatbase.sk/" style="color:#1A4F8A;text-decoration:none;">expatbase.sk</a><br>
           <a href="tel:+421902641684" style="color:#1A4F8A;text-decoration:none;">+421&nbsp;902&nbsp;641&nbsp;684</a>
         </td>
@@ -150,7 +152,7 @@ Prajem pekn\u00fd de\u0148,<br><br>
 
   <tr><td bgcolor="#F4F6F9" style="background-color:#F4F6F9;">
     <table width="100%" cellpadding="22" cellspacing="0" border="0"><tr><td bgcolor="#F4F6F9" style="background-color:#F4F6F9;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#8C97A8;">
-      Z\u00e1kladn\u00e9 \u010dlenstvo v datab\u00e1ze je bezplatn\u00e9 natrvalo. Ako jeden z prv\u00fdch partnerov m\u00e1te nav\u00fd\u0161e roz\u0161\u00edren\u00fd Pro profil na 6 mesiacov zadarmo a odznak Founding Partner, ktor\u00fd v\u00e1m v profile zostane natrvalo.
+      A basic listing on ExpatBase is free, permanently. As one of our first partners you also receive the extended Pro profile free for six months and the Founding Partner badge, which stays on your listing for good.
     </td></tr></table>
   </td></tr>
 
@@ -229,9 +231,10 @@ export async function onRequestPost(context) {
       const sbKey = env.SUPABASE_ANON_KEY;
       if (!sbUrl || !sbKey) return response({ error: 'Supabase not configured' }, 500);
 
+      const sbHeaders = { apikey: sbKey, Authorization: `Bearer ${sbKey}` };
       const look = await fetch(
-        `${sbUrl}/rest/v1/businesses?select=id,name,contact_name,email,status&id=eq.${encodeURIComponent(id)}`,
-        { headers: { apikey: sbKey, Authorization: `Bearer ${sbKey}` } }
+        `${sbUrl}/rest/v1/businesses?select=id,name,contact_name,email,status,about,website,logo_url,cover_url,gallery,opening_hours,social_links&id=eq.${encodeURIComponent(id)}`,
+        { headers: sbHeaders }
       );
       const rows = await look.json();
       if (!Array.isArray(rows) || !rows.length) return response({ error: 'Listing not found' }, 404);
@@ -239,12 +242,42 @@ export async function onRequestPost(context) {
       const biz = rows[0];
       if (biz.status !== 'approved') return response({ error: 'Listing is not approved yet' }, 409);
 
+      // Does this listing already have reviews? (non-fatal if the lookup fails)
+      let reviewCount = 0;
+      try {
+        const rev = await fetch(
+          `${sbUrl}/rest/v1/reviews?business_id=eq.${encodeURIComponent(biz.id)}&select=id`,
+          { headers: sbHeaders }
+        );
+        const revRows = await rev.json();
+        if (Array.isArray(revRows)) reviewCount = revRows.length;
+      } catch { /* ignore */ }
+
+      // Build the suggestions from what is actually missing, so nobody is asked
+      // to add something they have already filled in.
+      const filled = (v) => typeof v === 'string' && v.trim() !== '';
+      const hasPhotos = filled(biz.logo_url) || filled(biz.cover_url) ||
+                        (Array.isArray(biz.gallery) && biz.gallery.length > 0);
+      const hasHours  = biz.opening_hours && typeof biz.opening_hours === 'object' &&
+                        Object.keys(biz.opening_hours).some(k => biz.opening_hours[k] && biz.opening_hours[k].open);
+      const sl = biz.social_links || {};
+      const hasSocial = filled(sl.instagram) || filled(sl.facebook);
+
+      const tips = [];
+      if (!hasPhotos)            tips.push('<b>Add your logo and a few photos</b> \u2014 listings with images are opened far more often than those without.');
+      if (!filled(biz.about))    tips.push('<b>Write a fuller description</b> \u2014 three or four sentences on what you do and who you do it for.');
+      if (!filled(biz.website))  tips.push('<b>Add your website</b> \u2014 most people check a business online before they call.');
+      if (!hasHours)             tips.push('<b>Set your opening hours</b> \u2014 your listing then shows a live &ldquo;Open now&rdquo; label.');
+      if (!hasSocial)            tips.push('<b>Link your Facebook or Instagram</b> \u2014 an active page reassures people you are still trading.');
+      if (reviewCount === 0)     tips.push('<b>Ask a client for a review</b> \u2014 reviews are what expats rely on most, and yours would be the first.');
+
       const tpl = approvalNotifyEmail({
         bizName:     biz.name,
         contactName: biz.contact_name || biz.name,
         bizEmail:    biz.email,
         profileUrl:  `https://expatbase.sk/expert.html?id=${biz.id}`,
         loginUrl:    'https://expatbase.sk/business-login.html',
+        tips,
       });
 
       await sendBrevo(apiKey, {
