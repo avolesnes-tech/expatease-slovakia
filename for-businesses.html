@@ -31,7 +31,7 @@ a{text-decoration:none;color:inherit}
 .nav-links{display:flex;gap:22px;margin-left:8px;list-style:none}
 .nav-links a{font-family:var(--head);font-weight:600;font-size:15px;color:var(--gray-700)}
 .nav-links a:hover,.nav-links a.active{color:var(--blue)}
-.nav-right{margin-left:auto}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:16px}
 .btn-nav{font-family:var(--head);font-weight:700;font-size:14px;color:#fff;background:linear-gradient(135deg,var(--green-dark),var(--green));padding:10px 18px;border-radius:999px;display:inline-flex;align-items:center;gap:6px}
 
 /* HERO */
@@ -116,11 +116,17 @@ a{text-decoration:none;color:inherit}
 .lang-switch a{padding:6px 11px;color:var(--gray-500)}
 .lang-switch a.on{background:var(--blue);color:#fff}
 @media(max-width:560px){
-  .nav-inner{gap:12px}
-  .nav-right{gap:10px}
+  .nav-inner{gap:10px;padding:0 14px}
+  .nav-right{gap:8px}
   .nav-right a[href="business-login.html"]{display:none}
-  .btn-nav{padding:9px 13px;font-size:13px}
-  .logo{font-size:18px}
+  .logo{font-size:17px;gap:7px;flex:0 0 auto}
+  .lang-switch{flex:0 0 auto;font-size:11.5px}
+  .lang-switch a{padding:5px 8px}
+  .btn-nav{padding:8px 12px;font-size:12.5px;white-space:nowrap;flex:0 0 auto}
+}
+@media(max-width:385px){
+  .logo-txt{display:none}
+  .nav-inner{gap:8px}
 }
 </style>
 
@@ -133,7 +139,7 @@ a{text-decoration:none;color:inherit}
 <!-- NAV -->
 <header class="nav">
   <div class="wrap nav-inner">
-    <a href="index.html" class="logo"><svg width="27" height="32" viewBox="0 0 120 140" aria-hidden="true" style="flex:0 0 auto"><defs><linearGradient id="ebFB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1A4F8A"/><stop offset="1" stop-color="#2E9E6B"/></linearGradient></defs><path d="M60 132 C 36 110 18 86 18 54 A 42 42 0 1 1 102 54 C 102 86 84 110 60 132 Z" fill="url(#ebFB)"/><text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text></svg>ExpatBase</a>
+    <a href="index.html" class="logo"><svg width="27" height="32" viewBox="0 0 120 140" aria-hidden="true" style="flex:0 0 auto"><defs><linearGradient id="ebFB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1A4F8A"/><stop offset="1" stop-color="#2E9E6B"/></linearGradient></defs><path d="M60 132 C 36 110 18 86 18 54 A 42 42 0 1 1 102 54 C 102 86 84 110 60 132 Z" fill="url(#ebFB)"/><text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text></svg><span class="logo-txt">ExpatBase</span></a>
     <ul class="nav-links">
       <li><a href="index.html#categories">Find Experts</a></li>
       <li><a href="index.html#blog">Guides</a></li>
