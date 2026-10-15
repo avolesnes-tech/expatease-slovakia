@@ -233,7 +233,9 @@
     var prem=b.plan==='premium'||b.plan==='founding';
     var social=b.social_links||{};
     var gallery=Array.isArray(b.gallery)?b.gallery.slice():[];
-    var photos=gallery;
+    // The hero photo is a photo too: show it first in Photos, without duplicating
+    // it if the business also added the same file to the gallery.
+    var photos=(b.cover_url && gallery.indexOf(b.cover_url)===-1) ? [b.cover_url].concat(gallery) : gallery;
     document.title=(b.name||'Expert')+' | ExpatBase Slovakia';
 
     document.getElementById('crumbs').innerHTML='<a href="index.html">ExpatBase</a> › <a href="'+catSlug(b.category)+'">'+esc(b.category||'Experts')+'</a> › '+esc(b.name);
