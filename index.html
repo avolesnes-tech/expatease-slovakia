@@ -423,6 +423,14 @@
 
  /* ─── SECTION SHARED ─── */
  .section { padding: 96px 48px; }
+ .latest-more { text-align: center; margin-top: 34px; }
+ .latest-more a {
+ display: inline-block; font-family: 'Urbanist', system-ui, sans-serif; font-weight: 700;
+ font-size: 15px; color: var(--blue); text-decoration: none;
+ border: 1.5px solid var(--gray-100); background: #fff;
+ padding: 12px 26px; border-radius: 999px; transition: border-color .15s, box-shadow .15s;
+ }
+ .latest-more a:hover { border-color: var(--blue); box-shadow: 0 2px 12px rgba(26,79,138,.1); }
  .section-inner { max-width: 1200px; margin: 0 auto; }
  .section-label {
  font-family: var(--font-body);
@@ -2721,6 +2729,21 @@
 </section>
 
 
+<!-- NAJNOVŠIE PRIDANÉ -->
+<section class="section" id="latest" style="background:var(--gray-50);padding-top:80px;padding-bottom:80px">
+ <div class="section-inner">
+ <div class="section-header reveal">
+ <div class="section-label">Just joined</div>
+ <h2 class="section-title">Recently added</h2>
+ <p class="section-sub">The newest English-speaking professionals on ExpatBase. New names are added every week.</p>
+ </div>
+ <div data-eb-grid></div>
+ <div class="latest-more reveal">
+ <a href="#categories">Browse all categories &rarr;</a>
+ </div>
+ </div>
+</section>
+
 
 <section class="section blog-section" id="blog">
  <svg class="guide-zigzag-svg" viewBox="0 0 400 56" preserveAspectRatio="none" aria-hidden="true">
@@ -4940,5 +4963,7 @@
 </script>
 
 <script src="contact.js" defer></script>
+<script>window.EB_LATEST = 6;</script>
+<script src="listings.js" defer></script>
 </body>
 </html>

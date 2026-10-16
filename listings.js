@@ -9,7 +9,8 @@
   var SB = 'https://etxqrlrqbjcbjmitnspv.supabase.co';
   var KEY = 'sb_publishable_i38f7jyt2HYOjUTNuOsklg_aMofdDvE';
   var CATEGORY = window.EB_CATEGORY;
-  if (!CATEGORY) return;
+  var LATEST = window.EB_LATEST;          // homepage: show the N newest listings
+  if (!CATEGORY && !LATEST) return;
 
   /* ── anonymous visitor id (no personal data) ── */
   function vid() {
@@ -79,7 +80,9 @@
     ".ebl-card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(26,79,138,.16)}" +
     ".ebl-head{display:flex;gap:14px;align-items:center;min-width:0}" +
     ".ebl-hd{min-width:0}" +
-    ".ebl-av{width:52px;height:52px;border-radius:14px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Urbanist',system-ui,sans-serif;font-weight:800;font-size:18px;background:linear-gradient(135deg,#1A4F8A,#2E9E6B)}" +
+    ".ebl-av{width:52px;height:52px;border-radius:14px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Urbanist',system-ui,sans-serif;font-weight:800;font-size:18px;background:linear-gradient(135deg,#1A4F8A,#2E9E6B);overflow:hidden}" +
+    ".ebl-av.has-logo{background:#fff;border:1px solid #E4EBF3}" +
+    ".ebl-av img{width:100%;height:100%;object-fit:contain;display:block;padding:5px}" +
     ".ebl-name{font-family:'Urbanist',system-ui,sans-serif;font-weight:700;font-size:1.1rem;color:#0F3360;line-height:1.2;overflow-wrap:anywhere;word-break:break-word}" +
     ".ebl-cat{font-size:.82rem;color:#6B7A90}" +
     ".ebl-badges{display:flex;gap:6px;flex-wrap:wrap}" +
@@ -125,7 +128,7 @@
       extra = (links ? '<div class="ebl-links">' + links + '</div>' : '') + prof;
     }
     return '<div class="ebl-card" data-eb-id="' + esc(b.id) + '">' +
-      '<div class="ebl-head"><div class="ebl-av">' + esc(initials(b.name)) + '</div>' +
+      '<div class="ebl-head">' + avatar(b) +
       '<div class="ebl-hd"><div class="ebl-name">' + esc(b.name) + '</div>' +
       '<div class="ebl-cat">' + esc(b.category) + '</div></div></div>' +
       (badges.replace(/\s/g, '') ? '<div class="ebl-badges">' + badges + '</div>' : '') +
@@ -161,6 +164,28 @@
       track('profile_click', id);
     });
   }
+  // A logo earns far more trust than two letters, so use it whenever there is one.
+  function avatar(b) {
+    if (b.logo_url) {
+      return '<div class="ebl-av has-logo" data-ini="' + esc(initials(b.name)) + '">' +
+        '<img src="' + esc(b.logo_url) + '" alt="' + esc(b.name) + '" loading="lazy"></div>';
+    }
+    return '<div class="ebl-av">' + esc(initials(b.name)) + '</div>';
+  }
+  // If a logo fails to load we must not leave a broken image in the card.
+  function wireLogoFallback(holder) {
+    var imgs = holder.querySelectorAll('.ebl-av.has-logo img');
+    for (var i = 0; i < imgs.length; i++) {
+      (function (img) {
+        img.addEventListener('error', function () {
+          var box = img.parentNode;
+          if (!box) return;
+          box.className = 'ebl-av';
+          box.textContent = box.getAttribute('data-ini') || '';
+        });
+      })(imgs[i]);
+    }
+  }
   function render(rows) {
     var grid = findGrid();
     if (!grid) return;
@@ -173,6 +198,10 @@
       holder.innerHTML = rows.map(card).join('');
       grid.appendChild(holder);
       setupTracking(holder);
+      wireLogoFallback(holder);
+    } else if (LATEST) {
+      var sec = grid.closest ? grid.closest('section') : null;
+      if (sec) sec.style.display = 'none';
     } else {
       grid.innerHTML =
         '<div class="ebl-empty"><h3>No listings yet</h3>' +
@@ -181,8 +210,11 @@
     }
   }
   function load() {
-    var url = SB + '/rest/v1/businesses?status=eq.approved&category=eq.' +
-      encodeURIComponent(CATEGORY) + '&select=*&order=plan.desc,created_at.desc';
+    var url = LATEST
+      ? SB + '/rest/v1/businesses?status=eq.approved&select=*&order=created_at.desc&limit=' +
+        encodeURIComponent(LATEST)
+      : SB + '/rest/v1/businesses?status=eq.approved&category=eq.' +
+        encodeURIComponent(CATEGORY) + '&select=*&order=plan.desc,created_at.desc';
     fetch(url, { headers: { apikey: KEY, Authorization: 'Bearer ' + KEY } })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (rows) { if (rows) render(Array.isArray(rows) ? rows : []); })
