@@ -134,6 +134,12 @@ a{text-decoration:none;color:inherit}
 .reg-lang.on{border-color:var(--green);background:#E6F7EF;color:var(--green-dark);font-weight:600}
 .reg-pro-only{display:none}
 .reg-pro-only.show{display:block}
+.reg-sub-wrap{display:none;margin-bottom:4px}
+.reg-sub-wrap.show{display:block}
+.reg-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px;margin-bottom:4px}
+.reg-chip{display:inline-flex;align-items:center;gap:6px;border:1.4px solid var(--gray-100);border-radius:999px;padding:7px 13px;font-size:.85rem;cursor:pointer;user-select:none}
+.reg-chip input{width:auto;margin:0}
+.reg-chip.on{border-color:var(--green);background:#E6F7EF;color:var(--green-dark);font-weight:600}
 .reg-hint{font-size:.78rem;color:var(--gray-500);margin-top:-8px;margin-bottom:14px}
 .reg-send{width:100%;border:0;border-radius:999px;padding:14px;font-family:var(--head);font-weight:800;font-size:1rem;color:#fff;background:linear-gradient(135deg,var(--green-dark),var(--green));cursor:pointer;transition:.15s}
 .reg-send:hover{opacity:.93}
@@ -366,6 +372,16 @@ a{text-decoration:none;color:inherit}
             <option value="Others">Ostatné</option>
           </select>
         </div>
+        <div class="reg-sub-wrap" id="regSubWrap">
+          <div class="reg-field">
+            <label>Čím sa zaoberáte? <span style="font-weight:400;color:var(--gray-500);font-size:.78rem">(vyberte všetko, čo sedí)</span></label>
+            <div class="reg-chips" id="regSubchips"></div>
+          </div>
+          <div class="reg-field"><label for="regDistrict">Okres / oblasť</label>
+            <select id="regDistrict"><option value="">Vyberte okres…</option></select>
+          </div>
+          <div id="regExtra"></div>
+        </div>
         <div class="reg-field"><label for="regContact">Kontaktná osoba <span class="req">*</span></label><input id="regContact" name="contact_name" type="text" required></div>
         <div class="reg-row">
           <div class="reg-field"><label for="regEmail">E-mail <span class="req">*</span></label><input id="regEmail" name="email" type="email" required></div>
@@ -417,6 +433,111 @@ a{text-decoration:none;color:inherit}
   var proBlock=document.getElementById('regProBlock');
   var plan='basic';
 
+  // Rovnaka taxonomia ako anglicky formular (index.html) - hodnoty ostavaju v anglictine,
+  // lebo kategorie na webe filtruju podla tychto retazcov.
+  var CAT_META = {
+ 'Doctors & Specialists': {
+ subLabel: 'Specialty',
+ subs: ['General Practitioner','Paediatrician','Dentist','Orthodontist','Gynaecologist','Dermatologist','ENT','Ophthalmologist','Orthopaedist','Cardiologist','Neurologist','Allergist','Psychologist / Therapist','Psychiatrist','Speech Therapy','Physiotherapy','Nutritionist','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
+ extras: [{ key: 'insurance', label: 'Insurance accepted', type: 'multi',
+ opts: ['VšZP','Dôvera','Union','Self-pay'] },
+ { key: 'accepting', label: 'New patients', type: 'radio',
+ opts: ['Accepting new patients','Waiting list','Not accepting'] }]
+ },
+ 'Lawyers & Legal': {
+ subLabel: 'Specialisation',
+ subs: ['Immigration & Residence','Employment','Property & Real Estate','Corporate & Business','Family & Divorce','Criminal','Tax','Notary','Debt & Insolvency','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
+ extras: []
+ },
+ 'Banks & Finance': {
+ subLabel: 'Service type',
+ subs: ['Bank','Accountant & Bookkeeping','Tax Advisor','Financial Advisor','Mortgage Advisor','Insurance Broker','Payroll','Company Formation','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
+ extras: []
+ },
+ 'Hair, Beauty & Tattoo': {
+ subLabel: 'Service type',
+ subs: ['Barbershop (Men\'s)','Hair Salon (Women\'s)','Unisex Salon','Colourist','Nail Salon','Lashes & Brows','Waxing & Laser','Aesthetic Medicine','Spa & Wellness','Massage','Tattoo','Piercing','Kids Haircuts','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
+ extras: [{ key: 'price_tier', label: 'Price range', type: 'radio',
+ opts: ['€','€€','€€€'] }]
+ },
+ 'Handymen': {
+ subLabel: 'Service type',
+ subs: ['Electrician','Plumber','Gardener','Maintenance & Repairs','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
+ extras: [{ key: 'availability', label: 'Availability', type: 'radio',
+ opts: ['24/7 Emergency','Same Day','By Appointment'] }]
+ },
+ 'Builders & Construction': {
+ subLabel: 'Service type',
+ subs: ['Flooring & Tiling','Painting & Plastering','Structural & Extensions','Kitchen & Bathroom Renovation','Roofing','Windows & Doors','Insulation','Architect','Interior Designer','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
+ extras: []
+ },
+ 'Vets': {
+ subLabel: 'Service type',
+ subs: ['Vet — Small Animals','Vet — Exotic Pets','Emergency Vet','Mobile Vet','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
+ extras: []
+ },
+ 'Real Estate': {
+ subLabel: 'Service type',
+ subs: ['Rental Agent','Sales Agent','Property Management','Short-term / Expat Housing','Serviced Apartments','Relocation Service','Property Valuation','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
+ extras: []
+ },
+ 'Schools & Learning': {
+ subLabel: 'Type',
+ subs: ['International School','Bilingual School','Kindergarten & Nursery','Language School','Slovak for Foreigners','Tutoring','Kids Clubs & Activities','Music & Art School','University / Higher Ed','Online Learning','Driving School','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
+ extras: []
+ },
+ 'Moving & Relocation': {
+ subLabel: 'Service type',
+ subs: ['Local Moves','International Moves','Customs & Freight','Storage','Packing Service','Expat Relocation','Pet Relocation','Furniture Assembly','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
+ extras: []
+ },
+ 'Sports & Leisure': {
+ subLabel: 'Activity type',
+ subs: ['Personal Trainer','Yoga & Pilates','Gym','Sports Club','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
+ extras: []
+ },
+ 'Others': {
+ subLabel: 'Service type',
+ subs: ['Cleaning Service','Childcare / Nanny','IT & Tech Support','Car Service & Repair','Photography & Video','Translation & Interpreting','Catering & Events','Pest Control','Clubs & Societies','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
+ extras: []
+ }
+ };
+
+  function regEscAttr(v){ return String(v).replace(/&/g,'&amp;').replace(/"/g,'&quot;'); }
+  function regUpdateCategoryFields(cat){
+    var meta=CAT_META[cat];
+    var wrap=document.getElementById('regSubWrap');
+    var chips=document.getElementById('regSubchips');
+    var dist=document.getElementById('regDistrict');
+    var extra=document.getElementById('regExtra');
+    if(!meta){ wrap.classList.remove('show'); chips.innerHTML=''; extra.innerHTML=''; dist.innerHTML='<option value="">Vyberte okres...</option>'; return; }
+    chips.innerHTML=meta.subs.map(function(sv){
+      return '<label class="reg-chip"><input type="checkbox" data-sub value="'+regEscAttr(sv)+'"> '+sv+'</label>';
+    }).join('');
+    dist.innerHTML='<option value="">Vyberte okres...</option>'+meta.districts.map(function(d){return '<option>'+d+'</option>';}).join('');
+    extra.innerHTML=(meta.extras||[]).map(function(ex){
+      var inner=ex.opts.map(function(opt,i){
+        var type=ex.type==='radio'?'radio':'checkbox';
+        var nm=ex.type==='radio'?('regEx_'+ex.key):('regEx_'+ex.key+'_'+i);
+        return '<label class="reg-chip"><input type="'+type+'" name="'+nm+'" data-extkey="'+ex.key+'" value="'+regEscAttr(opt)+'"> '+opt+'</label>';
+      }).join('');
+      return '<div class="reg-field" style="margin-bottom:10px"><label>'+ex.label+'</label><div class="reg-chips">'+inner+'</div></div>';
+    }).join('');
+    wrap.classList.add('show');
+  }
+
   function setPlan(p){
     plan=p;
     document.querySelectorAll('.reg-plan').forEach(function(b){ b.classList.toggle('sel', b.getAttribute('data-plan')===p); });
@@ -445,6 +566,16 @@ a{text-decoration:none;color:inherit}
     ch.addEventListener('change', function(){ ch.closest('.reg-lang').classList.toggle('on', ch.checked); });
   });
 
+  var _catSel=document.getElementById('regCat');
+  if(_catSel) _catSel.addEventListener('change', function(){ regUpdateCategoryFields(_catSel.value); });
+  var _subWrap=document.getElementById('regSubWrap');
+  if(_subWrap) _subWrap.addEventListener('change', function(e){
+    var ch=e.target; if(!ch || !ch.matches || !ch.matches('.reg-chip input')) return;
+    if(ch.type==='radio'){
+      _subWrap.querySelectorAll('input[name="'+ch.name+'"]').forEach(function(r){ r.closest('.reg-chip').classList.toggle('on', r.checked); });
+    } else { ch.closest('.reg-chip').classList.toggle('on', ch.checked); }
+  });
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
     statusEl.className='reg-status'; statusEl.textContent='';
@@ -452,14 +583,24 @@ a{text-decoration:none;color:inherit}
 
     var langs=Array.from(document.querySelectorAll('#regLangs .reg-lang input:checked')).map(function(c){return c.value;});
     var get=function(id){ var el=document.getElementById(id); return el?el.value.trim():''; };
+    var subs=Array.prototype.slice.call(document.querySelectorAll('#regSubchips .reg-chip input:checked')).map(function(c){return c.value;});
+    var attrs={};
+    Array.prototype.slice.call(document.querySelectorAll('#regExtra .reg-chip input:checked')).forEach(function(c){
+      var k=c.getAttribute('data-extkey');
+      if(c.type==='radio'){ attrs[k]=c.value; } else { (attrs[k]=attrs[k]||[]).push(c.value); }
+    });
     var row={
       name:get('regName'), category:get('regCat'), contact_name:get('regContact'),
       email:get('regEmail'), phone:get('regPhone'), address:get('regAddr'),
       description:get('regDesc'),
       english_speaking: langs.indexOf('English')!==-1,
       languages: langs,
-      subcategories: [], district: null,
-      plan: plan==='premium'?'premium':'basic'
+      subcategories: subs.length?subs:null,
+      district: (document.getElementById('regDistrict')||{}).value||null,
+      attributes: Object.keys(attrs).length?attrs:null,
+      plan: 'founding',
+      status: 'pending',
+      id: (window.crypto&&crypto.randomUUID)?crypto.randomUUID():'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return (c==='x'?r:(r&0x3|0x8)).toString(16);})
     };
     if(plan==='premium'){
       row.about=get('regAbout')||null;
@@ -481,6 +622,7 @@ a{text-decoration:none;color:inherit}
 
     client.from('businesses').insert(row).then(function(res){
       if(res && res.error){ throw res.error; }
+      fetch('/send-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'submission_confirm',bizName:row.name,contactName:row.contact_name,bizEmail:row.email,category:row.category,plan:'founding'})}).catch(function(){});
       done();
     }).catch(function(err){
       btn.disabled=false; btn.textContent='Odoslať registráciu →';
