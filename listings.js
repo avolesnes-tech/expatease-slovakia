@@ -90,14 +90,14 @@
     ".ebl-en{background:#E6F7EF;color:#1D7A50}" +
     ".ebl-prem{background:linear-gradient(135deg,#0F3360,#2563EB);color:#fff}" +
     ".ebl-desc{font-size:.92rem;color:#3B4A5E;margin:0;line-height:1.5;overflow-wrap:anywhere;word-break:break-word}" +
-    ".ebl-contact{display:flex;flex-direction:column;gap:7px;margin-top:auto}" +
+    ".ebl-contact{display:flex;flex-direction:column;gap:7px}" +
     ".ebl-row{display:flex;gap:9px;align-items:flex-start;font-size:.9rem;color:#3B4A5E;text-decoration:none;min-width:0;overflow-wrap:anywhere;word-break:break-word}" +
     ".ebl-row span{color:#2E9E6B;flex:0 0 auto}" +
     "a.ebl-row:hover{color:#1A4F8A}" +
     ".ebl-links{display:flex;gap:8px;flex-wrap:wrap;font-size:.86rem;padding-top:10px;border-top:1px solid #EEF3F8}" +
     ".ebl-links a{color:#1A4F8A;font-weight:600;text-decoration:none}" +
     ".ebl-links a:hover{text-decoration:underline}" +
-    ".ebl-profile{display:inline-block;margin-top:12px;color:#1A4F8A;font-family:'Urbanist',system-ui,sans-serif;font-weight:700;font-size:.9rem;text-decoration:none} .ebl-profile:hover{text-decoration:underline}" +
+    ".ebl-profile{display:inline-block;margin-top:auto;padding-top:14px;color:#1A4F8A;font-family:'Urbanist',system-ui,sans-serif;font-weight:700;font-size:.9rem;text-decoration:none} .ebl-profile:hover{text-decoration:underline}" +
     ".ebl-empty{text-align:center;max-width:520px;margin:16px auto;padding:44px 26px;background:#fff;border:1px solid #E4EBF3;border-radius:20px;box-shadow:0 2px 16px rgba(26,79,138,.06);font-family:'DM Sans',system-ui,sans-serif}" +
     ".ebl-empty h3{font-family:'Urbanist',system-ui,sans-serif;font-weight:800;color:#0F3360;font-size:1.3rem;margin:0 0 10px}" +
     ".ebl-empty p{color:#6B7A90;margin:0 0 20px;line-height:1.55}" +
