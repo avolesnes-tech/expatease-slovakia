@@ -3755,85 +3755,81 @@
  const CAT_META = {
  'Doctors & Specialists': {
  subLabel: 'Specialty',
- subs: ['General Practitioner','Cardiologist','Dermatologist','Pediatrician','Gynecologist','Dentist','Psychiatrist','Physiotherapist','Other'],
- districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Online'],
- extras: [
- { key: 'insurance', label: 'Insurance accepted', type: 'multi',
- opts: ['VšZP','Dôvera','Union','Self-pay'] }
- ]
+ subs: ['General Practitioner','Paediatrician','Dentist','Orthodontist','Gynaecologist','Dermatologist','ENT','Ophthalmologist','Orthopaedist','Cardiologist','Neurologist','Allergist','Psychologist / Therapist','Psychiatrist','Speech Therapy','Physiotherapy','Nutritionist','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
+ extras: [{ key: 'insurance', label: 'Insurance accepted', type: 'multi',
+ opts: ['VšZP','Dôvera','Union','Self-pay'] },
+ { key: 'accepting', label: 'New patients', type: 'radio',
+ opts: ['Accepting new patients','Waiting list','Not accepting'] }]
  },
  'Lawyers & Legal': {
  subLabel: 'Specialisation',
- subs: ['Immigration Law','Employment Law','Real Estate Law','Corporate Law','Family Law','Criminal Law','Tax Law','Other'],
- districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Online'],
+ subs: ['Immigration & Residence','Employment','Property & Real Estate','Corporate & Business','Family & Divorce','Criminal','Tax','Notary','Debt & Insolvency','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
  extras: []
  },
  'Banks & Finance': {
  subLabel: 'Service type',
- subs: ['Bank','Accountant','Tax Advisor','Financial Advisor','Mortgage Advisor','Insurance','Other'],
- districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Online'],
+ subs: ['Bank','Accountant & Bookkeeping','Tax Advisor','Financial Advisor','Mortgage Advisor','Insurance Broker','Payroll','Company Formation','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
  extras: []
  },
  'Hair, Beauty & Tattoo': {
  subLabel: 'Service type',
- subs: ["Barbershop (Men's)",'Hair Salon (Women\'s)','Unisex Salon','Colourist','Blow-dry Bar','Nail Salon','Spa & Wellness','Aesthetic Medicine','Tattoo','Piercing','Laser Removal','Other'],
- districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto'],
- extras: [
- { key: 'price_tier', label: 'Price range', type: 'radio',
- opts: ['€','€€','€€€'] }
- ]
+ subs: ['Barbershop (Men\'s)','Hair Salon (Women\'s)','Unisex Salon','Colourist','Nail Salon','Lashes & Brows','Waxing & Laser','Aesthetic Medicine','Spa & Wellness','Massage','Tattoo','Piercing','Kids Haircuts','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
+ extras: [{ key: 'price_tier', label: 'Price range', type: 'radio',
+ opts: ['€','€€','€€€'] }]
  },
  'Handymen': {
  subLabel: 'Service type',
- subs: ['Emergency Plumbing','Emergency Electrician','General Handyman','Appliance Repair','Locksmith','Boiler & Heating','EV Charger Installation','Smart Home','Drain Cleaning','Residential Wiring','Other'],
- districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Bratislava-wide'],
- extras: [
- { key: 'availability', label: 'Availability', type: 'multi',
- opts: ['24/7 Emergency','Same Day','By Appointment'] }
- ]
+ subs: ['Electrician','Plumber','Gardener','Maintenance & Repairs','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
+ extras: [{ key: 'availability', label: 'Availability', type: 'radio',
+ opts: ['24/7 Emergency','Same Day','By Appointment'] }]
  },
  'Builders & Construction': {
  subLabel: 'Service type',
- subs: ['Flooring & Tiling','Painting & Plastering','Structural & Extensions','Kitchen & Bathroom Renovation','Roofing','Other'],
- districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Vajnory','Bratislava-wide'],
+ subs: ['Flooring & Tiling','Painting & Plastering','Structural & Extensions','Kitchen & Bathroom Renovation','Roofing','Windows & Doors','Insulation','Architect','Interior Designer','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
  extras: []
  },
  'Vets': {
- subLabel: 'Specialisation',
- subs: ['General Practice','Cats','Other Animals'],
- districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto'],
+ subLabel: 'Service type',
+ subs: ['Vet — Small Animals','Vet — Exotic Pets','Emergency Vet','Mobile Vet','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
  extras: []
  },
  'Real Estate': {
  subLabel: 'Service type',
- subs: ['Rental Agent','Sales Agent','Property Management','Relocation Service','Short-term / Expat Housing','Property Lawyer','Other'],
- districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Citywide'],
+ subs: ['Rental Agent','Sales Agent','Property Management','Short-term / Expat Housing','Serviced Apartments','Relocation Service','Property Valuation','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
  extras: []
  },
  'Schools & Learning': {
  subLabel: 'Type',
- subs: ['International School','Language School','Slovak Lessons','University / Higher Ed','Tutoring & Coaching','Kids Classes','Online Learning','Driving School','Other'],
- districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Online'],
+ subs: ['International School','Bilingual School','Kindergarten & Nursery','Language School','Slovak for Foreigners','Tutoring','Kids Clubs & Activities','Music & Art School','University / Higher Ed','Online Learning','Driving School','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
  extras: []
  },
  'Moving & Relocation': {
  subLabel: 'Service type',
- subs: ['Local Moves','International Moves','Customs & Freight','Storage','Packing Service','Expat Relocation','Other'],
- districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Bratislava-wide'],
+ subs: ['Local Moves','International Moves','Customs & Freight','Storage','Packing Service','Expat Relocation','Pet Relocation','Furniture Assembly','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
  extras: []
  },
  'Sports & Leisure': {
  subLabel: 'Activity type',
- subs: ['Gym / Fitness Centre','Personal Trainer','Yoga & Pilates','Swimming','Martial Arts & Combat','Sports Club','Outdoor & Adventure','Cycling','Other'],
- districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Citywide'],
+ subs: ['Personal Trainer','Yoga & Pilates','Gym','Sports Club','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
  extras: []
  },
  'Others': {
  subLabel: 'Service type',
- subs: ['Cleaning Service','Childcare / Nanny','IT & Tech Support','Car Mechanic','Photography','Translation & Interpretation','Catering & Events','Pest Control','Other'],
- districts: ['Staré Mesto','Ružinov','Petržalka','Karlova Ves','Nové Mesto','Online','Bratislava-wide'],
+ subs: ['Cleaning Service','Childcare / Nanny','IT & Tech Support','Car Service & Repair','Photography & Video','Translation & Interpreting','Catering & Events','Pest Control','Clubs & Societies','Other'],
+ districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
  extras: []
- },
+ }
  };
 
  function smUpdateCategoryFields(cat) {

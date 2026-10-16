@@ -25,6 +25,15 @@
   .logout:hover { border-color: var(--gray-400); }
   .wrap { max-width: 680px; margin: 0 auto; padding: 36px 24px 80px; }
   .state { text-align: center; padding: 80px 20px; color: var(--gray-400); font-size: 15px; }
+  .pick-list { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+  .pick-card { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; background: #fff; border: 1.5px solid var(--gray-100); border-radius: 14px; padding: 16px 18px; font-family: inherit; cursor: pointer; transition: border-color .15s, box-shadow .15s; }
+  .pick-card:hover { border-color: var(--blue); box-shadow: 0 2px 10px rgba(26,79,138,.08); }
+  .pick-card .pc-main { flex: 1 1 auto; min-width: 0; }
+  .pick-card .pc-name { display: block; font-size: 15px; font-weight: 700; color: var(--blue-dark); }
+  .pick-card .pc-cat { display: block; font-size: 13px; color: var(--gray-400); margin-top: 2px; }
+  .pick-card .pc-go { flex: 0 0 auto; color: var(--gray-400); font-size: 18px; }
+  .back-link { display: inline-block; margin-bottom: 14px; font-size: 13px; font-weight: 600; color: var(--blue); text-decoration: none; }
+  .back-link:hover { text-decoration: underline; }
   .state a { color: var(--blue); text-decoration: none; font-weight: 600; }
   .head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; }
   h1 { font-family: var(--font-head); font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
@@ -90,7 +99,14 @@
     <a href="index.html#submit">Submit your business →</a> &nbsp;·&nbsp; <a href="business-login.html">Try another email</a>
   </div>
 
+  <div id="pickState" style="display:none">
+    <div class="head"><h1>Your listings</h1></div>
+    <p class="lead">You have more than one listing under this email. Choose the one you'd like to edit.</p>
+    <div id="pickList" class="pick-list"></div>
+  </div>
+
   <div id="dashboard" style="display:none">
+    <a href="#" id="backToPick" class="back-link" style="display:none">&larr; All my listings</a>
     <div class="head">
       <h1 id="bizTitle">Your listing</h1>
       <span class="status-badge" id="statusBadge"></span>
@@ -212,10 +228,11 @@
   const LANGS = ['English','Slovak','German','French','Russian','Ukrainian','Hungarian','Other'];
   let bizRow = null;
   let logoUrl=null, coverUrl=null, galleryArr=[];
+  let myListings = [];
 
   const $ = (id) => document.getElementById(id);
-  function show(id) { $(id).style.display = (id === 'dashboard' || id.endsWith('State')) ? 'block' : ''; }
-  function hideAll() { ['loadingState','noSessionState','noListingState','dashboard'].forEach(s => $(s).style.display = 'none'); }
+  function show(id) { $(id).style.display = (id === 'dashboard' || id === 'pickState' || id.endsWith('State')) ? 'block' : ''; }
+  function hideAll() { ['loadingState','noSessionState','noListingState','pickState','dashboard'].forEach(s => $(s).style.display = 'none'); }
 
   function buildLangChips(selected) {
     const set = new Set(selected || []);
@@ -266,6 +283,8 @@
   }
 
   function renderListing(row) {
+    const back = $('backToPick');
+    if (back) back.style.display = (myListings.length > 1) ? 'inline-block' : 'none';
     bizRow = row;
     $('bizTitle').textContent = row.name || 'Your listing';
     const approved = row.status === 'approved';
@@ -315,8 +334,7 @@
       .from('businesses')
       .select('*')
       .ilike('email', email)
-      .order('created_at', { ascending: false })
-      .limit(1);
+      .order('created_at', { ascending: false });
 
     if (error) {
       hideAll(); show('noSessionState');
@@ -328,8 +346,42 @@
       $('logoutBtn').style.display = '';
       return;
     }
-    renderListing(data[0]);
+
+    myListings = data;
+    if (data.length === 1) {
+      renderListing(data[0]);
+    } else {
+      showPicker();
+    }
   }
+
+  // A person can run more than one business from the same email address
+  // (a translator who also sells property, say). Let them choose.
+  function showPicker() {
+    const esc = (v) => String(v == null ? '' : v).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    $('pickList').innerHTML = myListings.map((b, i) =>
+      `<button type="button" class="pick-card" data-i="${i}">
+         <span class="pc-main">
+           <span class="pc-name">${esc(b.name)}</span>
+           <span class="pc-cat">${esc(b.category || '')}${b.status !== 'approved' ? ' &middot; awaiting review' : ''}</span>
+         </span>
+         <span class="pc-go">&rarr;</span>
+       </button>`).join('');
+    hideAll();
+    show('pickState');
+    $('logoutBtn').style.display = '';
+  }
+
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest ? e.target.closest('.pick-card') : null;
+    if (card) {
+      renderListing(myListings[+card.getAttribute('data-i')]);
+      window.scrollTo(0, 0);
+      return;
+    }
+    const back = e.target.closest ? e.target.closest('#backToPick') : null;
+    if (back) { e.preventDefault(); showPicker(); window.scrollTo(0, 0); }
+  });
 
   $('editForm').addEventListener('submit', async (e) => {
     e.preventDefault();
