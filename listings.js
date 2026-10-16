@@ -76,6 +76,17 @@
     st.id = 'ebl-css';
     st.textContent =
     ".ebl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px}" +
+    /* homepage carousel: native scroll-snap, so swipe, keyboard and screen readers all work */
+    ".ebl-railwrap{position:relative}" +
+    ".ebl-rail{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:6px 2px 14px;scrollbar-width:none;-ms-overflow-style:none}" +
+    ".ebl-rail::-webkit-scrollbar{display:none}" +
+    ".ebl-rail>.ebl-card{flex:0 0 318px;scroll-snap-align:start}" +
+    ".ebl-nav{position:absolute;top:calc(50% - 10px);transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:1px solid #E4EBF3;background:#fff;box-shadow:0 3px 14px rgba(26,79,138,.14);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#1A4F8A;font-size:19px;line-height:1;z-index:3;transition:opacity .15s,box-shadow .15s}" +
+    ".ebl-nav:hover{box-shadow:0 4px 18px rgba(26,79,138,.22)}" +
+    ".ebl-nav[disabled]{opacity:.3;cursor:default;box-shadow:none}" +
+    ".ebl-nav.prev{left:-20px}.ebl-nav.next{right:-20px}" +
+    "@media(max-width:1060px){.ebl-nav{display:none}.ebl-rail{padding-left:0;padding-right:0}}" +
+    "@media(max-width:420px){.ebl-rail>.ebl-card{flex:0 0 86%}}" +
     ".ebl-card{background:#fff;border:1px solid #E4EBF3;border-radius:18px;padding:22px;box-shadow:0 2px 16px rgba(26,79,138,.08);display:flex;flex-direction:column;gap:12px;font-family:'DM Sans',system-ui,sans-serif;transition:transform .2s,box-shadow .2s}" +
     ".ebl-card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(26,79,138,.16)}" +
     ".ebl-head{display:flex;gap:14px;align-items:center;min-width:0}" +
@@ -186,6 +197,36 @@
       })(imgs[i]);
     }
   }
+  function navBtn(dir, glyph, label) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'ebl-nav ' + dir;
+    b.setAttribute('aria-label', label);
+    b.textContent = glyph;
+    return b;
+  }
+  function wireRail(wrap, rail) {
+    var prev = wrap.querySelector('.ebl-nav.prev');
+    var next = wrap.querySelector('.ebl-nav.next');
+    function step() {
+      var first = rail.querySelector('.ebl-card');
+      return first ? first.getBoundingClientRect().width + 20 : 320;
+    }
+    function sync() {
+      var max = rail.scrollWidth - rail.clientWidth - 2;
+      prev.disabled = rail.scrollLeft <= 2;
+      next.disabled = rail.scrollLeft >= max;
+      // nothing to scroll: no point showing the arrows at all
+      var none = rail.scrollWidth <= rail.clientWidth + 2;
+      prev.style.display = next.style.display = none ? 'none' : '';
+    }
+    prev.addEventListener('click', function () { rail.scrollLeft -= step(); });
+    next.addEventListener('click', function () { rail.scrollLeft += step(); });
+    rail.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    setTimeout(sync, 60);
+    sync();
+  }
   function render(rows) {
     var grid = findGrid();
     if (!grid) return;
@@ -194,9 +235,22 @@
     grid.innerHTML = '';
     if (rows && rows.length) {
       var holder = document.createElement('div');
-      holder.className = 'ebl-grid';
-      holder.innerHTML = rows.map(card).join('');
-      grid.appendChild(holder);
+      if (LATEST) {
+        // One row the visitor can swipe through, instead of a tall block of cards.
+        var wrap = document.createElement('div');
+        wrap.className = 'ebl-railwrap';
+        holder.className = 'ebl-rail';
+        holder.innerHTML = rows.map(card).join('');
+        wrap.appendChild(holder);
+        wrap.appendChild(navBtn('prev', '\u2190', 'Previous listings'));
+        wrap.appendChild(navBtn('next', '\u2192', 'Next listings'));
+        grid.appendChild(wrap);
+        wireRail(wrap, holder);
+      } else {
+        holder.className = 'ebl-grid';
+        holder.innerHTML = rows.map(card).join('');
+        grid.appendChild(holder);
+      }
       setupTracking(holder);
       wireLogoFallback(holder);
     } else if (LATEST) {
