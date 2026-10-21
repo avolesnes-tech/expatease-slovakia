@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Login | ExpatBase Slovakia</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231A4F8A'/%3E%3Ctext x='16' y='22' font-family='Arial Black,sans-serif' font-size='16' font-weight='900' fill='white' text-anchor='middle'%3EEB%3C/text%3E%3C/svg%3E">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/urbanist-latin-wght-normal.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/dm-sans-latin-standard-normal.woff2"><style>@font-face{font-family:'Urbanist';font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/urbanist-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Urbanist';font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/urbanist-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Urbanist';font-style:italic;font-weight:100 900;font-display:swap;src:url(/fonts/urbanist-latin-wght-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'DM Sans';font-style:normal;font-weight:100 1000;font-display:swap;src:url(/fonts/dm-sans-latin-ext-standard-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'DM Sans';font-style:normal;font-weight:100 1000;font-display:swap;src:url(/fonts/dm-sans-latin-standard-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'DM Sans';font-style:italic;font-weight:100 1000;font-display:swap;src:url(/fonts/dm-sans-latin-wght-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Instrument Serif';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/instrument-serif-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Instrument Serif';font-style:italic;font-weight:400;font-display:swap;src:url(/fonts/instrument-serif-latin-400-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}</style>
+<style>
+  :root {
+    --blue: #1A4F8A; --blue-dark: #0F3360; --green: #2E9E6B; --green-dark: #1D7A50;
+    --gray-50: #F4F6F9; --gray-100: #DDE3EC; --gray-400: #8C97A8; --gray-700: #3D4A5C; --gray-900: #1F2937;
+    --radius-md: 12px; --radius-lg: 20px; --radius-xl: 9999px;
+    --font-head: 'Urbanist', sans-serif; --font-body: 'DM Sans', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-body); color: var(--gray-900);
+    background: linear-gradient(160deg, #0d1829 0%, #0f1f14 100%);
+    min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px;
+  }
+  .card {
+    background: #fff; border-radius: var(--radius-lg); width: 100%; max-width: 420px;
+    padding: 40px 36px; box-shadow: 0 24px 64px rgba(0,0,0,0.28);
+  }
+  .logo { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; text-decoration: none; }
+  .logo-mark { width: 36px; height: 36px; border-radius: 9px; background: linear-gradient(135deg, var(--blue), var(--green)); display: flex; align-items: center; justify-content: center; color: #fff; font-family: var(--font-head); font-weight: 800; font-size: 15px; }
+  .logo-text { font-family: var(--font-head); font-weight: 700; font-size: 17px; color: var(--gray-900); }
+  h1 { font-family: var(--font-head); font-size: 23px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .sub { font-size: 14px; color: var(--gray-400); line-height: 1.6; margin-bottom: 26px; }
+  label { display: block; font-size: 12px; font-weight: 600; color: var(--gray-700); margin-bottom: 7px; }
+  input[type=email] {
+    width: 100%; padding: 13px 15px; border: 1.5px solid var(--gray-100); border-radius: var(--radius-md);
+    font-family: var(--font-body); font-size: 15px; color: var(--gray-900); transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  input[type=email]:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,79,138,0.12); }
+  .btn {
+    width: 100%; margin-top: 18px; padding: 14px 20px; border: none; cursor: pointer;
+    background: var(--green); color: #fff; border-radius: var(--radius-xl);
+    font-family: var(--font-body); font-size: 15px; font-weight: 600; transition: background 0.2s, opacity 0.2s;
+  }
+  .btn:hover { background: var(--green-dark); }
+  .btn:disabled { opacity: 0.65; cursor: default; }
+  .msg { margin-top: 18px; font-size: 14px; line-height: 1.6; padding: 14px 16px; border-radius: var(--radius-md); display: none; }
+  .msg.show { display: block; }
+  .msg.ok { background: #E6F7EF; color: #14532d; border: 1px solid rgba(46,158,107,0.3); }
+  .msg.err { background: #FEECEC; color: #7c1d1d; border: 1px solid rgba(229,62,62,0.3); }
+  .foot { margin-top: 24px; font-size: 13px; color: var(--gray-400); text-align: center; }
+  .foot a { color: var(--blue); text-decoration: none; }
+</style>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7dd3174682984f72b6609a6d522b1f98"}'></script><!-- End Cloudflare Web Analytics -->
+<script defer src="cookie-consent.js"></script>
+</head>
+<body>
+<div class="card">
+  <a href="index.html" class="logo">
+    <svg width="30" height="35" viewBox="0 0 120 140" aria-hidden="true" style="flex:0 0 auto"><defs><linearGradient id="ebLogoGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1A4F8A"/><stop offset="1" stop-color="#2E9E6B"/></linearGradient></defs><path d="M60 132 C 36 110 18 86 18 54 A 42 42 0 1 1 102 54 C 102 86 84 110 60 132 Z" fill="url(#ebLogoGrad)"/><text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text></svg>
+    <span class="logo-text">ExpatBase Slovakia</span>
+  </a>
+  <h1>Manage your business</h1>
+  <p class="sub">Enter the email you used to submit your listing. We'll send you a secure login link — no password needed.</p>
+
+  <form id="loginForm">
+    <label for="email">Business email</label>
+    <input type="email" id="email" placeholder="you@yourbusiness.sk" autocomplete="email" required>
+    <button class="btn" type="submit" id="sendBtn">Send me a login link</button>
+  </form>
+
+  <div class="msg" id="msg"></div>
+
+  <div class="foot">Haven't listed yet? <a href="index.html#submit">Add your business</a></div>
+</div>
+
+<script src="/vendor/supabase-js-2.117.3.js"></script>
+<script>
+  const _sb = supabase.createClient(
+    'https://etxqrlrqbjcbjmitnspv.supabase.co',
+    'sb_publishable_i38f7jyt2HYOjUTNuOsklg_aMofdDvE'
+  );
+  const form = document.getElementById('loginForm');
+  const btn = document.getElementById('sendBtn');
+  const msg = document.getElementById('msg');
+  const emailEl = document.getElementById('email');
+
+  function showMsg(text, kind) {
+    msg.textContent = text;
+    msg.className = 'msg show ' + kind;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = emailEl.value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showMsg('Please enter a valid email address.', 'err');
+      return;
+    }
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    msg.className = 'msg';
+    try {
+      const { error } = await _sb.auth.signInWithOtp({
+        email,
+        options: { emailRedirectTo: window.location.origin + '/business-dashboard.html' }
+      });
+      if (error) throw error;
+      showMsg('Check your inbox — we sent a login link to ' + email + '. Click it to manage your listing. The link expires in 1 hour.', 'ok');
+      btn.textContent = 'Link sent ✓';
+      form.querySelector('input').disabled = true;
+    } catch (err) {
+      showMsg(err.message || 'Something went wrong. Please try again.', 'err');
+      btn.disabled = false;
+      btn.textContent = 'Send me a login link';
+    }
+  });
+</script>
+<script src="contact.js" defer></script>
+</body>
+</html>

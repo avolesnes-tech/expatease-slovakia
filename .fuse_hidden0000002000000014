@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231A4F8A'/%3E%3Ctext x='16' y='22' font-family='Arial Black,sans-serif' font-size='16' font-weight='900' fill='white' text-anchor='middle'%3EEB%3C/text%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Slovak Pension System for Foreigners (2026): Pillars, Retirement Age &amp; EU Rules | ExpatBase</title>
+<meta name="description" content="How Slovakia’s three-pillar pension system works for expats — 2026 retirement age, contributions, and how EU rules aggregate your pension across countries when you move.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ExpatBase Slovakia">
+<meta property="og:title" content="The Slovak Pension System: An Expat Guide | ExpatBase Slovakia">
+<meta property="og:description" content="Three pillars, 2026 retirement age, and EU pension coordination, explained for expats.">
+<meta property="og:url" content="https://expatbase.sk/pension-guide.html">
+<meta property="og:image" content="https://expatbase.sk/lawyer.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Slovak Pension System: An Expat Guide | ExpatBase Slovakia">
+<meta name="twitter:description" content="Three pillars, 2026 retirement age, and EU pension coordination, explained for expats.">
+<meta name="twitter:image" content="https://expatbase.sk/lawyer.webp">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/urbanist-latin-wght-normal.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/dm-sans-latin-standard-normal.woff2"><style>@font-face{font-family:'Urbanist';font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/urbanist-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Urbanist';font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/urbanist-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Urbanist';font-style:italic;font-weight:100 900;font-display:swap;src:url(/fonts/urbanist-latin-wght-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'DM Sans';font-style:normal;font-weight:100 1000;font-display:swap;src:url(/fonts/dm-sans-latin-ext-standard-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'DM Sans';font-style:normal;font-weight:100 1000;font-display:swap;src:url(/fonts/dm-sans-latin-standard-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'DM Sans';font-style:italic;font-weight:100 1000;font-display:swap;src:url(/fonts/dm-sans-latin-wght-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Instrument Serif';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/instrument-serif-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Instrument Serif';font-style:italic;font-weight:400;font-display:swap;src:url(/fonts/instrument-serif-latin-400-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}</style>
+<style>
+ :root {
+ --blue: #1A4F8A;
+ --blue-dark: #0F3360;
+ --blue-light: #E8F1FB;
+ --green: #2E9E6B;
+ --green-dark: #1D7A50;
+ --green-light: #E6F7EF;
+ --white: #FFFFFF;
+ --gray-50: #F4F6F9;
+ --gray-100: #DDE3EC;
+ --gray-400: #8C97A8;
+ --gray-700: #3D4A5C;
+ --gray-900: #1F2937;
+ --gold: #F6AD55;
+ --amber: #F59E0B;
+ --radius-sm: 6px;
+ --radius-md: 12px;
+ --radius-lg: 20px;
+ --radius-xl: 9999px;
+ --shadow-card: 0 2px 16px rgba(26,79,138,0.08);
+ --shadow-hover: 0 12px 40px rgba(26,79,138,0.16);
+ --shadow-nav: 0 2px 24px rgba(26,79,138,0.10);
+ --font-head: 'Urbanist', sans-serif;
+ --font-body: 'DM Sans', sans-serif;
+ --transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
+ }
+
+ *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ html { scroll-behavior: smooth; overflow-x: hidden; }
+ body { font-family: var(--font-body); color: var(--gray-900); background: var(--white); overflow-x: hidden; line-height: 1.6; }
+
+ .nav {
+ position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+ padding: 0 48px; height: 72px;
+ display: flex; align-items: center; justify-content: space-between;
+ transition: var(--transition); backdrop-filter: blur(0px);
+ }
+ .nav.scrolled { background: rgba(255,255,255,0.94); backdrop-filter: blur(16px); box-shadow: var(--shadow-nav); }
+ .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+ .nav-logo-text { font-family: var(--font-head); font-weight: 700; font-size: 18px; color: var(--white); letter-spacing: -0.3px; transition: var(--transition); }
+ .nav.scrolled .nav-logo-text { color: var(--gray-900); }
+ .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+ .nav-links a { text-decoration: none; font-family: var(--font-body); font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.88); padding: 8px 14px; border-radius: var(--radius-sm); transition: var(--transition); }
+ .nav.scrolled .nav-links a { color: var(--gray-700); }
+ .nav-links a:hover { background: rgba(255,255,255,0.15); color: white; }
+ .nav.scrolled .nav-links a:hover { background: var(--blue-light); color: var(--blue); }
+ .nav-right { display: flex; align-items: center; gap: 12px; }
+ .nav-cta { font-family: var(--font-body); font-size: 13px; font-weight: 600; padding: 9px 20px; border-radius: var(--radius-xl); border: none; cursor: pointer; background: var(--green); color: white; text-decoration: none; transition: var(--transition); display: inline-flex; align-items: center; gap: 6px; }
+ .nav-cta:hover { background: var(--green-dark); transform: translateY(-1px); }
+ .nav-logo-svg { flex-shrink: 0; }
+ .nav.scrolled .logo-use-light { display: none !important; }
+ .nav.scrolled .logo-use-dark { display: inline !important; }
+ .nav:not(.scrolled) .logo-use-light { display: inline !important; }
+ .nav:not(.scrolled) .logo-use-dark { display: none !important; }
+
+ .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; border-radius: 8px; transition: background 0.2s; flex-shrink: 0; margin-left: 8px; }
+ .hamburger:hover { background: rgba(255,255,255,0.1); }
+ .nav.scrolled .hamburger:hover { background: var(--gray-50); }
+ .hamburger span { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); transform-origin: center; }
+ .nav.scrolled .hamburger span { background: var(--gray-900); }
+ .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+ .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+ .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+ @media (max-width: 860px) {
+ .hamburger { display: flex; } .nav-right a.nav-cta { display: none; }
+ .nav-links { display: none; }
+ }
+ .mobile-overlay { position: fixed; inset: 0; background: rgba(10,18,35,0.65); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); z-index: 998; opacity: 0; pointer-events: none; transition: opacity 0.32s ease; }
+ .mobile-overlay.open { opacity: 1; pointer-events: all; }
+ .mobile-drawer { position: fixed; top: 0; right: 0; width: min(300px, 84vw); height: 100dvh; background: linear-gradient(160deg, #0d1829 0%, #0f1f14 100%); z-index: 999; transform: translateX(100%); transition: transform 0.36s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; box-shadow: -8px 0 40px rgba(0,0,0,0.4); }
+ .mobile-drawer.open { transform: translateX(0); }
+ .mobile-drawer-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.07); flex-shrink: 0; }
+ .mobile-close { background: rgba(255,255,255,0.08); border: none; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: rgba(255,255,255,0.75); font-size: 20px; line-height: 1; transition: background 0.2s, color 0.2s; flex-shrink: 0; }
+ .mobile-close:hover { background: rgba(255,255,255,0.15); color: white; }
+ .mobile-nav { flex: 1; display: flex; flex-direction: column; padding: 20px 12px; gap: 2px; overflow-y: auto; }
+ .mobile-nav a { text-decoration: none; font-family: var(--font-head); font-weight: 600; font-size: 19px; color: rgba(255,255,255,0.82); padding: 14px 16px; border-radius: 12px; transition: all 0.2s; letter-spacing: -0.02em; display: block; }
+ .mobile-nav a:hover { background: rgba(255,255,255,0.07); color: white; }
+ .mobile-drawer-footer { padding: 20px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
+ .mobile-drawer-footer .mob-btn { font-family: var(--font-body); font-size: 14px; font-weight: 600; padding: 13px 20px; border-radius: 100px; border: none; cursor: pointer; text-align: center; text-decoration: none; display: block; transition: all 0.2s; }
+ .mob-btn-primary { background: var(--green); color: white; }
+ .mob-btn-primary:hover { background: var(--green-dark); }
+ .mob-btn-ghost { background: transparent; color: rgba(255,255,255,0.8); border: 1.5px solid rgba(255,255,255,0.25) !important; }
+ .mob-btn-ghost:hover { background: rgba(255,255,255,0.08); color: white; }
+
+ .article-hero {
+ position: relative;
+ background:
+ radial-gradient(ellipse at 20% 0%, rgba(46,158,107,0.25), transparent 55%),
+ linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, #16613f 100%);
+ padding: 150px 24px 64px; text-align: center; overflow: hidden;
+ }
+ .article-hero::after { content: ''; position: absolute; inset: 0; opacity: 0.05; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+ .article-hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+ .article-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-xl); padding: 6px 16px; margin-bottom: 24px; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.9); }
+ .article-h1 { font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.12; letter-spacing: -0.03em; color: white; margin-bottom: 18px; }
+ .article-sub { font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.82); max-width: 600px; margin: 0 auto 24px; }
+ .article-meta { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; font-size: 13px; color: rgba(255,255,255,0.6); }
+ .article-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.4); }
+
+ .article-wrap { max-width: 760px; margin: 0 auto; padding: 56px 24px 96px; }
+ .article-wrap h2 { font-family: var(--font-head); font-size: 28px; font-weight: 800; letter-spacing: -0.02em; color: var(--gray-900); margin: 56px 0 16px; scroll-margin-top: 96px; }
+ .article-wrap h2:first-of-type { margin-top: 0; }
+ .article-wrap h3 { font-family: var(--font-head); font-size: 20px; font-weight: 700; color: var(--gray-900); margin: 32px 0 10px; scroll-margin-top: 96px; }
+ .article-wrap p { font-size: 16px; line-height: 1.75; color: var(--gray-700); margin-bottom: 16px; }
+ .article-wrap ul, .article-wrap ol { margin: 0 0 16px 22px; color: var(--gray-700); }
+ .article-wrap li { font-size: 16px; line-height: 1.7; margin-bottom: 8px; }
+ .article-wrap a { color: var(--blue); font-weight: 500; text-decoration: underline; text-decoration-color: rgba(26,79,138,0.3); text-underline-offset: 3px; }
+ .article-wrap a:hover { text-decoration-color: var(--blue); }
+ .article-wrap strong { color: var(--gray-900); font-weight: 600; }
+
+ .toc { background: var(--gray-50); border: 1px solid var(--gray-100); border-radius: var(--radius-lg); padding: 24px 28px; margin-bottom: 40px; }
+ .toc-title { font-family: var(--font-head); font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 12px; }
+ .toc ol { margin: 0 0 0 20px; }
+ .toc li { font-size: 15px; margin-bottom: 6px; }
+ .toc a { text-decoration: none; color: var(--blue); font-weight: 500; }
+ .toc a:hover { text-decoration: underline; }
+
+ .callout { border-radius: var(--radius-md); padding: 18px 22px; margin: 24px 0; font-size: 15px; line-height: 1.65; display: flex; gap: 12px; align-items: flex-start; }
+ .callout-icon { flex-shrink: 0; font-size: 18px; line-height: 1.4; }
+ .callout p { margin: 0; font-size: 15px; }
+ .callout-tip { background: var(--green-light); border: 1px solid rgba(46,158,107,0.25); }
+ .callout-tip p { color: #14532d; }
+ .callout-warn { background: #FEF6E7; border: 1px solid rgba(245,158,11,0.3); }
+ .callout-warn p { color: #7c4a03; }
+ .callout-info { background: var(--blue-light); border: 1px solid rgba(26,79,138,0.2); }
+ .callout-info p { color: var(--blue-dark); }
+
+ .check-card { background: white; border: 1px solid var(--gray-100); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: 26px 28px; margin: 24px 0; }
+ .check-card-title { font-family: var(--font-head); font-size: 17px; font-weight: 700; color: var(--gray-900); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+ .check-list { list-style: none; margin: 0 !important; }
+ .check-list li { padding-left: 30px; position: relative; margin-bottom: 10px !important; font-size: 15px !important; }
+ .check-list li::before { content: ''; position: absolute; left: 0; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--green-light); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E9E6B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); background-size: 11px; background-repeat: no-repeat; background-position: center; }
+
+ .step { display: flex; gap: 18px; margin-bottom: 26px; }
+ .step-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--green)); color: white; font-family: var(--font-head); font-weight: 800; font-size: 16px; display: flex; align-items: center; justify-content: center; }
+ .step-body h3 { margin-top: 2px !important; margin-bottom: 8px !important; }
+ .step-body p { margin-bottom: 8px; }
+
+ .fee-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
+ .fee-table th { text-align: left; font-family: var(--font-head); font-weight: 700; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--gray-400); padding: 10px 14px; border-bottom: 2px solid var(--gray-100); }
+ .fee-table td { padding: 12px 14px; border-bottom: 1px solid var(--gray-100); color: var(--gray-700); }
+ .fee-table tr:last-child td { border-bottom: none; }
+ .fee-table td:last-child { font-weight: 600; color: var(--gray-900); white-space: nowrap; }
+
+ .sources { background: var(--gray-50); border-radius: var(--radius-lg); padding: 26px 28px; margin-top: 48px; }
+ .sources ul { margin-left: 20px; }
+ .sources li { font-size: 14px !important; }
+
+ .disclaimer { margin-top: 32px; padding: 18px 22px; border-radius: var(--radius-md); background: white; border: 1px dashed var(--gray-100); font-size: 13px; color: var(--gray-400); line-height: 1.6; }
+
+ .article-cta { margin-top: 56px; border-radius: var(--radius-lg); padding: 36px 32px; background: linear-gradient(135deg, var(--blue-dark), var(--blue) 60%, #16613f); text-align: center; }
+ .article-cta-title { font-family: var(--font-head); font-size: 24px; font-weight: 800; color: white; margin-bottom: 10px; letter-spacing: -0.02em; }
+ .article-cta-sub { font-size: 15px; color: rgba(255,255,255,0.75); margin-bottom: 22px; }
+ .article-cta-btn { display: inline-block; background: var(--green); color: white !important; font-weight: 600; font-size: 15px; padding: 13px 30px; border-radius: var(--radius-xl); text-decoration: none !important; transition: var(--transition); }
+ .article-cta-btn:hover { background: var(--green-dark); transform: translateY(-1px); }
+
+
+ @media (max-width: 768px) {
+ .nav { padding: 0 16px; }
+ .article-wrap { padding: 40px 20px 72px; }
+ .article-wrap h2 { font-size: 24px; }
+ .fee-table { font-size: 13px; }
+ .fee-table th, .fee-table td { padding: 8px 8px; }
+ }
+ .footer { background: #0a1628; color: rgba(255,255,255,0.6); padding: 64px 40px 32px; }
+ .footer-inner { max-width: 1200px; margin: 0 auto; }
+ .footer-grid {
+ display: grid;
+ grid-template-columns: 2fr 1fr 1fr 1fr;
+ gap: 48px;
+ margin-bottom: 56px;
+ }
+ .footer-brand {}
+ .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+ .footer-logo-mark { width: 32px; height: 37px; }
+ .footer-logo-text { font-family: var(--font-head); font-weight: 700; font-size: 18px; color: white; letter-spacing: -0.02em; }
+ .footer-tagline { font-size: 13px; line-height: 1.65; color: rgba(255,255,255,0.45); max-width: 260px; margin-bottom: 24px; }
+ .footer-socials { display: flex; gap: 12px; }
+ .footer-social { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; color: #7DD3A8; text-decoration: none; transition: background 0.2s, color 0.2s; }
+ .footer-social:hover { background: rgba(255,255,255,0.14); color: white; }
+ .footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 20px; }
+ .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+ .footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px; transition: color 0.2s, padding-left 0.2s; }
+ .footer-links a:hover { color: white; padding-left: 4px; }
+ .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+ .footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+ .footer-legal { display: flex; gap: 24px; }
+ .footer-legal a { font-size: 12px; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+ .footer-legal a:hover { color: white; }
+ @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+ @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; gap: 28px; } .footer { padding: 48px 20px 28px; } .footer-bottom { flex-direction: column; align-items: flex-start; } }
+</style>
+
+<link rel="canonical" href="https://expatbase.sk/pension-guide.html">
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7dd3174682984f72b6609a6d522b1f98"}'></script><!-- End Cloudflare Web Analytics -->
+<script defer src="cookie-consent.js"></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+ <defs>
+ <linearGradient id="ebGrad" x1="0%" y1="0%" x2="90%" y2="110%">
+ <stop offset="0%" stop-color="#1A4F8A"/><stop offset="100%" stop-color="#2E9E6B"/>
+ </linearGradient>
+ <linearGradient id="ebGradLight" x1="0%" y1="0%" x2="90%" y2="110%">
+ <stop offset="0%" stop-color="#2E6FC4"/><stop offset="100%" stop-color="#35B87C"/>
+ </linearGradient>
+ <radialGradient id="ebHighlight" cx="38%" cy="28%" r="62%">
+ <stop offset="0%" stop-color="white" stop-opacity=".22"/><stop offset="100%" stop-color="white" stop-opacity="0"/>
+ </radialGradient>
+ <filter id="ebShadow" x="-25%" y="-10%" width="150%" height="160%">
+ <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1A4F8A" flood-opacity=".28"/>
+ </filter>
+ <filter id="ebGlow" x="-30%" y="-15%" width="160%" height="170%">
+ <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#2E9E6B" flood-opacity=".45"/>
+ </filter>
+ <symbol id="eb-icon" viewBox="0 0 120 140">
+ <path d="M60 132 C 36 110 18 86 18 54 A 42 42 0 1 1 102 54 C 102 86 84 110 60 132 Z" fill="url(#ebGrad)" filter="url(#ebShadow)"/>
+ <path d="M60 132 C 36 110 18 86 18 54 A 42 42 0 1 1 102 54 C 102 86 84 110 60 132 Z" fill="url(#ebHighlight)"/>
+ <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
+ </symbol>
+ <symbol id="eb-icon-light" viewBox="0 0 120 140">
+ <path d="M60 132 C 36 110 18 86 18 54 A 42 42 0 1 1 102 54 C 102 86 84 110 60 132 Z" fill="url(#ebGrad)"/>
+ <path d="M60 132 C 36 110 18 86 18 54 A 42 42 0 1 1 102 54 C 102 86 84 110 60 132 Z" fill="url(#ebHighlight)"/>
+ <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text>
+ </symbol>
+ <symbol id="eb-icon-dark" viewBox="0 0 120 140">
+ <path d="M60 132 C 36 110 18 86 18 54 A 42 42 0 1 1 102 54 C 102 86 84 110 60 132 Z" fill="#E8F1FB"/>
+ <text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="#1A4F8A" letter-spacing="-2">EB</text>
+ </symbol>
+ </defs>
+</svg>
+
+<nav class="nav" id="navbar">
+ <a href="index.html" class="nav-logo">
+ <svg class="nav-logo-svg" width="27" height="32" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light" class="logo-use-light"/><use href="#eb-icon-dark" class="logo-use-dark" style="display:none"/></svg>
+ <span class="nav-logo-text">ExpatBase</span>
+ </a>
+ <ul class="nav-links">
+ <li><a href="index.html#categories">Find Experts</a></li>
+ <li><a href="index.html#blog" class="active">Guides</a></li>
+ <li><a href="about.html">About</a></li>
+ </ul>
+ <div class="nav-right">
+ <a href="for-businesses.html" class="nav-cta">For Businesses</a>
+ </div>
+ <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+ <span></span><span></span><span></span>
+ </button>
+</nav>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<aside class="mobile-drawer" id="mobileDrawer" aria-label="Navigation menu">
+ <div class="mobile-drawer-header">
+ <a href="index.html" class="nav-logo" style="text-decoration:none;">
+ <svg width="24" height="28" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light"/></svg>
+ <span class="nav-logo-text" style="font-size:16px;">ExpatBase</span>
+ </a>
+ <button class="mobile-close" id="mobileClose" aria-label="Close menu">&#x2715;</button>
+ </div>
+ <nav class="mobile-nav">
+ <a href="index.html#categories">Find Experts</a>
+ <a href="index.html#blog">Guides</a>
+ <a href="about.html">About</a>
+ </nav>
+ <div class="mobile-drawer-footer">
+ <a class="mob-btn mob-btn-primary" href="for-businesses.html">For Businesses</a>
+ <a class="mob-btn mob-btn-ghost" href="index.html">Join the community</a>
+ </div>
+</aside>
+
+<header class="article-hero">
+ <div class="article-hero-inner">
+ <div class="article-eyebrow">🇸🇰 &nbsp;Guides · Money &amp; Tax</div>
+ <h1 class="article-h1">The Slovak Pension System: An Expat's Guide</h1>
+ <p class="article-sub">How Slovakia's three pension pillars work, the 2026 retirement age, and — most importantly for expats — what happens to your pension when you've worked in several countries or you move on.</p>
+ <div class="article-meta">
+ <span>Updated September 2026</span>
+ <div class="dot"></div>
+ <span>8 min read</span>
+ <div class="dot"></div>
+ <span>Reviewed against Sociálna poisťovňa &amp; EU Regulation 883/2004</span>
+ </div>
+ </div>
+</header>
+
+<main class="article-wrap">
+
+ <div class="toc">
+ <div class="toc-title">In this guide</div>
+ <ol>
+ <li><a href="#how">How the Slovak pension system works</a></li>
+ <li><a href="#pillars">The three pillars in detail</a></li>
+ <li><a href="#age">Retirement age &amp; minimum period</a></li>
+ <li><a href="#expats">What it means for expats</a></li>
+ <li><a href="#leaving">What happens if you leave Slovakia</a></li>
+ <li><a href="#tips">Practical tips for expats</a></li>
+ </ol>
+ </div>
+
+ <div class="callout callout-info">
+ <span class="callout-icon">📅</span>
+ <p><strong>Figures verified for 2026.</strong> The retirement age and contribution rules change over time. This guide is general information, not financial advice — confirm your situation with the Social Insurance Agency (<a href="https://www.socpoist.sk" target="_blank" rel="noopener">socpoist.sk</a>) or a financial advisor.</p>
+ </div>
+
+ <h2 id="how">How the Slovak pension system works</h2>
+ <p>Slovakia has a <strong>three-pillar</strong> pension system. Your pension is built from the social contributions you (and your employer) pay while working here.</p>
+ <ul>
+ <li><strong>1st pillar</strong> — the state pay-as-you-go pension, run by the Social Insurance Agency (<em>Sociálna poisťovňa</em>). Mandatory for employees and the self-employed.</li>
+ <li><strong>2nd pillar</strong> — private old-age savings (<em>starobné dôchodkové sporenie</em>): part of your contributions goes into a personal account managed by a pension company (DSS). Optional, but new entrants to the labour market are enrolled automatically and can opt out.</li>
+ <li><strong>3rd pillar</strong> — voluntary supplementary savings (<em>doplnkové dôchodkové sporenie</em>), often with an employer contribution and a small tax advantage.</li>
+ </ul>
+
+ <h2 id="pillars">The three pillars in detail</h2>
+ <ul>
+ <li><strong>1st pillar — state pension.</strong> Old-age insurance is <strong>18% of your assessment base</strong> (paid as part of your social contributions). Your future pension depends on how long and how much you contributed, and you need at least <strong>15 years</strong> of insurance to qualify.</li>
+ <li><strong>2nd pillar — private savings.</strong> If you are a saver, <strong>4% of your assessment base</strong> (2026) goes into your personal investment account with a pension company; the rest of the old-age contribution stays in the 1st pillar. The money is your property and is <strong>inheritable</strong>.</li>
+ <li><strong>3rd pillar — voluntary top-up.</strong> You — and often your employer — contribute to a supplementary pension fund; contributions are tax-deductible up to a limit. A useful extra layer, especially if your employer chips in.</li>
+ </ul>
+
+ <h2 id="age">Retirement age &amp; minimum period</h2>
+ <ul>
+ <li>To draw an old-age pension you need at least <strong>15 years</strong> of pension insurance and to reach the <strong>retirement age</strong>.</li>
+ <li>In <strong>2026</strong> the retirement age is about <strong>63 years and 6 months</strong> (for example, men born in 1963) and rises gradually with year of birth. Women get a reduction of about <strong>6 months per child</strong> raised, up to a maximum of 18 months.</li>
+ <li>Check your exact date with the Social Insurance Agency's retirement-age calculator.</li>
+ </ul>
+
+ <h2 id="expats">What it means for expats</h2>
+ <ul>
+ <li><strong>EU / EEA / Switzerland:</strong> your insurance periods in different member states are <strong>added together</strong> (aggregated) to meet the minimum qualifying period. Each country then pays a <strong>pro-rata pension</strong> for the years you were insured there. You need at least <strong>1 year</strong> of insurance in Slovakia for Slovakia to pay a pension.</li>
+ <li>You <strong>apply once</strong> — usually through the pension authority in your country of residence at retirement — and the claim is coordinated across countries (using EU forms such as P5000 / E205).</li>
+ <li><strong>Non-EU countries:</strong> periods aggregate only if Slovakia has a <strong>bilateral social-security agreement</strong> with that country; otherwise only your Slovak periods count toward a Slovak pension.</li>
+ </ul>
+
+ <h2 id="leaving">What happens if you leave Slovakia</h2>
+ <ul>
+ <li><strong>You don't lose what you built up.</strong> Your Slovak insurance periods stay on your record, and at retirement Slovakia pays a pension for those years (as long as you have at least 1 year here; EU periods aggregate to help you qualify).</li>
+ <li><strong>Your 2nd-pillar savings are yours.</strong> They remain in your personal account, are paid out at retirement, and are inheritable.</li>
+ <li><strong>You don't need to return to claim.</strong> You apply from your country of residence and Slovakia pays its share directly.</li>
+ </ul>
+
+ <h2 id="tips">Practical tips for expats</h2>
+ <ul>
+ <li><strong>Keep records of every country you've worked in</strong> — you'll need them to aggregate your insurance periods later.</li>
+ <li><strong>Decide early about the 2nd pillar.</strong> It's your money and it stays yours even if you leave Slovakia.</li>
+ <li><strong>Consider the 3rd pillar</strong> for a tax-advantaged top-up, especially if your employer contributes.</li>
+ <li><strong>If you've worked in several countries</strong>, a financial or pension advisor can help you plan — find English-speaking ones under <a href="banks.html">Banks &amp; Finance</a>.</li>
+ </ul>
+
+ <div class="callout callout-info">
+ <span class="callout-icon">📚</span>
+ <p><strong>Sources (verified September 2026):</strong> pillars &amp; system — <a href="https://www.employment.gov.sk/sk/socialne-poistenie-dochodkovy-system/dochodkovy-system/" target="_blank" rel="noopener">Ministry of Labour (MPSVR)</a>; retirement age — <a href="https://www.finsider.sk/servis/tabulka-odchodu-do-dochodku-v-roku-2026/" target="_blank" rel="noopener">Finsider 2026 table</a>; 2nd-pillar rate — <a href="https://www.podnikajte.sk/osobne-financie/2-pilier-2026-vyplacanie-referencna-suma-sadzba-prispevkov" target="_blank" rel="noopener">Podnikajte.sk</a>; EU coordination — <a href="https://socpoist.sk/en/node/5215" target="_blank" rel="noopener">Sociálna poisťovňa</a>. Always confirm your situation with <a href="https://www.socpoist.sk" target="_blank" rel="noopener">socpoist.sk</a> or an advisor.</p>
+ </div>
+
+ <div class="article-cta">
+ <div class="article-cta-title">Planning your finances in Slovakia?</div>
+ <div class="article-cta-sub">Find vetted English-speaking banks, insurers and financial advisors who work with expats.</div>
+ <a href="banks.html" class="article-cta-btn">Browse Banks &amp; Finance →</a>
+ </div>
+
+</main>
+
+
+<footer class="footer">
+ <div class="footer-inner">
+ <div class="footer-grid">
+ <div class="footer-brand">
+ <div class="footer-logo">
+ <div class="footer-logo-mark">
+ <svg width="32" height="37" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-dark"/></svg>
+ </div>
+ <div class="footer-logo-text">ExpatBase Slovakia</div>
+ </div>
+ <p class="footer-tagline">Life in Slovakia, made simple. The #1 resource for English-speaking expats in Bratislava.</p>
+ <div class="footer-socials">
+ <a href="#" class="footer-social" aria-label="Facebook">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+ </a>
+ <a href="#" class="footer-social" aria-label="Instagram">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+ </a>
+ <a href="#" class="footer-social" aria-label="X / Twitter">
+ <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+ </a>
+ <a href="#" class="footer-social" aria-label="LinkedIn">
+ <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+ </a>
+ </div>
+ </div>
+ <div>
+ <div class="footer-col-title">Find Experts</div>
+ <ul class="footer-links">
+ <li><a href="doctors.html">Doctors &amp; Specialists</a></li>
+ <li><a href="lawyers.html">Lawyers &amp; Legal</a></li>
+ <li><a href="banks.html">Banks &amp; Finance</a></li>
+ <li><a href="barbers.html">Hair, Beauty &amp; Tattoo</a></li>
+ <li><a href="plumbers.html">Handymen</a></li>
+ <li><a href="builders.html">Builders &amp; Construction</a></li>
+ <li><a href="vets.html">Vets &amp; Pet Care</a></li>
+ <li><a href="real-estate.html">Real Estate</a></li>
+ <li><a href="schools.html">Schools &amp; Learning</a></li>
+ <li><a href="moving.html">Moving &amp; Relocation</a></li>
+ <li><a href="sports.html">Sports &amp; Leisure</a></li>
+ <li><a href="others.html">Other Services</a></li>
+ </ul>
+ </div>
+ <div>
+ <div class="footer-col-title">Guides</div>
+ <ul class="footer-links">
+ <li><a href="residence-permit-guide.html">Residence Permit Guide</a></li>
+ <li><a href="health-insurance-guide.html">Health Insurance</a></li>
+ <li><a href="bank-account-guide.html">Bank Account Setup</a></li>
+ <li><a href="zivnost-guide.html">Trade License (Živnosť)</a></li>
+ <li><a href="company-setup-guide.html">Setting up a company (s.r.o.)</a></li>
+ <li><a href="tax-guide.html">Taxes for expats</a></li>
+ <li><a href="pension-guide.html">Pension system</a></li>
+ <li><a href="index.html#blog">All guides →</a></li>
+ </ul>
+ </div>
+ <div>
+ <div class="footer-col-title">Resources</div>
+ <ul class="footer-links">
+ <li><a href="index.html#blog">Guides</a></li>
+ <li><a href="#">Newsletter</a></li>
+ <li><a href="for-businesses.html">For Businesses</a></li>
+ <li><a href="about.html">About ExpatBase</a></li>
+ <li><a href="#" data-contact-open>Contact Us</a></li>
+ </ul>
+ </div>
+ </div>
+ <div class="footer-bottom">
+ <div class="footer-copy">© 2026 ExpatBase Slovakia. All rights reserved.</div>
+ <div class="footer-legal">
+ <a href="privacy-policy.html">Privacy Policy</a>
+ <a href="terms.html">Terms of Use</a>
+ <a href="cookie-policy.html">Cookie Policy</a>
+ </div>
+ </div>
+ </div>
+</footer>
+
+<script>
+ const nav = document.getElementById('navbar');
+ function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 60); }
+ window.addEventListener('scroll', onScroll, { passive: true });
+ onScroll();
+
+ (function() {
+ var hamburger = document.getElementById('hamburger');
+ var overlay = document.getElementById('mobileOverlay');
+ var drawer = document.getElementById('mobileDrawer');
+ var closeBtn = document.getElementById('mobileClose');
+ if (!hamburger) return;
+ function openM() {
+ hamburger.classList.add('open'); overlay.classList.add('open'); drawer.classList.add('open');
+ document.body.style.overflow = 'hidden'; hamburger.setAttribute('aria-expanded','true');
+ }
+ function closeM() {
+ hamburger.classList.remove('open'); overlay.classList.remove('open'); drawer.classList.remove('open');
+ document.body.style.overflow = ''; hamburger.setAttribute('aria-expanded','false');
+ }
+ hamburger.addEventListener('click', function() { hamburger.classList.contains('open') ? closeM() : openM(); });
+ overlay.addEventListener('click', closeM);
+ closeBtn.addEventListener('click', closeM);
+ drawer.querySelectorAll('.mobile-nav a').forEach(function(a){ a.addEventListener('click', closeM); });
+ document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeM(); });
+ })();
+</script>
+<script src="contact.js" defer></script>
+</body>
+</html>
