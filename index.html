@@ -3269,6 +3269,13 @@
  </label>
  </div>
 
+ <div class="sm-field-group" style="margin-top:4px">
+ <label style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:#3B4A5E;cursor:pointer;line-height:1.45">
+ <input type="checkbox" id="smConsent" style="margin-top:3px;flex:0 0 auto;width:16px;height:16px">
+ <span>I agree to the processing of my personal data for the purpose of listing and publishing my profile in the ExpatBase directory. See our <a href="privacy-policy.html" target="_blank" rel="noopener" style="color:#1A4F8A;text-decoration:underline">Privacy Policy</a>.</span>
+ </label>
+ </div>
+
  <!-- Error banner -->
  <div class="sm-error-banner" id="smErrorBanner" style="display:none">
  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -4056,6 +4063,8 @@
  ══════════════════════════════ */
  async function smSubmit() {
  if (!smValidateForm()) return;
+ var _con = document.getElementById('smConsent');
+ if (_con && !_con.checked) { var _eb2 = document.getElementById('smErrorBanner'); document.getElementById('smErrorMsg').textContent = 'Please tick the box to agree to the processing of your personal data before submitting.'; if (_eb2) _eb2.style.display = 'flex'; return; }
  var _att = document.getElementById('smAttestEN');
  if (_att && !_att.checked) {
  var _eb = document.getElementById('smErrorBanner');

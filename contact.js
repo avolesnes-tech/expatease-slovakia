@@ -63,6 +63,7 @@
             '<div class="eb-c-field"><label for="eb-c-email">Your email</label><input id="eb-c-email" name="email" type="email" autocomplete="email" required></div>' +
             '<div class="eb-c-field"><label for="eb-c-msg">Message</label><textarea id="eb-c-msg" name="message" required></textarea></div>' +
             '<div id="eb-c-hp"><label>Company<input name="company" tabindex="-1" autocomplete="off"></label></div>' +
+            '<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.4;color:#6B7A90;margin:2px 0 14px"><input type="checkbox" id="eb-c-consent" style="margin-top:2px;flex:0 0 auto"><span>I agree my details may be used to reply to my enquiry. See our <a href="privacy-policy.html" target="_blank" rel="noopener" style="color:#1A4F8A">Privacy Policy</a>.</span></label>' +
             '<button id="eb-c-send" type="submit">Send message</button>' +
             '<div id="eb-c-status" role="status"></div>' +
           '</form>' +
@@ -103,6 +104,10 @@
     statusEl.className = '';
     if (!data.name || !data.email || !data.message) {
       statusEl.className = 'err'; statusEl.textContent = 'Please fill in all fields.'; return;
+    }
+    var cEl = modal.querySelector('#eb-c-consent');
+    if (cEl && !cEl.checked) {
+      statusEl.className = 'err'; statusEl.textContent = 'Please tick the consent box so we can reply.'; return;
     }
     var btn = form.querySelector('#eb-c-send');
     btn.disabled = true; btn.textContent = 'Sending…'; statusEl.textContent = '';
