@@ -411,6 +411,7 @@ a{text-decoration:none;color:inherit}
 
         <div class="reg-hp"><label>Firma (nevypĺňať)<input name="company" tabindex="-1" autocomplete="off"></label></div>
 
+        <div class="reg-field reg-consent" style="display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.45;color:#3B4A5E;margin:4px 0 14px"><input type="checkbox" id="regConsent" name="consent" style="margin-top:3px;flex:0 0 auto" required><label for="regConsent">Súhlasím so spracovaním mojich osobných údajov za účelom zaradenia a zverejnenia môjho profilu v adresári ExpatBase. Viac v <a href="privacy-policy.html" target="_blank" rel="noopener" style="color:#1A4F8A;text-decoration:underline">zásadách ochrany osobných údajov</a>.</label></div>
         <button type="submit" class="reg-send" id="regSend">Odoslať registráciu →</button>
         <div class="reg-status" id="regStatus" role="status"></div>
         <div class="reg-note">Dnes neplatíte nič a kartu nezadávate. Profil overíme a ozveme sa na zadaný e-mail. Vaše dáta zostávajú v EÚ.</div>
@@ -613,6 +614,7 @@ a{text-decoration:none;color:inherit}
     for(var i=0;i<reqd.length;i++){ if(!row[reqd[i]]){ statusEl.className='reg-status err'; statusEl.textContent='Prosím vyplňte všetky povinné polia (*).'; return; } }
     if(langs.length===0){ statusEl.className='reg-status err'; statusEl.textContent='Vyberte aspoň jeden jazyk.'; return; }
     if(!/^\S+@\S+\.\S+$/.test(row.email)){ statusEl.className='reg-status err'; statusEl.textContent='Zadajte platný e-mail.'; return; }
+    var cons=document.getElementById('regConsent'); if(cons && !cons.checked){ statusEl.className='reg-status err'; statusEl.textContent='Pre odoslanie prosím potvrďte súhlas so spracovaním osobných údajov.'; return; }
 
     var client=sb();
     if(!client){ statusEl.className='reg-status err'; statusEl.textContent='Nepodarilo sa spojiť so serverom. Skúste znova, prosím.'; return; }
