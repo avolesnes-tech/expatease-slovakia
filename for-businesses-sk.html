@@ -385,7 +385,7 @@ a{text-decoration:none;color:inherit}
         <div class="reg-field"><label for="regContact">Kontaktná osoba <span class="req">*</span></label><input id="regContact" name="contact_name" type="text" required></div>
         <div class="reg-row">
           <div class="reg-field"><label for="regEmail">E-mail <span class="req">*</span></label><input id="regEmail" name="email" type="email" required></div>
-          <div class="reg-field"><label for="regPhone">Telefón <span class="req">*</span></label><input id="regPhone" name="phone" type="tel" placeholder="+421 …" required></div>
+          <div class="reg-field"><label for="regPhone">Telefón <span style="color:var(--gray-500);font-weight:400">(nepovinné)</span></label><input id="regPhone" name="phone" type="tel" placeholder="+421 …"></div>
         </div>
         <div class="reg-field"><label for="regAddr">Adresa <span class="req">*</span></label><input id="regAddr" name="address" type="text" placeholder="Ulica, mesto" required></div>
         <div class="reg-field"><label for="regDesc">Krátky popis <span class="req">*</span></label><textarea id="regDesc" name="description" maxlength="180" placeholder="V jednej-dvoch vetách, čo ponúkate (max. 180 znakov)."></textarea></div>
@@ -397,6 +397,7 @@ a{text-decoration:none;color:inherit}
             <label class="reg-lang"><input type="checkbox" value="Slovak"> 🇸🇰 Slovenčina</label>
             <label class="reg-lang"><input type="checkbox" value="German"> 🇩🇪 Nemčina</label>
             <label class="reg-lang"><input type="checkbox" value="French"> 🇫🇷 Francúzština</label>
+            <label class="reg-lang"><input type="checkbox" value="Italian"> 🇮🇹 Taliančina</label>
           </div>
         </div>
 
@@ -610,7 +611,7 @@ a{text-decoration:none;color:inherit}
     }
 
     // validation
-    var reqd=['name','category','contact_name','email','phone','address','description'];
+    var reqd=['name','category','contact_name','email','address','description'];
     for(var i=0;i<reqd.length;i++){ if(!row[reqd[i]]){ statusEl.className='reg-status err'; statusEl.textContent='Prosím vyplňte všetky povinné polia (*).'; return; } }
     if(langs.length===0){ statusEl.className='reg-status err'; statusEl.textContent='Vyberte aspoň jeden jazyk.'; return; }
     if(!/^\S+@\S+\.\S+$/.test(row.email)){ statusEl.className='reg-status err'; statusEl.textContent='Zadajte platný e-mail.'; return; }
