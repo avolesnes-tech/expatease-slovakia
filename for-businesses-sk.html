@@ -388,7 +388,7 @@ a{text-decoration:none;color:inherit}
           <div class="reg-field"><label for="regPhone">Telefón <span style="color:var(--gray-500);font-weight:400">(nepovinné)</span></label><input id="regPhone" name="phone" type="tel" placeholder="+421 …"></div>
         </div>
         <div class="reg-field"><label for="regAddr">Adresa <span class="req">*</span></label><input id="regAddr" name="address" type="text" placeholder="Ulica, mesto" required></div>
-        <div class="reg-field"><label for="regDesc">Krátky popis <span class="req">*</span></label><textarea id="regDesc" name="description" maxlength="180" placeholder="V jednej-dvoch vetách, čo ponúkate (max. 180 znakov)."></textarea></div>
+        <div class="reg-field"><label for="regDesc">Krátky popis <span class="req">*</span> <span id="regDescCount" style="float:right;font-weight:400;color:#9aa7b8;font-size:12px">0 / 150</span></label><textarea id="regDesc" name="description" maxlength="150" placeholder="V jednej-dvoch vetách, čo ponúkate (max. 150 znakov)." oninput="var c=document.getElementById('regDescCount');if(c)c.textContent=this.value.length+' / 150';"></textarea></div>
 
         <div class="reg-field">
           <label>Jazyky, v ktorých komunikujete s klientmi <span class="req">*</span></label>
@@ -407,7 +407,7 @@ a{text-decoration:none;color:inherit}
             <div class="reg-field"><label for="regIg">Instagram</label><input id="regIg" type="url" placeholder="https://instagram.com/…"></div>
             <div class="reg-field"><label for="regFb">Facebook</label><input id="regFb" type="url" placeholder="https://facebook.com/…"></div>
           </div>
-          <div class="reg-field"><label for="regAbout">O firme (dlhší popis)</label><textarea id="regAbout" placeholder="Predstavte svoju firmu podrobnejšie."></textarea></div>
+          <div class="reg-field"><label for="regAbout">O firme (dlhší popis) <span id="regAboutCount" style="float:right;font-weight:400;color:#9aa7b8;font-size:12px">0 znakov</span></label><textarea id="regAbout" placeholder="Predstavte svoju firmu podrobnejšie." oninput="var c=document.getElementById('regAboutCount');if(c)c.textContent=this.value.length+' znakov';"></textarea></div>
         </div>
 
         <div class="reg-hp"><label>Firma (nevypĺňať)<input name="company" tabindex="-1" autocomplete="off"></label></div>
