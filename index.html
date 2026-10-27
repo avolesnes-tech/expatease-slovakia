@@ -3194,9 +3194,9 @@
  <div class="sm-field-group">
  <label class="sm-label" for="smAbout">
  About Your Business
- <span class="sm-char-counter" id="smAboutCounter">0 / 500</span>
+ <span class="sm-char-counter" id="smAboutCounter">0 characters</span>
  </label>
- <textarea class="sm-input sm-textarea sm-textarea-tall" id="smAbout" maxlength="500" placeholder="Tell expats what makes your business special, your experience, and why they should choose you…"></textarea>
+ <textarea class="sm-input sm-textarea sm-textarea-tall" id="smAbout" placeholder="Tell expats what makes your business special, your experience, and why they should choose you…"></textarea>
  </div>
 
  <!-- Services -->
@@ -4198,7 +4198,7 @@
  const descCounter = document.getElementById('smDescCounter');
  const aboutCounter = document.getElementById('smAboutCounter');
  if (descCounter) descCounter.textContent = '0 / 150';
- if (aboutCounter) aboutCounter.textContent = '0 / 500';
+ if (aboutCounter) aboutCounter.textContent = '0 characters';
 
  // Reset premium fields
  document.getElementById('smServicesList').innerHTML = '';
@@ -4324,7 +4324,7 @@
 
  // Char counters
  smCharCounter('smDescription', 'smDescCounter', 150);
- smCharCounter('smAbout', 'smAboutCounter', 500);
+ (function(){var a=document.getElementById('smAbout'),c=document.getElementById('smAboutCounter');if(a&&c){a.addEventListener('input',function(){c.textContent=a.value.length+' characters';});}})();
 
  // Upload zones
  smWireSimpleUpload('smLogoZone', 'smLogoInput', 'smLogoBrowse', smHandleLogoUpload);
