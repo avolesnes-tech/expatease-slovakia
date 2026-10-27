@@ -267,8 +267,8 @@
 
     // main column
     var main='';
-    if(b.tagline) main+='<p class="tagline">'+esc(b.tagline)+'</p>';
-    if(b.about||b.description) main+='<div class="card"><h2>About</h2><p>'+esc(b.about||b.description)+'</p></div>';
+    var _lead=b.tagline||b.description; if(_lead) main+='<p class="tagline">'+esc(_lead)+'</p>';
+    if(b.about) main+='<div class="card"><h2>About</h2><p>'+esc(b.about)+'</p></div>';
     if(photos.length){
       var imgs=photos.map(function(u){return '<img src="'+esc(u)+'" alt="" loading="lazy" class="gimg">';}).join('');
       main+='<div class="card"><h2>Photos</h2><div class="gallery">'+imgs+'</div></div>';
