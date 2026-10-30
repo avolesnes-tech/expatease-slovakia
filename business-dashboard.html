@@ -178,20 +178,20 @@
           <label>Logo</label>
           <div style="display:flex;align-items:center;gap:14px">
             <img id="logoPrev" alt="" style="width:64px;height:64px;border-radius:14px;object-fit:cover;background:var(--gray-50);display:none">
-            <input type="file" id="fLogo" accept="image/*">
+            <input type="file" id="fLogo" accept="image/png,image/jpeg,image/webp">
           </div>
         </div>
         <div class="field">
           <label>Cover photo</label>
           <div style="display:flex;align-items:center;gap:14px">
             <img id="coverPrev" alt="" style="width:130px;height:60px;border-radius:10px;object-fit:cover;background:var(--gray-50);display:none">
-            <input type="file" id="fCover" accept="image/*">
+            <input type="file" id="fCover" accept="image/png,image/jpeg,image/webp">
           </div>
         </div>
         <div class="field">
           <label>Gallery photos</label>
           <div id="galPrev" class="chips" style="margin-bottom:10px"></div>
-          <input type="file" id="fGallery" accept="image/*" multiple>
+          <input type="file" id="fGallery" accept="image/png,image/jpeg,image/webp" multiple>
           <div class="hint">A few photos of your work, team or space.</div>
         </div>
         <div class="field">
@@ -456,7 +456,11 @@
     $(inputId).addEventListener('change', async function (e) {
       const files = Array.from(e.target.files || []); if (!files.length) return;
       $(inputId).disabled = true;
-      try { for (const f of files) { const url = await uploadMedia(f, kind); cb(url); } }
+      const _OKT=['image/png','image/jpeg','image/webp'], _MAXB=5*1024*1024;
+      const _bad=files.filter(f=>_OKT.indexOf(f.type)===-1||f.size>_MAXB);
+      if(_bad.length){ alert('Some files were skipped. Please upload PNG, JPG or WebP images up to 5 MB. SVG and PDF aren’t supported — email hello@expatbase.sk and we’ll add it for you.'); }
+      const _ok=files.filter(f=>_OKT.indexOf(f.type)!==-1 && f.size<=_MAXB);
+      try { for (const f of _ok) { const url = await uploadMedia(f, kind); cb(url); } }
       catch (err) { alert('Upload failed: ' + (err.message || err)); }
       $(inputId).disabled = false; e.target.value = '';
     });

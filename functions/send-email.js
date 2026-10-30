@@ -178,6 +178,34 @@ function adminNotifyEmail({ bizName, contactName, bizEmail, category, plan, admi
   };
 }
 
+
+function businessInviteEmail({ businessName, personalNote, suggesterName }) {
+  const esc = (s) => String(s || '').replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]));
+  const name = esc((businessName || 'there').trim());
+  const note = (personalNote || '').trim();
+  const who  = (suggesterName || '').trim();
+  const noteBlock = note
+    ? `<tr><td style="padding:0 30px 18px;"><table width="100%" cellpadding="16" cellspacing="0" border="0" bgcolor="#E6F7EF" style="background-color:#E6F7EF;border-radius:10px;"><tr><td style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#1F2937;"><em>“${esc(note)}”</em>${who ? `<br><span style="color:#5A6676;font-size:13px;">— ${esc(who)}, via ExpatBase</span>` : ''}</td></tr></table></td></tr>`
+    : '';
+  return {
+    subject: `An expat recommended ${name} to ExpatBase`,
+    htmlContent: `<!DOCTYPE html><html><body style="margin:0;background:#fff;"><table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:100%;border:1px solid #E4EBF3;">
+<tr><td bgcolor="#0F3360" style="background:#0F3360;padding:22px 30px;"><img src="https://expatbase.sk/mail/email-logo.png" width="160" alt="ExpatBase" style="display:block;"></td></tr>
+<tr><td style="padding:30px 30px 10px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:24px;color:#1F2937;">
+Hello,<br><br>
+one of our members recommended <b>${name}</b> as a business that looks after English-speaking clients &ndash; so we wanted to reach out.<br><br>
+We run <a href="https://expatbase.sk" style="color:#1A4F8A;font-weight:bold;text-decoration:none;">ExpatBase.sk</a>, a directory where foreigners living in Bratislava find professionals they can deal with in English.</td></tr>
+${noteBlock}
+<tr><td style="padding:0 30px 24px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:24px;color:#1F2937;">
+Being listed is <b>free</b>, and your basic profile stays free for good. If you'd like to be found by this community, you can create your profile in a couple of minutes:</td></tr>
+<tr><td align="center" style="padding:0 30px 26px;"><table cellpadding="0" cellspacing="0" border="0"><tr><td bgcolor="#2E9E6B" style="background:#2E9E6B;border-radius:999px;"><table cellpadding="13" cellspacing="0" border="0"><tr><td align="center" style="font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:bold;">&nbsp;&nbsp;<a href="https://expatbase.sk/for-businesses" style="color:#fff;text-decoration:none;font-weight:bold;">Create your free profile &rarr;</a>&nbsp;&nbsp;</td></tr></table></td></tr></table></td></tr>
+<tr><td style="padding:18px 30px 30px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:21px;color:#5A6676;border-top:1px solid #E4EBF3;">
+No pressure at all – if this isn't for you, simply ignore this message. Any questions? Just reply to this email.<br><br>
+Warm regards,<br><b style="color:#0F3360;">Anna · ExpatBase.sk</b></td></tr>
+</table></body></html>`
+  };
+}
+
 // ── Route handler ─────────────────────────────────────────────────
 
 export async function onRequestPost(context) {
@@ -301,6 +329,51 @@ export async function onRequestPost(context) {
         htmlContent: `<p><strong>From:</strong> ${esc(name)} &lt;${esc(email)}&gt;</p><p><strong>Message:</strong></p><p>${esc(message).replace(/\n/g, '<br>')}</p>`,
       });
       return response({ success: true });
+    }
+
+
+    if (type === 'business_invite') {
+      const sbUrl = env.SUPABASE_URL;
+      const sbKey = env.SUPABASE_ANON_KEY;
+      if (!sbUrl || !sbKey) return response({ error: 'Supabase not configured' }, 500);
+
+      const { userToken, businessName, businessEmail, personalNote, suggesterName } = body;
+      if (!userToken) return response({ error: 'Not signed in' }, 401);
+
+      // Only a signed-in ExpatBase member can trigger a send (prevents open relay / spam).
+      const uRes = await fetch(`${sbUrl}/auth/v1/user`, { headers: { apikey: sbKey, Authorization: `Bearer ${userToken}` } });
+      if (!uRes.ok) return response({ error: 'Not authorised' }, 401);
+      const authUser = await uRes.json();
+      const uid = authUser && authUser.id;
+      if (!uid) return response({ error: 'Not authorised' }, 401);
+
+      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!businessName || !emailRe.test(businessEmail || '')) return response({ error: 'Invalid business details' }, 400);
+
+      const authHeaders = { apikey: sbKey, Authorization: `Bearer ${userToken}` };
+
+      // Rate limit: at most 10 invites per member per 24h.
+      try {
+        const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+        const rl = await fetch(`${sbUrl}/rest/v1/business_suggestions?select=id&suggested_by=eq.${uid}&created_at=gte.${encodeURIComponent(since)}`, { headers: authHeaders });
+        const rlRows = await rl.json();
+        if (Array.isArray(rlRows) && rlRows.length >= 10) return response({ error: 'rate_limited' }, 429);
+      } catch { /* non-fatal */ }
+
+      // If the business is already listed, don't email them again.
+      try {
+        const ex = await fetch(`${sbUrl}/rest/v1/businesses?select=id&email=eq.${encodeURIComponent(businessEmail)}`, { headers: { apikey: sbKey, Authorization: `Bearer ${sbKey}` } });
+        const exRows = await ex.json();
+        if (Array.isArray(exRows) && exRows.length) return response({ success: true, already: true });
+      } catch { /* non-fatal */ }
+
+      const tpl = businessInviteEmail({ businessName, personalNote, suggesterName });
+      await sendBrevo(apiKey, {
+        sender: FROM,
+        to: [{ email: businessEmail, name: businessName }],
+        ...tpl,
+      });
+      return response({ success: true, sent: true });
     }
 
     return response({ error: 'Unknown email type' }, 400);

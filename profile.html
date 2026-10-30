@@ -1007,6 +1007,7 @@ async function initProfile() {
  renderFavourites();
  renderReviews();
  renderRecommended();
+ _openDeepLink();
 }
 
 // ─── SIDEBAR ───
@@ -1503,28 +1504,54 @@ async function submitSuggest() {
  btn.disabled = true;
  btn.textContent = 'Sending...';
 
- // Save suggestion to Supabase (for your records + triggering edge function)
- const { error } = await sb.from('business_suggestions').insert({
- suggested_by: currentUser.id,
- business_name: bizName,
- business_email: bizEmail,
- personal_note: bizNote || null,
- created_at: new Date().toISOString()
+ try {
+ const { data: { session } } = await sb.auth.getSession();
+ const token = session && session.access_token;
+ if (!token) { showToast('Please sign in again.'); btn.disabled = false; btn.textContent = 'Send the email'; return; }
+ const meta = (currentUser && currentUser.user_metadata) || {};
+ const suggesterName = meta.full_name || meta.name || (currentUser.email || '').split('@')[0] || '';
+
+ const res = await fetch('/send-email', {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify({ type: 'business_invite', userToken: token, businessName: bizName, businessEmail: bizEmail, personalNote: bizNote || null, suggesterName })
  });
+ const out = await res.json().catch(() => ({}));
 
  btn.disabled = false;
  btn.textContent = 'Send the email';
 
- if (error) {
- showToast('Something went wrong. Please try again.');
- return;
- }
+ if (res.status === 429) { showToast("You've sent a lot of invites today — please try again tomorrow."); return; }
+ if (!res.ok || !out.success) { showToast('Something went wrong. Please try again.'); return; }
 
- // Show success
+ // Keep a record (best-effort; never blocks the UX).
+ sb.from('business_suggestions').insert({
+ suggested_by: currentUser.id,
+ business_name: bizName,
+ business_email: bizEmail,
+ personal_note: bizNote || null
+ }).then(() => {}, () => {});
+
  document.getElementById('suggestForm').style.display = 'none';
  document.getElementById('suggestSuccess').style.display = 'block';
- document.getElementById('suggestSuccessMsg').textContent =
- `We've reached out to ${bizName}. If they're interested, we'll be in touch to get them listed.`;
+ document.getElementById('suggestSuccessMsg').textContent = out.already
+ ? `${bizName} is already on ExpatBase — thanks for thinking of them!`
+ : `We've sent ${bizName} a friendly invite. If they join, you'll see them in the directory soon. Thank you!`;
+ } catch (e) {
+ btn.disabled = false;
+ btn.textContent = 'Send the email';
+ showToast('Something went wrong. Please try again.');
+ }
+}
+
+function _openDeepLink() {
+ try {
+ const p = new URLSearchParams(window.location.search);
+ if (p.get('suggest') === '1') {
+ const el = document.querySelector('.nav-item[onclick*="suggest"]');
+ showSection('suggest', el || null);
+ }
+ } catch (e) {}
 }
 
 function resetSuggest() {
