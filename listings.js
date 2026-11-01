@@ -95,7 +95,7 @@
     ".ebl-av.has-logo{background:#fff;border:1px solid #E4EBF3}" +
     ".ebl-av img{width:100%;height:100%;object-fit:contain;display:block;padding:5px}" +
     ".ebl-name{font-family:'Urbanist',system-ui,sans-serif;font-weight:700;font-size:1.1rem;color:#0F3360;line-height:1.2;overflow-wrap:anywhere;word-break:break-word}" +
-    ".ebl-cat{font-size:.82rem;color:#6B7A90}" +
+    ".ebl-cat{font-size:.82rem;color:#6B7A90;line-height:1.4;margin-top:2px}" +
     ".ebl-badges{display:flex;gap:6px;flex-wrap:wrap}" +
     ".ebl-badge{font-family:'Urbanist',system-ui,sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.04em;padding:3px 9px;border-radius:999px}" +
     ".ebl-en{background:#E6F7EF;color:#1D7A50}" +
@@ -116,6 +116,14 @@
     ".ebl-empty p{color:#6B7A90;margin:0 0 20px;line-height:1.55}" +
     ".ebl-empty a{display:inline-block;background:linear-gradient(135deg,#1D7A50,#2E9E6B);color:#fff;font-family:'Urbanist',system-ui,sans-serif;font-weight:700;text-decoration:none;padding:12px 22px;border-radius:999px}";
     document.head.appendChild(st);
+  }
+  /* under the name: the business's subcategories on category pages,
+     the main category on the homepage (where categories are mixed) */
+  function cardLabel(b) {
+    var subs = (Array.isArray(b.subcategories) ? b.subcategories : []).filter(Boolean);
+    if (LATEST || !subs.length) return b.category || '';
+    var named = subs.filter(function (x) { return x !== 'Other'; });
+    return named.length ? named.join(' \u00b7 ') : (b.category || '');
   }
   function card(b) {
     /* founding partners get Pro-level display (website/socials) during launch */
@@ -143,7 +151,7 @@
     return '<div class="ebl-card" data-eb-id="' + esc(b.id) + '">' +
       '<div class="ebl-head">' + avatar(b) +
       '<div class="ebl-hd"><div class="ebl-name">' + esc(b.name) + '</div>' +
-      '<div class="ebl-cat">' + esc(b.category) + '</div></div></div>' +
+      '<div class="ebl-cat">' + esc(cardLabel(b)) + '</div></div></div>' +
       (badges.replace(/\s/g, '') ? '<div class="ebl-badges">' + badges + '</div>' : '') +
       (b.description ? '<p class="ebl-desc">' + esc(b.description) + '</p>' : '') +
       '<div class="ebl-contact">' + contact + '</div>' + extra + '</div>';
