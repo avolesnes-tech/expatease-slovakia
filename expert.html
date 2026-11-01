@@ -197,7 +197,7 @@
 
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function initials(n){return String(n||'?').trim().split(/\s+/).slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();}
-  function catSlug(c){return {'Doctors':'doctors.html','Lawyers':'lawyers.html','Banks':'banks.html','Real Estate':'real-estate.html','Schools':'schools.html','Plumbers':'plumbers.html','Builders':'builders.html','Barbers':'barbers.html','Moving':'moving.html','Vets':'vets.html','Sports':'sports.html'}[c]||'index.html#categories';}
+  function catSlug(c){return {'Doctors':'doctors.html','Lawyers':'lawyers.html','Banks':'banks.html','Real Estate':'real-estate.html','Schools':'schools.html','Plumbers':'plumbers.html','Builders':'builders.html','Barbers':'barbers.html','Moving':'moving.html','Vets':'vets.html','Sports':'sports.html','Doctors & Specialists':'doctors.html','Lawyers & Legal':'lawyers.html','Banks & Finance':'banks.html','Hair, Beauty & Tattoo':'barbers.html','Handymen':'plumbers.html','Schools & Learning':'schools.html','Moving & Relocation':'moving.html','Sports & Leisure':'sports.html','Others':'others.html','Counselling & Wellbeing':'counselling.html'}[c]||'index.html#categories';}
   function q(name){return new URLSearchParams(location.search).get(name);}
   function track(type,id){try{fetch(SB+'/rest/v1/events',{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({business_id:id,type:type}),keepalive:true}).catch(function(){});}catch(e){}}
 

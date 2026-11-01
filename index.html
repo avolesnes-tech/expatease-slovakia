@@ -2644,6 +2644,14 @@
  <h2 class="section-title">Find your expert</h2>
  <p class="section-sub">Verified English-speaking professionals in Bratislava, across every category you need.</p>
  </div>
+ <div class="eb-search reveal" role="search">
+ <label for="ebSearchInput" class="eb-sr">Search for a service</label>
+ <div class="eb-search-box">
+ <svg class="eb-search-ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+ <input type="search" id="ebSearchInput" autocomplete="off" spellcheck="false" placeholder="Search for a service, e.g. plumber, psychologist, lawyer" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="ebSearchList">
+ </div>
+ <ul class="eb-search-list" id="ebSearchList" role="listbox" hidden></ul>
+ </div>
  <div class="categories-grid">
  <a href="doctors.html" class="cat-card reveal" style="transition-delay: 0ms">
  <div class="cat-card-inner">
@@ -2680,10 +2688,10 @@
  </div>
  <span class="cat-arrow">→</span>
  </a>
- <a href="builders.html" class="cat-card reveal" style="transition-delay: 300ms">
+ <a href="counselling.html" class="cat-card reveal" style="transition-delay: 300ms">
  <div class="cat-card-inner">
- <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="6" height="4"/><rect x="16" y="3" width="6" height="4"/><rect x="9" y="3" width="6" height="4"/><path d="M2 7v14h20V7"/><path d="M9 21v-8h6v8"/></svg></span>
- <div class="cat-name">Builders & Construction</div>
+ <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+ <div class="cat-name">Counselling & Wellbeing</div>
  </div>
  <span class="cat-arrow">→</span>
  </a>
@@ -2918,7 +2926,7 @@
  <li><a href="banks.html">Banks &amp; Finance</a></li>
  <li><a href="barbers.html">Hair, Beauty &amp; Tattoo</a></li>
  <li><a href="plumbers.html">Handymen</a></li>
- <li><a href="builders.html">Builders &amp; Construction</a></li>
+ <li><a href="counselling.html">Counselling &amp; Wellbeing</a></li>
  <li><a href="vets.html">Vets &amp; Pet Care</a></li>
  <li><a href="real-estate.html">Real Estate</a></li>
  <li><a href="schools.html">Schools &amp; Learning</a></li>
@@ -3063,7 +3071,7 @@
  <option>Banks &amp; Finance</option>
  <option>Hair, Beauty &amp; Tattoo</option>
  <option>Handymen</option>
- <option>Builders &amp; Construction</option>
+ <option>Counselling &amp; Wellbeing</option>
  <option>Vets</option>
  <option>Real Estate</option>
  <option>Schools &amp; Learning</option>
@@ -3822,7 +3830,7 @@
  const CAT_META = {
  'Doctors & Specialists': {
  subLabel: 'Specialty',
- subs: ['General Practitioner','Paediatrician','Dentist','Orthodontist','Gynaecologist','Dermatologist','ENT','Ophthalmologist','Orthopaedist','Cardiologist','Neurologist','Allergist','Psychologist / Therapist','Psychiatrist','Speech Therapy','Physiotherapy','Nutritionist','Other'],
+ subs: ['General Practitioner','Paediatrician','Dentist','Orthodontist','Gynaecologist','Dermatologist','ENT','Ophthalmologist','Orthopaedist','Cardiologist','Neurologist','Allergist','Clinical Psychologist','Psychiatrist','Speech Therapy','Physiotherapy','Nutritionist','Other'],
  districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
  extras: [{ key: 'insurance', label: 'Insurance accepted', type: 'multi',
  opts: ['VšZP','Dôvera','Union','Self-pay'] },
@@ -3855,9 +3863,9 @@
  extras: [{ key: 'availability', label: 'Availability', type: 'radio',
  opts: ['24/7 Emergency','Same Day','By Appointment'] }]
  },
- 'Builders & Construction': {
+ 'Counselling & Wellbeing': {
  subLabel: 'Service type',
- subs: ['Flooring & Tiling','Painting & Plastering','Structural & Extensions','Kitchen & Bathroom Renovation','Roofing','Windows & Doors','Insulation','Architect','Interior Designer','Other'],
+ subs: ['Counsellor','Psychologist','Psychotherapist','Couples & Family Therapy','Child & Adolescent Psychologist','Life Coach','Career Coach','Nutrition & Wellbeing','Mindfulness & Meditation','Other'],
  districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
  extras: []
  },
@@ -3893,11 +3901,12 @@
  },
  'Others': {
  subLabel: 'Service type',
- subs: ['Cleaning Service','Childcare / Nanny','IT & Tech Support','Car Service & Repair','Photography & Video','Translation & Interpreting','Catering & Events','Pest Control','Clubs & Societies','Other'],
+ subs: ['Cleaning Service','Childcare / Nanny','Graphic Design','Interior Design','Tailor & Seamstress','Car Service & Repair','Photography & Video','Translation & Interpreting','Catering & Events','Pest Control','Clubs & Societies','Building & Construction','Other'],
  districts: ['Staré Mesto','Nové Mesto','Ružinov','Petržalka','Karlova Ves','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Devínska Nová Ves','Lamač','Vajnory','Iná mestská časť','Senec a okolie','Bratislava-wide','Online'],
  extras: []
  }
  };
+ window.EB_CAT_META = CAT_META; /* used by the homepage search */
 
  function smUpdateCategoryFields(cat) {
  const meta = CAT_META[cat];
@@ -5019,5 +5028,80 @@
 <script>window.EB_LATEST = 6;</script>
 <script src="listings.js" defer></script>
 <script src="biz-promo.js" defer></script>
+<style>
+.eb-search{position:relative;max-width:640px;margin:-24px 0 40px}
+.eb-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.eb-search-box{position:relative}
+.eb-search-ic{position:absolute;left:20px;top:50%;transform:translateY(-50%);color:#8C97A8;pointer-events:none}
+#ebSearchInput{width:100%;box-sizing:border-box;font:500 16px/1.4 'DM Sans',system-ui,sans-serif;color:#1F2937;background:#fff;border:1.5px solid #DDE3EC;border-radius:999px;padding:16px 22px 16px 52px;box-shadow:0 4px 20px rgba(26,79,138,.08);outline:none;transition:border-color .15s,box-shadow .15s;-webkit-appearance:none;appearance:none}
+#ebSearchInput:focus{border-color:#1A4F8A;box-shadow:0 0 0 4px rgba(26,79,138,.12)}
+.eb-search-list{position:absolute;left:0;right:0;top:calc(100% + 8px);z-index:50;list-style:none;margin:0;padding:6px;background:#fff;border:1px solid #E4EBF3;border-radius:18px;box-shadow:0 12px 36px rgba(15,51,96,.16);max-height:360px;overflow-y:auto}
+.eb-search-list li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:11px 14px;border-radius:12px;cursor:pointer;font:500 15px/1.35 'DM Sans',system-ui,sans-serif;color:#1F2937}
+.eb-search-list li[aria-selected="true"],.eb-search-list li:hover{background:#E8F1FB}
+.eb-search-list li mark{background:none;color:#1A4F8A;font-weight:700}
+.eb-search-list .eb-cat{flex:0 0 auto;font-size:12.5px;color:#6B7A90}
+.eb-search-list li.eb-none{cursor:default;color:#6B7A90;background:none}
+@media (max-width:600px){.eb-search{margin:-28px 0 32px}#ebSearchInput{font-size:16px;padding:14px 18px 14px 46px}.eb-search-ic{left:16px}.eb-search-list li{flex-direction:column;gap:2px}}
+</style>
+<script>
+(function(){
+  var input=document.getElementById('ebSearchInput'), list=document.getElementById('ebSearchList');
+  var CAT_META=window.EB_CAT_META;
+  if(!input||!list||!CAT_META) return;
+  var PAGE={'Doctors & Specialists':'doctors.html','Lawyers & Legal':'lawyers.html','Banks & Finance':'banks.html','Hair, Beauty & Tattoo':'barbers.html','Handymen':'plumbers.html','Counselling & Wellbeing':'counselling.html','Vets':'vets.html','Real Estate':'real-estate.html','Schools & Learning':'schools.html','Moving & Relocation':'moving.html','Sports & Leisure':'sports.html','Others':'others.html'};
+  /* extra everyday words that should lead to a subcategory: [word, category, subcategory] */
+  var ALIAS=[['Therapist','Counselling & Wellbeing','Psychotherapist'],['Therapy','Counselling & Wellbeing','Psychotherapist'],['Coach','Counselling & Wellbeing','Life Coach'],
+    ['Doctor','Doctors & Specialists',''],['Builder','Others','Building & Construction'],['Construction','Others','Building & Construction'],['Roofer','Others','Building & Construction'],['Painter','Others','Building & Construction'],['Tiler','Others','Building & Construction'],['Architect','Others','Building & Construction'],['Renovation','Others','Building & Construction'],
+    ['Mechanic','Others','Car Service & Repair'],['Translator','Others','Translation & Interpreting'],['Hairdresser','Hair, Beauty & Tattoo',"Hair Salon (Women's)"],
+    ['Barber','Hair, Beauty & Tattoo',"Barbershop (Men's)"],['Vet','Vets',''],['Lawyer','Lawyers & Legal',''],['Accountant','Banks & Finance','Accountant & Bookkeeping'],
+    ['Nanny','Others','Childcare / Nanny'],['Babysitter','Others','Childcare / Nanny'],['Cleaner','Others','Cleaning Service'],['Movers','Moving & Relocation','Local Moves'],
+    ['Yoga','Sports & Leisure','Yoga & Pilates'],['School','Schools & Learning',''],['Slovak lessons','Schools & Learning','Slovak for Foreigners']];
+  function norm(t){return String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+  var IDX=[];
+  Object.keys(CAT_META).forEach(function(cat){
+    if(!PAGE[cat]) return;
+    IDX.push({label:cat,cat:cat,sub:'',page:PAGE[cat]});
+    (CAT_META[cat].subs||[]).forEach(function(sub){ if(sub!=='Other') IDX.push({label:sub,cat:cat,sub:sub,page:PAGE[cat]}); });
+  });
+  ALIAS.forEach(function(a){ if(PAGE[a[1]]) IDX.push({label:a[0],cat:a[1],sub:a[2],page:PAGE[a[1]],alias:true}); });
+  IDX.forEach(function(it){it.n=norm(it.label);});
+  var items=[], active=-1, timer=null;
+  function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function hl(label,q){var i=norm(label).indexOf(q);if(i<0)return esc(label);return esc(label.slice(0,i))+'<mark>'+esc(label.slice(i,i+q.length))+'</mark>'+esc(label.slice(i+q.length));}
+  function close(){list.hidden=true;input.setAttribute('aria-expanded','false');input.removeAttribute('aria-activedescendant');active=-1;}
+  function go(it){ location.href=it.page+(it.sub?'?sub='+encodeURIComponent(it.sub):''); }
+  function setActive(i){
+    var lis=list.querySelectorAll('li[role="option"]');
+    lis.forEach(function(li,k){li.setAttribute('aria-selected',k===i?'true':'false');});
+    active=i; if(lis[i]){input.setAttribute('aria-activedescendant',lis[i].id);lis[i].scrollIntoView({block:'nearest'});}
+  }
+  function update(){
+    var q=norm(input.value.trim());
+    if(!q){close();return;}
+    var seen={}, res=IDX.filter(function(it){return it.n.indexOf(q)>-1;})
+      .sort(function(a,b){return (a.n.indexOf(q)===0?0:1)-(b.n.indexOf(q)===0?0:1) || (a.alias?1:0)-(b.alias?1:0) || a.label.length-b.label.length;})
+      .filter(function(it){var k=it.cat+'|'+it.sub;if(seen[k])return false;seen[k]=1;return true;}).slice(0,8);
+    items=res;
+    if(!res.length){list.innerHTML='<li class="eb-none" role="presentation">No matches, try another word</li>';}
+    else list.innerHTML=res.map(function(it,i){
+      var right=it.sub?(it.alias?esc(it.sub)+' · ':'')+esc(it.cat):'Category';
+      return '<li role="option" id="ebOpt'+i+'" aria-selected="false" data-i="'+i+'"><span>'+hl(it.label,q)+'</span><span class="eb-cat">'+right+'</span></li>';
+    }).join('');
+    list.hidden=false; input.setAttribute('aria-expanded','true'); active=-1;
+  }
+  input.addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(update,120);});
+  input.addEventListener('keydown',function(e){
+    if(list.hidden&&e.key!=='Enter') return;
+    var n=items.length;
+    if(e.key==='ArrowDown'){e.preventDefault();if(n)setActive((active+1)%n);}
+    else if(e.key==='ArrowUp'){e.preventDefault();if(n)setActive((active-1+n)%n);}
+    else if(e.key==='Enter'){ if(list.hidden) update(); var it=items[active>-1?active:0]; if(it&&!list.hidden&&n){e.preventDefault();go(it);} }
+    else if(e.key==='Escape'){close();}
+  });
+  list.addEventListener('mousedown',function(e){var li=e.target.closest('li[data-i]');if(li){e.preventDefault();go(items[+li.getAttribute('data-i')]);}});
+  input.addEventListener('blur',function(){setTimeout(close,120);});
+  input.addEventListener('focus',function(){if(input.value.trim())update();});
+})();
+</script>
 </body>
 </html>

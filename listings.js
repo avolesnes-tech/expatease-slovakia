@@ -109,6 +109,8 @@
     ".ebl-links a{color:#1A4F8A;font-weight:600;text-decoration:none}" +
     ".ebl-links a:hover{text-decoration:underline}" +
     ".ebl-profile{display:inline-block;margin-top:auto;padding-top:14px;color:#1A4F8A;font-family:'Urbanist',system-ui,sans-serif;font-weight:700;font-size:.9rem;text-decoration:none} .ebl-profile:hover{text-decoration:underline}" +
+    ".ebl-subnote{font-family:'DM Sans',system-ui,sans-serif;font-size:.95rem;color:#3B4A5E;background:#F2F7FC;border:1px solid #E4EBF3;border-radius:12px;padding:12px 16px;margin:0 0 18px}" +
+    ".ebl-subnote a{color:#1A4F8A;font-weight:600}" +
     ".ebl-empty{text-align:center;max-width:520px;margin:16px auto;padding:44px 26px;background:#fff;border:1px solid #E4EBF3;border-radius:20px;box-shadow:0 2px 16px rgba(26,79,138,.06);font-family:'DM Sans',system-ui,sans-serif}" +
     ".ebl-empty h3{font-family:'Urbanist',system-ui,sans-serif;font-weight:800;color:#0F3360;font-size:1.3rem;margin:0 0 10px}" +
     ".ebl-empty p{color:#6B7A90;margin:0 0 20px;line-height:1.55}" +
@@ -227,12 +229,41 @@
     setTimeout(sync, 60);
     sync();
   }
+  /* ── optional ?sub=<subcategory> from the homepage search ── */
+  var SUBNOTE = '';
+  function norm(t) {
+    return String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+  }
+  function applySub(rows) {
+    var sub = '';
+    try { sub = new URLSearchParams(location.search).get('sub') || ''; } catch (e) {}
+    if (!sub || LATEST) return rows;
+    var want = norm(sub);
+    var hit = rows.filter(function (b) {
+      return (Array.isArray(b.subcategories) ? b.subcategories : []).some(function (x) { return norm(x) === want; });
+    });
+    var all = '<a href="' + location.pathname.split('/').pop() + '">Show all in this category</a>';
+    if (hit.length) {
+      SUBNOTE = 'Showing: <strong>' + esc(sub) + '</strong> \u00b7 ' + all;
+      return hit;
+    }
+    SUBNOTE = rows.length
+      ? 'No <strong>' + esc(sub) + '</strong> listed yet \u2014 here is everyone in this category.'
+      : '';
+    return rows;
+  }
   function render(rows) {
     var grid = findGrid();
     if (!grid) return;
     injectCSS();
     // Take over the grid: remove any hardcoded/sample cards or empty state.
     grid.innerHTML = '';
+    if (SUBNOTE) {
+      var note = document.createElement('div');
+      note.className = 'ebl-subnote';
+      note.innerHTML = SUBNOTE;
+      grid.appendChild(note);
+    }
     if (rows && rows.length) {
       var holder = document.createElement('div');
       if (LATEST) {
@@ -271,7 +302,7 @@
         encodeURIComponent(CATEGORY) + '&select=*&order=plan.desc,created_at.desc';
     fetch(url, { headers: { apikey: KEY, Authorization: 'Bearer ' + KEY } })
       .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (rows) { if (rows) render(Array.isArray(rows) ? rows : []); })
+      .then(function (rows) { if (rows) render(applySub(Array.isArray(rows) ? rows : [])); })
       .catch(function () { /* leave page untouched on failure */ });
   }
   if (document.readyState === 'loading') {
