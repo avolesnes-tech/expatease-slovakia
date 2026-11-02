@@ -35,11 +35,7 @@
   /* identity band — brand hero; cover photo overlays when the business has one */
   .idband{position:relative;overflow:hidden;background:linear-gradient(130deg,#0F3360 0%,#17518A 58%,#1E7A5A 100%)}
   .idband::after{content:"";position:absolute;right:-90px;top:-110px;width:360px;height:360px;background:radial-gradient(circle,rgba(46,158,107,.38),transparent 70%);z-index:0;pointer-events:none}
-  .idband .cover{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0}
-  .idband .scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(125deg,rgba(9,26,51,.86) 0%,rgba(9,26,51,.60) 52%,rgba(12,58,43,.66) 100%)}
   .idband .wrap{position:relative;z-index:2}
-  .idband.has-cover{min-height:300px;display:flex;flex-direction:column;justify-content:flex-end}
-  .idband.has-cover .idrow{padding-top:30px;padding-bottom:34px}
   .idband .crumbs,.idband .crumbs a{color:rgba(255,255,255,.72)}
   .idband .crumbs a:hover{color:#fff}
   .idband .idmeta h1{color:#fff}
@@ -49,6 +45,27 @@
   .idband .rev-agg .cnt{color:rgba(255,255,255,.82)}
   .idband .b-prem{background:linear-gradient(135deg,#F5C451,#E0A32E);color:#3A2A06}
   .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+
+  /* cover photo layout (LinkedIn-style): photo sits in a framed 3:1 banner, identity
+     sits below it on white, so no text or dark scrim ever covers the photo.
+     Crop is anchored at 25% from top (faces usually sit in the upper third);
+     a per-business cover_focal_y (0-100) overrides it when present. */
+  .idband.has-cover{background:#fff;border-bottom:1px solid var(--gray-200)}
+  .idband.has-cover::after{display:none}
+  .idband.has-cover .crumbs,.idband.has-cover .crumbs a{color:var(--gray-600)}
+  .idband.has-cover .crumbs a:hover{color:var(--blue)}
+  .idband.has-cover .idmeta h1{color:var(--blue-dark)}
+  .idband.has-cover .idmeta .cat{color:var(--gray-600)}
+  .idband.has-cover .rev-agg .score{color:var(--blue-dark)}
+  .idband.has-cover .rev-agg .cnt{color:var(--gray-600)}
+  .idband.has-cover .logo-chip{border:4px solid #fff;box-shadow:0 8px 24px rgba(15,51,96,.18)}
+  .cover-banner{position:relative;margin-top:14px;aspect-ratio:3/1;border-radius:var(--radius-lg);overflow:hidden;background:var(--gray-100)}
+  .cover-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%;display:block}
+  .cover-banner::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(15,51,96,.06);pointer-events:none}
+  .idband.has-cover .idrow{position:relative;z-index:1;align-items:flex-start;margin-top:-54px;padding:0 0 28px 28px}
+  .idband.has-cover .idmeta{padding-top:66px}
+  @media(max-width:700px){.cover-banner{aspect-ratio:16/9;border-radius:var(--radius-md)}}
+  @media(max-width:560px){.idband.has-cover .idrow{margin-top:-46px;padding-left:16px;gap:12px}.idband.has-cover .idmeta{padding-top:0}.idband.has-cover .logo-chip{height:84px;min-width:84px}}
   .crumbs{font-size:13px;color:var(--gray-600);padding:18px 0 0}
   .crumbs a{text-decoration:none;color:var(--gray-600)}
   .crumbs a:hover{color:var(--blue)}
@@ -254,7 +271,7 @@
     document.getElementById('idrow').innerHTML=chip+
       '<div class="idmeta"><h1>'+esc(b.name)+'</h1><div class="cat">'+esc(b.category||'')+'</div>'+(badges?'<div class="badges">'+badges+'</div>':'')+'<div class="rev-agg" id="idAgg" style="display:none"></div></div>';
     var _ib=document.getElementById('idband');
-    if(b.cover_url&&_ib){_ib.classList.add('has-cover');var _cv=document.createElement('div');_cv.className='cover';_cv.style.backgroundImage="url('"+String(b.cover_url).replace(/'/g,"%27")+"')";var _sc=document.createElement('div');_sc.className='scrim';_ib.insertBefore(_sc,_ib.firstChild);_ib.insertBefore(_cv,_ib.firstChild);}
+    if(b.cover_url&&_ib){_ib.classList.add('has-cover');var _bn=document.createElement('div');_bn.className='cover-banner';var _im=document.createElement('img');_im.src=b.cover_url;_im.alt=(b.name||'')+' \u2014 cover photo';_im.decoding='async';try{_im.fetchPriority='high';}catch(_){};var _fy=parseFloat(b.cover_focal_y);if(isFinite(_fy)&&_fy>=0&&_fy<=100)_im.style.objectPosition='50% '+_fy+'%';_bn.appendChild(_im);var _ir=document.getElementById('idrow');_ir.parentNode.insertBefore(_bn,_ir);}
     try{
       var _u='https://expatbase.sk/expert.html?id='+b.id;
       var _ld={"@context":"https://schema.org","@type":"LocalBusiness","name":b.name,"url":_u};
