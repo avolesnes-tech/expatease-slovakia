@@ -130,7 +130,7 @@
     var prem = b.plan === 'premium' || b.plan === 'founding';
     var badges = [
       b.english_speaking ? '<span class="ebl-badge ebl-en">English-speaking</span>' : '',
-      prem ? '<span class="ebl-badge ebl-prem">Premium</span>' : ''
+      prem ? '<span class="ebl-badge ebl-prem">Founding Partner</span>' : ''
     ].join('');
     var contact = [
       b.phone ? '<a href="tel:' + esc(b.phone) + '" class="ebl-row"><span>☎</span>' + esc(b.phone) + '</a>' : '',

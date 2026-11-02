@@ -250,7 +250,7 @@
       : '<div class="logo-chip initials">'+esc(initials(b.name))+'</div>';
     var badges='';
     if(b.english_speaking) badges+='<span class="badge b-en">English-speaking</span>';
-    if(prem) badges+='<span class="badge b-prem">Premium</span>';
+    if(prem) badges+='<span class="badge b-prem">Founding Partner</span>';
     document.getElementById('idrow').innerHTML=chip+
       '<div class="idmeta"><h1>'+esc(b.name)+'</h1><div class="cat">'+esc(b.category||'')+'</div>'+(badges?'<div class="badges">'+badges+'</div>':'')+'<div class="rev-agg" id="idAgg" style="display:none"></div></div>';
     var _ib=document.getElementById('idband');
