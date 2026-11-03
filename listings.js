@@ -311,7 +311,7 @@
           if (extraSubs.length) {
             // OR: category matches, OR any of the extra subcategories match
             var subFilters = extraSubs.map(function(s){
-              return 'subcategories.cs.{"' + s.replace(/"/g,'\\\"')' + '"}';
+              return 'subcategories.cs.{"' + s.replace(/"/g,'\\"') + '"}';
             });
             var orParts = ['category.eq.' + CATEGORY].concat(subFilters);
             return SB + '/rest/v1/businesses?status=eq.approved&or=(' +
