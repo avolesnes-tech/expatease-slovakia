@@ -104,6 +104,10 @@ a{text-decoration:none;color:inherit}
 .offer-group li{position:relative;padding-left:22px;font-size:14.5px;color:var(--gray-700);line-height:1.45;display:block}
 .offer-group li::before{content:"\2713";position:absolute;left:0;color:var(--green);font-weight:800}
 .reg-founding-note{background:#EFFaf4;border:1px solid #cdeedd;border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.5;color:#2b4a3c;margin-bottom:18px}
+#regStep1 .offer.offer-in-modal{max-width:none;margin:16px 0 0;box-shadow:none;padding:30px 24px 22px}
+#regContinue{margin-top:2px}
+.reg-back{background:none;border:0;color:var(--blue);font-family:var(--head);font-weight:700;font-size:13.5px;cursor:pointer;padding:2px 2px 2px 0;margin-bottom:8px}
+.reg-back:hover{text-decoration:underline}
 .reg-optional-head{font-family:var(--head);font-weight:800;font-size:14px;color:var(--ink);margin:6px 0 12px;padding-top:6px;border-top:1px solid var(--gray-100)}
 .reg-optional-head span{font-weight:400;color:var(--gray-500);font-size:12.5px}
 
@@ -363,8 +367,33 @@ a{text-decoration:none;color:inherit}
       <p>Pár údajov a ste v databáze. Zadarmo, kartu teraz nezadávate.</p>
     </div>
     <div class="reg-body" id="regBody">
-      <form id="regForm" novalidate>
-        <div class="reg-founding-note">Základný profil je zadarmo navždy. Ako <strong>Founding Partner</strong> k nemu máte rozšírený profil šesť mesiacov zadarmo — polia označené <em>nepovinné</em> môžete vyplniť teraz alebo kedykoľvek neskôr.</div>
+      <div id="regStep1">
+        <div class="offer offer-in-modal">
+          <span class="pill">Founding Partner · teraz zadarmo</span>
+          <h3>Váš profil na ExpatBase</h3>
+          <div class="offer-sub">Expati často hľadajú služby po anglicky a nevedia, kam sa obrátiť. S profilom na ExpatBase ste presne tam, kde vás v tej chvíli potrebujú — a nájdu vás.</div>
+          <div class="offer-group">
+            <div class="offer-group-h">Základný profil <span class="og-free">— zadarmo navždy</span></div>
+            <ul>
+              <li>Názov, kategória a kontakt — expat vás nájde a ozve sa</li>
+              <li>Krátky popis toho, čo ponúkate</li>
+              <li>Zobrazenie vo vyhľadávaní aj vo vašej kategórii</li>
+            </ul>
+          </div>
+          <div class="offer-group pro">
+            <div class="offer-group-h">Rozšírený profil (Pro) <span class="og-founding">— teraz 6 mesiacov zadarmo</span></div>
+            <ul>
+              <li>Fotky a otváracie hodiny — profil, ktorému sa dá veriť</li>
+              <li>Web a sociálne siete na jeden preklik</li>
+              <li>Prioritné umiestnenie vo vašej kategórii — ste medzi prvými, koho expat uvidí</li>
+              <li>Zvýraznené recenzie a odznak Founding Partner <em>(ostáva vám natrvalo)</em></li>
+            </ul>
+          </div>
+        </div>
+        <button type="button" class="reg-send" id="regContinue">Pokračovať →</button>
+      </div>
+      <form id="regForm" novalidate style="display:none">
+        <button type="button" class="reg-back" id="regBack">← Späť na prehľad</button>
 
         <div class="reg-field"><label for="regName">Názov firmy <span class="req">*</span></label><input id="regName" name="name" type="text" required></div>
         <div class="reg-field"><label for="regCat">Kategória <span class="req">*</span></label>
@@ -560,8 +589,10 @@ a{text-decoration:none;color:inherit}
 
   function open(){
     setPlan();
+    var s1=document.getElementById('regStep1'); if(s1) s1.style.display='';
+    form.style.display='none';
+    var _b=document.getElementById('regBody'); if(_b) _b.scrollTop=0;
     ov.classList.add('open'); document.body.style.overflow='hidden';
-    setTimeout(function(){ var n=document.getElementById('regName'); if(n) n.focus(); }, 60);
   }
   function close(){ ov.classList.remove('open'); document.body.style.overflow=''; }
 
@@ -571,6 +602,19 @@ a{text-decoration:none;color:inherit}
   document.getElementById('regX').addEventListener('click', close);
   ov.addEventListener('click', function(e){ if(e.target===ov) close(); });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape' && ov.classList.contains('open')) close(); });
+  var _cont=document.getElementById('regContinue');
+  if(_cont) _cont.addEventListener('click', function(){
+    var s1=document.getElementById('regStep1'); if(s1) s1.style.display='none';
+    form.style.display='';
+    var _b=document.getElementById('regBody'); if(_b) _b.scrollTop=0;
+    setTimeout(function(){ var n=document.getElementById('regName'); if(n) n.focus(); }, 40);
+  });
+  var _back=document.getElementById('regBack');
+  if(_back) _back.addEventListener('click', function(){
+    form.style.display='none';
+    var s1=document.getElementById('regStep1'); if(s1) s1.style.display='';
+    var _b=document.getElementById('regBody'); if(_b) _b.scrollTop=0;
+  });
 
   // language chip styling
   document.querySelectorAll('#regLangs .reg-lang input').forEach(function(ch){
