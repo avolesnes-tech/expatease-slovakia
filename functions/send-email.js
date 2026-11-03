@@ -196,8 +196,10 @@ Hello,<br><br>
 one of our members recommended <b>${name}</b> as a business that looks after English-speaking clients &ndash; so we wanted to reach out.<br><br>
 We run <a href="https://expatbase.sk" style="color:#1A4F8A;font-weight:bold;text-decoration:none;">ExpatBase.sk</a>, a directory where foreigners living in Bratislava find professionals they can deal with in English.</td></tr>
 ${noteBlock}
-<tr><td style="padding:0 30px 24px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:24px;color:#1F2937;">
-Being listed is <b>free</b>, and your basic profile stays free for good. If you'd like to be found by this community, you can create your profile in a couple of minutes:</td></tr>
+<tr><td style="padding:0 30px 20px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:24px;color:#1F2937;">
+<b>Your basic listing is free &ndash; and stays free for good.</b> Your name, contact and a short description, so English-speaking expats can find you.<br><br>
+Right now, as a <b>founding partner</b>, you also get the full <b>Pro</b> profile <b>free for 6 months</b> &ndash; photos, website and social links, and priority placement in your category.<br><br>
+After that, your basic listing stays free. We&rsquo;ll always give you advance notice before we introduce any paid plans &ndash; so you can simply keep the free listing, or extend Pro if you&rsquo;d like to stay more visible. No card today, no commitment.</td></tr>
 <tr><td align="center" style="padding:0 30px 26px;"><table cellpadding="0" cellspacing="0" border="0"><tr><td bgcolor="#2E9E6B" style="background:#2E9E6B;border-radius:999px;"><table cellpadding="13" cellspacing="0" border="0"><tr><td align="center" style="font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:bold;">&nbsp;&nbsp;<a href="https://expatbase.sk/for-businesses" style="color:#fff;text-decoration:none;font-weight:bold;">Create your free profile &rarr;</a>&nbsp;&nbsp;</td></tr></table></td></tr></table></td></tr>
 <tr><td style="padding:18px 30px 30px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:21px;color:#5A6676;border-top:1px solid #E4EBF3;">
 No pressure at all – if this isn't for you, simply ignore this message. Any questions? Just reply to this email.<br><br>

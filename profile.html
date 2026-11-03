@@ -920,12 +920,14 @@
  <div class="email-preview">
  <div class="preview-label">Email preview</div>
  <div class="preview-from" id="prevFrom">From: ExpatBase &lt;hello@expatbase.sk&gt; · To: , </div>
- <div class="preview-subject">Subject: We'd love to feature you on ExpatBase Slovakia</div>
+ <div class="preview-subject">Subject: An expat recommended <em id="prevName">your business</em> to ExpatBase</div>
  <div class="preview-body" id="prevBody">
- Hi <em id="prevName">there</em>,<br><br>
- We run ExpatBase, a directory of English-friendly businesses in Bratislava, trusted by the local expat community. <em id="prevNote"></em>We'd love to list your business so more expats can discover you.<br><br>
- Getting started is free. Reply to this email or visit <em>expatbase.sk</em> to learn more.<br><br>
- , The ExpatBase team
+ Hello,<br><br>
+ One of our members recommended you as a business that looks after English-speaking clients. We run ExpatBase.sk, where foreigners in Bratislava find professionals they can deal with in English. <em id="prevNote"></em><br><br>
+ <strong>Your basic listing is free — and stays free for good.</strong> Right now, as a founding partner, you also get the full Pro profile free for 6 months — photos, links and priority placement in your category.<br><br>
+ After that, your basic listing stays free. We'll always give you advance notice before any paid plans — so you can keep the free listing, or extend Pro if you'd like to stay more visible. No card today, no commitment.<br><br>
+ Reply to this email or visit <em>expatbase.sk</em>.<br><br>
+ — Anna, ExpatBase.sk
  </div>
  </div>
 
@@ -1484,7 +1486,7 @@ function updateEmailPreview() {
  const email = document.getElementById('bizEmail').value.trim();
  const note = document.getElementById('bizNote').value.trim();
 
- document.getElementById('prevName').textContent = name || 'there';
+ document.getElementById('prevName').textContent = name || 'your business';
  document.getElementById('prevNote').textContent = note ? note + ' ' : '';
  document.getElementById('prevFrom').innerHTML =
  `From: ExpatBase &lt;hello@expatbase.sk&gt; · To: ${email || ', '}`;
