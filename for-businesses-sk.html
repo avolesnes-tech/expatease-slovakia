@@ -86,6 +86,18 @@ a{text-decoration:none;color:inherit}
 .plan .pbtn.ghost{border:1.6px solid var(--blue);color:var(--blue-dark);background:#fff}
 .plan .pbtn.solid{color:#fff;background:linear-gradient(135deg,var(--green-dark),var(--green))}
 .pill{position:absolute;top:-13px;left:50%;transform:translateX(-50%);font-family:var(--head);font-weight:800;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--green-dark);padding:5px 14px;border-radius:999px;white-space:nowrap}
+.offer{position:relative;max-width:600px;margin:0 auto;border:2px solid var(--green);border-radius:24px;padding:40px 36px 34px;background:#fff;box-shadow:0 16px 44px rgba(46,158,107,.14);text-align:center}
+.offer h3{font-family:var(--head);font-weight:900;font-size:25px;color:var(--ink);margin:8px 0 8px;letter-spacing:-.01em}
+.offer .offer-sub{font-size:15px;color:var(--gray-500);margin:0 auto 24px;max-width:440px}
+.offer ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin:0 auto 26px;text-align:left;max-width:440px}
+.offer li{display:flex;gap:10px;font-size:15px;color:var(--gray-700);align-items:flex-start;line-height:1.45}
+.offer li .ck{color:var(--green);font-weight:800;flex:0 0 auto}
+.offer .tag-free{color:var(--green-dark);font-weight:700}
+.offer .pbtn{display:inline-block;font-family:var(--head);font-weight:800;font-size:16px;padding:15px 36px;border-radius:999px;cursor:pointer;border:0;color:#fff;background:linear-gradient(135deg,var(--green-dark),var(--green))}
+.offer .free-note{font-size:13.5px;color:var(--gray-500);margin-top:14px}
+.reg-founding-note{background:#EFFaf4;border:1px solid #cdeedd;border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.5;color:#2b4a3c;margin-bottom:18px}
+.reg-optional-head{font-family:var(--head);font-weight:800;font-size:14px;color:var(--ink);margin:6px 0 12px;padding-top:6px;border-top:1px solid var(--gray-100)}
+.reg-optional-head span{font-weight:400;color:var(--gray-500);font-size:12.5px}
 
 .founding{background:linear-gradient(135deg,#0F3360,#1A4F8A);color:#fff;border-radius:24px;padding:44px 40px;text-align:center;max-width:820px;margin:0 auto}
 .founding .fp-tag{display:inline-block;font-family:var(--head);font-weight:800;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:#0B1F3A;background:#8fe0b6;padding:4px 12px;border-radius:999px;margin-bottom:16px}
@@ -261,35 +273,22 @@ a{text-decoration:none;color:inherit}
   <div class="wrap">
     <div class="section-head">
       <div class="section-eyebrow">Jednoducho a férovo</div>
-      <h2 class="section-title">Začnite zadarmo. Viac vtedy, keď chcete byť viac vidieť.</h2>
-      <p class="section-sub">Základná registrácia je zadarmo natrvalo. Všetko ostatné je len na vás, žiadny háčik.</p>
+      <h2 class="section-title">Teraz je všetko zadarmo. Vrátane Pro.</h2>
+      <p class="section-sub">Pridajte sa ako Founding Partner a získajte celý profil zadarmo. Platený Pro program zavedieme až neskôr — dobrovoľne, pre tých, čo budú chcieť ostať viac vidieť.</p>
     </div>
-    <div class="plans">
-      <div class="plan">
-        <div class="pname">Basic</div>
-        <div class="pprice">Zadarmo<small> &nbsp;navždy</small></div>
-        <div class="psub">Základ, s ktorým vás expati objavia.</div>
-        <ul>
-          <li><span class="ck">✓</span> Názov firmy a kategória</li>
-          <li><span class="ck">✓</span> Telefón, e-mail a adresa</li>
-          <li><span class="ck">✓</span> Krátky popis firmy</li>
-          <li><span class="ck">✓</span> Zobrazenie vo vyhľadávaní aj v kategórii</li>
-        </ul>
-        <button class="pbtn ghost" data-reg-open data-reg-plan="basic">Zaregistrovať firmu zadarmo</button>
-      </div>
-      <div class="plan pro">
-        <span class="pill">Founding Partner: 6 mesiacov zadarmo</span>
-        <div class="pname">Pro</div>
-        <div class="pprice">Upgrade<small> &nbsp;keď chcete ostať viac viditeľní</small></div>
-        <div class="psub">Všetko z Basic a k tomu nástroje, vďaka ktorým si expat vyberie vás a nie konkurenciu. Pre Founding Partnerov <strong>prvých 6 mesiacov zadarmo</strong>.</div>
-        <ul>
-          <li><span class="ck">✓</span> Všetko z Basic a navyše:</li>
-          <li><span class="ck">✓</span> Plný profil: fotky, hodiny, web a sociálne siete</li>
-          <li><span class="ck">✓</span> Prioritné umiestnenie v kategórii</li>
-          <li><span class="ck">✓</span> Zvýraznené recenzie a odznak Founding Partner</li>
-        </ul>
-        <button class="pbtn solid" data-reg-open data-reg-plan="premium">Chcem byť Founding Partner →</button>
-      </div>
+    <div class="offer">
+      <span class="pill">Founding Partner · teraz zadarmo</span>
+      <h3>Pridajte sa teraz — plný profil zadarmo</h3>
+      <div class="offer-sub">Každá firma, ktorá sa pridá teraz, je Founding Partner a má celý Pro profil zadarmo.</div>
+      <ul>
+        <li><span class="ck">✓</span><span>Názov firmy, kategória, telefón, e-mail a adresa</span></li>
+        <li><span class="ck">✓</span><span>Krátky popis a zobrazenie vo vyhľadávaní aj v kategórii</span></li>
+        <li><span class="ck">✓</span><span>Plný profil: fotky, otváracie hodiny, web a sociálne siete <span class="tag-free">— zadarmo</span></span></li>
+        <li><span class="ck">✓</span><span>Prioritné umiestnenie v kategórii <span class="tag-free">— zadarmo</span></span></li>
+        <li><span class="ck">✓</span><span>Zvýraznené recenzie a odznak Founding Partner <span class="tag-free">— ostáva natrvalo</span></span></li>
+      </ul>
+      <button class="pbtn" data-reg-open data-reg-plan="premium">Zaregistrovať firmu zadarmo →</button>
+      <div class="free-note">Bez platobnej karty. Dnes neplatíte nič.</div>
     </div>
   </div>
 </section>
@@ -298,10 +297,9 @@ a{text-decoration:none;color:inherit}
 <section class="section">
   <div class="wrap">
     <div class="founding">
-      <span class="fp-tag">Founding Partner</span>
-      <h2>Šesť mesiacov zadarmo ako poďakovanie, že ste v tom s nami od začiatku.</h2>
-      <p>ExpatBase budujeme spoločne. Pridajte sa teraz ako Founding Partner a plný Pro profil máte <strong>prvých šesť mesiacov zadarmo</strong> . Platobnú kartu teraz nezadávate a dnes neplatíte nič. Len vaša firma na očiach ľuďom, ktorí takú službu práve potrebujú.</p>
-      <button class="btn-primary" data-reg-open data-reg-plan="premium">Zaregistrovať firmu zadarmo →</button>
+      <span class="fp-tag">Čo bude ďalej</span>
+      <h2>Basic zostane zadarmo navždy. Pro až vtedy, keď to bude dávať zmysel vám.</h2>
+      <p>Teraz ako Founding Partner máte celý Pro profil zadarmo. Po šiestich mesiacoch sa Pro stane voliteľným plateným programom — pre firmy, ktoré budú chcieť ostať maximálne viditeľné. Nič sa nestane automaticky a k ničomu sa dnes nezaväzujete. Odznak Founding Partner vám ostáva natrvalo.</p>
     </div>
   </div>
 </section>
@@ -348,16 +346,7 @@ a{text-decoration:none;color:inherit}
     </div>
     <div class="reg-body" id="regBody">
       <form id="regForm" novalidate>
-        <div class="reg-plans">
-          <button type="button" class="reg-plan sel" data-plan="basic">
-            <div class="rp-n">Basic</div><div class="rp-p">Zadarmo navždy</div>
-            <div class="rp-d">Názov, kategória, kontakt a popis. Základ, ktorý expatom stačí.</div>
-          </button>
-          <button type="button" class="reg-plan" data-plan="premium">
-            <div class="rp-n">Pro — Founding Partner</div><div class="rp-p">6 mesiacov zadarmo</div>
-            <div class="rp-d">Plný profil: fotky, web, sociálne siete a prioritné umiestnenie.</div>
-          </button>
-        </div>
+        <div class="reg-founding-note">Pridávate sa ako <strong>Founding Partner</strong> — celý profil máte zadarmo. Polia označené <em>nepovinné</em> môžete vyplniť teraz alebo kedykoľvek neskôr.</div>
 
         <div class="reg-field"><label for="regName">Názov firmy <span class="req">*</span></label><input id="regName" name="name" type="text" required></div>
         <div class="reg-field"><label for="regCat">Kategória <span class="req">*</span></label>
@@ -406,7 +395,8 @@ a{text-decoration:none;color:inherit}
           </div>
         </div>
 
-        <div class="reg-pro-only" id="regProBlock">
+        <div class="reg-pro-only show" id="regProBlock">
+          <div class="reg-optional-head">Rozšírený profil <span>— nepovinné, ako Founding Partner zadarmo</span></div>
           <div class="reg-field"><label for="regWeb">Web</label><input id="regWeb" name="website" type="url" placeholder="https://…"></div>
           <div class="reg-row">
             <div class="reg-field"><label for="regIg">Instagram</label><input id="regIg" type="url" placeholder="https://instagram.com/…"></div>
@@ -438,7 +428,7 @@ a{text-decoration:none;color:inherit}
   var form=document.getElementById('regForm');
   var statusEl=document.getElementById('regStatus');
   var proBlock=document.getElementById('regProBlock');
-  var plan='basic';
+  var plan='premium';
 
   // Rovnaka taxonomia ako anglicky formular (index.html) - hodnoty ostavaju v anglictine,
   // lebo kategorie na webe filtruju podla tychto retazcov.
@@ -545,17 +535,13 @@ a{text-decoration:none;color:inherit}
     wrap.classList.add('show');
   }
 
-  function setPlan(p){
-    plan=p;
-    document.querySelectorAll('.reg-plan').forEach(function(b){ b.classList.toggle('sel', b.getAttribute('data-plan')===p); });
-    proBlock.classList.toggle('show', p==='premium');
+  function setPlan(){
+    plan='premium';
+    if(proBlock) proBlock.classList.add('show');
   }
-  document.querySelectorAll('.reg-plan').forEach(function(b){
-    b.addEventListener('click', function(){ setPlan(b.getAttribute('data-plan')); });
-  });
 
-  function open(preplan){
-    if(preplan) setPlan(preplan);
+  function open(){
+    setPlan();
     ov.classList.add('open'); document.body.style.overflow='hidden';
     setTimeout(function(){ var n=document.getElementById('regName'); if(n) n.focus(); }, 60);
   }
