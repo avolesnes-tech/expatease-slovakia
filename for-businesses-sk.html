@@ -95,6 +95,14 @@ a{text-decoration:none;color:inherit}
 .offer .tag-free{color:var(--green-dark);font-weight:700}
 .offer .pbtn{display:inline-block;font-family:var(--head);font-weight:800;font-size:16px;padding:15px 36px;border-radius:999px;cursor:pointer;border:0;color:#fff;background:linear-gradient(135deg,var(--green-dark),var(--green))}
 .offer .free-note{font-size:13.5px;color:var(--gray-500);margin-top:14px}
+.offer-group{text-align:left;max-width:440px;margin:0 auto 14px}
+.offer-group-h{font-family:var(--head);font-weight:800;font-size:14px;color:var(--ink);margin-bottom:10px}
+.offer-group-h .og-free{font-weight:700;color:var(--gray-500)}
+.offer-group-h .og-founding{font-weight:700;color:var(--green-dark)}
+.offer-group.pro{background:#F3FBF6;border:1px solid #cdeedd;border-radius:14px;padding:15px 16px;margin-bottom:22px}
+.offer-group ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin:0;max-width:none}
+.offer-group li{position:relative;padding-left:22px;font-size:14.5px;color:var(--gray-700);line-height:1.45;display:block}
+.offer-group li::before{content:"\2713";position:absolute;left:0;color:var(--green);font-weight:800}
 .reg-founding-note{background:#EFFaf4;border:1px solid #cdeedd;border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.5;color:#2b4a3c;margin-bottom:18px}
 .reg-optional-head{font-family:var(--head);font-weight:800;font-size:14px;color:var(--ink);margin:6px 0 12px;padding-top:6px;border-top:1px solid var(--gray-100)}
 .reg-optional-head span{font-weight:400;color:var(--gray-500);font-size:12.5px}
@@ -273,20 +281,30 @@ a{text-decoration:none;color:inherit}
   <div class="wrap">
     <div class="section-head">
       <div class="section-eyebrow">Jednoducho a férovo</div>
-      <h2 class="section-title">Teraz je všetko zadarmo. Vrátane Pro.</h2>
-      <p class="section-sub">Pridajte sa ako Founding Partner a získajte celý profil zadarmo. Platený Pro program zavedieme až neskôr — dobrovoľne, pre tých, čo budú chcieť ostať viac vidieť.</p>
+      <h2 class="section-title">Nech vás expati v Bratislave ľahko nájdu</h2>
+      <p class="section-sub">Založiť si profil je zadarmo a zostane tak. Ako Founding Partner máte navyše celý rozšírený profil prvých šesť mesiacov zadarmo — bez karty, bez záväzku.</p>
     </div>
     <div class="offer">
       <span class="pill">Founding Partner · teraz zadarmo</span>
-      <h3>Pridajte sa teraz — plný profil zadarmo</h3>
-      <div class="offer-sub">Každá firma, ktorá sa pridá teraz, je Founding Partner a má celý Pro profil zadarmo.</div>
-      <ul>
-        <li><span class="ck">✓</span><span>Názov firmy, kategória, telefón, e-mail a adresa</span></li>
-        <li><span class="ck">✓</span><span>Krátky popis a zobrazenie vo vyhľadávaní aj v kategórii</span></li>
-        <li><span class="ck">✓</span><span>Plný profil: fotky, otváracie hodiny, web a sociálne siete <span class="tag-free">— zadarmo</span></span></li>
-        <li><span class="ck">✓</span><span>Prioritné umiestnenie v kategórii <span class="tag-free">— zadarmo</span></span></li>
-        <li><span class="ck">✓</span><span>Zvýraznené recenzie a odznak Founding Partner <span class="tag-free">— ostáva natrvalo</span></span></li>
-      </ul>
+      <h3>Váš profil na ExpatBase</h3>
+      <div class="offer-sub">Expati často hľadajú služby po anglicky a nevedia, kam sa obrátiť. S profilom na ExpatBase ste presne tam, kde vás v tej chvíli potrebujú — a nájdu vás.</div>
+      <div class="offer-group">
+        <div class="offer-group-h">Základný profil <span class="og-free">— zadarmo navždy</span></div>
+        <ul>
+          <li>Názov, kategória a kontakt — expat vás nájde a ozve sa</li>
+          <li>Krátky popis toho, čo ponúkate</li>
+          <li>Zobrazenie vo vyhľadávaní aj vo vašej kategórii</li>
+        </ul>
+      </div>
+      <div class="offer-group pro">
+        <div class="offer-group-h">Rozšírený profil (Pro) <span class="og-founding">— teraz 6 mesiacov zadarmo</span></div>
+        <ul>
+          <li>Fotky a otváracie hodiny — profil, ktorému sa dá veriť</li>
+          <li>Web a sociálne siete na jeden preklik</li>
+          <li>Prioritné umiestnenie vo vašej kategórii — ste medzi prvými, koho expat uvidí</li>
+          <li>Zvýraznené recenzie a odznak Founding Partner <em>(ostáva vám natrvalo)</em></li>
+        </ul>
+      </div>
       <button class="pbtn" data-reg-open data-reg-plan="premium">Zaregistrovať firmu zadarmo →</button>
       <div class="free-note">Bez platobnej karty. Dnes neplatíte nič.</div>
     </div>
@@ -297,9 +315,9 @@ a{text-decoration:none;color:inherit}
 <section class="section">
   <div class="wrap">
     <div class="founding">
-      <span class="fp-tag">Čo bude ďalej</span>
-      <h2>Basic zostane zadarmo navždy. Pro až vtedy, keď to bude dávať zmysel vám.</h2>
-      <p>Teraz ako Founding Partner máte celý Pro profil zadarmo. Po šiestich mesiacoch sa Pro stane voliteľným plateným programom — pre firmy, ktoré budú chcieť ostať maximálne viditeľné. Nič sa nestane automaticky a k ničomu sa dnes nezaväzujete. Odznak Founding Partner vám ostáva natrvalo.</p>
+      <span class="fp-tag">Čo bude po šiestich mesiacoch</span>
+      <h2>Ako ďalej, rozhodnete vy</h2>
+      <p>Základný profil vám zostáva zadarmo — tak, ako ho poznáte. Po šiestich mesiacoch sa môžete slobodne rozhodnúť: zostať na bezplatnom profile, alebo si ponechať rozšírený <strong>Pro</strong> — s fotkami, odkazmi a prioritným miestom vo vašej kategórii — ktorý sa vtedy stane dobrovoľným plateným programom. Nič sa nestane automaticky a dnes vás k ničomu nezaväzujeme. Odznak Founding Partner vám ostáva navždy.</p>
     </div>
   </div>
 </section>
@@ -346,7 +364,7 @@ a{text-decoration:none;color:inherit}
     </div>
     <div class="reg-body" id="regBody">
       <form id="regForm" novalidate>
-        <div class="reg-founding-note">Pridávate sa ako <strong>Founding Partner</strong> — celý profil máte zadarmo. Polia označené <em>nepovinné</em> môžete vyplniť teraz alebo kedykoľvek neskôr.</div>
+        <div class="reg-founding-note">Základný profil je zadarmo navždy. Ako <strong>Founding Partner</strong> k nemu máte rozšírený profil šesť mesiacov zadarmo — polia označené <em>nepovinné</em> môžete vyplniť teraz alebo kedykoľvek neskôr.</div>
 
         <div class="reg-field"><label for="regName">Názov firmy <span class="req">*</span></label><input id="regName" name="name" type="text" required></div>
         <div class="reg-field"><label for="regCat">Kategória <span class="req">*</span></label>
