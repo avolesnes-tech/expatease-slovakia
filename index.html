@@ -1855,6 +1855,24 @@
  flex-shrink: 0; margin-top: 1px; text-decoration: none; display: inline-block;
  }
  .sm-plan-price-note { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
+ .sm-plan-grouphead { font-weight: 800; font-size: 11.5px; color: var(--blue-dark); margin: 13px 0 6px; }
+ .sm-plan-grouphead.first { margin-top: 4px; }
+ .sm-plan-grouphead .gh-free { font-weight: 700; color: var(--gray-400); }
+ .sm-plan-grouphead .gh-founding { font-weight: 700; color: var(--green-dark); }
+ .sm-plan-card.offer-look { border: 2px solid var(--green); text-align: center; padding: 34px 24px 26px; cursor: default; gap: 0; }
+ .sm-plan-card.offer-look:hover { transform: none; box-shadow: var(--shadow-hover); border-color: var(--green); }
+ .sm-plan-card.offer-look.selected { border-color: var(--green); box-shadow: 0 0 0 1px var(--green), var(--shadow-hover); transform: none; }
+ .offer-look .ol-pill { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); font-weight: 800; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: #fff; background: var(--green-dark); padding: 5px 14px; border-radius: 999px; white-space: nowrap; }
+ .offer-look .ol-h { font-weight: 900; font-size: 22px; color: var(--blue-dark); margin: 6px 0 8px; letter-spacing: -.01em; line-height: 1.15; }
+ .offer-look .ol-sub { font-size: 13.5px; color: #6B7A90; line-height: 1.5; margin: 0 auto 20px; max-width: 430px; }
+ .offer-look .ol-group { text-align: left; max-width: 430px; margin: 0 auto 14px; }
+ .offer-look .ol-group-h { font-weight: 800; font-size: 13px; color: var(--blue-dark); margin-bottom: 9px; }
+ .offer-look .ol-group-h .ol-free { font-weight: 700; color: var(--gray-400); }
+ .offer-look .ol-group-h .ol-founding { font-weight: 700; color: var(--green-dark); }
+ .offer-look .ol-group.pro { background: #F3FBF6; border: 1px solid #cdeedd; border-radius: 14px; padding: 14px 16px; margin-bottom: 4px; }
+ .offer-look .ol-group ul { list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; }
+ .offer-look .ol-group li { position: relative; padding-left: 22px; font-size: 13.5px; color: var(--gray-700); line-height: 1.45; }
+ .offer-look .ol-group li::before { content: "\2713"; position: absolute; left: 0; color: var(--green); font-weight: 800; }
 
  /* Step 1 footer */
  .sm-step1-footer { display: flex; flex-direction: column; gap: 10px; }
@@ -3017,33 +3035,31 @@
 
  <!-- ── STEP 1: Plan selection ── -->
  <div class="sm-panel" id="smpanel1">
- <div class="sm-panel-intro">
- <h2 class="sm-panel-title" id="smModalTitle">Become a founding partner of ExpatBase</h2>
- <p class="sm-panel-sub">We're just launching. Founding partners get a complete profile — free, no card required.</p>
- </div>
  <div class="sm-plans-grid sm-plans-grid-single">
-
- <!-- Founding Partner -->
- <div class="sm-plan-card sm-plan-featured selected" id="planFounding" data-plan="premium" role="button" tabindex="0" aria-pressed="true">
- <div class="sm-plan-badge">Founding Partner</div>
- <div class="sm-plan-name">Founding Partner</div>
- <div class="sm-plan-price">Free</div>
- <div class="sm-plan-price-note">during our launch · no payment, no card</div>
- <div class="sm-plan-desc">A complete profile so English-speaking expats can find and contact you.</div>
- <ul class="sm-plan-features">
- <li class="sm-plan-feature">Name, category &amp; district</li>
- <li class="sm-plan-feature">Full description &amp; languages</li>
- <li class="sm-plan-feature">Phone &amp; email visible to expats</li>
- <li class="sm-plan-feature">Photos</li>
- <li class="sm-plan-feature">Website &amp; social links</li>
- <li class="sm-plan-feature">Opening hours</li>
- <li class="sm-plan-feature">Edit your profile anytime</li>
- <li class="sm-plan-feature">✦ Founding Partner badge — kept for good</li>
+ <div class="sm-plan-card sm-plan-featured offer-look selected" id="planFounding" data-plan="premium" role="button" tabindex="0" aria-pressed="true">
+ <span class="ol-pill">Founding Partner · free right now</span>
+ <h2 class="ol-h" id="smModalTitle">Your profile on ExpatBase</h2>
+ <div class="ol-sub">Expats often look for services in English and don't know where to turn. With a profile on ExpatBase, you're right where they need you — and they'll find you.</div>
+ <div class="ol-group">
+ <div class="ol-group-h">Basic listing <span class="ol-free">— free forever</span></div>
+ <ul>
+ <li>Name, category &amp; contact — expats find you and get in touch</li>
+ <li>A short description of what you offer</li>
+ <li>Listed in search and in your category</li>
  </ul>
  </div>
-
+ <div class="ol-group pro">
+ <div class="ol-group-h">Full profile (Pro) <span class="ol-founding">— free for 6 months right now</span></div>
+ <ul>
+ <li>Photos &amp; opening hours — a profile people can trust</li>
+ <li>Website &amp; social links, one click away</li>
+ <li>Priority placement in your category — among the first expats see</li>
+ <li>Highlighted reviews &amp; Founding Partner badge <em>(kept for good)</em></li>
+ </ul>
  </div>
- <p class="sm-founding-note">You'll always get advance notice before we introduce any paid plans — and founding partners keep special benefits. No commitment.</p>
+ </div>
+ </div>
+ <p class="sm-founding-note">After six months, your basic listing stays free. The full profile then becomes an optional paid plan — only if you want to stay more visible. You'll always get advance notice, and your Founding Partner badge stays for good. No commitment.</p>
  <div class="sm-step1-footer">
  <button class="sm-continue-btn" id="smContinueBtn" disabled>Continue →</button>
  </div>
