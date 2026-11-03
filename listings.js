@@ -121,7 +121,7 @@
      the main category on the homepage (where categories are mixed) */
   function cardLabel(b) {
     var subs = (Array.isArray(b.subcategories) ? b.subcategories : []).filter(Boolean);
-    if (LATEST || !subs.length) return b.category || '';
+    if (!subs.length) return b.category || '';
     var named = subs.filter(function (x) { return x !== 'Other'; });
     return named.length ? named.join(' \u00b7 ') : (b.category || '');
   }
