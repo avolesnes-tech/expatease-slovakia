@@ -306,8 +306,21 @@
     var url = LATEST
       ? SB + '/rest/v1/businesses?status=eq.approved&select=*&order=created_at.desc&limit=' +
         encodeURIComponent(LATEST)
-      : SB + '/rest/v1/businesses?status=eq.approved&category=eq.' +
-        encodeURIComponent(CATEGORY) + '&select=*&order=plan.desc,created_at.desc';
+      : (function(){
+          var extraSubs = Array.isArray(window.EB_CATEGORY_SUBS) ? window.EB_CATEGORY_SUBS : [];
+          if (extraSubs.length) {
+            // OR: category matches, OR any of the extra subcategories match
+            var subFilters = extraSubs.map(function(s){
+              return 'subcategories.cs.{"' + s.replace(/"/g,'\\\"')' + '"}';
+            });
+            var orParts = ['category.eq.' + CATEGORY].concat(subFilters);
+            return SB + '/rest/v1/businesses?status=eq.approved&or=(' +
+              orParts.map(encodeURIComponent).join(',') +
+              ')&select=*&order=plan.desc,created_at.desc';
+          }
+          return SB + '/rest/v1/businesses?status=eq.approved&category=eq.' +
+            encodeURIComponent(CATEGORY) + '&select=*&order=plan.desc,created_at.desc';
+        })();
     fetch(url, { headers: { apikey: KEY, Authorization: 'Bearer ' + KEY } })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (rows) { if (rows) render(applySub(Array.isArray(rows) ? rows : [])); })
