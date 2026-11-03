@@ -268,8 +268,10 @@
     var badges='';
     if(b.english_speaking) badges+='<span class="badge b-en">English-speaking</span>';
     if(prem) badges+='<span class="badge b-prem">Founding Partner</span>';
+    var _subs=(Array.isArray(b.subcategories)?b.subcategories:[]).filter(Boolean).filter(function(x){return x!=='Other';});
+    var _catLbl=_subs.length?_subs.join(' \u00b7 '):(b.category||'');
     document.getElementById('idrow').innerHTML=chip+
-      '<div class="idmeta"><h1>'+esc(b.name)+'</h1><div class="cat">'+esc(b.category||'')+'</div>'+(badges?'<div class="badges">'+badges+'</div>':'')+'<div class="rev-agg" id="idAgg" style="display:none"></div></div>';
+      '<div class="idmeta"><h1>'+esc(b.name)+'</h1><div class="cat">'+esc(_catLbl)+'</div>'+(badges?'<div class="badges">'+badges+'</div>':'')+'<div class="rev-agg" id="idAgg" style="display:none"></div></div>';
     var _ib=document.getElementById('idband');
     if(b.cover_url&&_ib){_ib.classList.add('has-cover');var _bn=document.createElement('div');_bn.className='cover-banner';var _im=document.createElement('img');_im.src=b.cover_url;_im.alt=(b.name||'')+' \u2014 cover photo';_im.decoding='async';try{_im.fetchPriority='high';}catch(_){};var _fy=parseFloat(b.cover_focal_y);if(isFinite(_fy)&&_fy>=0&&_fy<=100)_im.style.objectPosition='50% '+_fy+'%';_bn.appendChild(_im);var _ir=document.getElementById('idrow');_ir.parentNode.insertBefore(_bn,_ir);}
     try{

@@ -8,9 +8,22 @@
   var SB = 'https://etxqrlrqbjcbjmitnspv.supabase.co';
   var KEY = 'sb_publishable_i38f7jyt2HYOjUTNuOsklg_aMofdDvE';
 
+  function countUrl(cat) {
+    var extraSubs = (cat === window.EB_CATEGORY && Array.isArray(window.EB_CATEGORY_SUBS))
+      ? window.EB_CATEGORY_SUBS : [];
+    if (extraSubs.length) {
+      var subFilters = extraSubs.map(function (s) {
+        return 'subcategories.cs.{"' + s.replace(/"/g, '\\"') + '"}';
+      });
+      var orParts = ['category.eq.' + cat].concat(subFilters);
+      return SB + '/rest/v1/businesses?status=eq.approved&or=(' +
+        orParts.map(encodeURIComponent).join(',') + ')&select=id';
+    }
+    return SB + '/rest/v1/businesses?status=eq.approved&category=eq.' +
+      encodeURIComponent(cat) + '&select=id';
+  }
   function countFor(cat) {
-    return fetch(SB + '/rest/v1/businesses?status=eq.approved&category=eq.' +
-      encodeURIComponent(cat) + '&select=id',
+    return fetch(countUrl(cat),
       { headers: { apikey: KEY, Authorization: 'Bearer ' + KEY } })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (rows) { return rows && Array.isArray(rows) ? rows.length : null; })

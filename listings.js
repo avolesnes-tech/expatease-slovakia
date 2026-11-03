@@ -121,7 +121,7 @@
      the main category on the homepage (where categories are mixed) */
   function cardLabel(b) {
     var subs = (Array.isArray(b.subcategories) ? b.subcategories : []).filter(Boolean);
-    if (LATEST || !subs.length) return b.category || '';
+    if (!subs.length) return b.category || '';
     var named = subs.filter(function (x) { return x !== 'Other'; });
     return named.length ? named.join(' \u00b7 ') : (b.category || '');
   }
@@ -148,7 +148,13 @@
       var prof = '<a class="ebl-profile" href="expert.html?id=' + esc(b.id) + '">View full profile \u2192</a>';
       extra = (links ? '<div class="ebl-links">' + links + '</div>' : '') + prof;
     }
-    return '<div class="ebl-card" data-eb-id="' + esc(b.id) + '">' +
+    var _fSubs = (Array.isArray(b.subcategories) ? b.subcategories : []).filter(Boolean).map(function (x) { return norm(x); }).join('|');
+    var _fLangs = (Array.isArray(b.languages) ? b.languages : []).filter(Boolean).map(function (x) { return norm(x); }).join('|');
+    return '<div class="ebl-card" data-eb-id="' + esc(b.id) + '"' +
+      ' data-eb-subs="' + esc(_fSubs) + '"' +
+      ' data-eb-langs="' + esc(_fLangs) + '"' +
+      ' data-eb-eng="' + (b.english_speaking ? '1' : '0') + '"' +
+      ' data-eb-district="' + esc(norm(b.district)) + '">' +
       '<div class="ebl-head">' + avatar(b) +
       '<div class="ebl-hd"><div class="ebl-name">' + esc(b.name) + '</div>' +
       '<div class="ebl-cat">' + esc(cardLabel(b)) + '</div></div></div>' +
@@ -292,6 +298,7 @@
       }
       setupTracking(holder);
       wireLogoFallback(holder);
+      if (!LATEST) wireFilters(holder);
     } else if (LATEST) {
       var sec = grid.closest ? grid.closest('section') : null;
       if (sec) sec.style.display = 'none';
@@ -301,6 +308,78 @@
         '<p>Be among the first verified English-speaking professionals in this category to appear here.</p>' +
         '<a href="index.html#submit">List your business →</a></div>';
     }
+  }
+  /* ── client-side filtering of the rendered category cards ──
+     Wires the page's own filter controls (specialization/service select,
+     district select, language pills, reset) to show/hide listings.
+     Generic across category pages; safe to no-op when controls are absent. */
+  function updateResultsCount(n) {
+    var el = document.querySelector('[data-eb-results]');
+    if (!el) return;
+    var noun = el.getAttribute('data-eb-noun') || 'listings';
+    var scope = el.getAttribute('data-eb-scope') || 'in Bratislava';
+    var bar = el.closest('.results-bar');
+    if (n > 0) {
+      el.innerHTML = 'Showing <strong>' + n + ' ' + noun + '</strong> ' + scope;
+      if (bar) bar.style.display = '';
+    } else {
+      el.innerHTML = 'No matching ' + noun + ' ' + scope;
+      if (bar) bar.style.display = '';
+    }
+  }
+  var LANGMAP = { en: 'english', de: 'german', ua: 'ukrainian', hu: 'hungarian',
+    es: 'spanish', it: 'italian', fr: 'french', ru: 'russian', sk: 'slovak' };
+  function wireFilters(holder) {
+    var specSel = document.getElementById('filterService')
+      || document.getElementById('filterSpecialty');
+    var distSel = document.getElementById('filterDistrict');
+    var pills = Array.prototype.slice.call(document.querySelectorAll('.lang-pill[data-lang]'));
+    var reset = document.getElementById('filterReset');
+    if (!specSel && !distSel && !pills.length) return;
+    function apply() {
+      var spec = specSel ? norm(specSel.value) : '';
+      var dist = distSel ? norm(distSel.value) : '';
+      var langs = pills.filter(function (p) { return p.classList.contains('active'); })
+        .map(function (p) { return p.getAttribute('data-lang'); });
+      var cards = holder.querySelectorAll('.ebl-card');
+      var shown = 0;
+      for (var i = 0; i < cards.length; i++) {
+        var c = cards[i];
+        var subs = (c.getAttribute('data-eb-subs') || '').split('|');
+        var clangs = (c.getAttribute('data-eb-langs') || '').split('|');
+        var eng = c.getAttribute('data-eb-eng') === '1';
+        var cd = c.getAttribute('data-eb-district') || '';
+        var ok = true;
+        if (spec) ok = subs.indexOf(spec) !== -1;
+        if (ok && dist) {
+          ok = (!cd || cd.indexOf('wide') !== -1) ? true : cd.indexOf(dist) !== -1;
+        }
+        if (ok && langs.length) {
+          ok = langs.every(function (lg) {
+            if (lg === 'en') return eng || clangs.indexOf('english') !== -1;
+            return clangs.indexOf(LANGMAP[lg] || lg) !== -1;
+          });
+        }
+        c.style.display = ok ? '' : 'none';
+        if (ok) shown++;
+      }
+      updateResultsCount(shown);
+    }
+    if (specSel) specSel.addEventListener('change', apply);
+    if (distSel) distSel.addEventListener('change', apply);
+    pills.forEach(function (p) { p.addEventListener('click', function () { setTimeout(apply, 0); }); });
+    if (reset) reset.addEventListener('click', function () {
+      setTimeout(function () {
+        if (specSel) specSel.value = '';
+        if (distSel) distSel.value = '';
+        // restore default: English pill active, others off
+        pills.forEach(function (p) {
+          p.classList.toggle('active', p.getAttribute('data-lang') === 'en');
+        });
+        apply();
+      }, 0);
+    });
+    apply();
   }
   function load() {
     var url = LATEST
