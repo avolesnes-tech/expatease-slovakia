@@ -108,6 +108,24 @@ a{text-decoration:none;color:inherit}
 #regContinue{margin-top:2px}
 .reg-back{background:none;border:0;color:var(--blue);font-family:var(--head);font-weight:700;font-size:13.5px;cursor:pointer;padding:2px 2px 2px 0;margin-bottom:8px}
 .reg-back:hover{text-decoration:underline}
+.reg-photos{margin-bottom:4px}
+.reg-sec-title{font-family:var(--head);font-weight:800;font-size:15px;color:var(--ink);margin:4px 0 12px;padding-top:8px;border-top:1px solid var(--gray-100)}
+.reg-sec-title .reg-opt{font-weight:400;color:var(--gray-500);font-size:12.5px}
+.reg-upz{border:1.6px dashed #cdd7e3;border-radius:14px;padding:20px;text-align:center;cursor:pointer;transition:.15s;background:#fafcff}
+.reg-upz:hover,.reg-upz.drag-over{border-color:var(--green);background:#f3fbf6}
+.reg-upz-ic{color:var(--blue);opacity:.65;margin-bottom:4px;line-height:0;display:flex;justify-content:center}
+.reg-upz-t{font-family:var(--head);font-weight:700;font-size:14px;color:var(--ink)}
+.reg-upz-s{font-size:12.5px;color:var(--gray-500);margin-top:3px}
+.reg-upz-link{color:var(--blue);font-weight:700;text-decoration:underline}
+.reg-upz-err{color:#c0392b;font-size:12px;margin-top:6px}
+.reg-prev{display:flex;align-items:center;gap:12px;margin-top:10px}
+.reg-prev img{width:66px;height:66px;border-radius:10px;object-fit:cover;border:1px solid var(--gray-100)}
+.reg-prev-x{background:none;border:0;color:#c0392b;font-weight:700;cursor:pointer;font-size:13px;padding:0}
+.reg-gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.reg-gal-thumb{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;border:1px solid var(--gray-100)}
+.reg-gal-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.reg-gal-x{position:absolute;top:4px;right:4px;width:22px;height:22px;border:0;border-radius:50%;background:rgba(10,18,35,.6);color:#fff;font-size:14px;line-height:1;cursor:pointer}
+@media(max-width:560px){.reg-gal-grid{grid-template-columns:repeat(3,1fr)}}
 .reg-optional-head{font-family:var(--head);font-weight:800;font-size:14px;color:var(--ink);margin:6px 0 12px;padding-top:6px;border-top:1px solid var(--gray-100)}
 .reg-optional-head span{font-weight:400;color:var(--gray-500);font-size:12.5px}
 
@@ -442,6 +460,43 @@ a{text-decoration:none;color:inherit}
           </div>
         </div>
 
+        <!-- Fotky (prominentné, nepovinné) -->
+        <div class="reg-photos">
+          <div class="reg-sec-title">Fotky <span class="reg-opt">— nepovinné, ale pomôžu vám vyniknúť</span></div>
+          <div class="reg-field">
+            <label>Logo firmy</label>
+            <div class="reg-upz" id="skLogoZone">
+              <input type="file" id="skLogoInput" accept="image/png,image/jpeg,image/webp" style="display:none">
+              <div class="reg-upz-ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+              <div class="reg-upz-t">Nahrať logo</div>
+              <div class="reg-upz-s">PNG, JPG alebo WebP, <span class="reg-upz-link" id="skLogoBrowse">vybrať</span></div>
+            </div>
+            <div class="reg-prev" id="skLogoPreview" style="display:none"><img id="skLogoImg" alt="Logo"><button type="button" class="reg-prev-x" id="skLogoRemove">Odstrániť</button></div>
+            <div class="reg-upz-err" id="skLogoErr"></div>
+          </div>
+          <div class="reg-field">
+            <label>Titulná fotka</label>
+            <div class="reg-upz" id="skCoverZone">
+              <input type="file" id="skCoverInput" accept="image/png,image/jpeg,image/webp" style="display:none">
+              <div class="reg-upz-ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+              <div class="reg-upz-t">Nahrať titulnú fotku</div>
+              <div class="reg-upz-s">Odporúčané 1200 × 400 px, <span class="reg-upz-link" id="skCoverBrowse">vybrať</span></div>
+            </div>
+            <div class="reg-prev" id="skCoverPreview" style="display:none"><img id="skCoverImg" alt="Titulná fotka"><button type="button" class="reg-prev-x" id="skCoverRemove">Odstrániť</button></div>
+            <div class="reg-upz-err" id="skCoverErr"></div>
+          </div>
+          <div class="reg-field">
+            <label>Galéria fotiek <span style="font-weight:400;color:var(--gray-500);font-size:.78rem">(až 8)</span></label>
+            <div class="reg-upz reg-upz-gal" id="skGalleryZone">
+              <input type="file" id="skGalleryInput" accept="image/png,image/jpeg,image/webp" multiple style="display:none">
+              <div class="reg-upz-ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+              <div class="reg-upz-t">Nahrať fotky</div>
+              <div class="reg-upz-s"><span class="reg-upz-link" id="skGalleryBrowse">Vybrať</span> alebo pretiahnite, až 8 obrázkov</div>
+            </div>
+            <div class="reg-gal-grid" id="skGalleryGrid"></div>
+            <div class="reg-upz-err" id="skGalleryErr"></div>
+          </div>
+        </div>
         <div class="reg-pro-only show" id="regProBlock">
           <div class="reg-optional-head">Rozšírený profil <span>— nepovinné, ako Founding Partner zadarmo</span></div>
           <div class="reg-field"><label for="regWeb">Web</label><input id="regWeb" name="website" type="url" placeholder="https://…"></div>
@@ -631,6 +686,82 @@ a{text-decoration:none;color:inherit}
     } else { ch.closest('.reg-chip').classList.toggle('on', ch.checked); }
   });
 
+  // ── Nahrávanie fotiek (logo / cover / galéria) ──
+  var skLogoFile=null, skCoverFile=null, skGalleryFiles=[];
+  var SK_TYPES=['image/png','image/jpeg','image/webp'], SK_MAX=5*1024*1024;
+  function skImgErr(f){
+    if(!f) return 'Nevybrali ste súbor.';
+    if(SK_TYPES.indexOf(f.type)===-1) return 'Nepodporovaný formát — nahrajte PNG, JPG alebo WebP.';
+    if(f.size>SK_MAX) return 'Obrázok je väčší ako 5 MB — nahrajte menší súbor.';
+    return null;
+  }
+  function skSetErr(id,msg){ var el=document.getElementById(id); if(el) el.textContent=msg||''; }
+  function skWireZone(zoneId,inputId,browseId,onFiles){
+    var zone=document.getElementById(zoneId), input=document.getElementById(inputId), browse=document.getElementById(browseId);
+    if(!zone||!input) return;
+    if(browse) browse.addEventListener('click', function(e){ e.stopPropagation(); input.click(); });
+    zone.addEventListener('click', function(){ input.click(); });
+    zone.addEventListener('dragover', function(e){ e.preventDefault(); zone.classList.add('drag-over'); });
+    zone.addEventListener('dragleave', function(){ zone.classList.remove('drag-over'); });
+    zone.addEventListener('drop', function(e){ e.preventDefault(); zone.classList.remove('drag-over'); if(e.dataTransfer.files&&e.dataTransfer.files.length) onFiles(e.dataTransfer.files); });
+    input.addEventListener('change', function(){ if(input.files&&input.files.length) onFiles(input.files); });
+  }
+  function skSingle(file,which){
+    var errId = which==='logo'?'skLogoErr':'skCoverErr';
+    var err=skImgErr(file);
+    if(err){ skSetErr(errId,err); if(which==='logo') skLogoFile=null; else skCoverFile=null; return; }
+    skSetErr(errId,'');
+    if(which==='logo') skLogoFile=file; else skCoverFile=file;
+    var zone=document.getElementById(which==='logo'?'skLogoZone':'skCoverZone');
+    var prev=document.getElementById(which==='logo'?'skLogoPreview':'skCoverPreview');
+    var img=document.getElementById(which==='logo'?'skLogoImg':'skCoverImg');
+    var r=new FileReader(); r.onload=function(e){ img.src=e.target.result; zone.style.display='none'; prev.style.display='flex'; }; r.readAsDataURL(file);
+  }
+  function skRemoveSingle(which){
+    if(which==='logo') skLogoFile=null; else skCoverFile=null;
+    document.getElementById(which==='logo'?'skLogoZone':'skCoverZone').style.display='';
+    document.getElementById(which==='logo'?'skLogoPreview':'skCoverPreview').style.display='none';
+    var inp=document.getElementById(which==='logo'?'skLogoInput':'skCoverInput'); if(inp) inp.value='';
+  }
+  function skGalleryAdd(files){
+    files=Array.prototype.slice.call(files);
+    var remaining=8-skGalleryFiles.length;
+    var rejected=files.filter(function(f){return skImgErr(f);});
+    skSetErr('skGalleryErr', rejected.length?(rejected.length+' fotiek preskočených — len PNG, JPG alebo WebP do 5 MB.'):'');
+    files.filter(function(f){return !skImgErr(f);}).slice(0,remaining).forEach(function(file){
+      var r=new FileReader(); r.onload=function(e){ skGalleryFiles.push({src:e.target.result,file:file}); skGalRender(); }; r.readAsDataURL(file);
+    });
+  }
+  function skGalRender(){
+    var grid=document.getElementById('skGalleryGrid'); if(!grid) return;
+    grid.innerHTML=skGalleryFiles.map(function(f,i){ return '<div class="reg-gal-thumb"><img src="'+f.src+'" alt=""><button type="button" class="reg-gal-x" data-i="'+i+'" aria-label="Odstrániť">×</button></div>'; }).join('');
+    Array.prototype.slice.call(grid.querySelectorAll('.reg-gal-x')).forEach(function(b){ b.addEventListener('click', function(){ skGalleryFiles.splice(parseInt(b.getAttribute('data-i'),10),1); skGalRender(); }); });
+  }
+  skWireZone('skLogoZone','skLogoInput','skLogoBrowse', function(fs){ skSingle(fs[0],'logo'); });
+  skWireZone('skCoverZone','skCoverInput','skCoverBrowse', function(fs){ skSingle(fs[0],'cover'); });
+  skWireZone('skGalleryZone','skGalleryInput','skGalleryBrowse', function(fs){ skGalleryAdd(fs); });
+  var _lr=document.getElementById('skLogoRemove'); if(_lr) _lr.addEventListener('click', function(e){ e.stopPropagation(); skRemoveSingle('logo'); });
+  var _cr=document.getElementById('skCoverRemove'); if(_cr) _cr.addEventListener('click', function(e){ e.stopPropagation(); skRemoveSingle('cover'); });
+  function skExt(f){ return ({'image/png':'png','image/jpeg':'jpg','image/webp':'webp'})[f.type]||'jpg'; }
+  function skUploadOne(bizId,file,kind){
+    if(!file) return Promise.resolve(null);
+    var client=sb(); if(!client) return Promise.resolve(null);
+    var path=bizId+'/'+kind+'_'+Date.now()+'_'+Math.random().toString(36).slice(2,8)+'.'+skExt(file);
+    return client.storage.from('business-media').upload(path,file,{upsert:false,cacheControl:'3600'}).then(function(res){
+      if(res&&res.error) return null;
+      return client.storage.from('business-media').getPublicUrl(path).data.publicUrl;
+    }).catch(function(){ return null; });
+  }
+  function skUploadMedia(bizId){
+    var out={logo_url:null,cover_url:null,gallery:[]};
+    return skUploadOne(bizId,skLogoFile,'logo').then(function(u){ out.logo_url=u; return skUploadOne(bizId,skCoverFile,'cover'); }).then(function(u){
+      out.cover_url=u;
+      var seq=Promise.resolve();
+      skGalleryFiles.forEach(function(g){ seq=seq.then(function(){ return skUploadOne(bizId,g.file,'gal'); }).then(function(u2){ if(u2) out.gallery.push(u2); }); });
+      return seq;
+    }).then(function(){ return out; }).catch(function(){ return out; });
+  }
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
     statusEl.className='reg-status'; statusEl.textContent='';
@@ -676,7 +807,10 @@ a{text-decoration:none;color:inherit}
     var btn=document.getElementById('regSend');
     btn.disabled=true; btn.textContent='Odosielam…';
 
-    client.from('businesses').insert(row).then(function(res){
+    skUploadMedia(row.id).then(function(media){
+      row.logo_url=media.logo_url; row.cover_url=media.cover_url; row.gallery=media.gallery;
+      return client.from('businesses').insert(row);
+    }).then(function(res){
       if(res && res.error){ throw res.error; }
       fetch('/send-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'submission_confirm',bizName:row.name,contactName:row.contact_name,bizEmail:row.email,category:row.category,plan:'founding'})}).catch(function(){});
       done();

@@ -3184,16 +3184,10 @@
  </div>
  </div><!-- /smFormBasic -->
 
- <div id="smMoreToggle" class="sm-field-group" style="margin-top:10px">
- <button type="button" id="smMoreBtn" class="sm-add-btn" style="width:100%;justify-content:center">+ Add photos, opening hours &amp; links (optional)</button>
- <p style="font-size:12.5px;color:#6B7A90;text-align:center;margin:8px 0 0">Optional — add these now to stand out, or skip and finish later from your profile.</p>
- </div>
-
- <!-- Premium-only fields -->
- <div id="smFormPremium" style="display:none">
- <div class="sm-section-title sm-section-divider">Optional — make your profile stand out</div>
-
- <!-- Logo -->
+ <!-- Photos (always visible, prominent) -->
+ <div id="smFormPhotos">
+ <div class="sm-section-title sm-section-divider">Add your photos <span class="sm-hint-inline">(optional, but they help you stand out)</span></div>
+<!-- Logo -->
  <div class="sm-field-group">
  <label class="sm-label">Business Logo</label>
  <div class="sm-upload-zone" id="smLogoZone">
@@ -3223,29 +3217,6 @@
  </div>
  </div>
 
- <!-- About -->
- <div class="sm-field-group">
- <label class="sm-label" for="smAbout">
- About Your Business
- <span class="sm-char-counter" id="smAboutCounter">0 characters</span>
- </label>
- <textarea class="sm-input sm-textarea sm-textarea-tall" id="smAbout" placeholder="Tell expats what makes your business special, your experience, and why they should choose you…"></textarea>
- </div>
-
- <!-- Services -->
- <div class="sm-field-group">
- <label class="sm-label">Services / Products <span class="sm-hint-inline">(up to 6)</span></label>
- <div id="smServicesList"></div>
- <button class="sm-add-btn" id="smAddServiceBtn" type="button">+ Add Service</button>
- </div>
-
- <!-- Team -->
- <div class="sm-field-group">
- <label class="sm-label">Team Members <span class="sm-hint-inline">(up to 5)</span></label>
- <div id="smTeamList"></div>
- <button class="sm-add-btn" id="smAddTeamBtn" type="button">+ Add Team Member</button>
- </div>
-
  <!-- Gallery -->
  <div class="sm-field-group">
  <label class="sm-label">Photo Gallery <span class="sm-hint-inline">(up to 8 photos)</span></label>
@@ -3256,6 +3227,33 @@
  <div class="sm-upload-zone-sub"><span class="sm-upload-zone-link" id="smGalleryBrowse">Browse</span> or drag &amp; drop, up to 8 images</div>
  </div>
  <div class="sm-gallery-grid" id="smGalleryGrid"></div>
+ </div>
+
+  </div>
+
+
+ <div id="smMoreToggle" class="sm-field-group" style="margin-top:10px">
+ <button type="button" id="smMoreBtn" class="sm-add-btn" style="width:100%;justify-content:center">+ Add description, links &amp; opening hours (optional)</button>
+ <p style="font-size:12.5px;color:#6B7A90;text-align:center;margin:8px 0 0">Optional — add these now, or finish anytime from your profile.</p>
+ </div>
+
+ <!-- Premium-only fields -->
+ <div id="smFormPremium" style="display:none">
+ <div class="sm-section-title sm-section-divider">A few more details (optional)</div>
+<!-- About -->
+ <div class="sm-field-group">
+ <label class="sm-label" for="smAbout">
+ About Your Business
+ <span class="sm-char-counter" id="smAboutCounter">0 characters</span>
+ </label>
+ <textarea class="sm-input sm-textarea sm-textarea-tall" id="smAbout" placeholder="Tell expats what makes your business special, your experience, and why they should choose you…"></textarea>
+ </div>
+
+ <!-- Team -->
+ <div class="sm-field-group">
+ <label class="sm-label">Team Members <span class="sm-hint-inline">(up to 5)</span></label>
+ <div id="smTeamList"></div>
+ <button class="sm-add-btn" id="smAddTeamBtn" type="button">+ Add Team Member</button>
  </div>
 
  <!-- Website & social -->
@@ -3286,7 +3284,7 @@
  <div class="sm-hours-grid" id="smHoursGrid" style="display:none"></div>
  </div>
 
- </div><!-- /smFormPremium -->
+  </div><!-- /smFormPremium -->
 
  <!-- Founding partner perk (always visible) -->
  <div class="sm-payment-section sm-founding-perk">
@@ -4248,7 +4246,6 @@
  if (aboutCounter) aboutCounter.textContent = '0 characters';
 
  // Reset premium fields
- document.getElementById('smServicesList').innerHTML = '';
  document.getElementById('smTeamList').innerHTML = '';
  document.getElementById('smGalleryGrid').innerHTML = '';
 
@@ -4366,7 +4363,6 @@
  });
 
  // Add buttons
- document.getElementById('smAddServiceBtn').addEventListener('click', smAddService);
  document.getElementById('smAddTeamBtn').addEventListener('click', smAddTeamMember);
 
  // Char counters
