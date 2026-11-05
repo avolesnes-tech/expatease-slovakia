@@ -1199,7 +1199,7 @@
  .blog-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gray-100); }
 
  /* Newsletter strip below guides */
- .guides-nl {
+ .guides-nl { scroll-margin-top: 90px;
  margin-top: 24px;
  background: linear-gradient(135deg, var(--blue), var(--green));
  border-radius: var(--radius-lg);
@@ -2851,7 +2851,7 @@
  </div>
 
  <!-- Newsletter strip -->
- <div class="guides-nl reveal">
+ <div class="guides-nl reveal" id="newsletter">
  <div class="guides-nl-text">
  <div class="guides-nl-title">The monthly expat guide to Slovakia</div>
  <div class="guides-nl-sub">Once a month: new listings, bureaucracy tips, and what's happening in the expat community. No spam, unsubscribe anytime.</div>
@@ -2869,7 +2869,7 @@
 
 
 <!-- RECOMMEND A BUSINESS -->
-<section class="reveal" style="max-width:1080px;margin:56px auto 0;padding:0 20px;">
+<section class="reveal" id="recommend" style="scroll-margin-top:90px;max-width:1080px;margin:56px auto 0;padding:0 20px;">
   <div style="background:linear-gradient(135deg,#0F3360 0%,#1A4F8A 55%,#2E9E6B 125%);border-radius:22px;padding:46px 32px;text-align:center;">
     <div style="font-family:var(--font-head),'Segoe UI',sans-serif;font-size:27px;font-weight:700;letter-spacing:-0.02em;color:#fff;margin-bottom:12px;">Know a hidden gem that speaks your language?</div>
     <div style="font-size:15.5px;line-height:1.6;color:rgba(255,255,255,0.88);max-width:580px;margin:0 auto 24px;">Help a favourite English-speaking business in Bratislava reach more expats &mdash; we&rsquo;ll send them a friendly invite on your behalf.</div>
@@ -2920,19 +2920,13 @@
  </div>
  <div class="footer-logo-text">ExpatBase Slovakia</div>
  </div>
- <p class="footer-tagline">Life in Slovakia, made simple. The #1 resource for English-speaking expats in Bratislava.</p>
+ <p class="footer-tagline">Life in Slovakia, made simple. Your guide to English-speaking professionals in Bratislava.</p>
  <div class="footer-socials">
  <a href="https://www.facebook.com/profile.php?id=61596383060496" target="_blank" rel="noopener" class="footer-social" aria-label="Facebook">
  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
  </a>
  <a href="https://www.instagram.com/expatbase_sk/" target="_blank" rel="noopener" class="footer-social" aria-label="Instagram">
  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
- </a>
- <a href="#" class="footer-social" aria-label="X / Twitter">
- <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
- </a>
- <a href="#" class="footer-social" aria-label="LinkedIn">
- <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
  </a>
  </div>
  </div>
@@ -2971,7 +2965,7 @@
  <div class="footer-col-title">Resources</div>
  <ul class="footer-links">
  <li><a href="#blog">Guides</a></li>
- <li><a href="#">Newsletter</a></li>
+ <li><a href="#newsletter">Newsletter</a></li>
  <li><a href="for-businesses.html">For Businesses</a></li>
  <li><a href="about.html">About ExpatBase</a></li>
  <li><a href="#" data-contact-open>Contact Us</a></li>
