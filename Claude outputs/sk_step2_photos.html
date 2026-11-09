@@ -1,0 +1,124 @@
+<!doctype html><html lang="sk"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SK krok 2 — fotky</title>
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/urbanist-latin-wght-normal.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/dm-sans-latin-standard-normal.woff2">
+<style>@font-face{font-family:'Urbanist';font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/urbanist-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Urbanist';font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/urbanist-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Urbanist';font-style:italic;font-weight:100 900;font-display:swap;src:url(/fonts/urbanist-latin-wght-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'DM Sans';font-style:normal;font-weight:100 1000;font-display:swap;src:url(/fonts/dm-sans-latin-ext-standard-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'DM Sans';font-style:normal;font-weight:100 1000;font-display:swap;src:url(/fonts/dm-sans-latin-standard-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'DM Sans';font-style:italic;font-weight:100 1000;font-display:swap;src:url(/fonts/dm-sans-latin-wght-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+body{background:rgba(10,18,35,.45);margin:0;padding:26px 14px}
+.reg-card-demo{width:100%;max-width:560px;margin:0 auto;background:#fff;border-radius:22px;box-shadow:0 24px 70px rgba(10,18,35,.35);overflow:hidden}
+.demo-note{background:#FFF7E6;border:1px solid #FCE2AE;border-radius:10px;padding:10px 12px;font-size:12.5px;color:#7a5b16;margin:0 0 16px}
+</style></head>
+<body><div class="reg-card-demo">
+  <div class="reg-head">
+      <button class="reg-x" id="regX" aria-label="Zavrieť">&#x2715;</button>
+      <h2 id="regTitle">Zaregistrujte svoju firmu</h2>
+      <p>Pár údajov a ste v databáze. Zadarmo, kartu teraz nezadávate.</p>
+    </div>
+  <div class="reg-body">
+    <div class="demo-note">Krok 2 (náhľad). Nová prominentná sekcia „Fotky" (logo + titulná + galéria) sa nahráva do Supabase pri odoslaní — rovnako ako v EN.</div>
+    <form id="regForm" novalidate>
+        <button type="button" class="reg-back" id="regBack">← Späť na prehľad</button>
+
+        <div class="reg-field"><label for="regName">Názov firmy <span class="req">*</span></label><input id="regName" name="name" type="text" required></div>
+        <div class="reg-field"><label for="regCat">Kategória <span class="req">*</span></label>
+          <select id="regCat" name="category" required>
+            <option value="">Vyberte kategóriu…</option>
+            <option value="Doctors &amp; Specialists">Lekári a špecialisti</option>
+            <option value="Lawyers &amp; Legal">Právnici a advokáti</option>
+            <option value="Banks &amp; Finance">Banky a financie</option>
+            <option value="Hair, Beauty &amp; Tattoo">Kaderníctvo, krása a tetovanie</option>
+            <option value="Handymen">Majstri a remeselníci</option>
+            <option value="Counselling &amp; Wellbeing">Poradenstvo a wellbeing</option>
+            <option value="Vets">Veterinári</option>
+            <option value="Real Estate">Reality</option>
+            <option value="Schools &amp; Learning">Školy a vzdelávanie</option>
+            <option value="Moving &amp; Relocation">Sťahovanie</option>
+            <option value="Sports &amp; Leisure">Šport a voľný čas</option>
+            <option value="Others">Ostatné</option>
+          </select>
+        </div>
+        <div class="reg-sub-wrap" id="regSubWrap">
+          <div class="reg-field">
+            <label>Čím sa zaoberáte? <span style="font-weight:400;color:var(--gray-500);font-size:.78rem">(vyberte všetko, čo sedí)</span></label>
+            <div class="reg-chips" id="regSubchips"></div>
+          </div>
+          <div class="reg-field"><label for="regDistrict">Okres / oblasť</label>
+            <select id="regDistrict"><option value="">Vyberte okres…</option></select>
+          </div>
+          <div id="regExtra"></div>
+        </div>
+        <div class="reg-field"><label for="regContact">Kontaktná osoba <span class="req">*</span></label><input id="regContact" name="contact_name" type="text" required></div>
+        <div class="reg-row">
+          <div class="reg-field"><label for="regEmail">E-mail <span class="req">*</span></label><input id="regEmail" name="email" type="email" required></div>
+          <div class="reg-field"><label for="regPhone">Telefón <span style="color:var(--gray-500);font-weight:400">(nepovinné)</span></label><input id="regPhone" name="phone" type="tel" placeholder="+421 …"></div>
+        </div>
+        <div class="reg-field"><label for="regAddr">Adresa <span class="req">*</span></label><input id="regAddr" name="address" type="text" placeholder="Ulica, mesto" required></div>
+        <div class="reg-field"><label for="regDesc">Krátky popis <span class="req">*</span> <span id="regDescCount" style="float:right;font-weight:400;color:#9aa7b8;font-size:12px">0 / 150</span></label><textarea id="regDesc" name="description" maxlength="150" placeholder="V jednej-dvoch vetách, čo ponúkate (max. 150 znakov)." oninput="var c=document.getElementById('regDescCount');if(c)c.textContent=this.value.length+' / 150';"></textarea></div>
+
+        <div class="reg-field">
+          <label>Jazyky, v ktorých komunikujete s klientmi <span class="req">*</span></label>
+          <div class="reg-langs" id="regLangs">
+            <label class="reg-lang on"><input type="checkbox" value="English" checked> 🇬🇧 Angličtina</label>
+            <label class="reg-lang"><input type="checkbox" value="Slovak"> 🇸🇰 Slovenčina</label>
+            <label class="reg-lang"><input type="checkbox" value="German"> 🇩🇪 Nemčina</label>
+            <label class="reg-lang"><input type="checkbox" value="French"> 🇫🇷 Francúzština</label>
+            <label class="reg-lang"><input type="checkbox" value="Italian"> 🇮🇹 Taliančina</label>
+          </div>
+        </div>
+
+        <!-- Fotky (prominentné, nepovinné) -->
+        <div class="reg-photos">
+          <div class="reg-sec-title">Fotky <span class="reg-opt">— nepovinné, ale pomôžu vám vyniknúť</span></div>
+          <div class="reg-field">
+            <label>Logo firmy</label>
+            <div class="reg-upz" id="skLogoZone">
+              <input type="file" id="skLogoInput" accept="image/png,image/jpeg,image/webp" style="display:none">
+              <div class="reg-upz-ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+              <div class="reg-upz-t">Nahrať logo</div>
+              <div class="reg-upz-s">PNG, JPG alebo WebP, <span class="reg-upz-link" id="skLogoBrowse">vybrať</span></div>
+            </div>
+            <div class="reg-prev" id="skLogoPreview" style="display:none"><img id="skLogoImg" alt="Logo"><button type="button" class="reg-prev-x" id="skLogoRemove">Odstrániť</button></div>
+            <div class="reg-upz-err" id="skLogoErr"></div>
+          </div>
+          <div class="reg-field">
+            <label>Titulná fotka</label>
+            <div class="reg-upz" id="skCoverZone">
+              <input type="file" id="skCoverInput" accept="image/png,image/jpeg,image/webp" style="display:none">
+              <div class="reg-upz-ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+              <div class="reg-upz-t">Nahrať titulnú fotku</div>
+              <div class="reg-upz-s">Odporúčané 1200 × 400 px, <span class="reg-upz-link" id="skCoverBrowse">vybrať</span></div>
+            </div>
+            <div class="reg-prev" id="skCoverPreview" style="display:none"><img id="skCoverImg" alt="Titulná fotka"><button type="button" class="reg-prev-x" id="skCoverRemove">Odstrániť</button></div>
+            <div class="reg-upz-err" id="skCoverErr"></div>
+          </div>
+          <div class="reg-field">
+            <label>Galéria fotiek <span style="font-weight:400;color:var(--gray-500);font-size:.78rem">(až 8)</span></label>
+            <div class="reg-upz reg-upz-gal" id="skGalleryZone">
+              <input type="file" id="skGalleryInput" accept="image/png,image/jpeg,image/webp" multiple style="display:none">
+              <div class="reg-upz-ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+              <div class="reg-upz-t">Nahrať fotky</div>
+              <div class="reg-upz-s"><span class="reg-upz-link" id="skGalleryBrowse">Vybrať</span> alebo pretiahnite, až 8 obrázkov</div>
+            </div>
+            <div class="reg-gal-grid" id="skGalleryGrid"></div>
+            <div class="reg-upz-err" id="skGalleryErr"></div>
+          </div>
+        </div>
+        <div class="reg-pro-only show" id="regProBlock">
+          <div class="reg-optional-head">Rozšírený profil <span>— nepovinné, ako Founding Partner zadarmo</span></div>
+          <div class="reg-field"><label for="regWeb">Web</label><input id="regWeb" name="website" type="url" placeholder="https://…"></div>
+          <div class="reg-row">
+            <div class="reg-field"><label for="regIg">Instagram</label><input id="regIg" type="url" placeholder="https://instagram.com/…"></div>
+            <div class="reg-field"><label for="regFb">Facebook</label><input id="regFb" type="url" placeholder="https://facebook.com/…"></div>
+          </div>
+          <div class="reg-field"><label for="regAbout">O firme (dlhší popis) <span id="regAboutCount" style="float:right;font-weight:400;color:#9aa7b8;font-size:12px">0 znakov</span></label><textarea id="regAbout" placeholder="Predstavte svoju firmu podrobnejšie." oninput="var c=document.getElementById('regAboutCount');if(c)c.textContent=this.value.length+' znakov';"></textarea></div>
+        </div>
+
+        <div class="reg-hp"><label>Firma (nevypĺňať)<input name="company" tabindex="-1" autocomplete="off"></label></div>
+
+        <div class="reg-field reg-consent" style="display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.45;color:#3B4A5E;margin:4px 0 14px"><input type="checkbox" id="regConsent" name="consent" style="margin-top:3px;flex:0 0 auto;width:16px;height:16px" required><label for="regConsent">Súhlasím so spracovaním mojich osobných údajov za účelom zaradenia a zverejnenia môjho profilu v adresári ExpatBase. Viac v <a href="privacy-policy.html" target="_blank" rel="noopener" style="color:#1A4F8A;text-decoration:underline">zásadách ochrany osobných údajov</a>.</label></div>
+        <button type="submit" class="reg-send" id="regSend">Odoslať registráciu →</button>
+        <div class="reg-status" id="regStatus" role="status"></div>
+        <div class="reg-note">Dnes neplatíte nič a kartu nezadávate. Profil overíme a ozveme sa na zadaný e-mail. Vaše dáta zostávajú v EÚ.</div>
+      </form>
+  </div>
+</div></body></html>

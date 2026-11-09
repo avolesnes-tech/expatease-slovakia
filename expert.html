@@ -210,6 +210,11 @@
   var SB='https://etxqrlrqbjcbjmitnspv.supabase.co';
   var KEY='sb_publishable_i38f7jyt2HYOjUTNuOsklg_aMofdDvE';
   var _sb=supabase.createClient(SB,KEY);
+  var ebAuthMember=null;
+  try{ _sb.auth.getSession().then(function(res){
+    var u=res&&res.data&&res.data.session&&res.data.session.user;
+    if(u){ var meta=u.user_metadata||{}; ebAuthMember={name:(meta.name||meta.full_name||(u.email||'').split('@')[0]||'you'),email:u.email,auth:true}; if(window._ebUpgradeReview){ try{window._ebUpgradeReview();}catch(_){ } } }
+  }).catch(function(){}); }catch(_){ }
   document.getElementById('yr').textContent=new Date().getFullYear();
 
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
@@ -352,7 +357,7 @@
     // ---- reviews (community members only) ----
     var REVKEY='eb_rev_'+b.id;
     var rvStars=0;
-    function ebMember(){ try{var m=JSON.parse(localStorage.getItem('ee_member')||'null'); if(m&&m.email) return m;}catch(_){ } return null; }
+    function ebMember(){ if(ebAuthMember) return ebAuthMember; try{var m=JSON.parse(localStorage.getItem('ee_member')||'null'); if(m&&m.email) return m;}catch(_){ } return null; }
     function wireStars(){ var sp=document.getElementById('revStars'); if(!sp||sp._wired)return; sp._wired=1; sp.querySelectorAll('span').forEach(function(st){ st.addEventListener('click',function(){rvStars=+st.getAttribute('data-v');sp.querySelectorAll('span').forEach(function(x){x.classList.toggle('on',+x.getAttribute('data-v')<=rvStars);});}); }); }
     function showWrite(){ var m=ebMember(); document.getElementById('revJoin').style.display='none'; document.getElementById('revWrite').style.display='block'; document.getElementById('revAsYou').textContent='Posting as '+(m?m.name:'you'); wireStars(); }
     function alreadyReviewed(){ try{return !!localStorage.getItem(REVKEY);}catch(_){return false;} }
@@ -362,6 +367,7 @@
       var f=document.getElementById('revForm'); f.classList.toggle('open');
       if(ebMember()){ showWrite(); } else { document.getElementById('revJoin').style.display='block'; document.getElementById('revWrite').style.display='none'; }
     });
+    window._ebUpgradeReview=function(){ try{ var f=document.getElementById('revForm'); var w=document.getElementById('revWrite'); if(ebMember() && f && f.classList.contains('open') && w && w.style.display==='none'){ showWrite(); } }catch(_){ } };
     document.getElementById('joinBtn').addEventListener('click',function(){
       var jm=document.getElementById('joinMsg');
       var nm=document.getElementById('jName').value.trim();
