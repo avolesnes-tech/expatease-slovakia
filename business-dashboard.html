@@ -130,8 +130,13 @@
         </div>
         <div class="field">
           <label for="fDesc">Short description</label>
-          <textarea id="fDesc" maxlength="600" placeholder="What you do, who you help, what makes you a good fit for expats."></textarea>
-          <div class="hint">Shown on your listing card. Up to 600 characters.</div>
+          <textarea id="fDesc" maxlength="150" rows="2" placeholder="e.g. English-speaking GP accepting new patients in Staré Mesto."></textarea>
+          <div class="hint">Shown on your listing card in search results. <span id="fDescCount">0</span> / 150 characters.</div>
+        </div>
+        <div class="field">
+          <label for="fAbout">About your business</label>
+          <textarea id="fAbout" maxlength="5000" rows="10" placeholder="Tell expats what you offer, your experience and why they should choose you. You can use several paragraphs."></textarea>
+          <div class="hint">The longer description shown on your profile page. Line breaks are kept.</div>
         </div>
         <div class="row">
           <div class="field">
@@ -302,7 +307,9 @@
     $('pendingNote').style.display = approved ? 'none' : 'block';
 
     $('fName').value = row.name || '';
-    $('fDesc').value = row.about || row.description || '';
+    $('fDesc').value = row.description || '';
+    $('fAbout').value = row.about || '';
+    $('fDescCount').textContent = $('fDesc').value.length;
     $('fPhone').value = row.phone || '';
     $('fDistrict').value = row.district || '';
     $('fAddress').value = row.address || '';
@@ -397,7 +404,7 @@
     const langs = Array.from(document.querySelectorAll('#langChips input:checked')).map(el => el.value);
     const updates = {
       name: $('fName').value.trim(),
-      about: $('fDesc').value.trim() || null,
+      about: $('fAbout').value.trim() || null,
       description: $('fDesc').value.trim().slice(0, 150),
       phone: $('fPhone').value.trim(),
       district: $('fDistrict').value.trim() || null,
@@ -415,12 +422,15 @@
       gallery: galleryArr,
     };
 
-    const { error } = await _sb.from('businesses').update(updates).eq('id', bizRow.id);
+    const { data: saved, error } = await _sb.from('businesses').update(updates).eq('id', bizRow.id).select('id');
     btn.disabled = false; btn.textContent = 'Save changes';
-    if (error) {
-      sm.textContent = 'Could not save: ' + error.message;
+    if (error || !saved || !saved.length) {
+      sm.textContent = error
+        ? 'Could not save: ' + error.message
+        : 'Could not save your changes. Please log in again, or email hello@expatbase.sk and we will help.';
       sm.className = 'save-msg err';
     } else {
+      Object.assign(bizRow, updates);
       sm.className = 'save-msg ok';
       if (bizRow.status === 'approved') {
         sm.textContent = 'Saved ✓ — opening your profile…';
@@ -468,6 +478,8 @@
   bindUpload('fLogo', 'logo', function (u) { logoUrl = u; $('logoPrev').src = u; $('logoPrev').style.display = ''; });
   bindUpload('fCover', 'cover', function (u) { coverUrl = u; $('coverPrev').src = u; $('coverPrev').style.display = ''; });
   bindUpload('fGallery', 'gal', function (u) { galleryArr.push(u); renderGalPrev(); });
+
+  $('fDesc').addEventListener('input', function () { $('fDescCount').textContent = this.value.length; });
 
   // supabase-js auto-detects the magic-link tokens in the URL hash on load
   init();
