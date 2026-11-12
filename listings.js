@@ -135,7 +135,7 @@
     var contact = [
       b.phone ? '<a href="tel:' + esc(b.phone) + '" class="ebl-row"><span>☎</span>' + esc(b.phone) + '</a>' : '',
       b.email ? '<a href="mailto:' + esc(b.email) + '" class="ebl-row"><span>✉</span>' + esc(b.email) + '</a>' : '',
-      b.address ? '<div class="ebl-row"><span>◎</span>' + esc(b.address) + '</div>' : ''
+      b.address ? '<div class="ebl-row"><span>◎</span>' + esc(b.address) + (b.district ? ', ' + esc(b.district) : '') + (/bratislava/i.test((b.address || '') + (b.district || '')) ? '' : ', Bratislava') + '</div>' : ''
     ].join('');
     var extra = '';
     if (prem) {
