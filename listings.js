@@ -1,3 +1,4 @@
+var DISTRICTS_BA = ['Staré Mesto','Ružinov','Nové Mesto','Karlova Ves','Petržalka','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Lamač','Devín','Devínska Nová Ves','Záhorská Bystrica','Vajnory','Jarovce','Rusovce','Čunovo'];
 /* ExpatBase — dynamic business listings from Supabase
    Reads window.EB_CATEGORY, loads approved businesses for that category,
    takes over the page's listings grid: removes any hardcoded/sample cards
@@ -135,7 +136,7 @@
     var contact = [
       b.phone ? '<a href="tel:' + esc(b.phone) + '" class="ebl-row"><span>☎</span>' + esc(b.phone) + '</a>' : '',
       b.email ? '<a href="mailto:' + esc(b.email) + '" class="ebl-row"><span>✉</span>' + esc(b.email) + '</a>' : '',
-      b.address ? '<div class="ebl-row"><span>◎</span>' + esc(b.address) + (b.district ? ', ' + esc(b.district) : '') + (/bratislava/i.test((b.address || '') + (b.district || '')) ? '' : ', Bratislava') + '</div>' : ''
+      b.address ? '<div class="ebl-row"><span>◎</span>' + esc(/bratislava/i.test(b.address) ? b.address : (DISTRICTS_BA.indexOf(b.district) !== -1 ? b.address + ', ' + b.district + ', Bratislava' : b.address)) + '</div>' : ''
     ].join('');
     var extra = '';
     if (prem) {

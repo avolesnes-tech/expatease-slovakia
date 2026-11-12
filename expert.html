@@ -334,7 +334,7 @@
     var contact='';
     if(b.phone) contact+='<a class="srow" href="tel:'+esc(b.phone)+'" data-x="call"><span class="ic">☎</span>'+esc(b.phone)+'</a>';
     if(b.email) contact+='<a class="srow" href="mailto:'+esc(b.email)+'" data-x="mail"><span class="ic">✉</span>'+esc(b.email)+'</a>';
-    if(b.address) contact+='<div class="srow"><span class="ic">◎</span>'+esc(b.address)+(b.district?', '+esc(b.district):'')+(/bratislava/i.test((b.address||'')+(b.district||''))?'':', Bratislava')+'</div>';
+    if(b.address) contact+='<div class="srow"><span class="ic">◎</span>'+esc(/bratislava/i.test(b.address)?b.address:(['Staré Mesto','Ružinov','Nové Mesto','Karlova Ves','Petržalka','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Lamač','Devín','Devínska Nová Ves','Záhorská Bystrica','Vajnory','Jarovce','Rusovce','Čunovo'].indexOf(b.district)!==-1?b.address+', '+b.district+', Bratislava':b.address))+'</div>';
     if(social.instagram) contact+='<a class="srow" href="'+esc(social.instagram)+'" target="_blank" rel="noopener"><span class="ic">◈</span>Instagram</a>';
     if(social.facebook) contact+='<a class="srow" href="'+esc(social.facebook)+'" target="_blank" rel="noopener"><span class="ic">◈</span>Facebook</a>';
     var cta='';
