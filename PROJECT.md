@@ -18,8 +18,13 @@ Statický web (čisté HTML/CSS/JS, BEZ build procesu a BEZ frameworku).
 - **Nasadenie (publish) ide LEN takto, z počítača majiteľky:**
   ```
   cd "/Users/annalockwoodova/Documents/GitHub/ExpatEase/ExpatEase/ExpatEase"
-  npx wrangler pages deploy . --project-name=expatease-final
+  ./deploy.sh        # = node scripts/build-seo.mjs && npx wrangler pages deploy . --project-name=expatease-final
   ```
+- **SEO build (od 13. 11. 2026):** `scripts/build-seo.mjs` pred každým deployom
+  vygeneruje statické profily `experts/<slug>.html` (URL /experts/<slug>),
+  `eb-slugs.js`, zoznam firiem do kategórií (blok `<!--EB-SEO:list-->`) a
+  profily do `sitemap.xml`. Tieto bloky/súbory needitovať ručne.
+  Šablóna profilov = `expert.html` (zmeny v nej sa prenesú pri ďalšom builde).
 - **Dôležité:** samotný `git push`/úprava na GitHub webe NEnasadí web na živo
   (Pages nie je prepojený s Gitom pre auto-deploy — ak by to malo platiť,
   treba to najprv overiť v Cloudflare → Pages → projekt → Settings).
