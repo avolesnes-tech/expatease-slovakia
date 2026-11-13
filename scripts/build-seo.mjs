@@ -110,12 +110,14 @@ function profilePage(tpl, b, slug, catFile) {
     `\n<meta property="og:type" content="profile"><meta property="og:site_name" content="ExpatBase Slovakia">` +
     `<meta property="og:title" content="${esc(b.name)} | ExpatBase Slovakia"><meta property="og:description" content="${esc(desc)}">` +
     `<meta property="og:url" content="${url}"><meta property="og:image" content="${esc(img)}"><meta name="twitter:card" content="summary_large_image">\n` +
-    `<script type="application/ld+json" id="ld-biz">${jsonLd(ld)}</script>\n<script type="application/ld+json">${jsonLd(crumbs)}</script>\n` +
+    `<script type="application/ld+json" id="ld-biz">${jsonLd(ld)}</script>\n<script type="application/ld+json" id="ld-crumbs">${jsonLd(crumbs)}</script>\n` +
     `<script>window.EB_ID=${JSON.stringify(b.id)};window.EB_CANON=${JSON.stringify(url)};</script>\n</head>`;
   h = h.replace('</head>', () => head);
   // the live script adds its own ld-biz; drop the static one once it renders (avoid duplicates)
   h = h.replace("var _e=document.createElement('script');_e.type='application/ld+json';_e.id='ld-biz';",
     "var _old=document.getElementById('ld-biz');if(_old)_old.remove();var _e=document.createElement('script');_e.type='application/ld+json';_e.id='ld-biz';");
+  h = h.replace("var _e2=document.createElement('script');", "var _oc=document.getElementById('ld-crumbs');if(_oc)_oc.remove();var _e2=document.createElement('script');");
+  h = h.replace(/document\.title=/g, 'if(!window.EB_CANON)document.title=');
   // 3) body: readable content inside the loading block (hidden by the script once the full profile renders)
   const pre =
     `<div id="loading" class="state" style="text-align:left;max-width:860px;margin:0 auto">` +
