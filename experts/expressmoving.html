@@ -167,7 +167,7 @@
 
 <meta property="og:type" content="profile"><meta property="og:site_name" content="ExpatBase Slovakia"><meta property="og:title" content="ExpressMoving | ExpatBase Slovakia"><meta property="og:description" content="ExpressMoving provides reliable moving and transport services across Slovakia and throughout Europe. We help individuals, families and businesses move"><meta property="og:url" content="https://expatbase.sk/experts/expressmoving"><meta property="og:image" content="https://etxqrlrqbjcbjmitnspv.supabase.co/storage/v1/object/public/business-media/fae8ca8a-7938-4b26-9102-88c78557d581/cover_1793643104094.jpg"><meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json" id="ld-biz">{"@context":"https://schema.org","@type":"LocalBusiness","name":"ExpressMoving","url":"https://expatbase.sk/experts/expressmoving","description":"ExpressMoving provides reliable moving and transport services across Slovakia and throughout Europe. We help individuals, families and businesses move","image":"https://etxqrlrqbjcbjmitnspv.supabase.co/storage/v1/object/public/business-media/fae8ca8a-7938-4b26-9102-88c78557d581/cover_1793643104094.jpg","knowsLanguage":["English","Slovak","German"],"address":{"@type":"PostalAddress","streetAddress":"Suché mýto 4769/2, Staré Mesto, Bratislava","addressLocality":"Bratislava","addressCountry":"SK"},"telephone":"+421911255119","sameAs":["https://www.expressmoving.sk/"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://expatbase.sk/"},{"@type":"ListItem","position":2,"name":"Others","item":"https://expatbase.sk/others"},{"@type":"ListItem","position":3,"name":"ExpressMoving","item":"https://expatbase.sk/experts/expressmoving"}]}</script>
+<script type="application/ld+json" id="ld-crumbs">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://expatbase.sk/"},{"@type":"ListItem","position":2,"name":"Others","item":"https://expatbase.sk/others"},{"@type":"ListItem","position":3,"name":"ExpressMoving","item":"https://expatbase.sk/experts/expressmoving"}]}</script>
 <script>window.EB_ID="fae8ca8a-7938-4b26-9102-88c78557d581";window.EB_CANON="https://expatbase.sk/experts/expressmoving";</script>
 </head>
 <body>
@@ -271,7 +271,7 @@ Whether you’re moving a few items, an entire home or an office, we tailor the 
     // The hero photo is a photo too: show it first in Photos, without duplicating
     // it if the business also added the same file to the gallery.
     var photos=(b.cover_url && gallery.indexOf(b.cover_url)===-1) ? [b.cover_url].concat(gallery) : gallery;
-    document.title=(b.name||'Expert')+' | ExpatBase Slovakia';
+    if(!window.EB_CANON)document.title=(b.name||'Expert')+' | ExpatBase Slovakia';
 
     document.getElementById('crumbs').innerHTML='<a href="/index.html">ExpatBase</a> › <a href="/'+catSlug(b.category)+'">'+esc(b.category||'Experts')+'</a> › '+esc(b.name);
 
@@ -297,9 +297,9 @@ Whether you’re moving a few items, an entire home or an office, we tailor the 
       if(b.logo_url)_ld.image=b.logo_url; else if(b.cover_url)_ld.image=b.cover_url;
       var _old=document.getElementById('ld-biz');if(_old)_old.remove();var _e=document.createElement('script');_e.type='application/ld+json';_e.id='ld-biz';_e.textContent=JSON.stringify(_ld);document.head.appendChild(_e);
       var _bc={"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://expatbase.sk/"},{"@type":"ListItem","position":2,"name":(b.category||'Experts'),"item":"https://expatbase.sk/"+catSlug(b.category)},{"@type":"ListItem","position":3,"name":b.name,"item":_u}]};
-      var _e2=document.createElement('script');_e2.type='application/ld+json';_e2.textContent=JSON.stringify(_bc);document.head.appendChild(_e2);
+      var _oc=document.getElementById('ld-crumbs');if(_oc)_oc.remove();var _e2=document.createElement('script');_e2.type='application/ld+json';_e2.textContent=JSON.stringify(_bc);document.head.appendChild(_e2);
       var _can=document.querySelector('link[rel="canonical"]'); if(_can)_can.href=_u;
-      document.title=b.name+' | ExpatBase Slovakia';
+      if(!window.EB_CANON)document.title=b.name+' | ExpatBase Slovakia';
     }catch(_){}
 
     // main column

@@ -167,7 +167,7 @@
 
 <meta property="og:type" content="profile"><meta property="og:site_name" content="ExpatBase Slovakia"><meta property="og:title" content="Mgr. Veronika Čiefová | ExpatBase Slovakia"><meta property="og:description" content="I offer psychological counselling for individuals and couples. You can find more about me here: https://www.ciefova.com/en/"><meta property="og:url" content="https://expatbase.sk/experts/mgr-veronika-ciefova"><meta property="og:image" content="https://expatbase.sk/brand/expatbase-logo-square-gradient.png"><meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json" id="ld-biz">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Mgr. Veronika Čiefová","url":"https://expatbase.sk/experts/mgr-veronika-ciefova","description":"I offer psychological counselling for individuals and couples. You can find more about me here: https://www.ciefova.com/en/","image":"https://expatbase.sk/brand/expatbase-logo-square-gradient.png","knowsLanguage":["English","Slovak"],"address":{"@type":"PostalAddress","streetAddress":"E. F. Sherera 14, Piešťany 921 01","addressLocality":"Bratislava","addressCountry":"SK"},"telephone":"+421911945028","sameAs":["https://www.ciefova.com/en/"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://expatbase.sk/"},{"@type":"ListItem","position":2,"name":"Counselling & Wellbeing","item":"https://expatbase.sk/counselling"},{"@type":"ListItem","position":3,"name":"Mgr. Veronika Čiefová","item":"https://expatbase.sk/experts/mgr-veronika-ciefova"}]}</script>
+<script type="application/ld+json" id="ld-crumbs">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://expatbase.sk/"},{"@type":"ListItem","position":2,"name":"Counselling & Wellbeing","item":"https://expatbase.sk/counselling"},{"@type":"ListItem","position":3,"name":"Mgr. Veronika Čiefová","item":"https://expatbase.sk/experts/mgr-veronika-ciefova"}]}</script>
 <script>window.EB_ID="7bf7d7a6-f537-498b-a274-c1fe5332a810";window.EB_CANON="https://expatbase.sk/experts/mgr-veronika-ciefova";</script>
 </head>
 <body>
@@ -269,7 +269,7 @@
     // The hero photo is a photo too: show it first in Photos, without duplicating
     // it if the business also added the same file to the gallery.
     var photos=(b.cover_url && gallery.indexOf(b.cover_url)===-1) ? [b.cover_url].concat(gallery) : gallery;
-    document.title=(b.name||'Expert')+' | ExpatBase Slovakia';
+    if(!window.EB_CANON)document.title=(b.name||'Expert')+' | ExpatBase Slovakia';
 
     document.getElementById('crumbs').innerHTML='<a href="/index.html">ExpatBase</a> › <a href="/'+catSlug(b.category)+'">'+esc(b.category||'Experts')+'</a> › '+esc(b.name);
 
@@ -295,9 +295,9 @@
       if(b.logo_url)_ld.image=b.logo_url; else if(b.cover_url)_ld.image=b.cover_url;
       var _old=document.getElementById('ld-biz');if(_old)_old.remove();var _e=document.createElement('script');_e.type='application/ld+json';_e.id='ld-biz';_e.textContent=JSON.stringify(_ld);document.head.appendChild(_e);
       var _bc={"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://expatbase.sk/"},{"@type":"ListItem","position":2,"name":(b.category||'Experts'),"item":"https://expatbase.sk/"+catSlug(b.category)},{"@type":"ListItem","position":3,"name":b.name,"item":_u}]};
-      var _e2=document.createElement('script');_e2.type='application/ld+json';_e2.textContent=JSON.stringify(_bc);document.head.appendChild(_e2);
+      var _oc=document.getElementById('ld-crumbs');if(_oc)_oc.remove();var _e2=document.createElement('script');_e2.type='application/ld+json';_e2.textContent=JSON.stringify(_bc);document.head.appendChild(_e2);
       var _can=document.querySelector('link[rel="canonical"]'); if(_can)_can.href=_u;
-      document.title=b.name+' | ExpatBase Slovakia';
+      if(!window.EB_CANON)document.title=b.name+' | ExpatBase Slovakia';
     }catch(_){}
 
     // main column
