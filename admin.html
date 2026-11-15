@@ -83,6 +83,7 @@
       </div>
       <button class="btn ghost" id="saveTok">Zapamätať</button>
     </div>
+    <div class="msg" id="tokMsg"></div>
     <div class="hint">Uloží sa len v tomto prehliadači. Bez neho sa e-maily poslať nedajú.</div>
   </div>
 
@@ -110,10 +111,14 @@
   }
 
   try { $('tok').value = localStorage.getItem('eb_admin_token') || ''; } catch(e){}
-  $('saveTok').addEventListener('click', function(){
-    try { localStorage.setItem('eb_admin_token', $('tok').value.trim()); } catch(e){}
-    show('ok', 'Kľúč uložený v tomto prehliadači.');
-  });
+  function saveTok(){
+    var v = $('tok').value.trim(), t = $('tokMsg');
+    if (!v) { t.className = 'msg err'; t.textContent = 'Pole je prázdne, najprv vlož kľúč.'; return; }
+    try { localStorage.setItem('eb_admin_token', v); } catch(e){}
+    t.className = 'msg ok'; t.textContent = '✓ Kľúč uložený v tomto prehliadači.';
+  }
+  $('saveTok').addEventListener('click', saveTok);
+  $('tok').addEventListener('keydown', function(e){ if (e.key === 'Enter') { e.preventDefault(); saveTok(); } });
 
   function show(kind, text){
     var m = $('msg'); m.className = 'msg ' + kind; m.textContent = text;
@@ -164,7 +169,7 @@
     var token = $('tok').value.trim();
     var rowmsg = tr.querySelector('[data-rowmsg]');
 
-    if (!token) { show('err', 'Najprv vlož ADMIN_TOKEN.'); return; }
+    if (!token) { rowmsg.className = 'rowmsg err'; rowmsg.textContent = 'Najprv hore vlož ADMIN_TOKEN.'; $('tok').focus(); return; }
 
     btn.disabled = true;
     var label = btn.textContent;
