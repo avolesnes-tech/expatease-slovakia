@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harmony Dog SPA – English-speaking Dog Grooming in Staré Mesto, Bratislava | ExpatBase</title>
+<meta name="description" content="Dog grooming salon and daycare in Bratislava's Old Town, where your dog is in gentle and caring hands. — Dog grooming salon and daycare in Bratislava's Old…">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/urbanist-latin-wght-normal.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/dm-sans-latin-standard-normal.woff2"><style>@font-face{font-family:'Urbanist';font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/urbanist-latin-ext-wght-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'Urbanist';font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/urbanist-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'Urbanist';font-style:italic;font-weight:100 900;font-display:swap;src:url(/fonts/urbanist-latin-wght-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'DM Sans';font-style:normal;font-weight:100 1000;font-display:swap;src:url(/fonts/dm-sans-latin-ext-standard-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:'DM Sans';font-style:normal;font-weight:100 1000;font-display:swap;src:url(/fonts/dm-sans-latin-standard-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:'DM Sans';font-style:italic;font-weight:100 1000;font-display:swap;src:url(/fonts/dm-sans-latin-wght-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}</style>
+<style>
+  :root{
+    --blue:#1A4F8A;--blue-dark:#0F3360;--blue-light:#E8F1FB;--green:#2E9E6B;--green-dark:#1D7A50;--green-light:#E6F7EF;
+    --gray-50:#F4F6F9;--gray-100:#DDE3EC;--gray-200:#E4EBF3;--gray-400:#8C97A8;--gray-600:#6B7A90;--gray-700:#3D4A5C;--gray-900:#1F2937;
+    --radius-md:14px;--radius-lg:20px;--radius-xl:9999px;
+    --head:'Urbanist',system-ui,sans-serif;--body:'DM Sans',system-ui,sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--body);color:var(--gray-900);background:var(--gray-50);line-height:1.6}
+  a{color:inherit}
+  .nav{background:#fff;border-bottom:1px solid var(--gray-100);height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:20}
+  .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .nav-logo-text{font-family:var(--head);font-weight:700;font-size:18px;color:var(--gray-900);letter-spacing:-.3px}
+  .eb-nav{filter:drop-shadow(0 1px 1.5px rgba(15,51,96,.3))}
+  .nav-links{display:flex;gap:22px;align-items:center}
+  .nav-links a{font-size:14px;color:var(--gray-700);text-decoration:none;font-weight:500}
+  .nav-links a:hover{color:var(--blue)}
+  @media(max-width:640px){.nav-links{display:none}}
+
+  /* identity band — soft brand tint, matches site's airy look */
+  /* identity band — brand hero; cover photo overlays when the business has one */
+  .idband{position:relative;overflow:hidden;background:linear-gradient(130deg,#0F3360 0%,#17518A 58%,#1E7A5A 100%)}
+  .idband::after{content:"";position:absolute;right:-90px;top:-110px;width:360px;height:360px;background:radial-gradient(circle,rgba(46,158,107,.38),transparent 70%);z-index:0;pointer-events:none}
+  .idband .wrap{position:relative;z-index:2}
+  .idband .crumbs,.idband .crumbs a{color:rgba(255,255,255,.72)}
+  .idband .crumbs a:hover{color:#fff}
+  .idband .idmeta h1{color:#fff}
+  .idband .idmeta .cat{color:rgba(255,255,255,.86)}
+  .idband .logo-chip{box-shadow:0 12px 32px rgba(0,0,0,.30)}
+  .idband .rev-agg .score{color:#fff}
+  .idband .rev-agg .cnt{color:rgba(255,255,255,.82)}
+  .idband .b-prem{background:linear-gradient(135deg,#F5C451,#E0A32E);color:#3A2A06}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+
+  /* cover photo layout (LinkedIn-style): photo sits in a framed 3:1 banner, identity
+     sits below it on white, so no text or dark scrim ever covers the photo.
+     Crop is anchored at 25% from top (faces usually sit in the upper third);
+     a per-business cover_focal_y (0-100) overrides it when present. */
+  .idband.has-cover{background:#fff;border-bottom:1px solid var(--gray-200)}
+  .idband.has-cover::after{display:none}
+  .idband.has-cover .crumbs,.idband.has-cover .crumbs a{color:var(--gray-600)}
+  .idband.has-cover .crumbs a:hover{color:var(--blue)}
+  .idband.has-cover .idmeta h1{color:var(--blue-dark)}
+  .idband.has-cover .idmeta .cat{color:var(--gray-600)}
+  .idband.has-cover .rev-agg .score{color:var(--blue-dark)}
+  .idband.has-cover .rev-agg .cnt{color:var(--gray-600)}
+  .idband.has-cover .logo-chip{border:4px solid #fff;box-shadow:0 8px 24px rgba(15,51,96,.18)}
+  .cover-banner{position:relative;margin-top:14px;aspect-ratio:3/1;border-radius:var(--radius-lg);overflow:hidden;background:var(--gray-100)}
+  .cover-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%;display:block}
+  .cover-banner::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(15,51,96,.06);pointer-events:none}
+  .idband.has-cover .idrow{position:relative;z-index:1;align-items:flex-start;margin-top:-54px;padding:0 0 28px 28px}
+  .idband.has-cover .idmeta{padding-top:66px}
+  @media(max-width:700px){.cover-banner{aspect-ratio:16/9;border-radius:var(--radius-md)}}
+  @media(max-width:560px){.idband.has-cover .idrow{margin-top:-46px;padding-left:16px;gap:12px}.idband.has-cover .idmeta{padding-top:0}.idband.has-cover .logo-chip{height:84px;min-width:84px}}
+  .crumbs{font-size:13px;color:var(--gray-600);padding:18px 0 0}
+  .crumbs a{text-decoration:none;color:var(--gray-600)}
+  .crumbs a:hover{color:var(--blue)}
+  .idrow{display:flex;align-items:center;gap:22px;padding:22px 0 30px}
+  @media(max-width:560px){.idrow{flex-direction:column;align-items:flex-start;gap:16px}}
+  .logo-chip{height:100px;min-width:100px;max-width:264px;flex:0 0 auto;background:#fff;border:1px solid var(--gray-200);border-radius:22px;box-shadow:0 8px 24px rgba(26,79,138,.12);display:flex;align-items:center;justify-content:center;padding:14px 20px;overflow:hidden}
+  .logo-chip img{height:100%;width:auto;max-width:224px;object-fit:contain;display:block}
+  .logo-chip.initials{width:100px;min-width:100px;max-width:100px;height:100px;background:linear-gradient(135deg,var(--blue),var(--green));color:#fff;font-family:var(--head);font-weight:900;font-size:40px;padding:0}
+  .idmeta{min-width:0}
+  .idmeta h1{font-family:var(--head);font-weight:800;font-size:2rem;color:var(--blue-dark);letter-spacing:-.02em;line-height:1.08;overflow-wrap:anywhere}
+  @media(max-width:560px){.idmeta h1{font-size:1.55rem}}
+  .idmeta .cat{color:var(--gray-600);font-size:1rem;margin-top:3px}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .badge{font-family:var(--head);font-weight:700;font-size:.72rem;letter-spacing:.04em;padding:5px 12px;border-radius:999px}
+  .b-en{background:var(--green-light);color:var(--green-dark)}
+  .b-prem{background:linear-gradient(135deg,var(--blue-dark),#2563EB);color:#fff}
+
+  /* content */
+  .grid{display:grid;grid-template-columns:1fr 330px;gap:26px;padding:34px 0 70px}
+  @media(max-width:820px){.grid{grid-template-columns:1fr;padding-top:26px}}
+  .card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:26px;box-shadow:0 2px 16px rgba(26,79,138,.06);margin-bottom:22px}
+  .card h2{font-family:var(--head);font-weight:800;font-size:1.05rem;color:var(--blue-dark);margin-bottom:12px}
+  .card p{color:var(--gray-700);font-size:.98rem;white-space:pre-line;overflow-wrap:anywhere}
+  .tagline{font-size:1.12rem;color:var(--gray-700);font-weight:500;margin:0 0 20px;max-width:60ch}
+  .gallery{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}
+  .gallery img{max-height:210px;max-width:100%;width:auto;height:auto;border-radius:12px;cursor:pointer;transition:transform .2s;background:var(--gray-50);display:block;box-shadow:0 1px 5px rgba(15,51,96,.08)}
+  .gallery img:hover{transform:scale(1.03)}
+  .hours{white-space:pre-line;color:var(--gray-700);font-size:.95rem}
+  .langline{display:flex;flex-wrap:wrap;gap:8px}
+  .langtag{background:var(--blue-light);color:var(--blue);font-weight:600;font-size:.85rem;padding:5px 12px;border-radius:999px}
+  .srow{display:flex;gap:11px;align-items:flex-start;font-size:.95rem;color:var(--gray-700);text-decoration:none;padding:10px 0;border-bottom:1px solid var(--gray-50);min-width:0;overflow-wrap:anywhere}
+  .srow:last-child{border-bottom:none}
+  .srow .ic{color:var(--green);flex:0 0 auto;font-size:1.05rem;width:20px;text-align:center}
+  a.srow:hover{color:var(--blue)}
+  .cta{display:block;text-align:center;background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;font-family:var(--head);font-weight:700;text-decoration:none;padding:13px;border-radius:999px;margin-top:14px}
+  .oh-pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--head);font-weight:700;font-size:.82rem;padding:5px 12px;border-radius:999px;margin-bottom:10px}
+  .oh-pill.on{background:var(--green-light);color:var(--green-dark)}
+  .oh-pill.off{background:var(--gray-50);color:var(--gray-600)}
+  .oh-pill .dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:0 0 auto}
+  .oh-row{display:flex;justify-content:space-between;gap:14px;font-size:.93rem;color:var(--gray-700);padding:7px 0;border-bottom:1px solid var(--gray-50)}
+  .oh-row:last-child{border-bottom:none}
+  .oh-row.today{font-weight:700;color:var(--blue-dark)}
+  .oh-row .oh-cl{color:var(--gray-400)}
+  .cta.secondary{background:#fff;color:var(--blue);border:1.5px solid var(--gray-200);margin-top:10px}
+  .cta.wa{background:#25D366;color:#fff;margin-top:10px}
+  .cta.wa:hover{background:#1ebe5b}
+  .mapbox{border:0;width:100%;height:200px;border-radius:14px;margin-top:4px}
+
+
+
+  /* reviews */
+  .rev-agg{display:flex;align-items:center;gap:9px;margin-top:12px}
+  .stars{display:inline-flex;gap:1px;color:#E0A32E;font-size:1.02rem;letter-spacing:1px}
+  .stars .off{color:#D4DBE6}
+  .rev-agg .score{font-family:var(--head);font-weight:800;color:var(--blue-dark);font-size:1.05rem}
+  .rev-agg .cnt{color:var(--gray-600);font-size:.9rem}
+  .rev-item{padding:16px 0;border-bottom:1px solid var(--gray-50)}
+  .rev-item:last-child{border-bottom:none}
+  .rev-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:5px}
+  .rev-who{font-family:var(--head);font-weight:700;color:var(--gray-900);font-size:.95rem}
+  .rev-date{color:var(--gray-400);font-size:.82rem;flex:0 0 auto}
+  .rev-body{color:var(--gray-700);font-size:.95rem;overflow-wrap:anywhere;margin-top:3px}
+  .rev-empty{color:var(--gray-600);font-size:.95rem;line-height:1.6}
+  .rev-btn{display:inline-block;margin-top:16px;background:#fff;border:1.5px solid var(--gray-200);color:var(--blue);font-family:var(--head);font-weight:700;font-size:.9rem;padding:10px 20px;border-radius:999px;cursor:pointer}
+  .rev-btn:hover{border-color:var(--blue)}
+  .rev-form{margin-top:18px;border-top:1px solid var(--gray-100);padding-top:16px;display:none}
+  .rev-form.open{display:block}
+  .rev-form label{display:block;font-size:12px;font-weight:600;color:var(--gray-700);margin:12px 0 6px}
+  .rev-form input,.rev-form textarea{width:100%;padding:11px 13px;border:1.5px solid var(--gray-100);border-radius:12px;font-family:var(--body);font-size:14px;color:var(--gray-900)}
+  .rev-form input:focus,.rev-form textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,79,138,.12)}
+  .rev-form textarea{min-height:92px;resize:vertical;line-height:1.5}
+  .star-pick{display:inline-flex;gap:5px;font-size:1.8rem;color:#D4DBE6;cursor:pointer;user-select:none}
+  .star-pick span.on{color:#E0A32E}
+  .rev-submit{margin-top:16px;background:linear-gradient(135deg,var(--green-dark),var(--green));color:#fff;border:none;font-family:var(--head);font-weight:700;padding:12px 26px;border-radius:999px;cursor:pointer}
+  .rev-submit:disabled{opacity:.6;cursor:default}
+  .rev-msg{margin-top:10px;font-size:.9rem;font-weight:500}
+  .rev-msg.ok{color:var(--green-dark)}.rev-msg.err{color:#b91c1c}
+  .rev-note{color:var(--gray-600);font-size:.82rem;margin:-2px 0 12px;line-height:1.5}
+  .rev-report{color:var(--gray-400);font-size:.78rem;text-decoration:none;margin-left:10px}
+  .rev-report:hover{color:#b91c1c;text-decoration:underline}
+  .rev-gate{color:var(--gray-700);font-size:.92rem;margin-bottom:4px;line-height:1.55}
+  .rev-asyou{color:var(--green-dark);font-weight:600;font-size:.88rem;margin-bottom:6px}
+  .rev-check{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--gray-700);font-weight:400;margin-top:12px}
+  .rev-check input{width:auto}
+  .state{text-align:center;padding:90px 20px;color:var(--gray-400)}
+  .state h2{font-family:var(--head);color:var(--blue-dark);font-size:1.3rem;margin-bottom:10px}
+  .state a{color:var(--blue);text-decoration:none;font-weight:600}
+  .lb{position:fixed;inset:0;background:rgba(15,51,96,.9);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+  .lb.open{display:flex}
+  .lb img{max-width:92vw;max-height:88vh;border-radius:12px}
+  .lb-close{position:absolute;top:18px;right:24px;color:#fff;font-size:34px;cursor:pointer;line-height:1}
+  .foot{background:var(--blue-dark);color:#cdd9ea;text-align:center;padding:30px 20px;font-size:.86rem}
+  .foot a{color:#fff;text-decoration:none}
+</style>
+
+<link rel="canonical" href="https://expatbase.sk/experts/harmony-dog-spa">
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7dd3174682984f72b6609a6d522b1f98"}'></script><!-- End Cloudflare Web Analytics -->
+<script defer src="/cookie-consent.js"></script>
+
+<meta property="og:type" content="profile"><meta property="og:site_name" content="ExpatBase Slovakia"><meta property="og:title" content="Harmony Dog SPA | ExpatBase Slovakia"><meta property="og:description" content="Dog grooming salon and daycare in Bratislava's Old Town, where your dog is in gentle and caring hands. — Dog grooming salon and daycare in Bratislava's Old…"><meta property="og:url" content="https://expatbase.sk/experts/harmony-dog-spa"><meta property="og:image" content="data:image/jpeg;base64,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"><meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json" id="ld-biz">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Harmony Dog SPA","url":"https://expatbase.sk/experts/harmony-dog-spa","description":"Dog grooming salon and daycare in Bratislava's Old Town, where your dog is in gentle and caring hands. — Dog grooming salon and daycare in Bratislava's Old…","image":"data:image/jpeg;base64,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","knowsLanguage":["Slovak","English","Italian","Ukrainian","Russian"],"address":{"@type":"PostalAddress","streetAddress":"Vazovova 22","addressLocality":"Bratislava","addressCountry":"SK"},"telephone":"+421 902 135 436","sameAs":["https://harmonydogspa.sk/"]}</script>
+<script type="application/ld+json" id="ld-crumbs">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://expatbase.sk/"},{"@type":"ListItem","position":2,"name":"Vets","item":"https://expatbase.sk/vets"},{"@type":"ListItem","position":3,"name":"Harmony Dog SPA","item":"https://expatbase.sk/experts/harmony-dog-spa"}]}</script>
+<script>window.EB_ID="d464d283-4d26-4da5-beb1-e777af4e3814";window.EB_CANON="https://expatbase.sk/experts/harmony-dog-spa";</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true"><defs>
+  <linearGradient id="ebGradLight" x1="0%" y1="0%" x2="90%" y2="110%"><stop offset="0%" stop-color="#1A4F8A"/><stop offset="100%" stop-color="#2E9E6B"/></linearGradient>
+  <radialGradient id="ebHi" cx="38%" cy="26%" r="62%"><stop offset="0%" stop-color="#fff" stop-opacity=".25"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient><symbol id="eb-icon-light" viewBox="0 0 120 140"><path d="M60 132 C 36 110 18 86 18 54 A 42 42 0 1 1 102 54 C 102 86 84 110 60 132 Z" fill="url(#ebGradLight)"/><path d="M60 132 C 36 110 18 86 18 54 A 42 42 0 1 1 102 54 C 102 86 84 110 60 132 Z" fill="url(#ebHi)"/><text x="60" y="55" text-anchor="middle" dominant-baseline="middle" font-family="Urbanist,system-ui,sans-serif" font-weight="900" font-size="36" fill="white" letter-spacing="-2">EB</text></symbol>
+</defs></svg>
+
+<nav class="nav">
+  <a href="/index.html" class="nav-logo">
+    <svg class="eb-nav" width="30" height="35" viewBox="0 0 120 140" aria-hidden="true"><use href="#eb-icon-light"/></svg>
+    <span class="nav-logo-text">ExpatBase</span>
+  </a>
+  <div class="nav-links">
+    <a href="/index.html#categories">Find Experts</a>
+    <a href="/index.html#blog">Guides</a>
+    <a href="/about.html">About</a>
+  </div>
+</nav>
+
+<div id="loading" class="state" style="text-align:left;max-width:860px;margin:0 auto"><p style="font-size:13px;color:#6B7A90"><a href="/">ExpatBase</a> › <a href="/vets">Vets</a></p><h1 style="font-family:Urbanist,sans-serif;margin:8px 0">Harmony Dog SPA</h1><p><strong>Dog Grooming, Dog Daycare</strong> · Staré Mesto · English-speaking</p><p>Dog grooming salon and daycare in Bratislava's Old Town, where your dog is in gentle and caring hands.</p><p>Dog grooming salon and daycare in Bratislava's Old Town, where your dog is in gentle and caring hands.</p><p style="white-space:pre-line">Professional grooming, haircuts and bathing for dogs on Vazovova 22 in Bratislava's Old Town. The salon is open Monday to Saturday from 8:00 to 18:30, by appointment.
+
+Our services: Fresh &amp; Clean, Fancy Haircut, Deluxe Bath, De-shed PRO, dental hygiene and Puppy Care.
+
+Dog daycare: while you are at work, your dog plays, rests and has company with us. The daycare is open Monday to Friday from 7:30 to 18:30, with morning, afternoon or full-day options.
+
+We only accept healthy, socialised and non-aggressive dogs in the salon and daycare, so that every dog feels good here.
+
+Book online: https://partner.notino.com/api/notino-partner/b2c/redirect/link/J7KJST7YOmsI</p><p>Address: Vazovova 22</p><p>Languages: Slovak, English, Italian, Ukrainian, Russian</p></div>
+<div id="notfound" class="state" style="display:none">
+  <h2>Profile not found</h2>
+  <p>This listing may have been removed or isn't published yet.</p>
+  <p style="margin-top:14px"><a href="/index.html#categories">← Browse all experts</a></p>
+</div>
+
+<div id="profile" style="display:none">
+  <div class="idband" id="idband">
+    <div class="wrap">
+      <div class="crumbs" id="crumbs"></div>
+      <div class="idrow" id="idrow"></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="grid"><div id="colMain"></div><aside id="colSide"></aside></div>
+  </div>
+</div>
+
+<div class="lb" id="lightbox"><span class="lb-close" id="lbClose">&times;</span><img id="lbImg" src="" alt=""></div>
+<footer class="foot">© <span id="yr"></span> ExpatBase Slovakia · <a href="/index.html">Home</a> · <a href="/privacy-policy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+
+<script src="/eb-slugs.js"></script>
+<script src="/vendor/supabase-js-2.117.3.js"></script>
+<script>
+  var SB='https://etxqrlrqbjcbjmitnspv.supabase.co';
+  var KEY='sb_publishable_i38f7jyt2HYOjUTNuOsklg_aMofdDvE';
+  var _sb=supabase.createClient(SB,KEY);
+  var ebAuthMember=null;
+  try{ _sb.auth.getSession().then(function(res){
+    var u=res&&res.data&&res.data.session&&res.data.session.user;
+    if(u){ var meta=u.user_metadata||{}; ebAuthMember={name:(meta.name||meta.full_name||(u.email||'').split('@')[0]||'you'),email:u.email,auth:true}; if(window._ebUpgradeReview){ try{window._ebUpgradeReview();}catch(_){ } } }
+  }).catch(function(){}); }catch(_){ }
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function initials(n){return String(n||'?').trim().split(/\s+/).slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();}
+  function catSlug(c){return {'Doctors':'doctors.html','Lawyers':'lawyers.html','Banks':'banks.html','Real Estate':'real-estate.html','Schools':'schools.html','Plumbers':'plumbers.html','Builders':'builders.html','Barbers':'barbers.html','Moving':'moving.html','Vets':'vets.html','Sports':'sports.html','Doctors & Specialists':'doctors.html','Lawyers & Legal':'lawyers.html','Banks & Finance':'banks.html','Hair, Beauty & Tattoo':'barbers.html','Handymen':'plumbers.html','Schools & Learning':'schools.html','Moving & Relocation':'moving.html','Sports & Leisure':'sports.html','Others':'others.html','Counselling & Wellbeing':'counselling.html'}[c]||'index.html#categories';}
+  function q(name){if(name==='id'&&window.EB_ID)return window.EB_ID;return new URLSearchParams(location.search).get(name);}
+  function track(type,id){try{fetch(SB+'/rest/v1/events',{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({business_id:id,type:type}),keepalive:true}).catch(function(){});}catch(e){}}
+
+  var EB_DAYS=[['monday','Monday'],['tuesday','Tuesday'],['wednesday','Wednesday'],['thursday','Thursday'],['friday','Friday'],['saturday','Saturday'],['sunday','Sunday']];
+  function ebMin(t){var m=/^(\d{1,2}):(\d{2})$/.exec(String(t||''));if(!m)return null;var h=+m[1],mi=+m[2];if(h>23||mi>59)return null;return h*60+mi;}
+  function ebNowBA(){
+    try{
+      var p={};
+      new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Bratislava',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false})
+        .formatToParts(new Date()).forEach(function(x){p[x.type]=x.value;});
+      var ord={Mon:0,Tue:1,Wed:2,Thu:3,Fri:4,Sat:5,Sun:6};
+      if(Object.prototype.hasOwnProperty.call(ord,p.weekday)) return {day:ord[p.weekday],min:((+p.hour)%24)*60+(+p.minute)};
+    }catch(e){}
+    var n=new Date();return {day:(n.getDay()+6)%7,min:n.getHours()*60+n.getMinutes()};
+  }
+  function ebHoursCard(oh,txt){
+    if(!oh||typeof oh!=='object') oh=null;
+    var i,any=false;
+    if(oh) for(i=0;i<EB_DAYS.length;i++){var c=oh[EB_DAYS[i][0]];if(c&&c.open&&ebMin(c.from)!==null&&ebMin(c.to)!==null){any=true;break;}}
+    if(!any) return txt?'<div class="card"><h2>Opening hours</h2><p>'+esc(txt)+'</p></div>':'';
+    var now=ebNowBA();
+    var td=oh[EB_DAYS[now.day][0]]||{};
+    var tF=ebMin(td.from),tT=ebMin(td.to);
+    var isOpen=!!(td.open&&tF!==null&&tT!==null&&now.min>=tF&&now.min<tT);
+    var label;
+    if(isOpen){label='Open now \u00b7 until '+esc(td.to);}
+    else if(td.open&&tF!==null&&tT!==null&&now.min<tF){label='Opens today at '+esc(td.from);}
+    else{label='Closed now';}
+    var rows='';
+    for(i=0;i<EB_DAYS.length;i++){
+      var d=oh[EB_DAYS[i][0]]||{},op=!!(d.open&&ebMin(d.from)!==null&&ebMin(d.to)!==null);
+      rows+='<div class="oh-row'+(i===now.day?' today':'')+'"><span>'+EB_DAYS[i][1]+'</span>'+
+            (op?'<span>'+esc(d.from)+'\u2009\u2013\u2009'+esc(d.to)+'</span>':'<span class="oh-cl">Closed</span>')+'</div>';
+    }
+    return '<div class="card"><h2>Opening hours</h2><div class="oh-pill '+(isOpen?'on':'off')+'"><span class="dot"></span>'+label+'</div>'+rows+'</div>';
+  }
+  function render(b){
+    var prem=b.plan==='premium'||b.plan==='founding';
+    var social=b.social_links||{};
+    var gallery=Array.isArray(b.gallery)?b.gallery.slice():[];
+    // The hero photo is a photo too: show it first in Photos, without duplicating
+    // it if the business also added the same file to the gallery.
+    var photos=(b.cover_url && gallery.indexOf(b.cover_url)===-1) ? [b.cover_url].concat(gallery) : gallery;
+    if(!window.EB_CANON)document.title=(b.name||'Expert')+' | ExpatBase Slovakia';
+
+    document.getElementById('crumbs').innerHTML='<a href="/index.html">ExpatBase</a> › <a href="/'+catSlug(b.category)+'">'+esc(b.category||'Experts')+'</a> › '+esc(b.name);
+
+    var chip=b.logo_url
+      ? '<div class="logo-chip"><img src="'+esc(b.logo_url)+'" alt="'+esc(b.name)+' logo"></div>'
+      : '<div class="logo-chip initials">'+esc(initials(b.name))+'</div>';
+    var badges='';
+    if(b.english_speaking) badges+='<span class="badge b-en">English-speaking</span>';
+    if(prem) badges+='<span class="badge b-prem">Founding Partner</span>';
+    var _subs=(Array.isArray(b.subcategories)?b.subcategories:[]).filter(Boolean).filter(function(x){return x!=='Other';});
+    var _catLbl=_subs.length?_subs.join(' \u00b7 '):(b.category||'');
+    document.getElementById('idrow').innerHTML=chip+
+      '<div class="idmeta"><h1>'+esc(b.name)+'</h1><div class="cat">'+esc(_catLbl)+'</div>'+(badges?'<div class="badges">'+badges+'</div>':'')+'<div class="rev-agg" id="idAgg" style="display:none"></div></div>';
+    var _ib=document.getElementById('idband');
+    if(b.cover_url&&_ib){_ib.classList.add('has-cover');var _bn=document.createElement('div');_bn.className='cover-banner';var _im=document.createElement('img');_im.src=b.cover_url;_im.alt=(b.name||'')+' \u2014 cover photo';_im.decoding='async';try{_im.fetchPriority='high';}catch(_){};var _fy=parseFloat(b.cover_focal_y);if(isFinite(_fy)&&_fy>=0&&_fy<=100)_im.style.objectPosition='50% '+_fy+'%';_bn.appendChild(_im);var _ir=document.getElementById('idrow');_ir.parentNode.insertBefore(_bn,_ir);}
+    try{
+      var _u=window.EB_CANON||((window.EB_SLUGS&&window.EB_SLUGS[b.id])?'https://expatbase.sk/experts/'+window.EB_SLUGS[b.id]:'https://expatbase.sk/expert.html?id='+b.id);
+      var _ld={"@context":"https://schema.org","@type":"LocalBusiness","name":b.name,"url":_u};
+      if(b.category)_ld.description=b.category;
+      if(b.address)_ld.address={"@type":"PostalAddress","streetAddress":b.address,"addressLocality":(b.district||'Bratislava'),"addressRegion":"Bratislava","addressCountry":"SK"};
+      if(b.phone)_ld.telephone=b.phone;
+      if(b.website)_ld.sameAs=[b.website];
+      if(b.logo_url)_ld.image=b.logo_url; else if(b.cover_url)_ld.image=b.cover_url;
+      var _old=document.getElementById('ld-biz');if(_old)_old.remove();var _e=document.createElement('script');_e.type='application/ld+json';_e.id='ld-biz';_e.textContent=JSON.stringify(_ld);document.head.appendChild(_e);
+      var _bc={"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://expatbase.sk/"},{"@type":"ListItem","position":2,"name":(b.category||'Experts'),"item":"https://expatbase.sk/"+catSlug(b.category)},{"@type":"ListItem","position":3,"name":b.name,"item":_u}]};
+      var _oc=document.getElementById('ld-crumbs');if(_oc)_oc.remove();var _e2=document.createElement('script');_e2.type='application/ld+json';_e2.textContent=JSON.stringify(_bc);document.head.appendChild(_e2);
+      var _can=document.querySelector('link[rel="canonical"]'); if(_can)_can.href=_u;
+      if(!window.EB_CANON)document.title=b.name+' | ExpatBase Slovakia';
+    }catch(_){}
+
+    // main column
+    var main='';
+    var _lead=b.tagline||b.description; if(_lead) main+='<p class="tagline">'+esc(_lead)+'</p>';
+    if(b.about) main+='<div class="card"><h2>About</h2><p>'+esc(b.about)+'</p></div>';
+    if(photos.length){
+      var imgs=photos.map(function(u){return '<img src="'+esc(u)+'" alt="" loading="lazy" class="gimg">';}).join('');
+      main+='<div class="card"><h2>Photos</h2><div class="gallery">'+imgs+'</div></div>';
+    }
+    if(b.hours) main+='<div class="card"><h2>Opening hours</h2><div class="hours">'+esc(b.hours)+'</div></div>';
+    if(b.languages&&b.languages.length) main+='<div class="card"><h2>Languages</h2><div class="langline">'+b.languages.map(function(l){return '<span class="langtag">'+esc(l)+'</span>';}).join('')+'</div></div>';
+    main+='<div class="card" id="reviewsCard">'+
+      '<h2>Reviews</h2>'+
+      '<p class="rev-note">Reviews come from people who contacted or used this business. We don\u2019t edit or pay for reviews, and we remove any that break our guidelines.</p>'+
+      '<div id="revAgg"></div>'+
+      '<div id="revList"></div>'+
+      '<button type="button" class="rev-btn" id="revToggle">Write a review</button>'+
+      '<div class="rev-form" id="revForm">'+
+        '<div id="revJoin">'+
+          '<p class="rev-gate">Reviews are for ExpatBase community members — it keeps them genuine. Join free to post yours.</p>'+
+          '<label for="jName">Your name</label><input id="jName" maxlength="80" placeholder="e.g. Sarah M.">'+
+          '<label for="jEmail">Email (kept private)</label><input id="jEmail" type="email" placeholder="you@example.com">'+
+          '<label class="rev-check"><input type="checkbox" id="jNews"> Send me the occasional ExpatBase newsletter</label>'+
+          '<button type="button" class="rev-submit" id="joinBtn">Join &amp; write a review</button>'+
+          '<div class="rev-msg" id="joinMsg"></div>'+
+        '</div>'+
+        '<div id="revWrite" style="display:none">'+
+          '<p class="rev-asyou" id="revAsYou"></p>'+
+          '<label>Your rating</label>'+
+          '<div class="star-pick" id="revStars"><span data-v="1">\u2605</span><span data-v="2">\u2605</span><span data-v="3">\u2605</span><span data-v="4">\u2605</span><span data-v="5">\u2605</span></div>'+
+          '<label for="revText">Your review</label><textarea id="revText" maxlength="500" placeholder="What made your experience good — or what could be better?"></textarea>'+
+          '<button type="button" class="rev-submit" id="revSubmit">Submit review</button>'+
+          '<div class="rev-msg" id="revMsg"></div>'+
+        '</div>'+
+      '</div></div>';
+    document.getElementById('colMain').innerHTML=main||'<div class="card"><p>This expert hasn\'t added more details yet.</p></div>';
+
+    // side column
+    var contact='';
+    if(b.phone) contact+='<a class="srow" href="tel:'+esc(b.phone)+'" data-x="call"><span class="ic">☎</span>'+esc(b.phone)+'</a>';
+    if(b.email) contact+='<a class="srow" href="mailto:'+esc(b.email)+'" data-x="mail"><span class="ic">✉</span>'+esc(b.email)+'</a>';
+    if(b.address) contact+='<div class="srow"><span class="ic">◎</span>'+esc(/bratislava/i.test(b.address)?b.address:(['Staré Mesto','Ružinov','Nové Mesto','Karlova Ves','Petržalka','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Lamač','Devín','Devínska Nová Ves','Záhorská Bystrica','Vajnory','Jarovce','Rusovce','Čunovo'].indexOf(b.district)!==-1?b.address+', '+b.district+', Bratislava':b.address))+'</div>';
+    if(social.instagram) contact+='<a class="srow" href="'+esc(social.instagram)+'" target="_blank" rel="noopener"><span class="ic">◈</span>Instagram</a>';
+    if(social.facebook) contact+='<a class="srow" href="'+esc(social.facebook)+'" target="_blank" rel="noopener"><span class="ic">◈</span>Facebook</a>';
+    var cta='';
+    if(b.website) cta+='<a class="cta" href="'+esc(b.website)+'" target="_blank" rel="noopener" data-x="web">Visit website</a>';
+    if(b.phone && !(b.social_links && b.social_links.whatsapp===false)){ var wa=String(b.phone).replace(/\D/g,''); if(wa.indexOf('00')===0){wa=wa.slice(2);} else if(wa.charAt(0)==='0'){wa='421'+wa.slice(1);} cta+='<a class="cta wa" href="https://wa.me/'+wa+'" target="_blank" rel="noopener" data-x="wa">Message on WhatsApp</a>'; }
+    var map='';var ebAddr='';
+    if(b.address){ebAddr=(b.address||'')+', '+(b.district?b.district+', ':'')+'Bratislava, Slovakia';var qq=encodeURIComponent(ebAddr);map='<div class="card"><h2>Location</h2><iframe id="ebMap" class="mapbox" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q='+qq+'&z=16&output=embed"></iframe><a class="srow" style="padding-top:12px" href="https://www.google.com/maps/search/?api=1&query='+qq+'" target="_blank" rel="noopener"><span class="ic">\u2197</span>Open in Google Maps</a></div>';}
+    document.getElementById('colSide').innerHTML='<div class="card"><h2>Contact</h2>'+(contact||'<p>No contact details yet.</p>')+cta+'</div>'+ebHoursCard(b.opening_hours,b.hours)+map;
+    if(ebAddr){fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&addressdetails=0&q='+encodeURIComponent(ebAddr)).then(function(r){return r.json();}).then(function(g){var el=document.getElementById('ebMap');if(el&&g&&g.length){el.src='https://maps.google.com/maps?q='+g[0].lat+','+g[0].lon+'&z=16&output=embed';}}).catch(function(){});}
+
+    document.getElementById('loading').style.display='none';
+    document.getElementById('profile').style.display='block';
+
+    var lb=document.getElementById('lightbox'),lbi=document.getElementById('lbImg');
+    document.querySelectorAll('.gimg').forEach(function(img){img.addEventListener('click',function(){lbi.src=img.src;lb.classList.add('open');});});
+    document.getElementById('lbClose').addEventListener('click',function(){lb.classList.remove('open');});
+    lb.addEventListener('click',function(e){if(e.target===lb)lb.classList.remove('open');});
+    document.querySelectorAll('[data-x]').forEach(function(el){el.addEventListener('click',function(){var x=el.getAttribute('data-x');track(x==='web'?'website_click':'contact_click',b.id);});});
+
+    // ---- reviews (community members only) ----
+    var REVKEY='eb_rev_'+b.id;
+    var rvStars=0;
+    function ebMember(){ if(ebAuthMember) return ebAuthMember; try{var m=JSON.parse(localStorage.getItem('ee_member')||'null'); if(m&&m.email) return m;}catch(_){ } return null; }
+    function wireStars(){ var sp=document.getElementById('revStars'); if(!sp||sp._wired)return; sp._wired=1; sp.querySelectorAll('span').forEach(function(st){ st.addEventListener('click',function(){rvStars=+st.getAttribute('data-v');sp.querySelectorAll('span').forEach(function(x){x.classList.toggle('on',+x.getAttribute('data-v')<=rvStars);});}); }); }
+    function showWrite(){ var m=ebMember(); document.getElementById('revJoin').style.display='none'; document.getElementById('revWrite').style.display='block'; document.getElementById('revAsYou').textContent='Posting as '+(m?m.name:'you'); wireStars(); }
+    function alreadyReviewed(){ try{return !!localStorage.getItem(REVKEY);}catch(_){return false;} }
+    var toggle=document.getElementById('revToggle');
+    if(alreadyReviewed()){ toggle.textContent='You’ve reviewed this business'; toggle.disabled=true; toggle.style.opacity='.6'; toggle.style.cursor='default'; }
+    toggle.addEventListener('click',function(){
+      var f=document.getElementById('revForm'); f.classList.toggle('open');
+      if(ebMember()){ showWrite(); } else { document.getElementById('revJoin').style.display='block'; document.getElementById('revWrite').style.display='none'; }
+    });
+    window._ebUpgradeReview=function(){ try{ var f=document.getElementById('revForm'); var w=document.getElementById('revWrite'); if(ebMember() && f && f.classList.contains('open') && w && w.style.display==='none'){ showWrite(); } }catch(_){ } };
+    document.getElementById('joinBtn').addEventListener('click',function(){
+      var jm=document.getElementById('joinMsg');
+      var nm=document.getElementById('jName').value.trim();
+      var em=document.getElementById('jEmail').value.trim();
+      if(!nm){jm.className='rev-msg err';jm.textContent='Please add your name.';return;}
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){jm.className='rev-msg err';jm.textContent='Please add a valid email.';return;}
+      var news=document.getElementById('jNews').checked;
+      try{ fetch('/functions/airtable-submit?table=Members',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({Name:nm,Email:em,Newsletter:news,'Submitted At':new Date().toISOString()})}).catch(function(){}); }catch(_){ }
+      try{ localStorage.setItem('ee_member',JSON.stringify({name:nm,email:em,newsletter:news,joinedAt:new Date().toISOString()})); }catch(_){ }
+      showWrite();
+    });
+    document.getElementById('revSubmit').addEventListener('click',async function(){
+      var msg=document.getElementById('revMsg'); var m=ebMember();
+      if(!m){document.getElementById('revWrite').style.display='none';document.getElementById('revJoin').style.display='block';return;}
+      var body=document.getElementById('revText').value.trim();
+      if(!rvStars){msg.className='rev-msg err';msg.textContent='Please pick a star rating.';return;}
+      if(body.length<8){msg.className='rev-msg err';msg.textContent='Please write a little more about your experience.';return;}
+      if(/https?:\/\//i.test(body)){msg.className='rev-msg err';msg.textContent='Please remove links from your review.';return;}
+      if(alreadyReviewed()){msg.className='rev-msg err';msg.textContent='You’ve already reviewed this business.';return;}
+      var btn=document.getElementById('revSubmit');btn.disabled=true;btn.textContent='Submitting…';
+      try{
+        var r=await _sb.from('reviews').insert({business_id:b.id,business_name:b.name,reviewer_name:m.name,reviewer_email:m.email,rating:rvStars,review_text:body});
+        if(r.error) throw r.error;
+        try{localStorage.setItem(REVKEY,'1');}catch(_){ }
+        document.getElementById('revForm').innerHTML='<div class="rev-empty">Thank you! Your review is now live. ✅</div>';
+        loadReviews(b.id);
+      }catch(e){btn.disabled=false;btn.textContent='Submit review';msg.className='rev-msg err';msg.textContent='Could not submit: '+(e.message||e);}
+    });
+    loadReviews(b.id);
+  }
+
+  function starHtml(n){var out='';for(var i=1;i<=5;i++){out+='<span'+(i<=Math.round(n)?'':' class="off"')+'>\u2605</span>';}return '<span class="stars">'+out+'</span>';}
+  function fmtDate(iso){try{var d=new Date(iso);return d.toLocaleDateString('en-GB',{month:'short',year:'numeric'});}catch(e){return '';}}
+  function loadReviews(id){
+    fetch(SB+'/rest/v1/reviews?business_id=eq.'+encodeURIComponent(id)+'&select=rating,reviewer_name,review_text,created_at&order=created_at.desc',{headers:{apikey:KEY,Authorization:'Bearer '+KEY}})
+      .then(function(r){return r.ok?r.json():[];})
+      .then(function(list){
+        list=Array.isArray(list)?list:[];
+        var agg=document.getElementById('revAgg'), idAgg=document.getElementById('idAgg'), listEl=document.getElementById('revList');
+        if(!list.length){
+          agg.innerHTML='';
+          listEl.innerHTML='<p class="rev-empty">No reviews yet \u2014 and we won\u2019t fake them. Be the first expat to share your experience.</p>';
+          return;
+        }
+        var avg=list.reduce(function(a,b){return a+(b.rating||0);},0)/list.length;
+        var avgR=Math.round(avg*10)/10;
+        var summary=starHtml(avg)+'<span class="score">'+avgR.toFixed(1)+'</span><span class="cnt">('+list.length+' review'+(list.length>1?'s':'')+')</span>';
+        agg.className='rev-agg';agg.innerHTML=summary;agg.style.marginTop='0';agg.style.marginBottom='8px';
+        if(idAgg){idAgg.innerHTML=summary;idAgg.style.display='flex';}
+        try{var _le=document.getElementById('ld-biz');if(_le){var _o=JSON.parse(_le.textContent);_o.aggregateRating={"@type":"AggregateRating","ratingValue":avgR,"reviewCount":list.length,"bestRating":5,"worstRating":1};_le.textContent=JSON.stringify(_o);}}catch(_){}
+        listEl.innerHTML=list.map(function(rv){
+          return '<div class="rev-item"><div class="rev-top"><span class="rev-who">'+esc(rv.reviewer_name||'Anonymous')+'</span><span class="rev-date">'+fmtDate(rv.created_at)+'</span></div>'+starHtml(rv.rating)+'<div class="rev-body">'+esc(rv.review_text||'')+'</div></div>';
+        }).join('');
+      })
+      .catch(function(){});
+  }
+
+  function load(){
+    var id=q('id');
+    if(!id){document.getElementById('loading').style.display='none';document.getElementById('notfound').style.display='block';return;}
+    fetch(SB+'/rest/v1/businesses?id=eq.'+encodeURIComponent(id)+'&status=eq.approved&select=*&limit=1',{headers:{apikey:KEY,Authorization:'Bearer '+KEY}})
+      .then(function(r){return r.ok?r.json():null;})
+      .then(function(rows){
+        if(!rows||!rows.length){document.getElementById('loading').style.display='none';document.getElementById('notfound').style.display='block';return;}
+        render(rows[0]); track('view',rows[0].id);
+      })
+      .catch(function(){document.getElementById('loading').style.display='none';document.getElementById('notfound').style.display='block';});
+  }
+  load();
+</script>
+<script src="/contact.js" defer></script>
+<script src="/biz-promo.js" defer></script>
+</body>
+</html>

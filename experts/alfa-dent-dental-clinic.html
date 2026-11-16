@@ -345,7 +345,7 @@
     if(social.facebook) contact+='<a class="srow" href="'+esc(social.facebook)+'" target="_blank" rel="noopener"><span class="ic">◈</span>Facebook</a>';
     var cta='';
     if(b.website) cta+='<a class="cta" href="'+esc(b.website)+'" target="_blank" rel="noopener" data-x="web">Visit website</a>';
-    if(b.phone){ var wa=String(b.phone).replace(/\D/g,''); if(wa.indexOf('00')===0){wa=wa.slice(2);} else if(wa.charAt(0)==='0'){wa='421'+wa.slice(1);} cta+='<a class="cta wa" href="https://wa.me/'+wa+'" target="_blank" rel="noopener" data-x="wa">Message on WhatsApp</a>'; }
+    if(b.phone && !(b.social_links && b.social_links.whatsapp===false)){ var wa=String(b.phone).replace(/\D/g,''); if(wa.indexOf('00')===0){wa=wa.slice(2);} else if(wa.charAt(0)==='0'){wa='421'+wa.slice(1);} cta+='<a class="cta wa" href="https://wa.me/'+wa+'" target="_blank" rel="noopener" data-x="wa">Message on WhatsApp</a>'; }
     var map='';var ebAddr='';
     if(b.address){ebAddr=(b.address||'')+', '+(b.district?b.district+', ':'')+'Bratislava, Slovakia';var qq=encodeURIComponent(ebAddr);map='<div class="card"><h2>Location</h2><iframe id="ebMap" class="mapbox" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q='+qq+'&z=16&output=embed"></iframe><a class="srow" style="padding-top:12px" href="https://www.google.com/maps/search/?api=1&query='+qq+'" target="_blank" rel="noopener"><span class="ic">\u2197</span>Open in Google Maps</a></div>';}
     document.getElementById('colSide').innerHTML='<div class="card"><h2>Contact</h2>'+(contact||'<p>No contact details yet.</p>')+cta+'</div>'+ebHoursCard(b.opening_hours,b.hours)+map;

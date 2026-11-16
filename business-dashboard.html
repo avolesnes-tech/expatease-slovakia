@@ -410,10 +410,10 @@
       district: $('fDistrict').value.trim() || null,
       address: $('fAddress').value.trim(),
       website: $('fWebsite').value.trim() || null,
-      social_links: {
+      social_links: Object.assign({}, (bizRow && bizRow.social_links) || {}, {
         instagram: $('fInstagram').value.trim() || null,
         facebook: $('fFacebook').value.trim() || null,
-      },
+      }),
       languages: langs.length ? langs : ['English'],
       tagline: $('fTagline').value.trim() || null,
       opening_hours: ohCollect(),
