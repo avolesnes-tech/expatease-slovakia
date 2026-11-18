@@ -3271,6 +3271,10 @@
  <label class="sm-label" for="smFacebook">Facebook URL</label>
  <input class="sm-input" type="url" id="smFacebook" placeholder="https://facebook.com/yourbusiness">
  </div>
+ <div class="sm-field-group">
+ <label class="sm-label" for="smLinkedin">LinkedIn URL <span style="font-weight:400;opacity:.7">(optional)</span></label>
+ <input class="sm-input" type="url" id="smLinkedin" placeholder="https://linkedin.com/in/yourname">
+ </div>
 
  <!-- Opening hours -->
  <div class="sm-field-group">
@@ -4084,6 +4088,7 @@
  data.social_links = {
  instagram: document.getElementById('smInstagram')?.value.trim() || null,
  facebook: document.getElementById('smFacebook')?.value.trim() || null,
+ linkedin: document.getElementById('smLinkedin')?.value.trim() || null,
  };
  // Opening hours - only when the business said it keeps them
  const wantsHours = document.getElementById('smHasHours')?.checked;
@@ -4229,7 +4234,7 @@
 
  // Clear inputs
  ['smBizName','smCategory','smContactName','smPhone','smEmail',
- 'smAddress','smDescription','smAbout','smWebsite','smInstagram','smFacebook',
+ 'smAddress','smDescription','smAbout','smWebsite','smInstagram','smFacebook','smLinkedin',
  'smDistrict']
  .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
  document.getElementById('smSubDistWrap').style.display = 'none';
@@ -5027,7 +5032,7 @@
 <script src="contact.js" defer></script>
 <script>window.EB_LATEST = 6;</script>
 <script src="/eb-slugs.js"></script>
-<script src="listings.js?v=20261113" defer></script>
+<script src="listings.js?v=20261118" defer></script>
 <script src="biz-promo.js" defer></script>
 <style>
 .eb-search{position:relative;max-width:640px;margin:-24px 0 40px}

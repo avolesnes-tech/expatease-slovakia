@@ -170,6 +170,10 @@
             <input type="text" id="fFacebook" placeholder="facebook.com/yourbusiness">
           </div>
         </div>
+        <div class="field">
+          <label for="fLinkedin">LinkedIn <span style="font-weight:400;opacity:.7">(optional)</span></label>
+          <input type="text" id="fLinkedin" placeholder="linkedin.com/in/yourname or linkedin.com/company/…">
+        </div>
       </div>
 
       <div class="card" id="proCard" style="display:none">
@@ -317,6 +321,7 @@
     const social = row.social_links || {};
     $('fInstagram').value = social.instagram || '';
     $('fFacebook').value = social.facebook || '';
+    $('fLinkedin').value = social.linkedin || '';
     $('fEmail').value = row.email || '';
     buildLangChips(row.languages);
 
@@ -413,6 +418,7 @@
       social_links: Object.assign({}, (bizRow && bizRow.social_links) || {}, {
         instagram: $('fInstagram').value.trim() || null,
         facebook: $('fFacebook').value.trim() || null,
+        linkedin: (function(v){ return v ? (/^https?:\/\//i.test(v) ? v : 'https://' + v.replace(/^\/+/, '')) : null; })($('fLinkedin').value.trim()),
       }),
       languages: langs.length ? langs : ['English'],
       tagline: $('fTagline').value.trim() || null,

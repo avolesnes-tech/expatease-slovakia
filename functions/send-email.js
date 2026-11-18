@@ -326,7 +326,7 @@ export async function onRequestPost(context) {
       const hasHours  = biz.opening_hours && typeof biz.opening_hours === 'object' &&
                         Object.keys(biz.opening_hours).some(k => biz.opening_hours[k] && biz.opening_hours[k].open);
       const sl = biz.social_links || {};
-      const hasSocial = filled(sl.instagram) || filled(sl.facebook);
+      const hasSocial = filled(sl.instagram) || filled(sl.facebook) || filled(sl.linkedin);
 
       const tips = [];
       if (!hasPhotos)            tips.push('<b>Add your logo and a few photos</b> \u2014 listings with images are opened far more often than those without.');

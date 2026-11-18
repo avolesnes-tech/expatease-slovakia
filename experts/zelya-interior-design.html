@@ -352,6 +352,7 @@ If setting up your space feels &quot;off&quot;, feel free to contact me.</p><p>L
     if(b.address) contact+='<div class="srow"><span class="ic">◎</span>'+esc(/bratislava/i.test(b.address)?b.address:(['Staré Mesto','Ružinov','Nové Mesto','Karlova Ves','Petržalka','Dúbravka','Rača','Vrakuňa','Podunajské Biskupice','Lamač','Devín','Devínska Nová Ves','Záhorská Bystrica','Vajnory','Jarovce','Rusovce','Čunovo'].indexOf(b.district)!==-1?b.address+', '+b.district+', Bratislava':b.address))+'</div>';
     if(social.instagram) contact+='<a class="srow" href="'+esc(social.instagram)+'" target="_blank" rel="noopener"><span class="ic">◈</span>Instagram</a>';
     if(social.facebook) contact+='<a class="srow" href="'+esc(social.facebook)+'" target="_blank" rel="noopener"><span class="ic">◈</span>Facebook</a>';
+    if(social.linkedin) contact+='<a class="srow" href="'+esc(/^https?:\/\//i.test(social.linkedin)?social.linkedin:'https://'+social.linkedin)+'" target="_blank" rel="noopener"><span class="ic">◈</span>LinkedIn</a>';
     var cta='';
     if(b.website) cta+='<a class="cta" href="'+esc(b.website)+'" target="_blank" rel="noopener" data-x="web">Visit website</a>';
     if(b.phone && !(b.social_links && b.social_links.whatsapp===false)){ var wa=String(b.phone).replace(/\D/g,''); if(wa.indexOf('00')===0){wa=wa.slice(2);} else if(wa.charAt(0)==='0'){wa='421'+wa.slice(1);} cta+='<a class="cta wa" href="https://wa.me/'+wa+'" target="_blank" rel="noopener" data-x="wa">Message on WhatsApp</a>'; }

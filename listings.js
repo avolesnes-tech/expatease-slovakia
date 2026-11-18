@@ -144,7 +144,8 @@ var DISTRICTS_BA = ['Staré Mesto','Ružinov','Nové Mesto','Karlova Ves','Petr�
       var links = [
         b.website ? '<a class="ebl-weblink" href="' + esc(b.website) + '" target="_blank" rel="noopener">Website</a>' : '',
         s.instagram ? '<a class="ebl-weblink" href="' + esc(s.instagram) + '" target="_blank" rel="noopener">Instagram</a>' : '',
-        s.facebook ? '<a class="ebl-weblink" href="' + esc(s.facebook) + '" target="_blank" rel="noopener">Facebook</a>' : ''
+        s.facebook ? '<a class="ebl-weblink" href="' + esc(s.facebook) + '" target="_blank" rel="noopener">Facebook</a>' : '',
+        s.linkedin ? '<a class="ebl-weblink" href="' + esc(/^https?:\/\//i.test(s.linkedin) ? s.linkedin : 'https://' + s.linkedin) + '" target="_blank" rel="noopener">LinkedIn</a>' : ''
       ].filter(Boolean).join(' · ');
       var _slug = window.EB_SLUGS && window.EB_SLUGS[b.id];
       var prof = '<a class="ebl-profile" href="' + (_slug ? '/experts/' + esc(_slug) : 'expert.html?id=' + esc(b.id)) + '">View full profile \u2192</a>';
