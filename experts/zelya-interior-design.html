@@ -392,7 +392,7 @@ If setting up your space feels &quot;off&quot;, feel free to contact me.</p><p>L
       if(!nm){jm.className='rev-msg err';jm.textContent='Please add your name.';return;}
       if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){jm.className='rev-msg err';jm.textContent='Please add a valid email.';return;}
       var news=document.getElementById('jNews').checked;
-      try{ fetch('/functions/airtable-submit?table=Members',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({Name:nm,Email:em,Newsletter:news,'Submitted At':new Date().toISOString()})}).catch(function(){}); }catch(_){ }
+      try{ fetch('/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({Name:nm,Email:em,Newsletter:news,'Submitted At':new Date().toISOString()})}).catch(function(){}); }catch(_){ }
       try{ localStorage.setItem('ee_member',JSON.stringify({name:nm,email:em,newsletter:news,joinedAt:new Date().toISOString()})); }catch(_){ }
       showWrite();
     });

@@ -4441,7 +4441,7 @@
  btn.textContent = 'Subscribing…';
  btn.disabled = true;
  try {
- await fetch('/functions/airtable-submit?table=Members', {
+ await fetch('/subscribe', {
  method: 'POST',
  headers: { 'Content-Type': 'application/json' },
  body: JSON.stringify({ Email: email, Newsletter: true, 'Submitted At': new Date().toISOString() })
@@ -4468,7 +4468,7 @@
  btn.textContent = 'Subscribing…';
  btn.disabled = true;
  try {
- await fetch('/functions/airtable-submit?table=Members', {
+ await fetch('/subscribe', {
  method: 'POST',
  headers: { 'Content-Type': 'application/json' },
  body: JSON.stringify({ Email: email, Newsletter: true, 'Submitted At': new Date().toISOString() })
@@ -4806,7 +4806,7 @@
  btn.textContent = 'Joining...';
 
  try {
- await fetch('/functions/airtable-submit?table=Members', {
+ await fetch('/subscribe', {
  method: 'POST',
  headers: { 'Content-Type': 'application/json' },
  body: JSON.stringify({ Name: name, Email: email, Newsletter: newsletter, 'Submitted At': new Date().toISOString() })
