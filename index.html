@@ -2661,7 +2661,43 @@
  <div class="section-label">Expert directory</div>
  <h2 class="section-title">Find your expert</h2>
  <p class="section-sub">Verified English-speaking professionals in Bratislava, across every category you need.</p>
+ <div class="eb-live" id="ebLive" hidden aria-live="polite"><span class="eb-live-dot" aria-hidden="true"></span><strong id="ebLiveN">0</strong>English-speaking pros<span class="eb-live-sep" aria-hidden="true">·</span>12 categories</div>
  </div>
+<style>
+.eb-live{display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:7px 15px 7px 12px;border-radius:999px;background:#E6F7EF;color:#1D7A50;font:500 14px/1.3 'DM Sans',system-ui,sans-serif}
+.eb-live strong{font-family:'Urbanist',system-ui,sans-serif;font-weight:800;font-size:15px;color:#0F3360;font-variant-numeric:tabular-nums}
+.eb-live-sep{opacity:.5}
+.eb-live[hidden]{display:none}
+.eb-live-dot{width:8px;height:8px;border-radius:50%;background:#2E9E6B;box-shadow:0 0 0 0 rgba(46,158,107,.5);animation:ebLivePulse 2s infinite}
+@keyframes ebLivePulse{0%{box-shadow:0 0 0 0 rgba(46,158,107,.5)}70%{box-shadow:0 0 0 7px rgba(46,158,107,0)}100%{box-shadow:0 0 0 0 rgba(46,158,107,0)}}
+.section-header.center .eb-live,.section-header[style*="center"] .eb-live{margin-left:auto;margin-right:auto}
+@media (prefers-reduced-motion:reduce){.eb-live-dot{animation:none}}
+</style>
+<script>
+/* ExpatBase live counter: total approved listings from Supabase. Hidden if the count can't be loaded. */
+(function(){
+  var SB='https://etxqrlrqbjcbjmitnspv.supabase.co', KEY='sb_publishable_i38f7jyt2HYOjUTNuOsklg_aMofdDvE';
+  var box=document.getElementById('ebLive'), num=document.getElementById('ebLiveN');
+  if(!box||!num||!window.fetch) return;
+  fetch(SB+'/rest/v1/businesses?status=eq.approved&select=id',{headers:{apikey:KEY,Authorization:'Bearer '+KEY}})
+    .then(function(r){return r.ok?r.json():null})
+    .then(function(rows){
+      if(!rows||!Array.isArray(rows)||!rows.length) return;
+      var n=rows.length; box.hidden=false;
+      var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function run(){
+        if(reduce){num.textContent=n;return}
+        var t0=null,d=900;
+        (function step(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/d);num.textContent=Math.round(n*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(step)})(performance.now());
+      }
+      if('IntersectionObserver' in window){
+        var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();run()}},{threshold:.6});
+        io.observe(box);
+      } else run();
+    })
+    .catch(function(){});
+})();
+</script>
  <div class="eb-search reveal" role="search">
  <label for="ebSearchInput" class="eb-sr">Search for a service</label>
  <div class="eb-search-box">
@@ -2992,6 +3028,8 @@
  <a href="privacy-policy.html">Privacy Policy</a>
  <a href="terms.html">Terms of Use</a>
  <a href="cookie-policy.html">Cookie Policy</a>
+ <a href="#" data-cookie-settings>Cookie settings</a>
+ <a href="terms.html#operator">Imprint</a>
  </div>
  </div>
  </div>
@@ -4522,7 +4560,7 @@
  <div class="auth-error-msg" id="regEmailErr">Please enter a valid email.</div>
  </div>
  <div class="auth-newsletter">
- <input type="checkbox" id="regNewsletter" checked />
+ <input type="checkbox" id="regNewsletter" />
  <label for="regNewsletter">Subscribe to the <strong>ExpatBase newsletter</strong>, tips, new experts &amp; expat news. Unsubscribe anytime.</label>
  </div>
  <button class="auth-submit" id="regSubmitBtn" onclick="doRegister()">Join the community →</button>

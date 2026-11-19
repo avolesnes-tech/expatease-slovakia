@@ -210,7 +210,7 @@ Fluent in English.</p><p>Address: Bratislava</p><p>Languages: English, Slovak</p
 </div>
 
 <div class="lb" id="lightbox"><span class="lb-close" id="lbClose">&times;</span><img id="lbImg" src="" alt=""></div>
-<footer class="foot">© <span id="yr"></span> ExpatBase Slovakia · <a href="/index.html">Home</a> · <a href="/privacy-policy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+<footer class="foot">© <span id="yr"></span> ExpatBase Slovakia · <a href="/index.html">Home</a> · <a href="/privacy-policy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="#" data-cookie-settings>Cookie settings</a> · <a href="/terms.html#operator">Imprint</a></footer>
 
 <script src="/eb-slugs.js"></script>
 <script src="/vendor/supabase-js-2.117.3.js"></script>
@@ -314,7 +314,7 @@ Fluent in English.</p><p>Address: Bratislava</p><p>Languages: English, Slovak</p
     if(b.languages&&b.languages.length) main+='<div class="card"><h2>Languages</h2><div class="langline">'+b.languages.map(function(l){return '<span class="langtag">'+esc(l)+'</span>';}).join('')+'</div></div>';
     main+='<div class="card" id="reviewsCard">'+
       '<h2>Reviews</h2>'+
-      '<p class="rev-note">Reviews come from people who contacted or used this business. We don\u2019t edit or pay for reviews, and we remove any that break our guidelines.</p>'+
+      '<p class="rev-note">Reviews are written by ExpatBase community members and reflect their own opinions. We don\u2019t check whether every reviewer used this business, we don\u2019t edit or pay for reviews, and we remove any that break our <a href="/terms.html">Terms</a>.</p>'+
       '<div id="revAgg"></div>'+
       '<div id="revList"></div>'+
       '<button type="button" class="rev-btn" id="revToggle">Write a review</button>'+
@@ -351,7 +351,9 @@ Fluent in English.</p><p>Address: Bratislava</p><p>Languages: English, Slovak</p
     if(b.phone && !(b.social_links && b.social_links.whatsapp===false)){ var wa=String(b.phone).replace(/\D/g,''); if(wa.indexOf('00')===0){wa=wa.slice(2);} else if(wa.charAt(0)==='0'){wa='421'+wa.slice(1);} cta+='<a class="cta wa" href="https://wa.me/'+wa+'" target="_blank" rel="noopener" data-x="wa">Message on WhatsApp</a>'; }
     var map='';var ebAddr='';
     if(b.address){ebAddr=(b.address||'')+', '+(b.district?b.district+', ':'')+'Bratislava, Slovakia';var qq=encodeURIComponent(ebAddr);map='<div class="card"><h2>Location</h2><iframe id="ebMap" class="mapbox" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q='+qq+'&z=16&output=embed"></iframe><a class="srow" style="padding-top:12px" href="https://www.google.com/maps/search/?api=1&query='+qq+'" target="_blank" rel="noopener"><span class="ic">\u2197</span>Open in Google Maps</a></div>';}
-    document.getElementById('colSide').innerHTML='<div class="card"><h2>Contact</h2>'+(contact||'<p>No contact details yet.</p>')+cta+'</div>'+ebHoursCard(b.opening_hours,b.hours)+map;
+    var _health=/doctor|counsel|health|medic|dent|psych|therap/i.test((b.category||'')+' '+(Array.isArray(b.subcategories)?b.subcategories.join(' '):''));
+    var disc='<p class="eb-disc" style="font-size:12.5px;line-height:1.5;color:#6B7A90;margin:14px 0 0;padding-top:12px;border-top:1px solid #EEF3F8">ExpatBase is an independent directory. You contact and agree with this business directly; we are not part of that agreement and are not responsible for its services. Please check qualifications before booking. <a href="/terms.html" style="color:#1A4F8A">Terms</a>'+(_health?'<br><strong style="color:#3D4A5C">In an emergency, call 112.</strong>':'')+'</p>';
+    document.getElementById('colSide').innerHTML='<div class="card"><h2>Contact</h2>'+(contact||'<p>No contact details yet.</p>')+cta+disc+'</div>'+ebHoursCard(b.opening_hours,b.hours)+map;
     if(ebAddr){fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&addressdetails=0&q='+encodeURIComponent(ebAddr)).then(function(r){return r.json();}).then(function(g){var el=document.getElementById('ebMap');if(el&&g&&g.length){el.src='https://maps.google.com/maps?q='+g[0].lat+','+g[0].lon+'&z=16&output=embed';}}).catch(function(){});}
 
     document.getElementById('loading').style.display='none';

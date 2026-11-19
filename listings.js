@@ -14,7 +14,13 @@ var DISTRICTS_BA = ['Staré Mesto','Ružinov','Nové Mesto','Karlova Ves','Petr�
   if (!CATEGORY && !LATEST) return;
 
   /* ── anonymous visitor id (no personal data) ── */
+  /* store the anonymous id only after cookie consent (ePrivacy); without consent
+     events are still counted, but nothing is written to the visitor's device */
+  function canStore() {
+    try { return localStorage.getItem('ee_cookie_consent') === 'granted'; } catch (e) { return false; }
+  }
   function vid() {
+    if (!canStore()) return null;
     try {
       var v = localStorage.getItem('eb_vid');
       if (!v) {
@@ -28,6 +34,7 @@ var DISTRICTS_BA = ['Staré Mesto','Ružinov','Nové Mesto','Karlova Ves','Petr�
   }
   /* dedupe profile impressions to once per visitor per business per day */
   function seenToday(id) {
+    if (!canStore()) return false;
     try {
       var day = new Date().toISOString().slice(0, 10);
       var o = JSON.parse(localStorage.getItem('eb_seen') || '{}');
