@@ -2661,7 +2661,7 @@
  <div class="section-label">Expert directory</div>
  <h2 class="section-title">Find your expert</h2>
  <p class="section-sub">Verified English-speaking professionals in Bratislava, across every category you need.</p>
- <div class="eb-live" id="ebLive" hidden aria-live="polite"><span class="eb-live-dot" aria-hidden="true"></span><strong id="ebLiveN">0</strong>English-speaking pros<span class="eb-live-sep" aria-hidden="true">·</span>12 categories</div>
+ <div class="eb-live" id="ebLive" hidden aria-live="polite"><span class="eb-live-dot" aria-hidden="true"></span><strong id="ebLiveN"></strong>English-speaking pros<span class="eb-live-sep" aria-hidden="true">·</span>12 categories</div>
  </div>
 <style>
 .eb-live{display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:7px 15px 7px 12px;border-radius:999px;background:#E6F7EF;color:#1D7A50;font:500 14px/1.3 'DM Sans',system-ui,sans-serif}
@@ -2683,12 +2683,13 @@
     .then(function(r){return r.ok?r.json():null})
     .then(function(rows){
       if(!rows||!Array.isArray(rows)||!rows.length) return;
-      var n=rows.length; box.hidden=false;
+      var n=rows.length; num.textContent=n; box.hidden=false;
       var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
       function run(){
         if(reduce){num.textContent=n;return}
         var t0=null,d=900;
         (function step(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/d);num.textContent=Math.round(n*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(step)})(performance.now());
+        setTimeout(function(){num.textContent=n},d+200); /* safety: always end on the real number */
       }
       if('IntersectionObserver' in window){
         var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();run()}},{threshold:.6});
