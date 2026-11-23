@@ -2,3 +2,7 @@ PROJECT.md
 .DS_Store
 .assetsignore
 brand/
+
+# carousel-generator skill (nástroj na sociálne siete, nie súčasť webu)
+.agents/
+skills-lock.json

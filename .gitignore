@@ -3,3 +3,7 @@ node_modules/
 .DS_Store
 .dev.vars
 .env
+
+# carousel-generator skill (nástroj na sociálne siete, nie súčasť webu)
+.agents/
+skills-lock.json
